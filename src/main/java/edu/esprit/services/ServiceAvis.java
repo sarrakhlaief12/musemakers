@@ -6,6 +6,8 @@ import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
 import java.util.Set;
 
+import java.util.HashSet;
+
 import java.sql.*;
 
 public class ServiceAvis implements IService<Avis>{
@@ -62,8 +64,7 @@ public class ServiceAvis implements IService<Avis>{
 
     @Override
     public Avis getOneById(int id) {
-        ServiceOeuvre serviceOeuvre = new ServiceOeuvre();
-        ServicePersonne serviceUser = new ServicePersonne();
+
         String req = "SELECT * FROM avis WHERE id_avis=?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
@@ -76,11 +77,12 @@ public class ServiceAvis implements IService<Avis>{
                 int idOeuvre = res.getInt("id_oeuvre");
                 int idUser = res.getInt("id_user");
 
+                ServiceOeuvre serviceOeuvre = new ServiceOeuvre();
+                Oeuvre oeuvre = serviceOeuvre.getOneById(idOeuvre);
+                ServicePersonne servicePersonne = new ServicePersonne();
+                User user = servicePersonne.getOneById(idUser);
 
-
-
-
-                Avis avis = new Avis(id, commentaire, dateExperience, note, serviceOeuvre.getOneById(idOeuvre), serviceUser.getOneById(idUser));
+                Avis avis = new Avis(id, commentaire, dateExperience, note,oeuvre,user );
                 System.out.println("avis retrouvée !");
                 System.out.println(avis.toString()); // Utilisation de la méthode toString
                 return avis;
@@ -94,6 +96,30 @@ public class ServiceAvis implements IService<Avis>{
 
     @Override
     public Set<Avis> getAll() {
-        return null;
+        Set<Avis> avisSet = new HashSet<>();
+        String req = "SELECT * FROM avis";
+        try {
+            Statement st = cnx.createStatement();
+            ResultSet res = st.executeQuery(req);
+            while (res.next()) {
+                String commentaire = res.getString("commentaire");
+                Date dateExperience = res.getDate("date_experience");
+                int note = res.getInt("note");
+                int idOeuvre = res.getInt("id_oeuvre");
+                int idUser = res.getInt("id_user");
+
+                ServiceOeuvre serviceOeuvre = new ServiceOeuvre();
+                Oeuvre oeuvre = serviceOeuvre.getOneById(idOeuvre);
+                ServicePersonne servicePersonne = new ServicePersonne();
+                User user = servicePersonne.getOneById(idUser);
+
+                Avis avis = new Avis(commentaire,dateExperience, note,oeuvre,user);
+                avisSet.add(avis);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return avisSet;
     }
+
 }

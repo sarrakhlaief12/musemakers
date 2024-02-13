@@ -67,7 +67,20 @@ public class Main {
         //User user_add_avis = personne.getOneById(4); // Récupération de l'utilisateur par son ID
         //a.setClient(user_add_avis); // Association avec l'utilisateur
         //avis.ajouter(a); // ajout de l'avis à la base de données
+
         //avis.supprimer(1);
-        avis.getOneById(1);
+
+        //ajouter un avis
+        //a.setCommentaire("mediocre !");
+        //a.setDateExperience(java.sql.Date.valueOf("2022-05-05")); // Utilisation de la date actuelle
+        //a.setNote(1);
+        //Oeuvre oeuvre_add_avis = oeuvre.getOneById(1); // Récupération de l'oeuvre par son ID
+        //a.setOeuvre(oeuvre_add_avis); // Association avec l'oeuvre
+        //User user_add_avis = personne.getOneById(3); // Récupération de l'utilisateur par son ID
+        //a.setClient(user_add_avis); // Association avec l'utilisateur
+        //avis.ajouter(a); // ajout de l'avis à la base de données
+        System.out.println(avis.getAll());
+        //System.out.println(avis.getOneById(2));
+
     }
 }
