@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
-
+        System.out.println("Hello world!");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         /*DataSource ds = DataSource.getInstance();
         System.out.println(ds);*/
