@@ -10,6 +10,8 @@ public class Reclamation {
     private Date DateRec ;
     private String CategorieRec ;
     private String StatutRec ;
+
+    private int test = 0;
     public Reclamation() {
 
     }
