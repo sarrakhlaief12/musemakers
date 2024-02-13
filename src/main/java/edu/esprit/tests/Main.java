@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 
 public class Main {
-    hffyyy
+    
     public static void main(String[] args) {
         DataSource dataSource = DataSource.getInstance();
         dataSource.getCnx();
