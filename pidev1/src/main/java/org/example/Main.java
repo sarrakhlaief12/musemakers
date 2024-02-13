@@ -9,8 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Main {
-    public static void main(String[] args) throws ParseException {
-        System.out.println("Hello world!");
+    public static void main(String[] args) throws ParseException
+    {
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         /*DataSource ds = DataSource.getInstance();
         System.out.println(ds);*/
@@ -21,7 +22,7 @@ public class Main {
        /* Cour c1=new Cour("rania", "Descri rania", dateDebut, dateFin,1);
         ServiceCour sc=new ServiceCour();
         sc.ajouter(c1);*/
-        ServiceCour sc=new ServiceCour();
+        ServiceCour sc = new ServiceCour();
 /*
         int idrsupprimer=3;
         sc.supprimer(idrsupprimer);*/
@@ -29,7 +30,13 @@ public class Main {
         System.out.println(sc.getOneById(1));
         System.out.println(sc.getOneById(3));
     */
-        System.out.println(sc.getAll());
+        Cour coursAModifier = sc.getOneById(2); // Supposons que l'ID du cours à modifier est 1
+        coursAModifier.setTitre_cours("mathematique ");
+        coursAModifier.setDescription_cours("difficile");
+        sc.modifier(coursAModifier);
+
+        /*
+        System.out.println(sc.getAll()); */
 
 
     }

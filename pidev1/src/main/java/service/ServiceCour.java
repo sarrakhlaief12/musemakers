@@ -37,7 +37,23 @@ public class ServiceCour implements IService<Cour> {
 
     @Override
     public void modifier(Cour p) {
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dateDebutStr = sdf.format(p.getDateDebut_cours());
+        String dateFinStr = sdf.format(p.getDateFin_cours());
+        String requete = "UPDATE cours SET titre_cours=?, descri_cours=?, dateDebut_cours=?, dateFin_cours=?, id_user=? WHERE id_cours=?";
+        try {
+            PreparedStatement pst = conn.prepareStatement(requete);
+            pst.setString(1, p.getTitre_cours());
+            pst.setString(2, p.getDescription_cours());
+            pst.setString(3, dateDebutStr);
+            pst.setString(4, dateFinStr);
+            pst.setInt(5, p.getId_user());
+            pst.setInt(6, p.getId_cours());
+            pst.executeUpdate();
+            System.out.println("Cours modifié !");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
