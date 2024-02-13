@@ -91,7 +91,7 @@ public class ServiceCour implements IService<Cour> {
                 User u = new User();
 
                 u.setId_user(rst.getInt("id_user"));
-                
+
                 r.setId_user(u);
 
             }
