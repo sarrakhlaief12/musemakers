@@ -1,6 +1,7 @@
 package service;
 
 import entities.Cour;
+import entities.User;
 import utils.DataSource;
 
 import java.sql.*;
@@ -64,11 +65,11 @@ public class ServiceCour implements IService<Cour> {
             pst.setInt(1, id);
 
             pst.executeUpdate();
-            System.out.println("Réservation supprimée!");
+            System.out.println("Cours supprimé!");
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
-            System.out.println("Réservation non supprimée!");
+            System.out.println("Cours non supprimé!");
         }
 
     }
@@ -87,7 +88,11 @@ public class ServiceCour implements IService<Cour> {
                 r.setDescription_cours(rst.getString("descri_cours"));
                 r.setDateDebut_cours(rst.getDate("dateDebut_cours"));
                 r.setDateFin_cours(rst.getDate("DateFin_cours"));
-                r.setId_user(rst.getInt("id_user"));
+                User u = new User();
+
+                u.setId_user(rst.getInt("id_user"));
+                System.out.println(u.getId_user());
+                r.setId_user(u);
 
             }
         } catch (SQLException e) {
@@ -111,13 +116,14 @@ public class ServiceCour implements IService<Cour> {
 
                 java.util.Date dateDebut_cours = res.getDate(4);
                 java.util.Date dateFin_cours = res.getDate(5);
-
-                int id_user = res.getInt(6);
-
-
+                User u= new User();
+                u.setId_user(res.getInt(6));
 
 
-                Cour r= new Cour(res.getInt("id_cours"),res.getString("titre_cours"),res.getString("descri_cours"),res.getDate("dateDebut_cours"),res.getDate("dateFin_cours"),res.getInt("id_user"));
+
+
+
+                Cour r= new Cour(id_cours,titre_cours,description_cours,dateDebut_cours,dateFin_cours,u);
                 cours.add(r);
             }
         } catch (SQLException e) {

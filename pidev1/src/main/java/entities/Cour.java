@@ -8,26 +8,26 @@ public class Cour {
     private String description_cours;
         private Date dateDebut_cours;
     private Date dateFin_cours;
-    private int id_user;
+    private User user ;
 
     public Cour() {
     }
 
-    public Cour(int id_cours, String titre_cours, String description_cours, Date dateDebut_cours, Date dateFin_cours, int id_user) {
+    public Cour(int id_cours, String titre_cours, String description_cours, Date dateDebut_cours, Date dateFin_cours, User u) {
         this.id_cours = id_cours;
         this.titre_cours = titre_cours;
         this.description_cours = description_cours;
         this.dateDebut_cours = dateDebut_cours;
         this.dateFin_cours = dateFin_cours;
-        this.id_user = id_user;
+        this.user = u;
     }
 
-    public Cour(String titre_cours, String description_cours, Date dateDebut_cours, Date dateFin_cours, int id_user) {
+    public Cour(String titre_cours, String description_cours, Date dateDebut_cours, Date dateFin_cours, User u) {
         this.titre_cours = titre_cours;
         this.description_cours = description_cours;
         this.dateDebut_cours = dateDebut_cours;
         this.dateFin_cours = dateFin_cours;
-        this.id_user = id_user;
+        this.user = u;
     }
 
     public int getId_cours() {
@@ -71,11 +71,11 @@ public class Cour {
     }
 
     public int getId_user() {
-        return id_user;
+        return user.getId_user();
     }
 
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
+    public void setId_user(User u) {
+        this.user = u;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class Cour {
                 ", description_cours='" + description_cours + '\'' +
                 ", dateDebut_cours=" + dateDebut_cours +
                 ", dateFin_cours=" + dateFin_cours +
-                ", id_user=" + id_user +
+                ", id_user=" + user.getId_user() +
                 '}';
     }
 }
