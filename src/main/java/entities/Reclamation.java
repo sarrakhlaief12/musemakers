@@ -11,7 +11,7 @@ public class Reclamation {
     private String CategorieRec ;
     private String StatutRec ;
 
-    private int test = 0;
+    
     public Reclamation() {
 
     }
