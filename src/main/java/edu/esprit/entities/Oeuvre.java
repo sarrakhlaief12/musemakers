@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Oeuvre {
     private int id;
     private String nom;
-
+    private  String prenom ;
     private String categorie;
     private float prix;
 
