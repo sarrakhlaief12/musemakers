@@ -53,30 +53,41 @@ public class Main {
         ServiceUser.ajouter(client);
         ServiceUser.ajouter(artiste);
 */
-
+/*
         // Créez une instance de User (ou Client, Artiste, Admin)
-        User user = new User(1, "nom", "prenom", "email@example.com", "mdp");
+        User user = new User(5, "nom", "prenom", "email@example.com", "mdp");
         ServiceUser ServiceUser = new ServiceUser();
         // Modifiez certains attributs de l'utilisateur
-        user.setNom_user("nouveau_nom");
-        user.setPrenom_user("nouveau_prenom");
-
+        user.setNom_user("tounsi");
+        user.setPrenom_user("yassine");
+user.setEmail("chakalon@");
+user.setMdp("1256");
         // Appelez la méthode 'modifier'
         ServiceUser.modifier(user);
+*/
+        //supprimer
+        /*
+        ServiceUser ServiceUser = new ServiceUser();
 
-        /*int id = 7;
+        int id = 3;
 
         // Appelez la méthode 'supprimer'
          ServiceUser.supprimer(id);*/
-/*
-        User user = ServiceUser.getOneById(3);
+//get one by id 8 11
+        /*
+        ServiceUser ServiceUser = new ServiceUser();
+
+        User user = ServiceUser.getOneById(11);
         System.out.println(user);
 */
-      /*  Set<User> users = ServiceUser.getAll();
+        /*
+        ServiceUser ServiceUser = new ServiceUser();
+
+        Set<User> users = ServiceUser.getAll();
 
         // Afficher les utilisateurs
         for (User user : users) {
             System.out.println(user);
-        }    }*/}}
+        }  */  }}
 
 
