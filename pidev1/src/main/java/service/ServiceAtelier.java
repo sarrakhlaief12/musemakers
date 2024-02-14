@@ -5,14 +5,12 @@ import entities.Cour;
 import entities.User;
 import utils.DataSource;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Set;
 
 public class ServiceAtelier implements IService<Atelier>{
+
 
     Connection  conn= DataSource.getInstance().getCnx();
 
@@ -36,66 +34,67 @@ public class ServiceAtelier implements IService<Atelier>{
     public void modifier(Atelier p) {
 
 
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String dateDebutStr = sdf.format(p.getDateDebut_atelier());
+            String dateFinStr = sdf.format(p.getDateFin_atelier());
+
+            String requete = "UPDATE atelier SET id_cours=?, dateDebut_atelier=?, dateFin_atelier=?, lien_atelier=? WHERE id_atelier=?";
+            try {
+                PreparedStatement pst = conn.prepareStatement(requete);
+                pst.setInt(1, p.getId_atelier());
+                pst.setInt(2, p.getCour().getId_cours());
+                pst.setString(3, dateDebutStr);
+                pst.setString(4, dateFinStr);
+                pst.setString(5, p.getLien());
 
 
-
-    }
+                pst.executeUpdate();
+                System.out.println("Atelier modifié avec succès !");
+            } catch (SQLException e) {
+                System.out.println("Erreur lors de la modification de l'atelier : " + e.getMessage());
+            }
+        }
 
     @Override
     public void supprimer(int id) {
+        try {
+            String requete = "DELETE  FROM atelier WHERE id_cours=?";
+            PreparedStatement pst = conn.prepareStatement(requete);
+            pst.setInt(1, id);
+
+            pst.executeUpdate();
+            System.out.println("atelier supprimé!");
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            System.out.println("atelier non supprimé!");
+        }
 
     }
 
     @Override
     public Atelier getOneById(int id) {
-      /*  Atelier a = new Atelier();
-        String req = "SELECT * FROM atelier WHERE id_atelier = ?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(req);
-            ps.setInt(1, id);
-            ResultSet rst = ps.executeQuery();
-            while (rst.next()) {
-                a.setId_atelier(rst.getInt("id_cours"));
-
-                a.setDateDebut_atelier(rst.getDate("dateDebut_atelier"));
-                a.setDateFin_atelier(rst.getDate("DateFin_atelier"));
-                a.setLien(rst.getString("lien"));
-                Cour c1 = new Cour();
-
-                c1.setId_cours(rst.getInt("id_cours"));
-
-                a.setId_cours(c1);
-
+        Atelier atelier = null;
+        String query = "SELECT * FROM atelier WHERE id_atelier = ?";
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                // Récupérer les données de l'atelier à partir du ResultSet
+                int id_cours = rs.getInt("id_cours");
+                Date dateDebut = rs.getDate("dateDebut_atelier");
+                Date dateFin = rs.getDate("dateFin_atelier");
+                String lien = rs.getString("lien_atelier");
+                // Créer une nouvelle instance de Atelier
+                atelier = new Atelier(id, new Cour(id_cours), dateDebut, dateFin, lien);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
-        return a;*/
-       /* Atelier a = new Atelier();
-        String req = "SELECT * FROM atelier WHERE id_atelier = ?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(req);
-            ps.setInt(1, id);
-            ResultSet rst = ps.executeQuery();
-            while (rst.next()) {
-                a.setId_atelier(rst.getInt("id_atelier")); // Changed from "id_cours" to "id_atelier"
-
-                a.setDateDebut_atelier(rst.getDate("dateDebut_atelier"));
-                a.setDateFin_atelier(rst.getDate("DateFin_atelier"));
-                a.setLien(rst.getString("lien_atelier"));
-                Cour c1 = new Cour();
-
-                c1.setId_cours(rst.getInt("id_cours")); // Assuming "id_cours" is a field in your "Cour" class
-
-                a.setCour(c1); // Changed from "setId_cours(c1)" to "setCour(c1)"
-
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return a;
-
+        return atelier;
     }
+
+
 
     @Override
     public Set<Atelier> getAll() {
@@ -106,4 +105,11 @@ public class ServiceAtelier implements IService<Atelier>{
 
 
 
-*/
+
+
+
+
+
+
+
+

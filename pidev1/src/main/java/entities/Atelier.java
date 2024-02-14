@@ -48,6 +48,13 @@ public class Atelier {
     public void setId_atelier(int id_atelier) {
         this.id_atelier = id_atelier;
     }
+    public int getId_cours() {
+        return cour.getId_cours();
+    }
+
+    public void setId_cours(Cour C) {
+        this.cour = C;
+    }
 
     public Cour getCour() {
         return cour;

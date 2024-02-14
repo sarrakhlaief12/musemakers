@@ -30,6 +30,9 @@ public class Cour {
         this.user = u;
     }
 
+    public Cour(int idCours) {
+    }
+
     public int getId_cours() {
         return id_cours;
     }
