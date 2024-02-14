@@ -1,0 +1,75 @@
+package entities;
+
+import java.util.Date;
+
+public class Commentaire {
+    private int idCom;
+    private Reclamation reclamation;  // Référence à l'objet Reclamation
+    private Date DateCom;
+    private String ContenuCom;
+
+    public Commentaire() {
+    }
+
+    public Commentaire(Reclamation reclamation, Date dateCom, String contenuCom) {
+        this.reclamation = reclamation;
+        DateCom = dateCom;
+        ContenuCom = contenuCom;
+    }
+
+    // Constructeur
+    public Commentaire(int idCom, Reclamation reclamation, Date DateCom, String ContenuCom) {
+        this.idCom = idCom;
+        this.reclamation = reclamation;
+        this.DateCom = DateCom;
+        this.ContenuCom = ContenuCom;
+    }
+
+    // Getters
+    public int getIdCom() {
+        return idCom;
+    }
+
+    public Reclamation getReclamation() {
+        return reclamation;
+    }
+
+    public int getIdRec() {
+        return reclamation.getIdRec();  // Obtenir idRec via l'objet Reclamation
+    }
+
+    public Date getDateCom() {
+        return DateCom;
+    }
+
+    public String getContenuCom() {
+        return ContenuCom;
+    }
+
+    // Setters
+    public void setIdCom(int idCom) {
+        this.idCom = idCom;
+    }
+
+    public void setReclamation(Reclamation reclamation) {
+        this.reclamation = reclamation;
+    }
+
+    public void setDateCom(Date DateCom) {
+        this.DateCom = DateCom;
+    }
+
+    public void setContenuCom(String ContenuCom) {
+        this.ContenuCom = ContenuCom;
+    }
+
+    @Override
+    public String toString() {
+        return "Commentaire{" +
+                "reclamation=" + reclamation +
+                ", DateCom=" + DateCom +
+                ", ContenuCom='" + ContenuCom + '\'' +
+                '}';
+    }
+}
+
