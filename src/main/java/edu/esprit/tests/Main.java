@@ -18,20 +18,21 @@ public class Main {
         ServiceOeuvre oeuvre=new ServiceOeuvre();
         ServiceAvis avis=new ServiceAvis();
 
-        Oeuvre e=new Oeuvre();
+        Oeuvre e=new Oeuvre("femme0.3","peinture",3200,java.sql.Date.valueOf("2021-12-15"),"ttttttttttt","/images/art/femme");
+        oeuvre.ajouter(e);
         User p = new User();
         Avis a = new Avis();
 
         ///////////////:Oeuvre/::::::::::::::::::::::::::::
 
 ////////********ajouterrrrr oeuvre********////////
-       //e.setNom("femme");
-        //e.setPrix(2500);
-       //e.setCategorie("peinture");
-       //e.setDateCreation(java.sql.Date.valueOf("2020-09-15"));
-      //e.setDescription("mlkjhgf");
-      //e.setImage("/images/art/femme");
-      //oeuvre.ajouter(e);
+        //e.setNom("femme0.3");
+        //e.setPrix(3000);
+        //e.setCategorie("peinture");
+        //e.setDateCreation(java.sql.Date.valueOf("2021-12-15"));
+        //e.setDescription("ttttttttttt");
+        //e.setImage("/images/art/femme");
+        //oeuvre.ajouter(e);
 
         //////////modifier////////
         // Modification de l'oeuvre
@@ -71,16 +72,17 @@ public class Main {
         //avis.supprimer(1);
 
         //ajouter un avis
-        //a.setCommentaire("mediocre !");
-        //a.setDateExperience(java.sql.Date.valueOf("2022-05-05")); // Utilisation de la date actuelle
-        //a.setNote(1);
-        //Oeuvre oeuvre_add_avis = oeuvre.getOneById(1); // Récupération de l'oeuvre par son ID
+        //a.setCommentaire("bien!");
+        //a.setDateExperience(java.sql.Date.valueOf("2023-02-14")); // Utilisation de la date actuelle
+        //a.setNote(3);
+        //Oeuvre oeuvre_add_avis = oeuvre.getOneById(6); // Récupération de l'oeuvre par son ID
         //a.setOeuvre(oeuvre_add_avis); // Association avec l'oeuvre
-        //User user_add_avis = personne.getOneById(3); // Récupération de l'utilisateur par son ID
+        //User user_add_avis = personne.getOneById(4); // Récupération de l'utilisateur par son ID
         //a.setClient(user_add_avis); // Association avec l'utilisateur
         //avis.ajouter(a); // ajout de l'avis à la base de données
-        System.out.println(avis.getAll());
+        //System.out.println(avis.getAll());
         //System.out.println(avis.getOneById(2));
+        //oeuvre.supprimer(6);
 
     }
 }

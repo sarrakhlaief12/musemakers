@@ -67,6 +67,7 @@ public class ServiceAvis implements IService<Avis>{
 
         String req = "SELECT * FROM avis WHERE id_avis=?";
         try {
+
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, id);
             ResultSet res = ps.executeQuery();
