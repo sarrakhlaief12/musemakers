@@ -4,29 +4,27 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Reclamation {
-    private int idRec ;
-    private int idU;
-    private String descriRec ;
-    private Date DateRec ;
-    private String CategorieRec ;
-    private String StatutRec ;
-
+    private int idRec;
+    private User user;  // Remplacez 'int idU' par 'User user'
+    private String descriRec;
+    private Date DateRec;
+    private String CategorieRec;
+    private String StatutRec;
 
     public Reclamation() {
-
     }
 
-    public Reclamation(int idRec, int idU, String descriRec, Date dateRec, String categorieRec, String statutRec) {
+    public Reclamation(int idRec, User user, String descriRec, Date dateRec, String categorieRec, String statutRec) {
         this.idRec = idRec;
-        this.idU = idU;
+        this.user = user;
         this.descriRec = descriRec;
         DateRec = dateRec;
         CategorieRec = categorieRec;
         StatutRec = statutRec;
     }
 
-    public Reclamation(int idU, String descriRec, Date dateRec, String categorieRec, String statutRec) {
-        this.idU = idU;
+    public Reclamation(User user, String descriRec, Date dateRec, String categorieRec, String statutRec) {
+        this.user = user;
         this.descriRec = descriRec;
         DateRec = dateRec;
         CategorieRec = categorieRec;
@@ -37,8 +35,8 @@ public class Reclamation {
         return idRec;
     }
 
-    public int getIdU() {
-        return idU;
+    public User getUser() {
+        return user;
     }
 
     public String getDescriRec() {
@@ -61,8 +59,8 @@ public class Reclamation {
         this.idRec = idRec;
     }
 
-    public void setIdU(int idU) {
-        this.idU = idU;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setDescriRec(String descriRec) {
@@ -85,7 +83,7 @@ public class Reclamation {
     public String toString() {
         return "Reclamation{" +
                 "idRec=" + idRec +
-                ", idU=" + idU +
+                ", idU=" + (user != null ? user.getId_user() : "null") +
                 ", descriRec=" + descriRec +
                 ", DateRec=" + DateRec +
                 ", CategorieRec=" + CategorieRec +

@@ -1,42 +1,45 @@
 package org.example;
 
 import entities.Reclamation;
+import entities.User;
 import sevice.ReclamationService;
 
 import java.util.Date;
+import java.util.Set;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
+        ReclamationService service = new ReclamationService();
 
-        Reclamation r1=new Reclamation(3,"ggg", new Date(),"probtechnique","non resolue");
-        ReclamationService rs=new ReclamationService();
-       // rs.ajouter(r1);
+        try {
+            // Créer un nouvel utilisateur et une nouvelle réclamation
+            User user = new User(3, "Nom", "Prenom", "email@example.com", "motdepasse", 1234567890, new Date(), "cartepro", "role");
+            Reclamation r = new Reclamation(user, "description", new Date(), "categorie", "statut");
 
+            // Tester la méthode 'ajouter'
+            service.ajouter(r);
+            System.out.println("Reclamation ajoutée: " + r);
 
+            // Tester la méthode 'modifier'
+            r.setDescriRec("nouvelle description");
+            service.modifier(r);
+            System.out.println("Reclamation modifiée: " + r);
 
+            // Tester la méthode 'getAll'
+            Set<Reclamation> all = service.getAll();
+            System.out.println("Toutes les réclamations: " + all);
 
-        // Créer une instance de Reclamation
-         Reclamation reclamation = new Reclamation(35, 1, "bare", new java.sql.Date(System.currentTimeMillis()), "categorie", "statut");
+            // Tester la méthode 'getOneById'
+            Reclamation r2 = service.getOneById(r.getIdRec());
+            System.out.println("Reclamation obtenue par ID: " + r2);
 
-        // Modifier la reclamation
-        /*reclamation.setIdU( 3 );
-       reclamation.setDescriRec(" rania ");
-        reclamation.setDateRec(new Date());
-        reclamation.setCategorieRec("nouvelle categorie");
-        reclamation.setStatutRec("cou");
-
-        // Créer une instance de votre classe qui contient la méthode modifier (par exemple, ReclamationService)
-
-
-        // Appeler la méthode modifier
-        rs.modifier(reclamation ); */
-         /* int idrsupprimer=36;
-        rs.supprimer(idrsupprimer); */
-
-        System.out.println(rs.getOneById(35));
-        //System.out.println(rs.getAll());
+            // Tester la méthode 'supprimer'
+            service.supprimer(r.getIdRec());
+            System.out.println("Reclamation supprimée: " + r);
+        } catch (NullPointerException e) {
+            System.out.println("Une exception NullPointerException a été levée.");
+            e.printStackTrace();
+        }
     }
 }
 
