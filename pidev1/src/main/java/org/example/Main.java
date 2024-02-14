@@ -48,7 +48,7 @@ public class Main {
         */
 
 /*
-        //AFFICHER PAR ID
+        //AFFICHER PAR ID cour
         ServiceCour sc = new ServiceCour();
         System.out.println(sc.getOneById(1));
         ;
@@ -56,36 +56,40 @@ public class Main {
     }
 
         /*
-        //MODIFIER
+        //MODIFIERCours
         Cour coursAModifier = sc.getOneById(1); // Supposons que l'ID du cours à modifier est 1
         coursAModifier.setTitre_cours("mathematique ");
         coursAModifier.setDescription_cours("difficile");
         sc.modifier(coursAModifier);
 
-*/
-        //System.out.println(sc.getAll());
+*/   //   ServiceCour sc = new ServiceCour();
+        // System.out.println(sc.getAll());
 
 
-/*
-            ServiceAtelier serviceAtelier = new ServiceAtelier();
+       // ServiceAtelier serviceAtelier = new ServiceAtelier();
 
-            // Création d'une instance de Cour pour associer à l'atelier
-            Cour cour = new Cour();
-            cour.setId_cours(6); // Supposons que l'ID du cours soit 1
+        // Création d'une instance de Cour pour associer à l'atelier
+       /* Cour cour = new Cour();
+        cour.setId_cours(1); // Supposons que l'ID du cours soit 1
 
 
-            // Modification de l'atelier
-            Atelier atelierAModifier = serviceAtelier.getOneById(6); // Supposons que l'ID de l'atelier à modifier soit 1
-            atelierAModifier.setDateDebut_atelier(new java.util.Date()); // Nouvelle date de début de l'atelier
-            atelierAModifier.setLien("heyyyy"); // Nouveau lien de l'atelier
-            serviceAtelier.modifier(atelierAModifier);
-        }*/
+        // Modification de l'atelier
+        Atelier atelierAModifier = serviceAtelier.getOneById(1); // Supposons que l'ID de l'atelier à modifier soit 1
+        atelierAModifier.setDateDebut_atelier(new java.util.Date()); // Nouvelle date de début de l'atelier
+        atelierAModifier.setLien("heyyyy"); // Nouveau lien de l'atelier
+        serviceAtelier.modifier(atelierAModifier);
+
 /*
         //SUPPRIMERATELIER
         ServiceAtelier se=new ServiceAtelier();
         int idrsupprimer=6;
         se.supprimer(idrsupprimer);
     }*/
-
+        //ServiceAtelier se = new ServiceAtelier();
+        //System.out.println(se.getAll());
+//AFFICHER PAR ID atelier
+       // ServiceAtelier se = new ServiceAtelier();
+        //System.out.println(se.getOneById(5));
+        ;
 
     }}

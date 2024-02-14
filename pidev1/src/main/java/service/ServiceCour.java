@@ -103,7 +103,7 @@ public class ServiceCour implements IService<Cour> {
 
     @Override
     public Set<Cour> getAll() {
-        Set<Cour> cours = new HashSet<>();
+       /* Set<Cour> cours = new HashSet<>();
 
         String requete = "Select * from cours";
         try {
@@ -117,11 +117,7 @@ public class ServiceCour implements IService<Cour> {
                 java.util.Date dateDebut_cours = res.getDate(4);
                 java.util.Date dateFin_cours = res.getDate(5);
                 User u= new User();
-                u.setId_user(res.getInt(6));
-
-
-
-
+               u.setId_user(res.getInt(6));
 
                 Cour r= new Cour(id_cours,titre_cours,description_cours,dateDebut_cours,dateFin_cours,u);
                 cours.add(r);
@@ -131,7 +127,38 @@ public class ServiceCour implements IService<Cour> {
         }
 
 
-        return cours;
+        return cours;*/
+
+            Set<Cour> cours = new HashSet<>();
+
+            String requete = "SELECT * FROM cours";
+            try {
+                Statement st = conn.createStatement();
+                ResultSet res = st.executeQuery(requete);
+                while (res.next()) {
+                    int id_cours = res.getInt(1);
+                    String titre_cours = res.getString(2);
+                    String description_cours = res.getString(3);
+                    java.util.Date dateDebut_cours = res.getDate(4);
+                    java.util.Date dateFin_cours = res.getDate(5);
+
+                    // Retrieve user ID from the database
+                    int userId = res.getInt(6);
+
+                    // Initialize a User object with the retrieved ID
+                    User u = new User();
+                    u.setId_user(userId);
+
+                    // Create Cour object with initialized User object
+                    Cour r = new Cour(id_cours, titre_cours, description_cours, dateDebut_cours, dateFin_cours, u);
+                    cours.add(r);
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+
+            return cours;
+        }
 
     }
-}
+

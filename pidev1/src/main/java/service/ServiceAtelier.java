@@ -7,6 +7,7 @@ import utils.DataSource;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
 import java.util.Set;
 
 public class ServiceAtelier implements IService<Atelier>{
@@ -16,7 +17,7 @@ public class ServiceAtelier implements IService<Atelier>{
 
     @Override
     public void ajouter(Atelier p) {
-        String requete ="insert into atelier ( id_cours, dateDebut_atelier, dateFin_atelier, lien_atelier) VALUES ( ?, ?, ?,?)";
+        String requete ="insert into atelier ( id_cours, dateDebut_atelier, dateFin_atelier, lien_atelier) VALUES ( ?, ?,?,?)";
         try {
             PreparedStatement pst = conn.prepareStatement(requete);
             pst.setInt(1, p.getCour().getId_cours()); // Supposons que l'id_cours soit la clé étrangère
@@ -98,9 +99,34 @@ public class ServiceAtelier implements IService<Atelier>{
 
     @Override
     public Set<Atelier> getAll() {
-        return null;
+        Set<Atelier> ateliers = new HashSet<>();
+
+        String requete = "SELECT * FROM atelier"; // Requête SQL pour récupérer tous les ateliers
+        try {
+            Statement st = conn.createStatement();
+            ResultSet res = st.executeQuery(requete);
+            while (res.next()) {
+                int id_atelier = res.getInt("id_atelier");
+                int id_cours = res.getInt("id_cours"); // Remplacez par le nom de la colonne dans votre table
+                Cour c = new Cour();
+                c.setId_cours(id_cours);
+                Date dateDebut_atelier = res.getDate("dateDebut_atelier"); // Remplacez par le nom de la colonne
+                Date dateFin_atelier = res.getDate("dateFin_atelier"); // Remplacez par le nom de la colonne
+                String lien_atelier = res.getString("lien_atelier"); // Remplacez par le nom de la colonne
+
+                Atelier a = new Atelier(id_atelier, c, dateDebut_atelier, dateFin_atelier, lien_atelier);
+                ateliers.add(a);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des ateliers : " + e.getMessage());
+        }
+
+        return ateliers;
     }
+
+
 }
+
 
 
 

@@ -17,14 +17,14 @@ public class Atelier {
 
     public Atelier(int id_atelier, Cour cour, Date dateDebut_atelier, Date dateFin_atelier, String lien) {
         this.id_atelier = id_atelier;
-        this.cour = cour;
+        //this.cour = cour;
         this.dateDebut_atelier = dateDebut_atelier;
         this.dateFin_atelier = dateFin_atelier;
         this.lien_atelier = lien;
     }
 
     public Atelier(Cour cour, Date dateDebut_atelier, Date dateFin_atelier, String lien) {
-        this.cour = cour;
+        //this.cour = cour;
         this.dateDebut_atelier = dateDebut_atelier;
         this.dateFin_atelier = dateFin_atelier;
         this.lien_atelier = lien;
@@ -48,13 +48,13 @@ public class Atelier {
     public void setId_atelier(int id_atelier) {
         this.id_atelier = id_atelier;
     }
-    public int getId_cours() {
+    /*public int getId_cours() {
         return cour.getId_cours();
     }
 
     public void setId_cours(Cour C) {
         this.cour = C;
-    }
+    }*/
 
     public Cour getCour() {
         return cour;
