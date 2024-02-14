@@ -4,6 +4,7 @@ import edu.esprit.entities.Exposition;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,12 +14,23 @@ Connection cnx= DataSource.getInstance().getCnx();
     private boolean isValidString(String value) {
         return value != null && !value.trim().isEmpty();
     }
-    @Override
-    public void ajouter(Exposition exp) {
+    private boolean validateExpositionDates(Exposition exp) {
+        LocalDate today = LocalDate.now();
+        if (exp.getDateDebut() != null && exp.getDateDebut().before(Timestamp.valueOf(today.atStartOfDay()))) {
+            System.out.println("Erreur : La date de début ne peut pas être inférieure à la date d'aujourd'hui.");
+            return false;
+        }
         if (exp.getDateDebut() != null && exp.getDateFin() != null && exp.getDateDebut().after(exp.getDateFin())) {
             System.out.println("Erreur : La date de fin doit être après la date de début.");
-            return;  // exit the method if the condition is not met
+            return false;
         }
+        return true;
+    }
+
+
+    @Override
+    public void ajouter(Exposition exp) {
+        if (validateExpositionDates(exp)) {
 
         if (!isValidString(exp.getNom()) || !isValidString(exp.getTheme()) || !isValidString(exp.getImage())) {
             System.out.println("Erreur : Le nom, le thème et l'image de l'exposition doivent être valides.");
@@ -40,17 +52,15 @@ Connection cnx= DataSource.getInstance().getCnx();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
+    }}
     @Override
     public void modifier(Exposition exp) {
-        if (exp.getDateDebut() != null && exp.getDateFin() != null && exp.getDateDebut().after(exp.getDateFin())) {
-            System.out.println("Erreur : La date de fin doit être après la date de début.");
-            return;
-        }
+        if (validateExpositionDates(exp)) {
 
-        if (!isValidString(exp.getNom()) || !isValidString(exp.getTheme()) || !isValidString(exp.getImage())) {
+
+            if (!isValidString(exp.getNom()) || !isValidString(exp.getTheme()) || !isValidString(exp.getImage())) {
             System.out.println("Erreur : Le nom, le thème et l'image de l'exposition doivent être valides.");
-            return;  // exit the method if the condition is not met
+            return;
         }
         String req = "UPDATE exposition SET nom=?, Date_debut=?, Date_fin=?, Description=?, Theme=?, image=? WHERE id_exposition=?";
         try{
@@ -62,17 +72,19 @@ Connection cnx= DataSource.getInstance().getCnx();
             ps.setString(5, exp.getTheme());
             ps.setString(6, exp.getImage());
             ps.setInt(7, exp.getId());
-            ps.executeUpdate();
-            System.out.println("exposition modifié  !");
-
-
+            int line_tomodify = ps.executeUpdate();
+            if(line_tomodify>0){
+            System.out.println("exposition modifié  !");}
+         else {
+                System.out.println("exposition with ID " + exp.getId() + " does not exist!");
+            }
 
         }catch (SQLException e) {
             System.out.println(e.getMessage());
 
         }
 
-    }
+    }}
 
     @Override
     public void supprimer(int id) {
@@ -80,8 +92,14 @@ Connection cnx= DataSource.getInstance().getCnx();
         try{
             PreparedStatement ps=cnx.prepareStatement(req);
             ps.setInt(1,id);
-            ps.executeUpdate();
-            System.out.println("exposition deleted succesfully !");
+            int line_todelete=ps.executeUpdate();
+            if (line_todelete>0){
+                System.out.println("Exposition deleted successfully!");
+            }
+            else {
+                System.out.println("Exposition with ID " + id + " does not exist!");
+
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
 

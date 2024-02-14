@@ -95,7 +95,7 @@ public class Reservation {
 
                 ", dateReser=" + dateReser +
                 ", ticketsNumber=" + ticketsNumber +
-                ", accessByAdmin=" + accessByAdmin +
+//                ", accessByAdmin=" + accessByAdmin +
                 ", exposition=" + exposition +
                 ", client=" + client +
                 '}';

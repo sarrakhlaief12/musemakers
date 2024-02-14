@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 
 public class Main {
-    
+
     public static void main(String[] args) {
         DataSource dataSource = DataSource.getInstance();
         dataSource.getCnx();
@@ -25,23 +25,23 @@ public class Main {
         Exposition e=new Exposition();
         User p = new User();
 
-        int num_exp=9;
+        int num_exp=11;
         int num_user=5;
 
 
         ////////RESERVATION//////
 
-        //Exposition exp_add_reser=exposition.getOneById(num_exp);
-        //User user_add_rese=personne.getOneById(num_user);
+//        Exposition exp_add_reser=exposition.getOneById(num_exp);
+//        User user_add_rese=personne.getOneById(num_user);
 
 
-//        Reservation r = new Reservation(Timestamp.valueOf(LocalDateTime.now()),5,true,exp_add_reser,user_add_rese);
+//        Reservation r = new Reservation(Timestamp.valueOf(LocalDateTime.now()),12,false,exp_add_reser,user_add_rese);
 //        reservation.ajouter(r);
-       // Reservation r1 = new Reservation(8,Timestamp.valueOf(LocalDateTime.now()),20,true,exp_add_reser,user_add_rese);
-       // reservation.modifier(r1);
+//        Reservation r1 = new Reservation(8,Timestamp.valueOf(LocalDateTime.now()),21,true,exp_add_reser,user_add_rese);
+//        reservation.modifier(r1);
 
-       // System.out.println(reservation.getAll());
-       // reservation.supprimer(30);
+       //System.out.println(reservation.getAll());
+      // reservation.supprimer(12);
         //System.out.println(reservation.triparDateAncienne());
 
 
@@ -49,11 +49,11 @@ public class Main {
 
 
 ////////********ajouterrrrr exposition********////////
-//        Exposition exp=new Exposition("ancienne vague",Timestamp.valueOf(LocalDateTime.of(2022, 5, 1, 12, 0)),Timestamp.valueOf(LocalDateTime.of(2022, 5, 2, 12, 0)),"cest .............","nostalgie","/images/art/comique");
-//        exposition.ajouter(exp);
-//        Exposition exp1=new Exposition(4,"ancienne vague",Timestamp.valueOf(LocalDateTime.of(2022, 5, 1, 12, 0)),Timestamp.valueOf(LocalDateTime.of(2022, 5, 2, 12, 0)),"cest .............","nostalgie","/images/art/comique");
+       // Exposition exp=new Exposition("nouvelle vague",Timestamp.valueOf(LocalDateTime.of(2024, 2, 14, 12, 0)),Timestamp.valueOf(LocalDateTime.of(2024, 2, 15, 12, 0)),"cest .............","futur","/images/art/futur");
+       // exposition.ajouter(exp);
+//        Exposition exp1=new Exposition(15,"Old but Gold",Timestamp.valueOf(LocalDateTime.of(2024, 5, 1, 12, 0)),Timestamp.valueOf(LocalDateTime.of(2024, 5, 2, 12, 0)),"cest .............","nostalgie","/images/art/comique");
 //        exposition.modifier(exp1);
-        //exposition.supprimer(10);
+       // exposition.supprimer(12);
        // System.out.println(reservation.getAll());
 
        // System.out.println(exposition.chercherParThemeOuNom("","limoncello"));

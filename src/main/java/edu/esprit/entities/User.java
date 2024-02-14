@@ -118,7 +118,7 @@ public class User {
                 "nom_user='" + nom_user + '\'' +
                 ", prenom_user='" + prenom_user + '\'' +
                 ", email='" + email + '\'' +
-                ", mdp='" + mdp + '\'' +
+
                 ", num_tel='" + num_tel + '\'' +
                 ", date=" + date +
                 ", cartepro='" + cartepro + '\'' +

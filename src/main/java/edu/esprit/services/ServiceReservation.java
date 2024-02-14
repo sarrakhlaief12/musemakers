@@ -57,11 +57,12 @@ public class ServiceReservation implements IService<Reservation> {
             ps.setInt(4, r.getExposition().getId());
             ps.setInt(5,r.getClient().getId_user());
             ps.setInt(6, r.getIdReservation());
-            ps.executeUpdate();
-            System.out.println("reservation modifié  !");
-
-
-
+            int line_tomodify = ps.executeUpdate();
+            if(line_tomodify>0){
+                System.out.println("reservation modifié  !");}
+            else {
+                System.out.println("reservation with ID " +  r.getIdReservation() + " does not exist!");
+            }
 
         }catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -74,18 +75,21 @@ public class ServiceReservation implements IService<Reservation> {
     @Override
     public void supprimer(int id) {
         String req = "DELETE FROM reservation WHERE id_reservation=?";
-        try{
-            PreparedStatement ps=cnx.prepareStatement(req);
-            ps.setInt(1,id);
-            ps.executeUpdate();
-            System.out.println("reservation deleted succesfully !");
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, id);
+            int line_todelete = ps.executeUpdate();
+
+            if (line_todelete > 0) {
+                System.out.println("Reservation deleted successfully!");
+            } else {
+                System.out.println("Reservation with ID " + id + " does not exist!");
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-
         }
-
-
     }
+
 
     @Override
     public Reservation getOneById(int id) {
