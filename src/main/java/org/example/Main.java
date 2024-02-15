@@ -1,9 +1,7 @@
 package org.example;
 
-import entities.Commentaire;
 import entities.Reclamation;
 import entities.User;
-import sevice.CommentaireService;
 import sevice.ReclamationService;
 
 import java.util.Date;
@@ -11,23 +9,26 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-      /*  ReclamationService service = new ReclamationService();
+        ReclamationService service = new ReclamationService();
 
         // Créer un nouvel utilisateur et une nouvelle réclamation
         User user = new User();
         user.setId_user(1);
         // ... initialiser les autres attributs de l'utilisateur ...
 
-        Reclamation r = new Reclamation(user, "description", new Date(), "categorie", "statut");
+        Reclamation r = new Reclamation(user, "description", new Date(), "gg", "statut");
 
-        // Tester la méthode 'ajouter'
-        service.ajouter(r);
+         //Tester la méthode 'ajouter'
+       // service.ajouter(r);
         System.out.println("Reclamation ajoutée: " + r);
 
         // Tester la méthode 'modifier'
-        r.setDescriRec("nouvelle description");
-        service.modifier(r);
-        System.out.println("Reclamation modifiée: " + r);
+        Reclamation r3 = new Reclamation(111,user, "description", new Date(), "categorie", "statut");
+       r3.setDescriRec("nouvelle desc");
+        r3.setCategorieRec("problemee");
+        r3.setStatutRec("CHKI");
+        //service.modifier(r3);
+        System.out.println("Reclamation modifiée: " + r3);
 
         // Tester la méthode 'getAll'
         Set<Reclamation> all = service.getAll();
@@ -38,11 +39,12 @@ public class Main {
         System.out.println("Reclamation obtenue par ID: " + r2);
 
         // Tester la méthode 'supprimer'
-        service.supprimer(r.getIdRec());
-        System.out.println("Reclamation supprimée: " + r);*
-       */
+
+        service.supprimer(112);
+        System.out.println("Reclamation supprimée: " );
+/*
         //commentaire
-        ReclamationService recService = new ReclamationService();
+      ReclamationService recService = new ReclamationService();
         CommentaireService comService = new CommentaireService();
 
         try {
@@ -56,7 +58,7 @@ public class Main {
             recService.ajouter(rec);
             System.out.println("Reclamation ajoutée: " + rec);
 
-            // Récupérer la réclamation avec idRec = 35
+            // Récupérer la réclamation avec idRec
             Reclamation rec35 = recService.getOneById(35);
             if (rec35 != null) {
                 // Créer un nouveau commentaire avec cette réclamation
@@ -67,7 +69,7 @@ public class Main {
                 System.out.println("Commentaire ajouté: " + com);
 
                 // Tester la méthode 'modifier'
-                Commentaire com22 = new Commentaire(3, rec35, new Date(), "contenu");
+                Commentaire com22 = new Commentaire(5, rec35, new Date(), "contenu");
 
 
                 com22.setContenuCom("chkili");
@@ -83,7 +85,7 @@ public class Main {
                 System.out.println("Commentaire obtenu par ID: " + com2);
 
                 // Tester la méthode 'supprimer'
-               comService.supprimer(3);
+               comService.supprimer(26);
                 System.out.println("Commentaire supprimé: " + com);
             } else {
                 System.out.println("Aucune réclamation trouvée avec idRec = 35");
@@ -91,7 +93,7 @@ public class Main {
         } catch (NullPointerException e) {
             System.out.println("Une exception NullPointerException a été levée.");
             e.printStackTrace();
-        }
+        }*/
     }
 }
 
