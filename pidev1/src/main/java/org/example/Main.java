@@ -17,24 +17,6 @@ public class Main {
 
 
 
-
-
-                     //AJOUTatelier
-        ServiceAtelier sc=new ServiceAtelier();
-        // Création d'une instance de Cour avec un ID
-        Cour c = new Cour();
-        c.setId_cours(1);
-
-        // Création d'une instance d'Atelier avec les informations nécessaires
-        Atelier a1 = new Atelier( c, currentDate, currentDate, "omar123");
-
-
-
-        // Appel de la méthode ajouter pour ajouter l'atelier à la base de données
-        sc.ajouter(a1);}}
-
-
-
                         //AJOUTcour
        /* ServiceCour sc=new ServiceCour();
         User u = new User();
@@ -44,53 +26,74 @@ public class Main {
 
         /*
 
-                //SUPPRIMER
-      /*  ServiceCour sc=new ServiceCour();
-        int idrsupprimer=7;
-        sc.supprimer(idrsupprimer);}}*/
+                //SUPPRIMERCOUR
+       ServiceCour sc=new ServiceCour();
+        int idrsupprimer=10;
+        sc.supprimer(idrsupprimer);
 
-/*
-        //AFFICHER PAR ID cour
+
+
+
+
+
+                            //MODIFIERCours
         ServiceCour sc = new ServiceCour();
-        System.out.println(sc.getOneById(1));
-        ;
-
-
-        /*
-        //MODIFIERCours
-        Cour coursAModifier = sc.getOneById(1); // Supposons que l'ID du cours à modifier est 1
-        coursAModifier.setTitre_cours("mathematique ");
+        Cour coursAModifier = sc.getOneById(6); // Supposons que l'ID du cours à modifier est 1
+        coursAModifier.setTitre_cours("base de donnees ");
         coursAModifier.setDescription_cours("difficile");
-        sc.modifier(coursAModifier);
+        sc.modifier(coursAModifier);}}
 
-*/   //   ServiceCour sc = new ServiceCour();
-        // System.out.println(sc.getAll());
+        */
+                               /* AFFICHER COUR
+  ServiceCour sc = new ServiceCour();
+        System.out.println(sc.getAll());}}
 
 
-       // ServiceAtelier serviceAtelier = new ServiceAtelier();
+                            //AFFICHER PAR ID cour
+        ServiceCour sc = new ServiceCour();
+        System.out.println(sc.getOneById(6));
+        ;}}
+
+                    //ARELIERS
+
+/*                  //AJOUTatelier
+        ServiceAtelier sc=new ServiceAtelier();
+        // Création d'une instance de Cour avec un ID
+        Cour c = new Cour();
+        c.setId_cours(6);
+
+        // Création d'une instance d'Atelier avec les informations nécessaires
+       Atelier a1 = new Atelier( c, currentDate, currentDate, "simba");
+
+        // Appel de la méthode ajouter pour ajouter l'atelier à la base de données
+        sc.ajouter(a1);}}
+*/
+/*
+
+                        //SUPPRIMERATELIER
+ServiceAtelier se=new ServiceAtelier();
+int idrsupprimer=27;
+        se.supprimer(idrsupprimer)
+
+         // AFFICHERALL
+ServiceAtelier se = new ServiceAtelier();
+       System.out.println(se.getAll());
+       */
+                    //AFFICHER PAR ID atelier
+        // ServiceAtelier se = new ServiceAtelier();
+        //  System.out.println(se.getOneById(26));
+
+        //MODIFIERATELIERS
+        ServiceAtelier serviceAtelier = new ServiceAtelier();
 
         // Création d'une instance de Cour pour associer à l'atelier
-       /* Cour cour = new Cour();
+        Cour cour = new Cour();
         cour.setId_cours(1); // Supposons que l'ID du cours soit 1
 
 
         // Modification de l'atelier
-        Atelier atelierAModifier = serviceAtelier.getOneById(1); // Supposons que l'ID de l'atelier à modifier soit 1
+        Atelier atelierAModifier = serviceAtelier.getOneById(3); // Supposons que l'ID de l'atelier à modifier soit 1
         atelierAModifier.setDateDebut_atelier(new java.util.Date()); // Nouvelle date de début de l'atelier
         atelierAModifier.setLien("heyyyy"); // Nouveau lien de l'atelier
         serviceAtelier.modifier(atelierAModifier);
-
-/*
-        //SUPPRIMERATELIER
-        ServiceAtelier se=new ServiceAtelier();
-        int idrsupprimer=1;
-        se.supprimer(idrsupprimer);
-
-        //ServiceAtelier se = new ServiceAtelier();
-        //System.out.println(se.getAll());
-//AFFICHER PAR ID atelier
-       // ServiceAtelier se = new ServiceAtelier();
-        //System.out.println(se.getOneById(5));
-        ;
-
-    }}*/
+        ;}}

@@ -59,20 +59,53 @@ public class ServiceCour implements IService<Cour> {
 
     @Override
     public void supprimer(int id) {
+      /*
         try {
-            String requete = "DELETE  FROM cours WHERE id_cours=?";
-            PreparedStatement pst = conn.prepareStatement(requete);
-            pst.setInt(1, id);
+            // Vérifie d'abord s'il y a des ateliers liés à ce cours
+            String checkQuery = "SELECT COUNT(*) FROM atelier WHERE id_cours=?";
+            PreparedStatement checkPst = conn.prepareStatement(checkQuery);
+            checkPst.setInt(1, id);
+            ResultSet rs = checkPst.executeQuery();
 
-            pst.executeUpdate();
-            System.out.println("Cours supprimé!");
+            if (rs.next() && rs.getInt(1) > 0) {
+                System.out.println("Ce cours ne peut pas être supprimé car il est lié à des ateliers.");
+                return;
+            }
 
+            // S'il n'y a pas d'ateliers liés, on peut supprimer le cours
+            String deleteQuery = "DELETE FROM cours WHERE id_cours=?";
+            PreparedStatement deletePst = conn.prepareStatement(deleteQuery);
+            deletePst.setInt(1, id);
+
+            int rowsAffected = deletePst.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Cours supprimé!");
+            } else {
+                System.out.println("Aucun cours supprimé. Vérifiez l'ID du cours.");
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            System.out.println("Cours non supprimé!");
+        }*/
+        try {
+            String deleteQuery = "DELETE FROM cours WHERE id_cours=?";
+            PreparedStatement deletePst = conn.prepareStatement(deleteQuery);
+            deletePst.setInt(1, id);
+
+            int rowsAffected = deletePst.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Cours supprimé!");
+            } else {
+                System.out.println("Aucun cours supprimé. Vérifiez l'ID du cours.");
+            }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
             System.out.println("Cours non supprimé!");
         }
-
     }
+
+
+
 
     @Override
     public Cour getOneById(int id) {
