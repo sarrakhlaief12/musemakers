@@ -59,7 +59,7 @@ public class ServiceAtelier implements IService<Atelier>{
     @Override
     public void supprimer(int id) {
         try {
-            String requete = "DELETE  FROM atelier WHERE id_cours=?";
+            String requete = "DELETE  FROM atelier WHERE id_atelier=?";
             PreparedStatement pst = conn.prepareStatement(requete);
             pst.setInt(1, id);
 

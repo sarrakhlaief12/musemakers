@@ -24,7 +24,7 @@ public class Atelier {
     }
 
     public Atelier(Cour cour, Date dateDebut_atelier, Date dateFin_atelier, String lien) {
-        //this.cour = cour;
+        this.cour = cour;
         this.dateDebut_atelier = dateDebut_atelier;
         this.dateFin_atelier = dateFin_atelier;
         this.lien_atelier = lien;

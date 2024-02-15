@@ -19,33 +19,35 @@ public class Main {
 
 
 
-        /*                //AJOUTatelier
+                     //AJOUTatelier
         ServiceAtelier sc=new ServiceAtelier();
         // Création d'une instance de Cour avec un ID
         Cour c = new Cour();
-        c.setId_cours(4);
+        c.setId_cours(1);
 
         // Création d'une instance d'Atelier avec les informations nécessaires
-        Atelier a1 = new Atelier( c, currentDate, currentDate, "lien_atelier");
+        Atelier a1 = new Atelier( c, currentDate, currentDate, "omar123");
+
+
 
         // Appel de la méthode ajouter pour ajouter l'atelier à la base de données
-        sc.ajouter(a1);
+        sc.ajouter(a1);}}
 
 
-/*
+
                         //AJOUTcour
-        ServiceCour sc=new ServiceCour();
+       /* ServiceCour sc=new ServiceCour();
         User u = new User();
         u.setId_user(1);
-        Cour c1=new Cour("b", "Descri ", currentDate, currentDate,u);
-        sc.ajouter(c1);
+        Cour c1=new Cour("kj", "mkk", currentDate, currentDate,u);
+        sc.ajouter(c1);}}
 
         /*
 
                 //SUPPRIMER
-        int idrsupprimer=2;
-        sc.supprimer(idrsupprimer);
-        */
+      /*  ServiceCour sc=new ServiceCour();
+        int idrsupprimer=7;
+        sc.supprimer(idrsupprimer);}}*/
 
 /*
         //AFFICHER PAR ID cour
@@ -53,7 +55,6 @@ public class Main {
         System.out.println(sc.getOneById(1));
         ;
 
-    }
 
         /*
         //MODIFIERCours
@@ -82,9 +83,9 @@ public class Main {
 /*
         //SUPPRIMERATELIER
         ServiceAtelier se=new ServiceAtelier();
-        int idrsupprimer=6;
+        int idrsupprimer=1;
         se.supprimer(idrsupprimer);
-    }*/
+
         //ServiceAtelier se = new ServiceAtelier();
         //System.out.println(se.getAll());
 //AFFICHER PAR ID atelier
@@ -92,4 +93,4 @@ public class Main {
         //System.out.println(se.getOneById(5));
         ;
 
-    }}
+    }}*/
