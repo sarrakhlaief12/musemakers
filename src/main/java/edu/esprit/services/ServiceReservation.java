@@ -19,7 +19,7 @@ public class ServiceReservation implements IService<Reservation> {
         }
 
         return true;
-    }
+    } //
     @Override
     public void ajouter(Reservation r) {
         if (isValidReservation(r)) {

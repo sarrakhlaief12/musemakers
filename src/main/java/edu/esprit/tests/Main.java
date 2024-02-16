@@ -49,8 +49,8 @@ public class Main {
 
 
 ////////********ajouterrrrr exposition********////////
-       // Exposition exp=new Exposition("nouvelle vague",Timestamp.valueOf(LocalDateTime.of(2024, 2, 14, 12, 0)),Timestamp.valueOf(LocalDateTime.of(2024, 2, 15, 12, 0)),"cest .............","futur","/images/art/futur");
-       // exposition.ajouter(exp);
+        Exposition exp=new Exposition("test",Timestamp.valueOf(LocalDateTime.of(2024, 2, 16, 12, 0)),Timestamp.valueOf(LocalDateTime.of(2024, 2, 17, 12, 0)),"cest .............","futur","/images/art/futur");
+        exposition.ajouter(exp);
 //        Exposition exp1=new Exposition(15,"Old but Gold",Timestamp.valueOf(LocalDateTime.of(2024, 5, 1, 12, 0)),Timestamp.valueOf(LocalDateTime.of(2024, 5, 2, 12, 0)),"cest .............","nostalgie","/images/art/comique");
 //        exposition.modifier(exp1);
        // exposition.supprimer(12);
