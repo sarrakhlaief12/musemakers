@@ -5,10 +5,7 @@ import edu.esprit.services.ServiceExposition;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -29,7 +26,7 @@ public class AjouterExposition {
     @FXML
     public TextField themeID;
     @FXML
-    public TextField descriptionId;
+    public TextArea descriptionId;
     @FXML
     public TextField nomExpoId;
     public void addExpo(ActionEvent event)throws IOException {
