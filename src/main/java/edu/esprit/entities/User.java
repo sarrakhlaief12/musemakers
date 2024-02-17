@@ -17,7 +17,7 @@ public class User {
 
     }
 
-    public User(String nom_user, String prenom_user, String email, String mdp, int num_tel, Date date, String cartepro, String role) {
+    public User(String nom_user, String prenom_user, String email,  int num_tel, Date date, String cartepro, String role) {
         this.nom_user = nom_user;
         this.prenom_user = prenom_user;
         this.email = email;
