@@ -10,8 +10,8 @@ public class DataSource {
         private String user ="root";
         private String passwd="";
         private Connection cnx;
-        //singletopn: amalna une bonne pratique
-        private static DataSource instance; //static pour arreter bbcp dinstanciation fel main
+        //on a utulise le modele singleton
+        private static DataSource instance; //static pour arreter plusieurs instanciations en  main
 
         private DataSource(){
             try {
