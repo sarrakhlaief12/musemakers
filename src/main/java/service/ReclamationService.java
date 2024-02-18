@@ -55,6 +55,8 @@ public class ReclamationService implements IService<Reclamation>{
 
     }
 
+
+
     @Override
     public void supprimer(int idRec ) throws SQLException {
 
@@ -88,29 +90,8 @@ return  r;
     }
 
 
-    /*@Override
-    public Set<Reclamation> getAll()throws SQLException {
-        Set<Reclamation> reclamations = new HashSet<>();
-        String req = "SELECT * FROM Reclamation";
 
-            PreparedStatement ps = cnx.prepareStatement(req);
-            ResultSet rst = ps.executeQuery();
-            while (rst.next()) {
-                Reclamation r = new Reclamation();
-                User user = new User();
-                user.setId_user(rst.getInt("IdU"));  // Utilisez 'user.setId_user(rst.getInt("IdU"))' au lieu de 'r.setIdRec(rst.getInt("IdU"))'
-                r.setUser(user);  // Ajoutez cette ligne
-                r.setIdRec(rst.getInt("idRec"));
-                r.setDescriRec(rst.getString("DescriRec"));
-                r.setDateRec(rst.getDate("dateRec"));
-                r.setCategorieRec(rst.getString("categorieRec"));
-                r.setStatutRec(rst.getString("statutRec"));
-                reclamations.add(r);
-            }
 
-        return reclamations;
-
-    }*/
     @Override
     public List<Reclamation> getAll() throws SQLException {
         List<Reclamation> reclamations = new ArrayList<>();

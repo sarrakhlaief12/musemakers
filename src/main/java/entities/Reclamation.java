@@ -31,8 +31,12 @@ public class Reclamation {
         StatutRec = statutRec;
     }
 
-    public Reclamation(User userAdd, String text, String text1, String text2) {
-    }
+   /* public Reclamation(User userAdd, String text, String text1, String text2) {
+    }*/
+   public String getNom_user() {
+       return this.user.getNom_user();
+   }
+
 
     public Reclamation(String descriRec, Date dateRec, String categorieRec, String statutRec) {
         this.descriRec = descriRec;

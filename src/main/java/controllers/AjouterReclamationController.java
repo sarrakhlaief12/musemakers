@@ -5,10 +5,7 @@ import entities.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import service.ReclamationService;
 import service.ServiceUser;
@@ -27,18 +24,7 @@ public class AjouterReclamationController {
     private TextField CategorieRecTF;
 
     @FXML
-    private TextField StatutRecTF;
-
-    @FXML
-    private TextField descriRecTF;
-
-    @FXML
-    private Button idA;
-    @FXML
     private TableColumn<?, ?> CvCat;
-
-    @FXML
-    private TableColumn<?, ?> CvClient;
 
     @FXML
     private TableColumn<?, ?> CvDate;
@@ -52,29 +38,50 @@ public class AjouterReclamationController {
     @FXML
     private TableView<?> TableViewRec;
 
+    @FXML
+    private Button ajouter;
+
+    @FXML
+    private Label cate;
+
+    @FXML
+    private Label desc;
+
+    @FXML
+    private TextField descriRecTF;
+
+    @FXML
+    private Button modifier;
+
+    @FXML
+    private Button supprimer;
 
 public void initialize() throws IOException {
     ShowReclamation();
+
+
 }
 
 
-    @FXML
-    void ajouter(ActionEvent event) throws  IOException {
-        Reclamation r=new Reclamation();
-        User userAdd= su.getOneById(2);
-        r.setCategorieRec(CategorieRecTF.getText());
-        r.setStatutRec("En cours");
-        r.setDescriRec(descriRecTF.getText());
-        r.setUser(userAdd);
-        r.setDateRec(new Date(System.currentTimeMillis()));
 
+   @FXML
+   void ajouter(ActionEvent event) throws IOException {
+       Reclamation r=new Reclamation();
+       User userAdd= su.getOneById(2);
+       r.setCategorieRec(CategorieRecTF.getText());
+       r.setStatutRec("En cours");
+       r.setDescriRec(descriRecTF.getText());
+       r.setUser(userAdd);
+       r.setDateRec(new Date(System.currentTimeMillis()));
 
-        try {
-            rs.ajouter(r);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+       try {
+           rs.ajouter(r);
+           ShowReclamation(); // Rafraîchir les données de la table
+       } catch (SQLException e) {
+           throw new RuntimeException(e);
+       }
+   }
+
     List<Reclamation> RecList;
     public void ShowReclamation() throws IOException {
         try {
@@ -91,7 +98,7 @@ public void initialize() throws IOException {
                 filteredRecList.add(r);
             }
         }
-        CvClient.setCellValueFactory(new PropertyValueFactory<>("user"));
+        //CvClient.setCellValueFactory(new PropertyValueFactory<>("user"));
 
         CvDescri.setCellValueFactory(new PropertyValueFactory<>("descriRec"));
         CvDate.setCellValueFactory(new PropertyValueFactory<>("DateRec"));
@@ -106,7 +113,45 @@ public void initialize() throws IOException {
     }
 
 
+    @FXML
+    void modifier(ActionEvent event) throws IOException {
+        // Obtenez la réclamation sélectionnée dans la table
+        Reclamation r = (Reclamation) TableViewRec.getSelectionModel().getSelectedItem();
+        if (r != null) {
+            // Mettez à jour les champs de la réclamation
+            r.setCategorieRec(CategorieRecTF.getText());
+            r.setDescriRec(descriRecTF.getText());
+
+            try {
+                // Mettez à jour la réclamation dans la base de données
+                rs.modifier(r);
+                // Rafraîchir les données de la table
+                ShowReclamation();
+                TableViewRec.refresh(); // Ajoutez cette ligne
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
+
+
+
+    @FXML
+    void supprimer(ActionEvent event) throws IOException, SQLException {
+        // Obtenez l'objet Reclamation sélectionné
+        Reclamation selectedReclamation = (Reclamation) TableViewRec.getSelectionModel().getSelectedItem();
+
+        // Supprimez cet objet de votre base de données
+        rs.supprimer(selectedReclamation.getIdRec());
+
+        // Supprimez cet objet de la vue de la table
+        TableViewRec.getItems().remove(selectedReclamation);
+    }
+
+
+}
+
+
 
 
 
