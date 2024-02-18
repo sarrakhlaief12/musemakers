@@ -42,6 +42,12 @@ public class User {
         this.role = role;
     }
 
+    public User(String nomUser, String prenomUser, String email, String mdp) {
+    }
+
+    public User(int idUser, String nomUser, String prenomUser, String email, String mdp) {
+    }
+
     public int getId_user() {
         return id_user;
     }

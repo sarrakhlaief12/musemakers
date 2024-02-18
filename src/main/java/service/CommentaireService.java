@@ -1,11 +1,11 @@
-package sevice;
+package service;
 
 import entities.Commentaire;
 import utils.DataSource;
 
 import java.sql.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommentaireService implements IService<Commentaire>{
     private Connection cnx;
@@ -16,10 +16,10 @@ public class CommentaireService implements IService<Commentaire>{
         cnx = DataSource.getInstance().getCnx();
     }
 
-    @Override
-    public void ajouter(Commentaire c) {
+   @Override
+    public void ajouter(Commentaire c)throws SQLException {
         String requete = "INSERT INTO commentaire (idCom, idRec, DateCom, ContenuCom) VALUES (?, ?, ?, ?)";
-        try {
+
             pst = cnx.prepareStatement(requete);
             pst.setInt(1, c.getIdCom());
             pst.setInt(2, c.getReclamation().getIdRec());
@@ -27,15 +27,14 @@ public class CommentaireService implements IService<Commentaire>{
             pst.setString(4, c.getContenuCom());
             pst.executeUpdate();
             System.out.println("Commentaire ajouté !");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
+
     @Override
-    public void modifier(Commentaire c) {
+    public void modifier(Commentaire c)throws SQLException {
         String requete = "UPDATE commentaire SET idRec = ?, DateCom = ?, ContenuCom = ? WHERE idCom = ?";
-        try {
+
             pst = cnx.prepareStatement(requete);
             pst.setInt(1, c.getReclamation().getIdRec());
             pst.setDate(2, new java.sql.Date(c.getDateCom().getTime()));
@@ -43,29 +42,25 @@ public class CommentaireService implements IService<Commentaire>{
             pst.setInt(4, c.getIdCom());
             pst.executeUpdate();
             System.out.println("Commentaire modifié !");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     @Override
-    public void supprimer(int id) {
+    public void supprimer(int id) throws SQLException{
         String requete = "DELETE FROM commentaire WHERE idCom = ?";
-        try {
+
             pst = cnx.prepareStatement(requete);
             pst.setInt(1, id);
             pst.executeUpdate();
             System.out.println("Commentaire supprimé !");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     @Override
-    public Commentaire getOneById(int id) {
+    public Commentaire getOneById(int id) throws SQLException{
         Commentaire c = null;
         String requete = "SELECT * FROM commentaire WHERE idCom = ?";
-        try {
+
             pst = cnx.prepareStatement(requete);
             pst.setInt(1, id);
             ResultSet rst = pst.executeQuery();
@@ -76,17 +71,33 @@ public class CommentaireService implements IService<Commentaire>{
                 c.setDateCom(rst.getDate("DateCom"));
                 c.setContenuCom(rst.getString("ContenuCom"));
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
         return c;
     }
-
     @Override
-    public Set<Commentaire> getAll() {
+    public List<Commentaire> getAll() throws SQLException {
+        List<Commentaire> commentaires = new ArrayList<>();
+        String requete = "SELECT * FROM commentaire";
+
+        ste = cnx.createStatement();
+        ResultSet rst = ste.executeQuery(requete);
+        while (rst.next()) {
+            Commentaire c = new Commentaire();
+            c.setIdCom(rst.getInt("idCom"));
+            // Vous devez récupérer l'objet Reclamation associé à partir de la base de données
+            c.setDateCom(rst.getDate("DateCom"));
+            c.setContenuCom(rst.getString("ContenuCom"));
+            commentaires.add(c);
+        }
+
+        return commentaires;
+    }
+
+   /* @Override
+    public Set<Commentaire> getAll() throws SQLException{
         Set<Commentaire> commentaires = new HashSet<>();
         String requete = "SELECT * FROM commentaire";
-        try {
+
             ste = cnx.createStatement();
             ResultSet rst = ste.executeQuery(requete);
             while (rst.next()) {
@@ -97,9 +108,9 @@ public class CommentaireService implements IService<Commentaire>{
                 c.setContenuCom(rst.getString("ContenuCom"));
                 commentaires.add(c);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
         return commentaires;
-    }
+    }*/
+
+
 }

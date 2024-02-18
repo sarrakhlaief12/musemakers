@@ -14,8 +14,16 @@ public class Reclamation {
     public Reclamation() {
     }
 
-    public Reclamation(int idRec, User user, String descriRec, Date dateRec, String categorieRec, String statutRec) {
+    public Reclamation(String descriRec, String categorieRec, String statutRec) {
         this.idRec = idRec;
+        this.user = user;
+        this.descriRec = descriRec;
+
+        CategorieRec = categorieRec;
+        StatutRec = statutRec;
+    }
+
+    public Reclamation(User user, String descriRec, Date dateRec, String categorieRec, String statutRec) {
         this.user = user;
         this.descriRec = descriRec;
         DateRec = dateRec;
@@ -23,8 +31,10 @@ public class Reclamation {
         StatutRec = statutRec;
     }
 
-    public Reclamation(User user, String descriRec, Date dateRec, String categorieRec, String statutRec) {
-        this.user = user;
+    public Reclamation(User userAdd, String text, String text1, String text2) {
+    }
+
+    public Reclamation(String descriRec, Date dateRec, String categorieRec, String statutRec) {
         this.descriRec = descriRec;
         DateRec = dateRec;
         CategorieRec = categorieRec;
