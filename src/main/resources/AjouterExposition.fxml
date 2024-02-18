@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="585.0" fitWidth="754.0" layoutX="-551.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../java/edu/esprit/assets/affciheexpo.jpg" />
+                  <Image url="@assets/affciheexpo.jpg" />
                </image>
             </ImageView>
          </children>
@@ -35,5 +35,6 @@
       <TextArea fx:id="descriptionId" layoutX="403.0" layoutY="166.0" prefHeight="98.0" prefWidth="168.0" promptText="description" />
       <TextField layoutX="508.0" layoutY="95.0" prefHeight="26.0" prefWidth="72.0" promptText="heure debut " />
       <TextField layoutX="514.0" layoutY="126.0" prefHeight="26.0" prefWidth="72.0" promptText="heure fin" />
+      <Button layoutX="533.0" layoutY="1.0" mnemonicParsing="false" onAction="#Afficher" text="Afficher" />
    </children>
 </AnchorPane>

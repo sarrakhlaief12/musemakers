@@ -123,7 +123,7 @@ public class ServiceReservation implements IService<Reservation> {
     }
 
     @Override
-    public Set<Reservation> getAll() {
+    public Set<Reservation> getAll()throws SQLException {
         Set<Reservation> reservations=new HashSet<>();
         String req="SELECT * FROM reservation";
         try{

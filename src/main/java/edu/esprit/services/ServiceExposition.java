@@ -134,7 +134,7 @@ Connection cnx= DataSource.getInstance().getCnx();
 
 
     @Override
-    public Set<Exposition> getAll() {
+    public Set<Exposition> getAll()throws SQLException{
        Set<Exposition> expositions=new HashSet<>();
        String req="SELECT * FROM exposition";
        try{

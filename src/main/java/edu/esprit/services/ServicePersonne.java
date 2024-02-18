@@ -54,7 +54,7 @@ public class ServicePersonne implements IService<User> {
     }
 
     @Override
-    public Set<User> getAll() {
+    public Set<User> getAll()throws SQLException {
         Set<User> personnes = new HashSet<>();
 
         String req = "Select * from user";
