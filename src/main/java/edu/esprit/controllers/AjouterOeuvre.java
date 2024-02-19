@@ -12,10 +12,12 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import java.io.IOException;
 import java.sql.SQLException;
+
 public class AjouterOeuvre {
 
     private final ServiceOeuvre PS = new ServiceOeuvre();
@@ -42,10 +44,15 @@ public class AjouterOeuvre {
     private Button button_ajouter;
 
     @FXML
-    void Ajouter(ActionEvent event) {
+    public void initialize() {
+        // Ajoutez des éléments à la ChoiceBox dans la méthode initialize
+        categorie_id.getItems().addAll("Peinture", "Sculpture", "scene");
+    }
 
-        try {
-            // Récupérer la valeur sélectionnée dans la ChoiceBox
+    @FXML
+    public void add(ActionEvent event){
+
+// Récupérer la valeur sélectionnée dans la ChoiceBox
             String categorie = categorie_id.getValue();
 
             // Récupérer la date sélectionnée dans le DatePicker
@@ -55,23 +62,13 @@ public class AjouterOeuvre {
             // Convertir le prix en float
             float prix = Float.parseFloat(prix_id.getText());
 
-            PS.ajouter(new Oeuvre(Nom_id.getText(), categorie,prix, date, description_id.getText(), image_id.getText()));
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Validation");
-            alert.setContentText("Oeuvre ajoute avec succes");
-            alert.showAndWait();
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherPersonne.fxml"));
-            Parent root=loader.load();
-            Nom_id.getScene().setRoot(root);
+        System.out.println("Ajout de l'oeuvre : ");
+            PS.ajouter(new Oeuvre(Nom_id.getText(), categorie, prix, date, description_id.getText(), image_id.getText()));
 
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("SQL Exeption");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            //FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherPersonne.fxml"));
+            // Parent root=loader.load();
+            // Nom_id.getScene().setRoot(root);
+
+
     }
-
 }

@@ -9,19 +9,19 @@ import edu.esprit.utils.DataSource;
 
 public class Main {
     public static void main(String[] args) {
-        DataSource dataSource = DataSource.getInstance();
+        //DataSource dataSource = DataSource.getInstance();
 //
-        dataSource.getCnx();
+      //  dataSource.getCnx();
 //
 //
-        ServicePersonne personne=new ServicePersonne();
-        ServiceOeuvre oeuvre=new ServiceOeuvre();
-        ServiceAvis avis=new ServiceAvis();
+     //   ServicePersonne personne=new ServicePersonne();
+     //   ServiceOeuvre oeuvre=new ServiceOeuvre();
+     //   ServiceAvis avis=new ServiceAvis();
 //
-        Oeuvre e=new Oeuvre("femme0.3","peinture",3200,java.sql.Date.valueOf("2021-12-15"),"ttttttttttt","/images/art/femme");
-        oeuvre.ajouter(e);
-        User p = new User();
-        Avis a = new Avis();
+        //Oeuvre e=new Oeuvre("femme0.3","peinture",3200,java.sql.Date.valueOf("2021-12-15"),"ttttttttttt","/images/art/femme");
+        //oeuvre.ajouter(e);
+        //User p = new User();
+        //Avis a = new Avis();
 
         ///////////////:Oeuvre/::::::::::::::::::::::::::::
 

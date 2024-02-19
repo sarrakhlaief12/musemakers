@@ -18,7 +18,7 @@
             <ChoiceBox fx:id="categorie_id" prefWidth="150.0" />
          </buttons>
       </ButtonBar>
-    <Button fx:id="button_ajouter" layoutX="291.0" layoutY="321.0" mnemonicParsing="false" text="Ajouter">
+    <Button fx:id="button_ajouter" layoutX="291.0" layoutY="321.0" mnemonicParsing="false" onAction="#add" text="Ajouter" >
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
