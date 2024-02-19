@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
@@ -31,7 +32,7 @@ public class AjouterExposition {
     public TextArea descriptionId;
     @FXML
     public TextField nomExpoId;
-    public void addExpo(ActionEvent event)throws IOException {
+    public void addExpo(ActionEvent event) throws IOException, SQLException {
 //
         LocalDate startDate = dateDebutId.getValue();
         LocalDate endDate = datefinId.getValue();
@@ -68,8 +69,7 @@ public class AjouterExposition {
         // Show the new stage
 //        stage.show();
         nomExpoId.getScene().setRoot(root);
-     }
+    }
 
 
 }
-

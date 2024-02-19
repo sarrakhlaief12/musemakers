@@ -29,7 +29,7 @@ Connection cnx= DataSource.getInstance().getCnx();
 
 
     @Override
-    public void ajouter(Exposition exp) {
+    public void ajouter(Exposition exp)throws SQLException {
         if (validateExpositionDates(exp)) {
 
         if (!isValidString(exp.getNom()) || !isValidString(exp.getTheme()) || !isValidString(exp.getImage())) {
@@ -54,7 +54,7 @@ Connection cnx= DataSource.getInstance().getCnx();
         }
     }}
     @Override
-    public void modifier(Exposition exp) {
+    public void modifier(Exposition exp)throws SQLException {
         if (validateExpositionDates(exp)) {
 
 
@@ -87,7 +87,7 @@ Connection cnx= DataSource.getInstance().getCnx();
     }}
 
     @Override
-    public void supprimer(int id) {
+    public void supprimer(int id)throws SQLException {
         String req = "DELETE FROM exposition WHERE id_exposition=?";
         try{
             PreparedStatement ps=cnx.prepareStatement(req);
@@ -108,7 +108,7 @@ Connection cnx= DataSource.getInstance().getCnx();
     }
 
     @Override
-    public Exposition getOneById(int id) {
+    public Exposition getOneById(int id)throws SQLException {
         String req = "SELECT * FROM exposition WHERE id_exposition=?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
@@ -156,7 +156,7 @@ Connection cnx= DataSource.getInstance().getCnx();
        }
        return expositions;
     }
-    public Set<Exposition> chercherParThemeOuNom(String theme, String nom) {
+    public Set<Exposition> chercherParThemeOuNom(String theme, String nom)throws SQLException {
         Set<Exposition> result = new HashSet<>();
         String req = "SELECT * FROM exposition WHERE Theme LIKE ? AND nom LIKE ?";
         try {
