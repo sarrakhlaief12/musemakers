@@ -134,6 +134,10 @@ public class User {
                 '}';
     }
 
+    /*@Override
+    public String toString() {
+        return nom_user;
+    }*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

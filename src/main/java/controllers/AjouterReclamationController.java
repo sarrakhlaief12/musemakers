@@ -56,31 +56,31 @@ public class AjouterReclamationController {
     @FXML
     private Button supprimer;
 
-public void initialize() throws IOException {
-    ShowReclamation();
+    public void initialize() throws IOException {
+        ShowReclamation();
 
 
-}
+    }
 
 
 
-   @FXML
-   void ajouter(ActionEvent event) throws IOException {
-       Reclamation r=new Reclamation();
-       User userAdd= su.getOneById(2);
-       r.setCategorieRec(CategorieRecTF.getText());
-       r.setStatutRec("En cours");
-       r.setDescriRec(descriRecTF.getText());
-       r.setUser(userAdd);
-       r.setDateRec(new Date(System.currentTimeMillis()));
+    @FXML
+    void ajouter(ActionEvent event) throws IOException {
+        Reclamation r=new Reclamation();
+        User userAdd= su.getOneById(2);
+        r.setCategorieRec(CategorieRecTF.getText());
+        r.setStatutRec("En cours");
+        r.setDescriRec(descriRecTF.getText());
+        r.setUser(userAdd);
+        r.setDateRec(new Date(System.currentTimeMillis()));
 
-       try {
-           rs.ajouter(r);
-           ShowReclamation(); // Rafraîchir les données de la table
-       } catch (SQLException e) {
-           throw new RuntimeException(e);
-       }
-   }
+        try {
+            rs.ajouter(r);
+            ShowReclamation(); // Rafraîchir les données de la table
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     List<Reclamation> RecList;
     public void ShowReclamation() throws IOException {
@@ -150,8 +150,3 @@ public void initialize() throws IOException {
 
 
 }
-
-
-
-
-

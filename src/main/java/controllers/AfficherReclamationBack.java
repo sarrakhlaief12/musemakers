@@ -56,8 +56,6 @@ public class AfficherReclamationBack {
 
     public void ShowReclamation() throws IOException {
 
-
-
         try {
             RecList = rs.getAll();
         } catch (SQLException e) {
@@ -74,7 +72,6 @@ public class AfficherReclamationBack {
             }
         }
         CvNom.setCellValueFactory(new PropertyValueFactory<>("user"));
-
         CvDescri.setCellValueFactory(new PropertyValueFactory<>("descriRec"));
         CvDate.setCellValueFactory(new PropertyValueFactory<>("DateRec"));
         CvCat.setCellValueFactory(new PropertyValueFactory<>("CategorieRec"));
