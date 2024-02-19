@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ScrollPane?>
+
+<AnchorPane prefHeight="473.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherExpositionClient">
+   <children>
+      <BorderPane prefHeight="473.0" prefWidth="818.0">
+         <left>
+            <VBox prefHeight="474.0" prefWidth="154.0" style="-fx-background-color: #e9d9d0;" BorderPane.alignment="CENTER" />
+         </left>
+         <top>
+            <HBox prefHeight="57.0" prefWidth="818.0" style="-fx-background-color: #dac0b1;" BorderPane.alignment="CENTER" />
+         </top>
+         <center>
+            <ScrollPane>
+               <VBox fx:id="exhibitionVBox" spacing="10" alignment="CENTER">
+                  <!-- This VBox will contain the exhibitions -->
+               </VBox>
+            </ScrollPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
