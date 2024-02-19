@@ -46,8 +46,11 @@ public class AfficherOeuvre {
     @FXML
     private final ServiceOeuvre PS=new ServiceOeuvre();
 
+
+
     @FXML
     void initialize() throws SQLException {
+
 
         List<Oeuvre> Ps= new ArrayList<>(PS.getAll());
         ObservableList<Oeuvre> observableList = FXCollections.observableList(Ps);

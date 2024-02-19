@@ -5,12 +5,15 @@ import edu.esprit.services.ServiceOeuvre;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -44,9 +47,16 @@ public class AjouterOeuvre {
     private Button button_ajouter;
 
     @FXML
+    private Button button_afficher;
+
+    @FXML
+    private AfficherOeuvre afficherOeuvreController;
+
+    @FXML
     public void initialize() {
         // Ajoutez des éléments à la ChoiceBox dans la méthode initialize
         categorie_id.getItems().addAll("Peinture", "Sculpture", "scene");
+
     }
 
     @FXML
@@ -65,10 +75,25 @@ public class AjouterOeuvre {
         System.out.println("Ajout de l'oeuvre : ");
             PS.ajouter(new Oeuvre(Nom_id.getText(), categorie, prix, date, description_id.getText(), image_id.getText()));
 
-            //FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherPersonne.fxml"));
+        //FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherPersonne.fxml"));
             // Parent root=loader.load();
             // Nom_id.getScene().setRoot(root);
 
 
+    }
+    @FXML
+    void Afficher(ActionEvent event) throws IOException {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherOeuvre.fxml"));
+        Parent root=loader.load();
+//        Scene scene = new Scene(root);
+//
+//        // Create a new stage (window)
+//        Stage stage = new Stage();
+//        stage.setTitle("Exhibition List"); // Set a title for the new window
+//        stage.setScene(scene);
+
+        // Show the new stage
+//        stage.show();
+        Nom_id.getScene().setRoot(root);
     }
 }
