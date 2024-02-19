@@ -52,7 +52,7 @@ public class Exposition {
 
     public void setNom(String nom) {
 
-            this.nom = nom;
+        this.nom = nom;
 
     }
 
@@ -61,7 +61,7 @@ public class Exposition {
     }
 
     public void setDateDebut(Timestamp dateDebut) {
-            this.dateDebut = dateDebut;
+        this.dateDebut = dateDebut;
 
     }
     public Timestamp getDateFin() {
@@ -69,7 +69,7 @@ public class Exposition {
     }
 
     public void setDateFin(Timestamp dateFin) {
-            this.dateFin = dateFin;
+        this.dateFin = dateFin;
 
     }
     public String getDescription() {
@@ -120,4 +120,3 @@ public class Exposition {
         return Objects.hash(getId());
     }
 }
-

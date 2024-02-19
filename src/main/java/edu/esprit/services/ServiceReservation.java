@@ -43,6 +43,28 @@ public class ServiceReservation implements IService<Reservation> {
 
         }}
     }
+    public void ajouterticket(Reservation r) {
+        if (isValidReservation(r)) {
+
+            String req="INSERT INTO `reservation`(`date_reser`, `tickets_number`,`id_exposition`,`id_user`) VALUES (?,?,?,?,?)";
+            try {
+                PreparedStatement ps=cnx.prepareStatement(req);
+                ps.setTimestamp(1,r.getDateReser());
+                ps.setInt(2,r.getTicketsNumber());
+                ps.setInt(4, r.getExposition().getId());
+                ps.setInt(5,r.getClient().getId_user());
+
+                ps.executeUpdate();
+                System.out.println("Reservation added!");
+
+
+
+            }catch(SQLException e){
+                System.out.println(e.getMessage());
+
+            }}
+    }
+
 
     @Override
     public void modifier(Reservation r) {

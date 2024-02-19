@@ -18,7 +18,10 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class AjouterExposition {
     private final ServiceExposition exp = new ServiceExposition();
@@ -28,9 +31,9 @@ public class AjouterExposition {
     @FXML
     public Button buttonaddExpoID;
     @FXML
-    public DatePicker datefinId;
+    private TextField startDateTimeTextField;
     @FXML
-    public DatePicker dateDebutId;
+    private TextField endDateTimeTextField;
     @FXML
     public TextField pathimageid;
     @FXML
@@ -43,27 +46,39 @@ public class AjouterExposition {
     @FXML
     public Button browseButton;
     public void addExpo(ActionEvent event) throws IOException, SQLException {
+        String startDateTimeInput = startDateTimeTextField.getText();
+        String endDateTimeInput = endDateTimeTextField.getText();
+
+        // Parse the entered start date and time
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime startLocalDateTime = LocalDateTime.parse(startDateTimeInput, dateTimeFormatter);
+
+        // Convert LocalDateTime to Timestamp
+        Timestamp startTimestamp = Timestamp.valueOf(startLocalDateTime);
+
+        // Parse the entered end date and time
+        LocalDateTime endLocalDateTime = LocalDateTime.parse(endDateTimeInput, dateTimeFormatter);
+
+        // Convert LocalDateTime to Timestamp
+        Timestamp endTimestamp = Timestamp.valueOf(endLocalDateTime);
 //
-        LocalDate startDate = dateDebutId.getValue();
-        LocalDate endDate = datefinId.getValue();
+        //datepicker fel fxml kenet en cas ou :
+//        LocalDate startDate = dateDebutId.getValue();
+//        LocalDate endDate = datefinId.getValue();
+//
+//        Timestamp sqlStartDate = Timestamp.valueOf(startDate.atStartOfDay());
+//        Timestamp sqlEndDate = Timestamp.valueOf(endDate.atStartOfDay());
 
-        Timestamp sqlStartDate = Timestamp.valueOf(startDate.atStartOfDay());
-        Timestamp sqlEndDate = Timestamp.valueOf(endDate.atStartOfDay());
 
+        // Now you can use the 'startTimestamp' and 'endTimestamp' variables for database operations
         exp.ajouter(new Exposition(
                 nomExpoId.getText(),
-                sqlStartDate,
-                sqlEndDate,
+                startTimestamp,
+                endTimestamp,
                 descriptionId.getText(),
                 themeID.getText(),
                 pathimageid.getText()));
-//
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setTitle("Validation");
-//            alert.setContentText("Expo added successfully");
-//            alert.showAndWait();
-//
-//
+
     }
     @FXML
     void Afficher(ActionEvent event) throws IOException {
