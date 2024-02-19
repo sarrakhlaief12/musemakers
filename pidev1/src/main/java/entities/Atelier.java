@@ -30,6 +30,7 @@ public class Atelier {
         this.lien_atelier = lien;
     }
 
+
     @Override
     public String toString() {
         return "Atelier{" +
@@ -100,4 +101,5 @@ public class Atelier {
     public int hashCode() {
         return Objects.hash(id_atelier, cour, dateDebut_atelier, dateFin_atelier, lien_atelier);
     }
+
 }

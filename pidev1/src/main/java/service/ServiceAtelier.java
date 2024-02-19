@@ -31,30 +31,49 @@ public class ServiceAtelier implements IService<Atelier>{
         }
     }
 
-    @Override
+   /* @Override
     public void modifier(Atelier p) {
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dateDebutStr = sdf.format(p.getDateDebut_atelier());
+        String dateFinStr = sdf.format(p.getDateFin_atelier());
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String dateDebutStr = sdf.format(p.getDateDebut_atelier());
-            String dateFinStr = sdf.format(p.getDateFin_atelier());
+        String requete = "UPDATE atelier SET id_cours=?, dateDebut_atelier=?, dateFin_atelier=?, lien_atelier=? WHERE id_atelier=?";
+        try {
+            PreparedStatement pst = conn.prepareStatement(requete);
+            pst.setInt(1, p.getCour().getId_cours()); // Correction ici
+            pst.setString(2, dateDebutStr);
+            pst.setString(3, dateFinStr);
+            pst.setString(4, p.getLien());
+            pst.setInt(5, p.getId_atelier()); // Correction ici
 
-            String requete = "UPDATE atelier SET id_cours=?, dateDebut_atelier=?, dateFin_atelier=?, lien_atelier=? WHERE id_atelier=?";
-            try {
-                PreparedStatement pst = conn.prepareStatement(requete);
-                pst.setInt(1, p.getId_atelier());
-                pst.setInt(2, p.getCour().getId_cours());
-                pst.setString(3, dateDebutStr);
-                pst.setString(4, dateFinStr);
-                pst.setString(5, p.getLien());
-
-
-                pst.executeUpdate();
-                System.out.println("Atelier modifié avec succès !");
-            } catch (SQLException e) {
-                System.out.println("Erreur lors de la modification de l'atelier : " + e.getMessage());
-            }
+            pst.executeUpdate();
+            System.out.println("Atelier modifié avec succès !");
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la modification de l'atelier : " + e.getMessage());
         }
+        }*/
+
+    @Override
+    public void modifier(Atelier p) {
+        String requete = "UPDATE atelier SET cour = ?, dateDebut_atelier = ?, dateFin_atelier = ?, lien_atelier = ? WHERE id_atelier = ?";
+
+        try (
+             PreparedStatement pstmt = conn.prepareStatement(requete)) {
+
+            pstmt.setInt(1, p.getId_atelier());
+            pstmt.setObject(2, p.getCour()); // Vous devrez peut-être convertir `Cour` en un type approprié
+            pstmt.setDate(3, new java.sql.Date(p.getDateDebut_atelier().getTime()));
+            pstmt.setDate(4, new java.sql.Date(p.getDateFin_atelier().getTime()));
+            pstmt.setString(5, p.getLien());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
 
     @Override
     public void supprimer(int id) {

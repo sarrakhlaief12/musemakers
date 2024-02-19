@@ -59,7 +59,7 @@ public class ServiceCour implements IService<Cour> {
 
     @Override
     public void supprimer(int id) {
-      /*
+
         try {
             // Vérifie d'abord s'il y a des ateliers liés à ce cours
             String checkQuery = "SELECT COUNT(*) FROM atelier WHERE id_cours=?";
@@ -85,8 +85,8 @@ public class ServiceCour implements IService<Cour> {
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
-            System.out.println("Cours non supprimé!");
-        }*/
+            System.out.println("Cours non supprimé!");}
+        /*
         try {
             String deleteQuery = "DELETE FROM cours WHERE id_cours=?";
             PreparedStatement deletePst = conn.prepareStatement(deleteQuery);
@@ -100,39 +100,40 @@ public class ServiceCour implements IService<Cour> {
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
-            System.out.println("Cours non supprimé!");
+            System.out.println("Cours non supprimé!");*/
         }
-    }
+
+
 
 
 
 
     @Override
-    public Cour getOneById(int id) {
-        Cour r = new Cour();
-        String req = "SELECT * FROM cours WHERE id_cours = ?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(req);
-            ps.setInt(1, id);
-            ResultSet rst = ps.executeQuery();
-            while (rst.next()) {
-                r.setId_cours(rst.getInt("id_cours"));
-                r.setTitre_cours(rst.getString("titre_cours"));
-                r.setDescription_cours(rst.getString("descri_cours"));
-                r.setDateDebut_cours(rst.getDate("dateDebut_cours"));
-                r.setDateFin_cours(rst.getDate("DateFin_cours"));
-                User u = new User();
+    public  Cour getOneById(int id){
+            Cour r = new Cour();
+            String req = "SELECT * FROM cours WHERE id_cours = ?";
+            try {
+                PreparedStatement ps = conn.prepareStatement(req);
+                ps.setInt(1, id);
+                ResultSet rst = ps.executeQuery();
+                while (rst.next()) {
+                    r.setId_cours(rst.getInt("id_cours"));
+                    r.setTitre_cours(rst.getString("titre_cours"));
+                    r.setDescription_cours(rst.getString("descri_cours"));
+                    r.setDateDebut_cours(rst.getDate("dateDebut_cours"));
+                    r.setDateFin_cours(rst.getDate("DateFin_cours"));
+                    User u = new User();
 
-                u.setId_user(rst.getInt("id_user"));
+                    u.setId_user(rst.getInt("id_user"));
 
-                r.setId_user(u);
+                    r.setId_user(u);
 
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            return r;
         }
-        return r;
-    }
 
     @Override
     public Set<Cour> getAll() {
