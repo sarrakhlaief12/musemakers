@@ -29,6 +29,8 @@ public class AfficherOeuvreClient {
     private final ServiceOeuvre oe = new ServiceOeuvre();
     private Set<Oeuvre> listeo = oe.getAll();
 
+    private final String cheminImages = "/art/";
+
     @FXML
     private VBox exhibitionVBox;
 
@@ -51,7 +53,8 @@ public class AfficherOeuvreClient {
             // ImageView pour l'image de l'exposition
             ImageView imageView = new ImageView();
             try {
-                Image image = new Image(new File(o.getImage()).toURI().toString());
+                String cheminImage = cheminImages + o.getImage(); // Concaténation du chemin d'accès
+                Image image = new Image(getClass().getResourceAsStream(cheminImage));
                 imageView.setImage(image);
                 imageView.setFitWidth(200);
                 imageView.setFitHeight(200);
