@@ -42,6 +42,24 @@ public class HistoriqueReservation {
 
     private ServiceReservation serviceReservation = new ServiceReservation();
     private ObservableList<Reservation> userReservations = FXCollections.observableArrayList();
+    private String getStatusText(Integer accessByAdmin) {
+        if (accessByAdmin == null) {
+            return null;
+        }
+
+        switch (accessByAdmin) {
+            case 0:
+                return "En Cours";
+            case 1:
+                return "Accepté";
+            case 2:
+                return "Refusé";
+            case 3:
+                return "Annulé";
+            default:
+                return "Unknown";
+        }
+    }
 
     //3amla haja bsh netfakrha ; 0en cours, 1:accepté,2 :refusé par admin, 3 anuuler
     @FXML
@@ -60,6 +78,18 @@ public class HistoriqueReservation {
         themeExpositionColumn.setCellValueFactory(new PropertyValueFactory<>("expositionTheme"));
         etatrdv.setCellValueFactory(new PropertyValueFactory<>("accessByAdmin"));
 
+        etatrdv.setCellFactory(column -> new TableCell<Reservation, Integer>() {
+            @Override
+            protected void updateItem(Integer accessByAdmin, boolean empty) {
+                super.updateItem(accessByAdmin, empty);
+                if (empty || accessByAdmin == null) {
+                    setText("");
+                } else {
+                    String statusText = getStatusText(accessByAdmin);
+                    setText(statusText != null ? statusText : "Unknown");
+                }
+            }
+        });
         // Add the button column
         action.setCellFactory(column -> new TableCell<Reservation, Void>() {
             private final Button xButton = new Button("X");
