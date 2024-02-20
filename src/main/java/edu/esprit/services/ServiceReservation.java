@@ -232,7 +232,7 @@ public class ServiceReservation implements IService<Reservation> {
             System.out.println("Error accepting reservation: " + e.getMessage());
         }
     }
-    public void annulerReservation(int reservationId) {
+    public void refuserReservation(int reservationId) {
         String updateQuery = "UPDATE reservation SET accessByAdmin = 2 WHERE id_reservation = ?";
 
         try (PreparedStatement statement = cnx.prepareStatement(updateQuery)) {
@@ -248,13 +248,63 @@ public class ServiceReservation implements IService<Reservation> {
             System.out.println("Error canceling reservation: " + e.getMessage());
         }
     }
+    public void annulerReservation(int reservationId) {
+        String updateQuery = "UPDATE reservation SET accessByAdmin = 3 WHERE id_reservation = ?";
 
+        try (PreparedStatement statement = cnx.prepareStatement(updateQuery)) {
+            statement.setInt(1, reservationId);
+            int rowsAffected = statement.executeUpdate();
 
+            if (rowsAffected > 0) {
+                System.out.println("Reservation cancelled successfully.");
+            } else {
+                System.out.println("Failed to cancel the reservation. Make sure the reservation ID is valid.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error canceling reservation: " + e.getMessage());
+        }
+    }
+    public Set<Reservation> getReservationsByUser(int userId) {
+        // Utilisez une requête SQL pour récupérer les réservations liées à l'utilisateur avec l'ID userId
+        Set<Reservation> userReservations = new HashSet<>();
+        String req = "SELECT * FROM reservation WHERE id_user = ?";
 
+        try (PreparedStatement statement = cnx.prepareStatement(req)) {
+            statement.setInt(1, userId);
+            ResultSet res = statement.executeQuery();
 
+            while (res.next()) {
+                int id = res.getInt(1);
+                Timestamp datereser = res.getTimestamp("Date_reser");
+                int ticketsNumber = res.getInt("tickets_number");
+                int accessByAdmin = res.getInt("accessByAdmin");
+                int idExposition = res.getInt("id_exposition");
+                int id_user = res.getInt("id_user");
 
+                ServiceExposition serviceExposition = new ServiceExposition();
+                Exposition exposition = serviceExposition.getOneById(idExposition);
 
+                ServicePersonne servicePersonne = new ServicePersonne();
+                User user = servicePersonne.getOneById(id_user);
+
+                Reservation reser = new Reservation(id, datereser, ticketsNumber, accessByAdmin, exposition, user);
+                userReservations.add(reser);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return userReservations;
+    }
 }
+
+
+
+
+
+
+
+
 
 
 

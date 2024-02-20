@@ -1,15 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.esprit.controllers.HistoriqueReservation"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.HistoriqueReservation">
+    <children>
+        <BorderPane prefHeight="558.0" prefWidth="1063.0">
+            <left>
+                <VBox prefHeight="498.0" prefWidth="154.0" style="-fx-background-color: #e9d9d0;" BorderPane.alignment="CENTER" />
+            </left>
+            <top>
+                <HBox prefHeight="58.0" prefWidth="1042.0" style="-fx-background-color: #dac0b1;" BorderPane.alignment="CENTER" />
+            </top>
+            <center>
+                <BorderPane prefHeight="497.0" prefWidth="875.0" BorderPane.alignment="CENTER">
+                    <top>
+                        <HBox prefHeight="42.0" prefWidth="500.0" style="-fx-background-color: E0C2BB;" BorderPane.alignment="CENTER">
+                            <children>
+                                <Label contentDisplay="CENTER" text="Mes Reservations" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
+                            </children>
+                        </HBox>
+                    </top>
+                    <center>
+                        <HBox prefHeight="374.0" prefWidth="504.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <AnchorPane prefHeight="374.0" prefWidth="448.0">
+                                    <children>
+                                        <AnchorPane layoutX="23.0" layoutY="14.0" prefHeight="348.0" prefWidth="607.0">
+                                            <children>
+                                                <TableView fx:id="reservationTableView" layoutX="25.0" layoutY="26.0" prefHeight="390.0" prefWidth="808.0">
+                                                    <columns>
+                                                        <TableColumn fx:id="nomExpositionColumn" prefWidth="124.0000228881836" text="nom exposition" />
+                                                        <TableColumn fx:id="themeExpositionColumn" prefWidth="92.0" text="theme exposition" />
+                                                        <TableColumn fx:id="dateDebutColumn" prefWidth="115.20001220703125" text="date debut" />
+                                                        <TableColumn fx:id="dateFinColumn" prefWidth="131.19998168945312" text="date fin" />
+                                                        <TableColumn fx:id="ticketsNumberColumn" prefWidth="81.5999755859375" text="nombre tickets" />
+                                                        <TableColumn fx:id="etatrdv" minWidth="0.0" prefWidth="163.2000732421875" text="etat" />
+                                                        <TableColumn fx:id="action" prefWidth="100.0" text="action" />
+                                                    </columns>
+                                                </TableView>
+                                            </children>
+                                        </AnchorPane>
+                                    </children>
+                                </AnchorPane>
+                            </children></HBox>
+                    </center>
+                </BorderPane>
+            </center>
+        </BorderPane>
+    </children>
 
 
 </AnchorPane>

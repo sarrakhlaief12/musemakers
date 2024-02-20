@@ -28,43 +28,47 @@
 //
 //        int num_exp=11;
 //        int num_user=5;
+//       // System.out.println(reservation.getReservationsByUser(6));
+//
+////
+////
+////        //////RESERVATION//////
+////
+////        Exposition exp_add_reser=exposition.getOneById(num_exp);
+////        User user_add_rese=personne.getOneById(num_user);
+////        reservation.annulerReservation(14);
+////
+////
+//////        Reservation r = new Reservation(Timestamp.valueOf(LocalDateTime.now()),12,false,exp_add_reser,user_add_rese);
+//////        reservation.ajouter(r);
+//////        Reservation r1 = new Reservation(8,Timestamp.valueOf(LocalDateTime.now()),21,true,exp_add_reser,user_add_rese);
+//////        reservation.modifier(r1);
 //
 //
-//        //////RESERVATION//////
-//
-//        Exposition exp_add_reser=exposition.getOneById(num_exp);
-//        User user_add_rese=personne.getOneById(num_user);
-//        reservation.annulerReservation(14);
-//
-//
-////        Reservation r = new Reservation(Timestamp.valueOf(LocalDateTime.now()),12,false,exp_add_reser,user_add_rese);
-////        reservation.ajouter(r);
-////        Reservation r1 = new Reservation(8,Timestamp.valueOf(LocalDateTime.now()),21,true,exp_add_reser,user_add_rese);
-////        reservation.modifier(r1);
-//
-//       //System.out.println(reservation.getAll());
-//      // reservation.supprimer(12);
-//        //System.out.println(reservation.triparDateAncienne());
-//
-//
-//        ///////////////:EXPOSITION/::::::::::::::::::::::::::::
-//
-//
-//////////********ajouterrrrr exposition********////////
-////        Exposition exp=new Exposition("test",Timestamp.valueOf(LocalDateTime.of(2024, 2, 16, 12, 0)),Timestamp.valueOf(LocalDateTime.of(2024, 2, 17, 12, 0)),"cest .............","futur","/images/art/futur");
-////        exposition.ajouter(exp);
-////        Exposition exp1=new Exposition(15,"Old but Gold",Timestamp.valueOf(LocalDateTime.of(2024, 5, 1, 12, 0)),Timestamp.valueOf(LocalDateTime.of(2024, 5, 2, 12, 0)),"cest .............","nostalgie","/images/art/comique");
-////        exposition.modifier(exp1);
-//       // exposition.supprimer(12);
-//       // System.out.println(reservation.getAll());
-//
-//       // System.out.println(exposition.chercherParThemeOuNom("","limoncello"));
-//
-//
-//
-//
-//
-//       // System.out.println(personne.getAll());
-//        //System.out.println(personne.getOneById(5));
+////
+////       //System.out.println(reservation.getAll());
+////      // reservation.supprimer(12);
+////        //System.out.println(reservation.triparDateAncienne());
+////
+////
+////        ///////////////:EXPOSITION/::::::::::::::::::::::::::::
+////
+////
+////////////********ajouterrrrr exposition********////////
+//////        Exposition exp=new Exposition("test",Timestamp.valueOf(LocalDateTime.of(2024, 2, 16, 12, 0)),Timestamp.valueOf(LocalDateTime.of(2024, 2, 17, 12, 0)),"cest .............","futur","/images/art/futur");
+//////        exposition.ajouter(exp);
+//////        Exposition exp1=new Exposition(15,"Old but Gold",Timestamp.valueOf(LocalDateTime.of(2024, 5, 1, 12, 0)),Timestamp.valueOf(LocalDateTime.of(2024, 5, 2, 12, 0)),"cest .............","nostalgie","/images/art/comique");
+//////        exposition.modifier(exp1);
+////       // exposition.supprimer(12);
+////       // System.out.println(reservation.getAll());
+////
+////       // System.out.println(exposition.chercherParThemeOuNom("","limoncello"));
+////
+////
+////
+////
+////
+////       // System.out.println(personne.getAll());
+////        //System.out.println(personne.getOneById(5));
 //    }
 //    }

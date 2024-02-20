@@ -90,7 +90,7 @@ public class DemandeReservation {
                 xButton.setOnAction(event -> {
                     Reservation reservation = getTableRow().getItem();
                     if (reservation != null && showConfirmationDialog("Annuler cette Reservation")) {
-                        serviceReservation.annulerReservation(reservation.getIdReservation());
+                        serviceReservation.refuserReservation(reservation.getIdReservation());
                         refreshTable();
                     }
                 });
