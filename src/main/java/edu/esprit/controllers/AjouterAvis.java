@@ -74,6 +74,9 @@ public class AjouterAvis {
 
             // Add the avis to the database
             serviceAvis.ajouter(avis);
+            comment_id.clear();
+            dateex_id.setValue(null);
+            note_id.setValue(null);
 
             // Show a confirmation message
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -83,8 +86,9 @@ public class AjouterAvis {
             alert.showAndWait();
 
             // Close the dialog
-            Stage stage = (Stage) comment_id.getScene().getWindow();
-            stage.close();
+
+            //Stage stage = (Stage) comment_id.getScene().getWindow();
+          //  stage.close();
         } catch (NumberFormatException e) {
             // Handle the case where the user enters a non-numeric value for note
             Alert alert = new Alert(Alert.AlertType.ERROR);
