@@ -6,7 +6,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -17,6 +19,7 @@ import javafx.stage.Stage;
 import java.io.File;
 
 import javax.swing.text.html.ImageView;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -49,10 +52,12 @@ public class AfficherOeuvre {
     @FXML
     private TableColumn<Oeuvre, Float> prix_id;
 
-    @FXML
-    private Button button_modifier;
+
 
     private Oeuvre selectedOeuvre;
+
+    @FXML
+    private Button nouvelajout_id;
     @FXML
     private final ServiceOeuvre PS=new ServiceOeuvre();
 
@@ -179,6 +184,7 @@ public class AfficherOeuvre {
             openEditDialog(selectedRec);
         }
     }
+
 
 
 }

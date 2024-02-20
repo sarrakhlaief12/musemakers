@@ -11,53 +11,48 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="926.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterOeuvre">
    <children>
-    <Button fx:id="button_ajouter" layoutX="329.0" layoutY="335.0" mnemonicParsing="false" onAction="#add" text="Ajouter">
+    <Button fx:id="button_ajouter" layoutX="357.0" layoutY="405.0" mnemonicParsing="false" onAction="#add" text="Ajouter">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
       <Accordion layoutX="190.0" layoutY="57.0" prefHeight="0.0" prefWidth="0.0" />
-      <TextField fx:id="prix_id" layoutX="427.0" layoutY="101.0" />
-      <TextField fx:id="Nom_id" layoutX="428.0" layoutY="14.0" />
-      <TextField fx:id="description_id" layoutX="427.0" layoutY="199.0" />
-      <Text fontSmoothingType="LCD" layoutX="289.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" wrappingWidth="108.74371337890625">
+      <TextField fx:id="prix_id" layoutX="426.0" layoutY="199.0" />
+      <TextField fx:id="Nom_id" layoutX="428.0" layoutY="101.0" />
+      <TextField fx:id="description_id" layoutX="428.0" layoutY="287.0" />
+       <TextField fx:id="image_id" layoutX="421.0" layoutY="331.0" promptText="image" />
+      <Text fontSmoothingType="LCD" layoutX="281.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" wrappingWidth="108.74371337890625">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="291.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" wrappingWidth="108.74371337890625">
+      <Text fontSmoothingType="LCD" layoutX="281.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" wrappingWidth="108.74371337890625">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="289.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date creation" wrappingWidth="123.9437255859375">
+      <Text fontSmoothingType="LCD" layoutX="283.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date creation" wrappingWidth="123.9437255859375">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="283.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image" wrappingWidth="123.9437255859375">
+      <Text fontSmoothingType="LCD" layoutX="281.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="123.9437255859375">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="283.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="123.9437255859375">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <DatePicker fx:id="date_id" layoutX="427.0" layoutY="150.0" prefHeight="26.0" prefWidth="150.0" />
-      <TextField fx:id="image_id" layoutX="428.0" layoutY="249.0" />
-      <Button fx:id="button_afficher" layoutX="479.0" layoutY="335.0" mnemonicParsing="false" onAction="#Afficher" text="Afficher">
+      <DatePicker fx:id="date_id" layoutX="426.0" layoutY="238.0" prefHeight="26.0" prefWidth="150.0" />
+      <Button fx:id="button_afficher" layoutX="543.0" layoutY="405.0" mnemonicParsing="false" onAction="#Afficher" text="Afficher">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <ChoiceBox fx:id="categorie_id" layoutX="427.0" layoutY="59.0" prefWidth="150.0" />
-      <Text fontSmoothingType="LCD" layoutX="290.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie" wrappingWidth="108.74371337890625">
+      <ChoiceBox fx:id="categorie_id" layoutX="425.0" layoutY="150.0" prefWidth="150.0" />
+      <Text fontSmoothingType="LCD" layoutX="281.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie" wrappingWidth="108.74371337890625">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-       <Button fx:id="browseButton" layoutX="312.0" layoutY="331.0" mnemonicParsing="false" onAction="#browseImage" text="Browse image" />
+       <Button fx:id="browseButton" layoutX="427.0" layoutY="344.0" mnemonicParsing="false" onAction="#browseImage" prefHeight="26.0" prefWidth="150.0" text="ajouter image" />
    </children>
 </AnchorPane>

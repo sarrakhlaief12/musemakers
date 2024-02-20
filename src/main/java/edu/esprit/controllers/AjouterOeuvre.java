@@ -123,7 +123,7 @@ public class AjouterOeuvre {
                 // imageView.setImage(image);
             } catch (Exception e) {
                 System.out.println("Error loading image: " + e.getMessage());
-                // Gérer l'exception, par exemple, afficher une image par défaut
+
             }
         }
     }

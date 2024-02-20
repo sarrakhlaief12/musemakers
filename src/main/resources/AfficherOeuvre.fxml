@@ -16,11 +16,16 @@
                 <TableColumn fx:id="datecreation_id" prefWidth="208.0" text="date creation" />
                 <TableColumn fx:id="description_id" minWidth="0.0" prefWidth="130.4000244140625" text="description" />
                 <TableColumn fx:id="image_id" prefWidth="152.800048828125" text="image " />
-
+                 
             </columns>
         </TableView>
 
-      <Button fx:id="button_supprimer" layoutX="647.0" layoutY="480.0" mnemonicParsing="false" onAction="#delete" text="supprimer">
+      <Button fx:id="button_supprimer" layoutX="545.0" layoutY="371.0" mnemonicParsing="false" onAction="#delete" text="supprimer">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="nouvelajout_id" layoutX="289.0" layoutY="371.0" mnemonicParsing="false" onAction="#delete" text="nouvel ajout ">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

@@ -76,7 +76,7 @@ public class AfficherOeuvreClient {
             // Bouton pour donner l avis a propos l oeuvre
             Button avisButton = new Button("ajouter avis");
             avisButton.setId("buttonavis");
-            //avisButton.setOnAction(event -> showReservationDialog(expo));
+            avisButton.setOnAction(event ->  showAvisDialog(o));
 
             // Ajouter les composants au VBox des détails
             detailsVBox.getChildren().addAll(nomLabel, categorieLabel, prixLabel,dateCreationLabel, descriptionLabel, avisButton);
@@ -93,5 +93,30 @@ public class AfficherOeuvreClient {
     private String formatDateTime(java.util.Date date) {
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateTimeFormat.format(date);
+    }
+
+    private void showAvisDialog(Oeuvre o) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterAvis.fxml"));
+
+            // Load the FXML after setting the controller
+            Parent root = loader.load();
+
+            // Set the artwork to the controller
+            AjouterAvis controller = loader.getController();
+            controller.setOeuvre(o);
+
+            // Create a new stage (window) ;
+            Stage stage = new Stage();
+           stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("donner votre avis");
+            stage.setScene(new Scene(root));
+           stage.showAndWait();
+
+
+            displayExhibitions();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
