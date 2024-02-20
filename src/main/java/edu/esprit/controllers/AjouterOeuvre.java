@@ -49,8 +49,7 @@ public class AjouterOeuvre {
     @FXML
     private Button button_afficher;
 
-    @FXML
-    private AfficherOeuvre afficherOeuvreController;
+
 
     @FXML
     public void initialize() {
@@ -75,9 +74,6 @@ public class AjouterOeuvre {
         System.out.println("Ajout de l'oeuvre : ");
             PS.ajouter(new Oeuvre(Nom_id.getText(), categorie, prix, date, description_id.getText(), image_id.getText()));
 
-        //FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherPersonne.fxml"));
-            // Parent root=loader.load();
-            // Nom_id.getScene().setRoot(root);
 
 
     }
