@@ -84,12 +84,28 @@ public class HistoriqueReservation {
                 super.updateItem(accessByAdmin, empty);
                 if (empty || accessByAdmin == null) {
                     setText("");
+                    setStyle(""); // Clear any previous styles
                 } else {
                     String statusText = getStatusText(accessByAdmin);
                     setText(statusText != null ? statusText : "Unknown");
+
+                    // Apply styles based on the status
+                    if (accessByAdmin == 1) {
+                        // Accepté (Green)
+                        setStyle("-fx-background-color: #B1DE77;");
+                    } else if (accessByAdmin == 2) {
+                        // Refusé (Red)
+                        setStyle("-fx-background-color: #F4A48F;");
+                    } else if (accessByAdmin == 3) {
+                        // Annulé (Orange)
+                        setStyle("-fx-background-color: #F5DEA2;");
+                    } else {
+                        setStyle(""); // Clear any previous styles
+                    }
                 }
             }
         });
+
         // Add the button column
         action.setCellFactory(column -> new TableCell<Reservation, Void>() {
             private final Button xButton = new Button("X");
