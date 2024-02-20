@@ -66,7 +66,7 @@ public class Commentaire {
     @Override
     public String toString() {
         return "Commentaire{" +
-                "reclamation=" + reclamation +
+                "reclamation=" + (reclamation != null? reclamation.getIdRec() : "null")+
                 ", DateCom=" + DateCom +
                 ", ContenuCom='" + ContenuCom + '\'' +
                 '}';

@@ -1,6 +1,7 @@
 package service;
 
 import entities.Commentaire;
+import entities.Reclamation;
 import utils.DataSource;
 
 import java.sql.*;
@@ -30,10 +31,11 @@ public class CommentaireService implements IService<Commentaire>{
 
     }
 
-
+/*
     @Override
     public void modifier(Commentaire c)throws SQLException {
         String requete = "UPDATE commentaire SET idRec = ?, DateCom = ?, ContenuCom = ? WHERE idCom = ?";
+
 
             pst = cnx.prepareStatement(requete);
             pst.setInt(1, c.getReclamation().getIdRec());
@@ -43,6 +45,22 @@ public class CommentaireService implements IService<Commentaire>{
             pst.executeUpdate();
             System.out.println("Commentaire modifié !");
 
+    }
+*/
+
+
+    @Override
+    public void modifier(Commentaire c) throws SQLException {
+
+
+        PreparedStatement ps = cnx.prepareStatement("UPDATE commentaire SET idRec = ?, DateCom = ?, ContenuCom = ? WHERE idCom = ?");
+        ps.setInt(1, c.getReclamation().getIdRec());
+        ps.setDate(2, new java.sql.Date(c.getDateCom().getTime()));
+        ps.setString(3, c.getContenuCom());
+        ps.setInt(4, c.getIdCom());
+
+        ps.executeUpdate();
+        System.out.println("Reclamation modifiée!");
     }
 
     @Override
@@ -93,24 +111,7 @@ public class CommentaireService implements IService<Commentaire>{
         return commentaires;
     }
 
-   /* @Override
-    public Set<Commentaire> getAll() throws SQLException{
-        Set<Commentaire> commentaires = new HashSet<>();
-        String requete = "SELECT * FROM commentaire";
 
-            ste = cnx.createStatement();
-            ResultSet rst = ste.executeQuery(requete);
-            while (rst.next()) {
-                Commentaire c = new Commentaire();
-                c.setIdCom(rst.getInt("idCom"));
-                // Vous devez récupérer l'objet Reclamation associé à partir de la base de données
-                c.setDateCom(rst.getDate("DateCom"));
-                c.setContenuCom(rst.getString("ContenuCom"));
-                commentaires.add(c);
-            }
-
-        return commentaires;
-    }*/
 
 
 }

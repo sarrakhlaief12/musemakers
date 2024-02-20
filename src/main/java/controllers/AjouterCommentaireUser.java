@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class AjouterCommentaireUser {
     private final CommentaireService cs = new CommentaireService();
@@ -43,13 +44,22 @@ public class AjouterCommentaireUser {
     private Button supprimer;
 
     public void initialize() throws IOException {
+        TableViewCommentaire.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) { // Vérifie si c'est un simple clic
+                Commentaire selectedCommentaire = (Commentaire) TableViewCommentaire.getSelectionModel().getSelectedItem();
+                if (selectedCommentaire != null) {
+                    // Afficher les informations de la séance sélectionnée dans le formulaire
+                    displayCommentaireInfo(selectedCommentaire);
+                }
+            }
+        });
         ShowCommentaire();
     }
 
     @FXML
     void ajouter(ActionEvent event) throws IOException {
         Commentaire c = new Commentaire();
-        Reclamation r = null; // Remplacez 1 par l'ID de la réclamation appropriée
+        Reclamation r = null ; // Remplacez 1 par l'ID de la réclamation appropriée
         try {
             r = rs.getOneById(35);
         } catch (SQLException e) {
@@ -67,7 +77,8 @@ public class AjouterCommentaireUser {
         }
     }
     List<Commentaire> CommentaireList;
-   public void ShowCommentaire() throws IOException {
+    @FXML
+     public void ShowCommentaire() throws IOException {
 
         try {
             CommentaireList = cs.getAll();
@@ -79,7 +90,7 @@ public class AjouterCommentaireUser {
        } catch (SQLException e) {
            throw new RuntimeException(e);
        }
-       List<Reclamation> filteredRecList = new ArrayList<>();
+       List<Reclamation> filteredCommentaireList = new ArrayList<>();
 
 
         CvContenu.setCellValueFactory(new PropertyValueFactory<>("ContenuCom"));
@@ -87,38 +98,70 @@ public class AjouterCommentaireUser {
 
         TableViewCommentaire.setItems(FXCollections.observableArrayList(CommentaireList));
     }
+/*
+ @FXML
+ void modifier(ActionEvent event) throws IOException, SQLException {
+     // Récupérer le commentaire sélectionné dans la table
+     Commentaire selectedCommentaire = TableViewCommentaire.getSelectionModel().getSelectedItem();
+
+     if (selectedCommentaire != null) {
+         // Mettre à jour le contenu du commentaire avec le texte du TextField
+         selectedCommentaire.setContenuCom(contenuCommentaireTF.getText());
+
+         // Mettre à jour la date du commentaire avec la date actuelle
+         selectedCommentaire.setDateCom(new Date(System.currentTimeMillis()));
+
+         // Demander une confirmation à l'utilisateur
+         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+         alert.setTitle("Confirmation de modification");
+         alert.setHeaderText("Modifier le commentaire");
+         alert.setContentText("Êtes-vous sûr de vouloir modifier le commentaire sélectionné ?");
+
+         Optional<ButtonType> result = alert.showAndWait();
+         // Si l'utilisateur confirme la modification, procéder
+         if (result.isPresent() && result.get() == ButtonType.OK) {
+             // Mettre à jour le commentaire dans la base de données
+             cs.modifier(selectedCommentaire);
+
+             // Rafraîchir l'affichage des commentaires dans la TableView
+             ShowCommentaire();
+         }
+     } else {
+         // Afficher un message si aucun commentaire n'est sélectionné
+         Alert alert = new Alert(Alert.AlertType.WARNING);
+         alert.setTitle("Aucun commentaire sélectionné");
+         alert.setHeaderText("Aucun commentaire sélectionné");
+         alert.setContentText("Veuillez sélectionner un commentaire à modifier.");
+         alert.showAndWait();
+     }
+ }*/
+    @FXML
+    void modifier(ActionEvent event) throws IOException {
+        // Obtenez la réclamation sélectionnée dans la table
+        Commentaire c = (Commentaire) TableViewCommentaire.getSelectionModel().getSelectedItem();
+        if (c != null) {
+            // Mettez à jour les champs de la réclamation
+            c.setContenuCom(contenuCommentaireTF.getText());
 
 
+            try {
+                // Mettez à jour la réclamation dans la base de données
+                cs.modifier(c);
+                // Rafraîchir les données de la table
+                ShowCommentaire();
+                TableViewCommentaire.refresh(); // Ajoutez cette ligne
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
 
-  @FXML
-  void modifier(ActionEvent event) throws IOException {
-      // Obtenez le commentaire sélectionné dans la table
-      Commentaire c = (Commentaire) TableViewCommentaire.getSelectionModel().getSelectedItem();
+    private void displayCommentaireInfo(Commentaire c) {
 
-      if (c != null) {
-          // Mettez à jour le contenu du commentaire avec le texte du TextField
-          c.setContenuCom(contenuCommentaireTF.getText());
-
-          // Mettez à jour la date du commentaire avec la date actuelle
-          c.setDateCom(new Date(System.currentTimeMillis()));
-          try {
-
-
-              // Appelez la méthode modifier de CommentaireService
-              cs.modifier(c);
-
-              // Rafraîchir les données de la table
-              ShowCommentaire();
-              TableViewCommentaire.refresh();
-
-          } catch (SQLException e) {
-              throw new RuntimeException(e);
-          }
-      }}
-
-
-      @FXML
+        contenuCommentaireTF.setText(c.getContenuCom());
+    }
+    @FXML
       void supprimer(ActionEvent event) throws IOException {
           // Obtenez le commentaire sélectionné dans la TableView
           Commentaire c = TableViewCommentaire.getSelectionModel().getSelectedItem();
@@ -132,8 +175,5 @@ public class AjouterCommentaireUser {
               }
           }
       }
-
-
-
       }
 

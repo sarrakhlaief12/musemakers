@@ -58,18 +58,19 @@ public class Main {
         Reclamation rec = new Reclamation(user, "description", new Date(), "categorie", "statut");
 
         // Ajouter la réclamation à la base de données
-        recService.ajouter(rec);
-        System.out.println("Reclamation ajoutée: " + rec);
+       // recService.ajouter(rec);
+        //System.out.println("Reclamation ajoutée: " + rec);
 
         // Récupérer la réclamation avec idRec
         Reclamation rec35 = recService.getOneById(35);
         if (rec35 != null) {
             // Créer un nouveau commentaire avec cette réclamation
-            Commentaire com = new Commentaire(rec35, new Date(), "contenu");
+            //Commentaire com = new Commentaire(rec35, new Date(), "contenu");
 
             // Tester la méthode 'ajouter'
-            comService.ajouter(com);
-            System.out.println("Commentaire ajouté: " + com);
+
+          //  comService.ajouter(com);
+           // System.out.println("Commentaire ajouté: " + com);
 
             // Tester la méthode 'modifier'
             Commentaire com22 = new Commentaire(5, rec35, new Date(), "contenu");
