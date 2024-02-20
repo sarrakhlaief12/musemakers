@@ -39,8 +39,8 @@
                                                         <TableColumn fx:id="themeExpositionColumn" prefWidth="92.0" text="theme exposition" />
                                                         <TableColumn fx:id="dateDebutColumn" prefWidth="115.20001220703125" text="date debut" />
                                                         <TableColumn fx:id="dateFinColumn" prefWidth="131.19998168945312" text="date fin" />
-                                                        <TableColumn fx:id="ticketsNumberColumn" prefWidth="81.5999755859375" text="nombre tickets" />
-                                                        <TableColumn fx:id="etatrdv" minWidth="0.0" prefWidth="163.2000732421875" text="etat" />
+                                                        <TableColumn fx:id="ticketsNumberColumn" prefWidth="123.2000732421875" text="nombre tickets" />
+                                                        <TableColumn fx:id="etatrdv" minWidth="0.0" prefWidth="122.39996337890625" text="etat" />
                                                         <TableColumn fx:id="action" prefWidth="100.0" text="action" />
                                                     </columns>
                                                 </TableView>

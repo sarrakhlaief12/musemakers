@@ -1,34 +1,34 @@
-//package edu.esprit.tests;
-//import edu.esprit.entities.Exposition;
-//import edu.esprit.entities.Reservation;
-//import edu.esprit.entities.User;
-//import edu.esprit.services.ServiceExposition;
-//import edu.esprit.services.ServicePersonne;
-//import edu.esprit.services.ServiceReservation;
-//import edu.esprit.utils.DataSource;
+package edu.esprit.tests;
+import edu.esprit.entities.Exposition;
+import edu.esprit.entities.Reservation;
+import edu.esprit.entities.User;
+import edu.esprit.services.ServiceExposition;
+import edu.esprit.services.ServicePersonne;
+import edu.esprit.services.ServiceReservation;
+import edu.esprit.utils.DataSource;
+
+import java.security.Provider;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+
+public class Main {
+
+    public static void main(String[] args) throws SQLException {
+        DataSource dataSource = DataSource.getInstance();
+        dataSource.getCnx();
 //
-//import java.security.Provider;
-//import java.sql.SQLException;
-//import java.sql.Timestamp;
-//import java.time.LocalDateTime;
-//import java.util.Calendar;
-//
-//public class Main {
-//
-//    public static void main(String[] args) throws SQLException {
-//        DataSource dataSource = DataSource.getInstance();
-//        dataSource.getCnx();
-////
-//        ServicePersonne personne=new ServicePersonne();
-//        ServiceExposition exposition=new ServiceExposition();
-//        ServiceReservation reservation=new ServiceReservation();
-//
-//        Exposition e=new Exposition();
-//        User p = new User();
-//
-//        int num_exp=11;
-//        int num_user=5;
-//       // System.out.println(reservation.getReservationsByUser(6));
+        ServicePersonne personne=new ServicePersonne();
+        ServiceExposition exposition=new ServiceExposition();
+        ServiceReservation reservation=new ServiceReservation();
+
+        Exposition e=new Exposition();
+        User p = new User();
+
+        int num_exp=11;
+        int num_user=5;
+//reservation.modifierNombreTickets(6,15,12);
 //
 ////
 ////
@@ -70,5 +70,5 @@
 ////
 ////       // System.out.println(personne.getAll());
 ////        //System.out.println(personne.getOneById(5));
-//    }
-//    }
+    }
+    }

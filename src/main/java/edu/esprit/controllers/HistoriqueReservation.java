@@ -6,14 +6,11 @@ import edu.esprit.services.ServiceReservation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.Timestamp;
-import java.util.Set;
+import java.util.Optional;
 
 public class HistoriqueReservation {
     @FXML
@@ -62,6 +59,29 @@ public class HistoriqueReservation {
     }
 
     //3amla haja bsh netfakrha ; 0en cours, 1:accepté,2 :refusé par admin, 3 anuuler
+    private void handleEditButtonAction(Reservation reservation) {
+        if (reservation.getAccessByAdmin() == 0) {
+            // Display a popup for editing the number of tickets
+            TextInputDialog dialog = new TextInputDialog(String.valueOf(reservation.getTicketsNumber()));
+            dialog.setTitle("Edit Number of Tickets");
+            dialog.setHeaderText(null);
+            dialog.setContentText("Enter the new number of tickets:");
+
+            Optional<String> result = dialog.showAndWait();
+            result.ifPresent(newTicketsNumber -> {
+                try {
+                    int newTickets = Integer.parseInt(newTicketsNumber);
+                    // Call the method to modify the number of tickets
+                    serviceReservation.modifierNombreTickets(reservation.getClient().getId_user(), reservation.getIdReservation(), newTickets);
+                    // Update the modified reservation in the TableView
+                    reservation.setTicketsNumber(newTickets);
+                    reservationTableView.refresh();
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input for the number of tickets.");
+                }
+            });
+        }
+    }
     @FXML
     private void initialize() {
         // Assuming you have a method to retrieve reservations for a specific user
@@ -106,6 +126,39 @@ public class HistoriqueReservation {
             }
         });
 
+        ticketsNumberColumn.setCellFactory(column -> new TableCell<Reservation, Integer>() {
+            private final Button editButton = new Button("Edit");
+
+            {
+                editButton.setOnAction(event -> {
+                    Reservation reservation = getTableView().getItems().get(getIndex());
+                    handleEditButtonAction(reservation);
+                });
+            }
+
+            @Override
+            protected void updateItem(Integer ticketsNumber, boolean empty) {
+                super.updateItem(ticketsNumber, empty);
+
+                if (empty || ticketsNumber == null) {
+                    setGraphic(null);
+                    setText(null); // Clear text if the cell is empty
+                } else {
+                    Reservation reservation = getTableView().getItems().get(getIndex());
+
+                    // Check if accessByAdmin is 2 or 3, hide the button
+                    if (reservation.getAccessByAdmin() == 1 ||reservation.getAccessByAdmin() == 2 || reservation.getAccessByAdmin() == 3) {
+                        setGraphic(null);
+                        setText(String.valueOf(ticketsNumber)); // Display the ticketsNumber
+                    } else {
+                        setGraphic(editButton);
+                        setText(String.valueOf(ticketsNumber)); // Display the ticketsNumber
+                    }
+                }
+            }
+        });
+
+
         // Add the button column
         action.setCellFactory(column -> new TableCell<Reservation, Void>() {
             private final Button xButton = new Button("X");
@@ -134,9 +187,6 @@ public class HistoriqueReservation {
                     setGraphic(xButton);
                 }
             }
-
-
-
         });
     }
 
@@ -149,4 +199,7 @@ public class HistoriqueReservation {
         reservation.setAccessByAdmin(3); // Assuming 3 is the status for cancellation
         reservationTableView.refresh();
     }
+
+
+
 }

@@ -296,6 +296,42 @@ public class ServiceReservation implements IService<Reservation> {
 
         return userReservations;
     }
+    public void modifierNombreTickets(int userId, int reservationId, int newTicketsNumber) {
+        // Check if the reservation exists, belongs to the user, and has accessByAdmin equal to 0
+        String selectQuery = "SELECT * FROM reservation WHERE id_reservation = ? AND id_user = ? AND accessByAdmin = 0";
+
+        try (PreparedStatement selectStatement = cnx.prepareStatement(selectQuery)) {
+            selectStatement.setInt(1, reservationId);
+            selectStatement.setInt(2, userId);
+            ResultSet resultSet = selectStatement.executeQuery();
+
+            if (resultSet.next()) {
+                // Reservation exists, belongs to the user, and has accessByAdmin equal to 0, proceed with the update
+                String updateQuery = "UPDATE reservation SET tickets_number = ? WHERE id_reservation = ?";
+
+                try (PreparedStatement updateStatement = cnx.prepareStatement(updateQuery)) {
+                    updateStatement.setInt(1, newTicketsNumber);
+                    updateStatement.setInt(2, reservationId);
+
+                    int rowsAffected = updateStatement.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        System.out.println("Number of tickets modified successfully.");
+                    } else {
+                        System.out.println("Failed to modify the number of tickets. Make sure the reservation ID is valid.");
+                    }
+                }
+            } else {
+                System.out.println("You can only modify the number of tickets for your reservations with accessByAdmin = 0.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error modifying the number of tickets: " + e.getMessage());
+        }
+    }
+
+
+
+
 }
 
 
