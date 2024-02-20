@@ -58,6 +58,6 @@
             <Font size="18.0" />
          </font>
       </Text>
-       
+       <Button fx:id="browseButton" layoutX="312.0" layoutY="331.0" mnemonicParsing="false" onAction="#browseImage" text="Browse image" />
    </children>
 </AnchorPane>

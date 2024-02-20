@@ -5,6 +5,7 @@ import edu.esprit.services.ServiceOeuvre;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -12,8 +13,11 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+import javafx.scene.image.Image;
+import java.io.File;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -24,6 +28,8 @@ import java.sql.SQLException;
 public class AjouterOeuvre {
 
     private final ServiceOeuvre PS = new ServiceOeuvre();
+
+    private File selectedFile;
 
     @FXML
     private TextField Nom_id;
@@ -49,7 +55,8 @@ public class AjouterOeuvre {
     @FXML
     private Button button_afficher;
 
-
+    @FXML
+    private Button browseButton;
 
     @FXML
     public void initialize() {
@@ -91,5 +98,33 @@ public class AjouterOeuvre {
         // Show the new stage
 //        stage.show();
         Nom_id.getScene().setRoot(root);
+    }
+    @FXML
+    void browseImage(ActionEvent event) {
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select an image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        selectedFile = fileChooser.showOpenDialog(primaryStage);
+        if (selectedFile != null) {
+            // Enregistrez le chemin du fichier dans le champ de texte pathimageid
+            image_id.setText(selectedFile.getPath());
+
+            // Chargez l'image depuis le fichier sélectionné
+            try {
+                // Utilisez la classe Paths pour obtenir un chemin de fichier correct
+                String imagePath = Paths.get(selectedFile.getPath()).toUri().toString();
+                Image image = new Image(imagePath);
+
+                // Affichez l'image dans l'ImageView si nécessaire
+                // imageView.setImage(image);
+            } catch (Exception e) {
+                System.out.println("Error loading image: " + e.getMessage());
+                // Gérer l'exception, par exemple, afficher une image par défaut
+            }
+        }
     }
 }

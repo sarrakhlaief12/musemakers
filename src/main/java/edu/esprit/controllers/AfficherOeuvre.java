@@ -6,13 +6,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
-
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import java.io.File;
 
 import javax.swing.text.html.ImageView;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.sql.SQLException;
 
@@ -51,7 +56,7 @@ public class AfficherOeuvre {
     @FXML
     private final ServiceOeuvre PS=new ServiceOeuvre();
 
-
+    private File selectedFile;
 
 
     @FXML
@@ -102,8 +107,10 @@ public class AfficherOeuvre {
         TextField categorieField = new TextField(oeuvre.getCategorie());
         TextField prixField = new TextField(String.valueOf(oeuvre.getPrix()));
         TextField dateCreationField = new TextField(oeuvre.getDateCreation().toString());
-        TextField descriptionField = new TextField(oeuvre.getDescription());
+       TextField descriptionField = new TextField(oeuvre.getDescription());
         TextField imageField = new TextField(oeuvre.getImage());
+        Button browseButton = new Button("Parcourir");
+
 
         // Layout for dialog
         GridPane grid = new GridPane();
@@ -117,8 +124,12 @@ public class AfficherOeuvre {
         grid.add(dateCreationField, 1, 3);
         grid.add(new Label("Description:"), 0, 4);
         grid.add(descriptionField, 1, 4);
+       // grid.add(new Label("Image:"), 0, 5);
+       // grid.add(imageField, 1, 5);
         grid.add(new Label("Image:"), 0, 5);
         grid.add(imageField, 1, 5);
+        grid.add(browseButton, 2, 5);
+
 
         dialog.getDialogPane().setContent(grid);
 
@@ -135,6 +146,17 @@ public class AfficherOeuvre {
             }
             return null;
         });
+        browseButton.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choisir une image");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+            );
+            File selectedFile = fileChooser.showOpenDialog(dialog.getDialogPane().getScene().getWindow());
+            if (selectedFile != null) {
+                imageField.setText(selectedFile.getAbsolutePath());
+            }
+        });
 
         // Show dialog and get result
         Optional<Oeuvre> result = dialog.showAndWait();
@@ -148,6 +170,7 @@ public class AfficherOeuvre {
             TableView.getItems().addAll(PS.getAll());
         });
     }
+
 
 
     private void handleTableViewDoubleClick() {
