@@ -1,5 +1,6 @@
 package edu.esprit.entities;
 
+import java.net.ProtocolFamily;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -7,15 +8,17 @@ public class Reservation {
     private int idReservation;
     private Timestamp dateReser;
     private int ticketsNumber;
-    private boolean accessByAdmin;
+    private int accessByAdmin;
 
     // Foreign key
     private Exposition exposition;
     private User client;
-    public Reservation(){
+
+    public Reservation() {
 
     }
-    public Reservation(int idReservation, Timestamp dateReser, int ticketsNumber, boolean accessByAdmin, Exposition exposition, User client) {
+
+    public Reservation(int idReservation, Timestamp dateReser, int ticketsNumber, int accessByAdmin, Exposition exposition, User client) {
         this.idReservation = idReservation;
         this.dateReser = dateReser;
         this.ticketsNumber = ticketsNumber;
@@ -23,7 +26,8 @@ public class Reservation {
         this.exposition = exposition;
         this.client = client;
     }
-    public Reservation( Timestamp dateReser, int ticketsNumber, boolean accessByAdmin, Exposition exposition, User client) {
+
+    public Reservation(Timestamp dateReser, int ticketsNumber, int accessByAdmin, Exposition exposition, User client) {
         this.dateReser = dateReser;
         this.ticketsNumber = ticketsNumber;
         this.accessByAdmin = accessByAdmin;
@@ -58,11 +62,13 @@ public class Reservation {
             System.out.println("Erreur : Le nombre de tickets doit être positif.");
         }
     }
-    public boolean isAccessByAdmin() {
+
+    public int getAccessByAdmin() {
+
         return accessByAdmin;
     }
 
-    public void setAccessByAdmin(boolean accessByAdmin) {
+    public void setAccessByAdmin(int accessByAdmin) {
         this.accessByAdmin = accessByAdmin;
     }
 
@@ -92,10 +98,10 @@ public class Reservation {
     @Override
     public String toString() {
         return "Reservation{" +
-
+                "idReservation=" + idReservation +
                 ", dateReser=" + dateReser +
                 ", ticketsNumber=" + ticketsNumber +
-//                ", accessByAdmin=" + accessByAdmin +
+                ", statutReservation=" + accessByAdmin +
                 ", exposition=" + exposition +
                 ", client=" + client +
                 '}';
@@ -105,4 +111,25 @@ public class Reservation {
     public int hashCode() {
         return Objects.hash(getIdReservation());
     }
+
+//
+public String getExpositionNom() {
+    return exposition.getNom();
+}
+
+    public String getExpositionTheme() {
+        return exposition.getTheme();
+    }
+
+    public String getUserEmail() {
+        return client.getEmail();
+    }
+    public Timestamp getExpositionDateD() {
+        return exposition.getDateDebut();
+    }public Timestamp getExpositionDateF() {
+        return exposition.getDateFin();
+    }
+
+
+
 }

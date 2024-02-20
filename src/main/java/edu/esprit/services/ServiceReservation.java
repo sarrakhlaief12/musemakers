@@ -29,7 +29,7 @@ public class ServiceReservation implements IService<Reservation> {
             PreparedStatement ps=cnx.prepareStatement(req);
             ps.setTimestamp(1,r.getDateReser());
             ps.setInt(2,r.getTicketsNumber());
-            ps.setBoolean(3,r.isAccessByAdmin());
+            ps.setInt(3,r.getAccessByAdmin());
             ps.setInt(4, r.getExposition().getId());
             ps.setInt(5,r.getClient().getId_user());
 
@@ -43,27 +43,7 @@ public class ServiceReservation implements IService<Reservation> {
 
         }}
     }
-    public void ajouterticket(Reservation r) {
-        if (isValidReservation(r)) {
 
-            String req="INSERT INTO `reservation`(`date_reser`, `tickets_number`,`id_exposition`,`id_user`) VALUES (?,?,?,?,?)";
-            try {
-                PreparedStatement ps=cnx.prepareStatement(req);
-                ps.setTimestamp(1,r.getDateReser());
-                ps.setInt(2,r.getTicketsNumber());
-                ps.setInt(4, r.getExposition().getId());
-                ps.setInt(5,r.getClient().getId_user());
-
-                ps.executeUpdate();
-                System.out.println("Reservation added!");
-
-
-
-            }catch(SQLException e){
-                System.out.println(e.getMessage());
-
-            }}
-    }
 
 
     @Override
@@ -75,7 +55,7 @@ public class ServiceReservation implements IService<Reservation> {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setTimestamp(1, r.getDateReser());
             ps.setInt(2,r.getTicketsNumber());
-            ps.setBoolean(3,r.isAccessByAdmin());
+            ps.setInt(3,r.getAccessByAdmin());
             ps.setInt(4, r.getExposition().getId());
             ps.setInt(5,r.getClient().getId_user());
             ps.setInt(6, r.getIdReservation());
@@ -124,7 +104,6 @@ public class ServiceReservation implements IService<Reservation> {
             if (res.next()) {
                 Timestamp datereser = res.getTimestamp("Date_reser");
                 int ticketsNumber = res.getInt("tickets_number");
-                Boolean accessByAdmin = res.getBoolean("accessByAdmin");
                 int idExposition = res.getInt("id_exposition");
                 int id_user = res.getInt("id_user");
 
@@ -133,6 +112,9 @@ public class ServiceReservation implements IService<Reservation> {
 
                 ServicePersonne servicePersonne = new ServicePersonne();
                 User user = servicePersonne.getOneById(id_user);
+
+                int accessByAdmin = res.getInt("accessByAdmin");
+
 
                 System.out.println("reservation mijouda  !");
                 return new Reservation(id, datereser, ticketsNumber, accessByAdmin, exposition, user);
@@ -155,7 +137,6 @@ public class ServiceReservation implements IService<Reservation> {
                 int id = res.getInt(1);
                 Timestamp datereser = res.getTimestamp("Date_reser");
                 int ticketsNumber = res.getInt("tickets_number");
-                Boolean accessByAdmin = res.getBoolean("accessByAdmin");
                 int idExposition = res.getInt("id_exposition");
                 int id_user = res.getInt("id_user");
 
@@ -165,6 +146,7 @@ public class ServiceReservation implements IService<Reservation> {
                 ServicePersonne servicePersonne = new ServicePersonne();
                 User user = servicePersonne.getOneById(id_user);
 
+                int accessByAdmin = res.getInt("accessByAdmin");
 
                 Reservation reser=new Reservation(id, datereser, ticketsNumber, accessByAdmin, exposition, user);
                 reservations.add(reser);
@@ -186,9 +168,10 @@ public class ServiceReservation implements IService<Reservation> {
                 int id = res.getInt(1);
                 Timestamp datereser = res.getTimestamp("Date_reser");
                 int ticketsNumber = res.getInt("tickets_number");
-                boolean accessByAdmin = res.getBoolean("accessByAdmin");
                 int idExposition = res.getInt("id_exposition");
                 int id_user = res.getInt("id_user");
+
+                int accessByAdmin = res.getInt("accessByAdmin");
 
                 ServiceExposition serviceExposition = new ServiceExposition();
                 Exposition exposition = serviceExposition.getOneById(idExposition);
@@ -204,6 +187,71 @@ public class ServiceReservation implements IService<Reservation> {
         }
         return reservations;
     }
+    // Add this method in your ServiceReservation class
+    public Set<Reservation> getEnCoursReservations() {
+        Set<Reservation> enCoursReservations = new HashSet<>();
+        String req = "SELECT * FROM reservation WHERE accessByAdmin = 0";
+        try {
+            Statement st = cnx.createStatement();
+            ResultSet res = st.executeQuery(req);
+            while (res.next()) {
+                int id = res.getInt(1);
+                Timestamp datereser = res.getTimestamp("Date_reser");
+                int ticketsNumber = res.getInt("tickets_number");
+                int accessByAdmin = res.getInt("accessByAdmin");
+                int idExposition = res.getInt("id_exposition");
+                int id_user = res.getInt("id_user");
+
+                ServiceExposition serviceExposition = new ServiceExposition();
+                Exposition exposition = serviceExposition.getOneById(idExposition);
+
+                ServicePersonne servicePersonne = new ServicePersonne();
+                User user = servicePersonne.getOneById(id_user);
+
+                Reservation reser = new Reservation(id, datereser, ticketsNumber, accessByAdmin, exposition, user);
+                enCoursReservations.add(reser);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return enCoursReservations;
+    }
+    public void acceptReservation(int reservationId) {
+        String updateQuery = "UPDATE reservation SET accessByAdmin = 1 WHERE id_reservation = ?";
+
+        try (PreparedStatement statement = cnx.prepareStatement(updateQuery)) {
+            statement.setInt(1, reservationId);
+            int rowsAffected = statement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Reservation accepted successfully.");
+            } else {
+                System.out.println("Failed to accept the reservation. Make sure the reservation ID is valid.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error accepting reservation: " + e.getMessage());
+        }
+    }
+    public void annulerReservation(int reservationId) {
+        String updateQuery = "UPDATE reservation SET accessByAdmin = 2 WHERE id_reservation = ?";
+
+        try (PreparedStatement statement = cnx.prepareStatement(updateQuery)) {
+            statement.setInt(1, reservationId);
+            int rowsAffected = statement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Reservation cancelled successfully.");
+            } else {
+                System.out.println("Failed to cancel the reservation. Make sure the reservation ID is valid.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error canceling reservation: " + e.getMessage());
+        }
+    }
+
+
+
+
 
 
 }

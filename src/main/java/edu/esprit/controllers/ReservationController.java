@@ -12,8 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 
 public class ReservationController {
 
@@ -25,6 +26,7 @@ public class ReservationController {
     private Label expositionDetailsLabel;
     ServicePersonne servicePersonne = new ServicePersonne();
     ServiceReservation serviceReservation = new ServiceReservation();
+    Reservation r=new Reservation();
 
 
     public void setExposition(Exposition exposition) {
@@ -40,10 +42,12 @@ public class ReservationController {
             int ticketsNumber = Integer.parseInt(ticketsTextField.getText());
 
             // Get the user with ID 6 (You can modify this part based on your requirements)
-            User user = servicePersonne.getOneById(6);
+            User user = servicePersonne.getOneById(5);
+
+
 
             // Create a reservation
-            Reservation reservation = new Reservation(exposition.getDateDebut(), ticketsNumber, false, exposition, user);
+            Reservation reservation = new Reservation(Timestamp.valueOf(LocalDateTime.now()), ticketsNumber, r.getAccessByAdmin(), exposition, user);
 
             // Add the reservation to the database
             serviceReservation.ajouter(reservation);
