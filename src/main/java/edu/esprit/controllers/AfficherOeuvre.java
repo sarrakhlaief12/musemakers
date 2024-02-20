@@ -12,9 +12,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import javax.swing.text.html.ImageView;
 import java.sql.Date;
 import java.sql.SQLException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +43,10 @@ public class AfficherOeuvre {
     @FXML
     private TableColumn<Oeuvre, Float> prix_id;
 
+    @FXML
+    private Button button_modifier;
 
-
+    private Oeuvre selectedOeuvre;
     @FXML
     private final ServiceOeuvre PS=new ServiceOeuvre();
 
@@ -62,6 +66,22 @@ public class AfficherOeuvre {
         description_id.setCellValueFactory(new PropertyValueFactory<>("description"));
         image_id.setCellValueFactory(new PropertyValueFactory<>("image"));
         prix_id.setCellValueFactory(new PropertyValueFactory<>("prix"));
+
+
+
+
+
+    }
+    @FXML
+    private void delete(ActionEvent event) throws SQLException {
+        Oeuvre selectedRec = (Oeuvre) TableView.getSelectionModel().getSelectedItem();
+        if (selectedRec != null) {
+            // Delete from database
+            PS.supprimer(selectedRec.getId());
+
+            // Refresh table view
+            initialize();
+        }
     }
 
 }
