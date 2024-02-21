@@ -116,7 +116,6 @@ public void ShowReclamation() throws IOException {
 
 
 
-
     @FXML
     private void modifier(ActionEvent event) throws SQLException {
         Reclamation selectedRec = (Reclamation) TableViewRecB.getSelectionModel().getSelectedItem();

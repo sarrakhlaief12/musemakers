@@ -2,6 +2,8 @@ package controllers;
 
 import entities.Commentaire;
 import entities.Reclamation;
+import entities.User;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -49,30 +51,27 @@ public class AjouterComAdmin {
     public void initialize() throws IOException {
         ShowCommentaire();
 
-
     }
+
+
     List<Commentaire> CommentaireList;
     public void ShowCommentaire() throws IOException {
-
         try {
             CommentaireList = cs.getAll();
+            for (Commentaire commentaire : CommentaireList) {
+                User user = su.getOneById(2);  // Remplacez '1' par l'ID de l'utilisateur approprié
+                commentaire.setUser(user);
+                commentaire.setUserNom(user.getNom_user());  // Assurez-vous que la classe User a une méthode getNom()
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        try {
-            Reclamation reclamationAdd = rs.getOneById(35);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        List<Reclamation> filteredCommentaireList = new ArrayList<>();
-
 
         CvCom.setCellValueFactory(new PropertyValueFactory<>("ContenuCom"));
-        CvNomA.setCellValueFactory(new PropertyValueFactory<>("user"));
-
-        TableViewComA.setItems(observableArrayList(CommentaireList).sorted());
-
+        CvNomA.setCellValueFactory(new PropertyValueFactory<>("userNom"));
+        TableViewComA.setItems(FXCollections.observableArrayList(CommentaireList).sorted());
     }
+
     @FXML
     void ajouter(ActionEvent event) throws IOException {
         Commentaire c = new Commentaire();
