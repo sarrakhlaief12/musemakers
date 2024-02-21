@@ -135,26 +135,34 @@ public class AjouterCommentaireUser {
          alert.showAndWait();
      }
  }*/
-    @FXML
-    void modifier(ActionEvent event) throws IOException {
-        // Obtenez la réclamation sélectionnée dans la table
-        Commentaire c = (Commentaire) TableViewCommentaire.getSelectionModel().getSelectedItem();
-        if (c != null) {
-            // Mettez à jour les champs de la réclamation
-            c.setContenuCom(contenuCommentaireTF.getText());
-
-
-            try {
-                // Mettez à jour la réclamation dans la base de données
-                cs.modifier(c);
-                // Rafraîchir les données de la table
-                ShowCommentaire();
-                TableViewCommentaire.refresh(); // Ajoutez cette ligne
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+@FXML
+void modifier(ActionEvent event) throws IOException {
+    // Obtenez le commentaire sélectionné dans la table
+    Commentaire c = TableViewCommentaire.getSelectionModel().getSelectedItem();
+    if (c != null) {
+        // Obtenez une instance de la réclamation que vous souhaitez associer
+        Reclamation r = null;
+        try {
+            r = rs.getOneById(35); // Remplacez 35 par l'ID de la réclamation appropriée
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        // Associez la réclamation au commentaire
+        c.setReclamation(r);
+        // Mettez à jour le contenu du commentaire avec le texte du TextField
+        c.setContenuCom(contenuCommentaireTF.getText());
+        c.setDateCom(new Date(System.currentTimeMillis()));
+        try {
+            // Appelez la méthode modifier pour mettre à jour le commentaire dans la base de données
+            cs.modifier(c);
+            // Rafraîchir les données de la table
+            ShowCommentaire();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la modification du commentaire", e);
         }
     }
+}
+
 
 
     private void displayCommentaireInfo(Commentaire c) {

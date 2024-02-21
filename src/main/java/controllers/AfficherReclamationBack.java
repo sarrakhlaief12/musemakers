@@ -35,7 +35,7 @@ public class AfficherReclamationBack {
     @FXML
     private TableColumn<?, ?> CvStatut;
     @FXML
-    private TableView<?> TableViewRecB;
+    private TableView<Reclamation> TableViewRecB;
     @FXML
     private Button modifier;
 
@@ -71,7 +71,7 @@ public class AfficherReclamationBack {
                 filteredRecList.add(r);
             }
         }
-        CvNom.setCellValueFactory(new PropertyValueFactory<>("user"));
+        CvNom.setCellValueFactory(new PropertyValueFactory<>("userNom"));
         CvDescri.setCellValueFactory(new PropertyValueFactory<>("descriRec"));
         CvDate.setCellValueFactory(new PropertyValueFactory<>("DateRec"));
         CvCat.setCellValueFactory(new PropertyValueFactory<>("CategorieRec"));

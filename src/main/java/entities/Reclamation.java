@@ -1,5 +1,8 @@
 package entities;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -111,7 +114,14 @@ public class Reclamation {
         if (!(o instanceof Reclamation that)) return false;
         return getIdRec() == that.getIdRec() && Objects.equals(getStatutRec(), that.getStatutRec());
     }
+    public String getUserNom() {
+        return user != null ? user.getNom_user() : null;
+    }
 
+
+    public StringProperty userNomProperty() {
+        return new SimpleStringProperty(getUserNom());
+    }
     @Override
     public int hashCode() {
         return Objects.hash(getIdRec(), getStatutRec());

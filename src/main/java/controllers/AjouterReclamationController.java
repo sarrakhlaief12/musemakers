@@ -98,7 +98,7 @@ public class AjouterReclamationController {
                 filteredRecList.add(r);
             }
         }
-        //CvClient.setCellValueFactory(new PropertyValueFactory<>("user"));
+       // CvClient.setCellValueFactory(new PropertyValueFactory<>("user"));
 
         CvDescri.setCellValueFactory(new PropertyValueFactory<>("descriRec"));
         CvDate.setCellValueFactory(new PropertyValueFactory<>("DateRec"));

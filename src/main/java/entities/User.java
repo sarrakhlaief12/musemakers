@@ -120,7 +120,7 @@ public class User {
         this.role = role;
     }
 
-    @Override
+  /*  @Override
     public String toString() {
         return "User{" +
                 "nom_user='" + nom_user + '\'' +
@@ -133,11 +133,12 @@ public class User {
                 ", role='" + role + '\'' +
                 '}';
     }
+ */@Override
+  public String toString() {
+      return nom_user;
+  }
 
-    /*@Override
-    public String toString() {
-        return nom_user;
-    }*/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

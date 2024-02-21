@@ -73,7 +73,7 @@ public class Main {
            // System.out.println("Commentaire ajouté: " + com);
 
             // Tester la méthode 'modifier'
-            Commentaire com22 = new Commentaire(5, rec35, new Date(), "contenu");
+            Commentaire com22 = new Commentaire(2, rec35, new Date(), "contenu");
 
 
             com22.setContenuCom("khalil");

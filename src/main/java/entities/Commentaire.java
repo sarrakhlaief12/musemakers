@@ -1,5 +1,8 @@
 package entities;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.Date;
 
 public class Commentaire {
@@ -7,6 +10,8 @@ public class Commentaire {
     private Reclamation reclamation;  // Référence à l'objet Reclamation
     private Date DateCom;
     private String ContenuCom;
+    private User user;  // Remplacez 'int idU' par 'User user'
+
 
     public Commentaire() {
     }
@@ -63,6 +68,14 @@ public class Commentaire {
         this.ContenuCom = ContenuCom;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Commentaire{" +
@@ -70,6 +83,14 @@ public class Commentaire {
                 ", DateCom=" + DateCom +
                 ", ContenuCom='" + ContenuCom + '\'' +
                 '}';
+    }
+    public String getUserNom() {
+        return user != null ? user.getNom_user() : null;
+    }
+
+    // Ajoutez un accesseur pour la propriété activiteNom
+    public StringProperty userNomProperty() {
+        return new SimpleStringProperty(getUserNom());
     }
 }
 
