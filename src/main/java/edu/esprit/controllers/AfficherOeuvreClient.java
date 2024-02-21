@@ -8,6 +8,7 @@ import edu.esprit.services.ServicePersonne;
 import edu.esprit.services.ServiceAvis;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -83,7 +84,16 @@ public class AfficherOeuvreClient {
             // Bouton pour donner l avis a propos l oeuvre
             Button avisButton = new Button("ajouter avis");
             avisButton.setId("buttonavis");
-            avisButton.setOnAction(event ->  showAvisDialog(o));
+            avisButton.setOnAction(event -> {
+                // Get the source of the event, which is the button
+                Node sourceNode = (Node) event.getSource();
+
+                // Get the current stage using the button's scene
+                Stage currentStage = (Stage) sourceNode.getScene().getWindow();
+
+                // Call the showAvisDialog method with the Oeuvre and currentStage
+                showAvisDialog(o, currentStage);
+            });
             // Bouton pour consulter les avis des clients
             Button avisButton1 = new Button("voir Avis");
             avisButton1.setId("buttonavis1");
@@ -106,7 +116,7 @@ public class AfficherOeuvreClient {
         return dateTimeFormat.format(date);
     }
 
-    private void showAvisDialog(Oeuvre o) {
+    private void showAvisDialog(Oeuvre o, Stage currentStage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterAvis.fxml"));
 
@@ -126,6 +136,8 @@ public class AfficherOeuvreClient {
            stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("donner votre avis");
             stage.setScene(new Scene(root));
+            // Close the current stage (AfficherClientOeuvre)
+            currentStage.close();
            stage.showAndWait();
 
 
