@@ -2,6 +2,7 @@ package edu.esprit.controllers;
 
 
 import edu.esprit.entities.Oeuvre;
+import edu.esprit.entities.Avis;
 import edu.esprit.services.ServiceOeuvre;
 import edu.esprit.services.ServicePersonne;
 import edu.esprit.services.ServiceAvis;
@@ -11,6 +12,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -22,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Set;
 public class AfficherOeuvreClient {
     private final ServiceAvis serviceReservation = new ServiceAvis();
@@ -80,9 +85,9 @@ public class AfficherOeuvreClient {
             avisButton.setId("buttonavis");
             avisButton.setOnAction(event ->  showAvisDialog(o));
             // Bouton pour consulter les avis des clients
-            Button avisButton1 = new Button("voir les details");
+            Button avisButton1 = new Button("voir Avis");
             avisButton1.setId("buttonavis1");
-            //avisButton1.setOnAction(event ->  showAvisDialog1(o));
+            avisButton1.setOnAction(event ->  showAvisDialog1(o));
 
             // Ajouter les composants au VBox des détails
             detailsVBox.getChildren().addAll(nomLabel, categorieLabel, prixLabel,dateCreationLabel, descriptionLabel, avisButton,avisButton1);
@@ -129,28 +134,77 @@ public class AfficherOeuvreClient {
             e.printStackTrace();
         }
     }
-   /* private void showAvisDialog1(Oeuvre o) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherDetails.fxml"));
+    private void showAvisDialog1(Oeuvre o) {
 
-            // Load the FXML after setting the controller
-            Parent root = loader.load();
+       /* Stage stage = new Stage();
+        stage.setTitle("Avis sur " + o.getNom());
 
-            // Set the artwork to the controller
-           // AjouterAvis controller = loader.getController();
-            //controller.setOeuvre(o);
+        // Créez une TableView pour afficher les avis
+        TableView<Avis> tableView = new TableView<>();
 
-            // Create a new stage (window) ;
-            //Stage stage = new Stage();
-            //stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.setTitle("les avis de nos clients");
-            //stage.setScene(new Scene(root));
-            //stage.showAndWait();
+        // Créez des colonnes pour la TableView
+        TableColumn<Avis, String> userColumn = new TableColumn<>("Utilisateur");
+        userColumn.setCellValueFactory(new PropertyValueFactory<>("client")); // Assurez-vous que Avis a une méthode getClient qui retourne un User
 
+        TableColumn<Avis, String> commentColumn = new TableColumn<>("Commentaire");
+        commentColumn.setCellValueFactory(new PropertyValueFactory<>("commentaire"));
 
-            displayExhibitions();
-        } catch (IOException e) {
-            e.printStackTrace();
+        TableColumn<Avis, Integer> noteColumn = new TableColumn<>("Note");
+        noteColumn.setCellValueFactory(new PropertyValueFactory<>("note"));
+
+        // Ajoutez les colonnes à la TableView
+        tableView.getColumns().add(userColumn);
+        tableView.getColumns().add(commentColumn);
+        tableView.getColumns().add(noteColumn);
+
+        // Récupérez les avis de la base de données
+        List<Avis> avisList = serviceReservation.getAvisByOeuvre(o);
+
+        // Ajoutez les avis à la TableView
+        tableView.getItems().addAll(avisList);
+
+        // Créez une Scene avec la TableView et ajoutez-la à la Stage
+        Scene scene = new Scene(tableView);
+        stage.setScene(scene);
+
+        // Affichez la Stage
+        stage.show();
+
+        */
+        // Créez une nouvelle fenêtre (Stage) pour afficher les avis
+        Stage stage = new Stage();
+        stage.setTitle("Avis sur " + o.getNom());
+
+        // Créez une VBox pour afficher les avis
+        VBox vbox = new VBox();
+        vbox.setSpacing(10); // Espacer les cartes de 10 pixels
+
+        // Récupérez les avis de la base de données
+        List<Avis> avisList = serviceReservation.getAvisByOeuvre(o);
+
+        for (Avis avis : avisList) {
+            // Créez une VBox pour chaque avis
+            VBox avisBox = new VBox();
+
+            // Créez des Labels pour l'utilisateur, le commentaire et la note
+            Label userLabel = new Label("Utilisateur: " + avis.getClient());
+            Label commentLabel = new Label("Commentaire: " + avis.getCommentaire());
+            Label noteLabel = new Label("Note: " + avis.getNote());
+
+            // Ajoutez les Labels à la VBox
+            avisBox.getChildren().addAll(userLabel, commentLabel, noteLabel);
+
+            // Ajoutez la VBox à la VBox principale
+            vbox.getChildren().add(avisBox);
         }
-    }*/
+
+        // Créez une Scene avec la VBox et ajoutez-la à la Stage
+        Scene scene = new Scene(vbox);
+        stage.setScene(scene);
+
+        // Affichez la Stage
+        stage.show();
+    }
+
+
 }

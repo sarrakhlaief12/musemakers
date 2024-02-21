@@ -12,9 +12,11 @@ import javafx.scene.control.*;
 import java.io.File;
 import java.sql.Date;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
+
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 
 public class HistoriqueAvis {
@@ -45,6 +49,10 @@ public class HistoriqueAvis {
     private Button buttonsupprimer_id;
 
 
+    @FXML
+    private ImageView image_id;
+
+
     ServiceAvis serviceAvis = new ServiceAvis();
     @FXML
     public void initialize() {
@@ -62,10 +70,12 @@ public class HistoriqueAvis {
         Note_id.setCellValueFactory(new PropertyValueFactory<Avis, Integer>("note"));
         commentaire_id.setCellValueFactory(new PropertyValueFactory<Avis, String>("commentaire"));
         dateexp_id.setCellValueFactory(new PropertyValueFactory<Avis, Date>("dateExperience"));
-        nomoeuvre_id.setCellValueFactory(new PropertyValueFactory<Avis, String>("oeuvre"));
+        //nomoeuvre_id.setCellValueFactory(new PropertyValueFactory<Avis, String>("oeuvre"));
 
         // Load the data into the table
         TableView.setItems(avisList);
+
+        
     }
     @FXML
     private void delete(ActionEvent event) throws SQLException {
@@ -103,8 +113,6 @@ public class HistoriqueAvis {
         TextField commentaireField = new TextField(avis.getCommentaire());
         //TextField noteField = new TextField(String.valueOf(avis.getNote()));
         //TextField dateexperienceField = new TextField(avis.getDateExperience().toString());
-
-
 
         // Layout for dialog
         GridPane grid = new GridPane();
@@ -156,6 +164,4 @@ public class HistoriqueAvis {
             openEditDialog(selectedRec);
        }
     }
-
-
 }
