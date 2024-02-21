@@ -107,11 +107,22 @@ public class AfficherOeuvre {
         ButtonType saveButtonType = new ButtonType("Enregistrer", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
 
+        // champ categorie
+        ChoiceBox<String> categorieField = new ChoiceBox<>();
+        categorieField.getItems().addAll("Peinture", "Sculpture", "Scene");
+        // Sélectionner la valeur actuelle
+        categorieField.setValue(oeuvre.getCategorie());
+
+        //champ date
+        DatePicker dateCreationField = new DatePicker();
+        dateCreationField.setValue(oeuvre.getDateCreation().toLocalDate());
+
+
         // Create the fields and populate with existing data
         TextField nomField = new TextField(oeuvre.getNom());
-        TextField categorieField = new TextField(oeuvre.getCategorie());
+        //TextField categorieField = new TextField(oeuvre.getCategorie());
         TextField prixField = new TextField(String.valueOf(oeuvre.getPrix()));
-        TextField dateCreationField = new TextField(oeuvre.getDateCreation().toString());
+       // TextField dateCreationField = new TextField(oeuvre.getDateCreation().toString());
        TextField descriptionField = new TextField(oeuvre.getDescription());
         TextField imageField = new TextField(oeuvre.getImage());
         Button browseButton = new Button("Parcourir");
@@ -121,10 +132,14 @@ public class AfficherOeuvre {
         GridPane grid = new GridPane();
         grid.add(new Label("Nom:"), 0, 0);
         grid.add(nomField, 1, 0);
+        //grid.add(new Label("Catégorie:"), 0, 1);
+        //grid.add(categorieField, 1, 1);
         grid.add(new Label("Catégorie:"), 0, 1);
         grid.add(categorieField, 1, 1);
         grid.add(new Label("Prix:"), 0, 2);
         grid.add(prixField, 1, 2);
+       // grid.add(new Label("Date de Création:"), 0, 3);
+        //grid.add(dateCreationField, 1, 3);
         grid.add(new Label("Date de Création:"), 0, 3);
         grid.add(dateCreationField, 1, 3);
         grid.add(new Label("Description:"), 0, 4);
@@ -142,9 +157,11 @@ public class AfficherOeuvre {
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
                 oeuvre.setNom(nomField.getText());
-                oeuvre.setCategorie(categorieField.getText());
+                //oeuvre.setCategorie(categorieField.getText());
+                oeuvre.setCategorie(categorieField.getValue());
                 oeuvre.setPrix(Float.parseFloat(prixField.getText()));
-                oeuvre.setDateCreation(Date.valueOf(dateCreationField.getText()));
+               // oeuvre.setDateCreation(Date.valueOf(dateCreationField.getText()));
+                oeuvre.setDateCreation(Date.valueOf(dateCreationField.getValue())); // on a utuliser getValue pour recuperer la date
                 oeuvre.setDescription(descriptionField.getText());
                 oeuvre.setImage(imageField.getText());
                 return oeuvre;
