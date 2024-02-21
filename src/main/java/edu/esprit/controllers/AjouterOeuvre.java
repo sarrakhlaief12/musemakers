@@ -81,8 +81,6 @@ public class AjouterOeuvre {
         System.out.println("Ajout de l'oeuvre : ");
             PS.ajouter(new Oeuvre(Nom_id.getText(), categorie, prix, date, description_id.getText(), image_id.getText()));
 
-
-
     }
     @FXML
     void Afficher(ActionEvent event) throws IOException {

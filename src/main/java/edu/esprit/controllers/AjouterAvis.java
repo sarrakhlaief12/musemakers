@@ -62,7 +62,7 @@ public class AjouterAvis {
 
     }
     @FXML
-    private void submitAvis() {
+    private void submitAvis(ActionEvent event) {
         try {
             // Get the note entered by the user
             int note = note_id.getValue();
@@ -71,7 +71,7 @@ public class AjouterAvis {
 
 
             // Get the user with ID 4  (You can modify this part based on your requirements)
-            User client = servicePersonne.getOneById(4);
+            User client = servicePersonne.getOneById(3);
 
             // Récupérer la date sélectionnée dans le DatePicker
             LocalDate localDate = dateex_id.getValue();
@@ -81,6 +81,7 @@ public class AjouterAvis {
 
             // Add the avis to the database
             serviceAvis.ajouter(avis);
+
             comment_id.clear();
             dateex_id.setValue(null);
             note_id.setValue(null);

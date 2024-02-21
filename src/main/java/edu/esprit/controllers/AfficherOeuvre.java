@@ -73,9 +73,9 @@ public class AfficherOeuvre {
             }
         });
 
-        List<Oeuvre> Ps= new ArrayList<>(PS.getAll());
-        ObservableList<Oeuvre> observableList = FXCollections.observableList(Ps);
-        TableView.setItems(observableList);
+        //List<Oeuvre> Ps= new ArrayList<>(PS.getAll());
+        //ObservableList<Oeuvre> observableList = FXCollections.observableList(Ps);
+        //TableView.setItems(observableList);
 
         nom_id.setCellValueFactory(new PropertyValueFactory<>("nom"));
         categorie_id.setCellValueFactory(new PropertyValueFactory<>("categorie"));

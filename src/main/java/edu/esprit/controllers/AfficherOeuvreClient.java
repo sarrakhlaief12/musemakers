@@ -45,6 +45,8 @@ public class AfficherOeuvreClient {
 
     // Méthode pour afficher toutes les expositions
     private void displayExhibitions() {
+        exhibitionVBox.getChildren().clear();
+
         for (Oeuvre o: listeo) {
             // Créer un HBox pour chaque exposition (to arrange components horizontally)
             HBox exhibitionBox = new HBox(10);
