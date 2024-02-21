@@ -41,7 +41,8 @@ public class AjouterAvis {
     @FXML
     private Button button_envoyer;
 
-
+    @FXML
+    private ImageView image_id;
     @FXML
     private Button historique_id;
 
@@ -53,13 +54,18 @@ public class AjouterAvis {
     public void setOeuvre(Oeuvre oeuvre) {
         this.oeuvre = oeuvre;
         // Set the image in the ImageView
-        details_id.setText("Exposition: " + oeuvre.getNom() );
+        //details_id.setText("Exposition: " + oeuvre.getNom() );
     }
     @FXML
     public void initialize() {
         // Ajoutez des éléments à la ChoiceBox dans la méthode initialize
         note_id.getItems().addAll(1,2,3,4,5);
 
+    }
+
+
+    public void setImage(Image image) {
+        image_id.setImage(image);
     }
     @FXML
     private void submitAvis(ActionEvent event) {

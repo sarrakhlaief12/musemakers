@@ -145,24 +145,17 @@ public class AfficherOeuvre {
         GridPane grid = new GridPane();
         grid.add(new Label("Nom:"), 0, 0);
         grid.add(nomField, 1, 0);
-        //grid.add(new Label("Catégorie:"), 0, 1);
-        //grid.add(categorieField, 1, 1);
         grid.add(new Label("Catégorie:"), 0, 1);
         grid.add(categorieField, 1, 1);
         grid.add(new Label("Prix:"), 0, 2);
         grid.add(prixField, 1, 2);
-       // grid.add(new Label("Date de Création:"), 0, 3);
-        //grid.add(dateCreationField, 1, 3);
         grid.add(new Label("Date de Création:"), 0, 3);
         grid.add(dateCreationField, 1, 3);
         grid.add(new Label("Description:"), 0, 4);
         grid.add(descriptionField, 1, 4);
-       // grid.add(new Label("Image:"), 0, 5);
-       // grid.add(imageField, 1, 5);
         grid.add(new Label("Image:"), 0, 5);
         grid.add(imageField, 1, 5);
         grid.add(browseButton, 2, 5);
-
 
         dialog.getDialogPane().setContent(grid);
 
@@ -220,13 +213,9 @@ public class AfficherOeuvre {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterOeuvre.fxml"));
         Parent root=loader.load();
 //        Scene scene = new Scene(root);
-//
-//        // Create a new stage (window)
 //        Stage stage = new Stage();
 //        stage.setTitle("Exhibition List"); // Set a title for the new window
 //        stage.setScene(scene);
-
-        // Show the new stage
 //        stage.show();
         TableView.getScene().setRoot(root);
     }

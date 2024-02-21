@@ -112,6 +112,10 @@ public class AfficherOeuvreClient {
             AjouterAvis controller = loader.getController();
             controller.setOeuvre(o);
 
+            // Load the image and set it to the controller
+            Image image = new Image(new File(o.getImage()).toURI().toString());
+            controller.setImage(image);
+
             // Create a new stage (window) ;
             Stage stage = new Stage();
            stage.initModality(Modality.APPLICATION_MODAL);
