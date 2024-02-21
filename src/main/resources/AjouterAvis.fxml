@@ -39,7 +39,7 @@
          <Font name="System Bold" size="20.0" />
       </font>
    </Button>
-   <Button fx:id="historique_id" layoutX="225.0" layoutY="289.0" mnemonicParsing="false" onAction="#submitAvis" text="Historique Avis">
+   <Button fx:id="historique_id" layoutX="225.0" layoutY="289.0" mnemonicParsing="false" onAction="#Afficherhistoriqueavis" text="Historique Avis">
       <font>
          <Font name="System Bold" size="20.0" />
       </font>
