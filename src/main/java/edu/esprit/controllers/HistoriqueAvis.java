@@ -56,7 +56,7 @@ public class HistoriqueAvis {
         });
         // Get the user's reviews
 
-        ObservableList<Avis> avisList = FXCollections.observableArrayList(serviceAvis.getAvisByUserId(4)); // Replace 4 with the actual user ID
+        ObservableList<Avis> avisList = FXCollections.observableArrayList(serviceAvis.getAvisByUserId(3)); // Replace 4 with the actual user ID
 
         // Set up the columns in the table
         Note_id.setCellValueFactory(new PropertyValueFactory<Avis, Integer>("note"));
@@ -89,10 +89,20 @@ public class HistoriqueAvis {
         ButtonType saveButtonType = new ButtonType("Enregistrer", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
 
+        //champ date
+        DatePicker dateexperienceField = new DatePicker();
+        dateexperienceField.setValue(avis.getDateExperience().toLocalDate());
+        // champ note
+        ChoiceBox<Integer> noteField = new ChoiceBox<>();
+        noteField.getItems().addAll(1,2,3,4,5);
+        // Sélectionner la valeur actuelle
+        noteField.setValue(avis.getNote());
+
+
         // Create the fields and populate with existing data
         TextField commentaireField = new TextField(avis.getCommentaire());
-        TextField noteField = new TextField(String.valueOf(avis.getNote()));
-        TextField dateexperienceField = new TextField(avis.getDateExperience().toString());
+        //TextField noteField = new TextField(String.valueOf(avis.getNote()));
+        //TextField dateexperienceField = new TextField(avis.getDateExperience().toString());
 
 
 
@@ -102,9 +112,12 @@ public class HistoriqueAvis {
         grid.add(commentaireField, 1, 0);
         grid.add(new Label("Note:"), 0, 1);
         grid.add(noteField, 1, 1);
+       // grid.add(new Label("Note:"), 0, 1);
+        //grid.add(noteField, 1, 1);
+        //grid.add(new Label("Date de votre experience:"), 0, 3);
+        //grid.add(dateexperienceField, 1, 3);
         grid.add(new Label("Date de votre experience:"), 0, 3);
         grid.add(dateexperienceField, 1, 3);
-
 
 
 
@@ -114,8 +127,9 @@ public class HistoriqueAvis {
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
                 avis.setCommentaire(commentaireField.getText());
-                avis.setNote(Integer.parseInt(noteField.getText()));
-                avis.setDateExperience(Date.valueOf(dateexperienceField.getText()));
+                avis.setNote(noteField.getValue());
+                //avis.setDateExperience(Date.valueOf(dateexperienceField.getText()));
+                avis.setDateExperience(Date.valueOf(dateexperienceField.getValue()));
 
                 return avis;
             }
@@ -132,7 +146,7 @@ public class HistoriqueAvis {
 
             // Refresh table view
             TableView.getItems().clear();
-            TableView.getItems().addAll(serviceAvis.getAvisByUserId(4));
+            TableView.getItems().addAll(serviceAvis.getAvisByUserId(3));
         });
     }
 
