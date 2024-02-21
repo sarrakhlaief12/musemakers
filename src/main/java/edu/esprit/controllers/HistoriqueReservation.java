@@ -126,8 +126,9 @@ public class HistoriqueReservation {
             }
         });
 
+
         ticketsNumberColumn.setCellFactory(column -> new TableCell<Reservation, Integer>() {
-            private final Button editButton = new Button("Edit");
+            private final Button editButton = new Button("modifier");
 
             {
                 editButton.setOnAction(event -> {

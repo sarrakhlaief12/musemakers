@@ -36,50 +36,83 @@ public class AjouterExposition {
     private TextField endDateTimeTextField;
     @FXML
     public TextField pathimageid;
+
     @FXML
-    public TextField themeID;
+    public ComboBox<String> themeID;
     @FXML
     public TextArea descriptionId;
     @FXML
     public TextField nomExpoId;
 
+    private final String FORMAT_ATTENDU = "yyyy-MM-dd HH:mm";
+
     @FXML
     public Button browseButton;
     public void addExpo(ActionEvent event) throws IOException, SQLException {
+        // Vérifiez si tous les champs sont remplis
+        if (nomExpoId.getText().isEmpty() || startDateTimeTextField.getText().isEmpty() ||
+                endDateTimeTextField.getText().isEmpty() || descriptionId.getText().isEmpty() ||
+                themeID.getValue() == null || pathimageid.getText().isEmpty()) {
+            // Affichez un message d'erreur et quittez la méthode
+            showAlert("Erreur", "Veuillez remplir tous les champs", Alert.AlertType.ERROR);
+            return;
+        }
+
         String startDateTimeInput = startDateTimeTextField.getText();
         String endDateTimeInput = endDateTimeTextField.getText();
 
         // Parse the entered start date and time
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime startLocalDateTime = LocalDateTime.parse(startDateTimeInput, dateTimeFormatter);
+        LocalDateTime startLocalDateTime;
+        LocalDateTime endLocalDateTime;
+
+        try {
+            startLocalDateTime = LocalDateTime.parse(startDateTimeInput, dateTimeFormatter);
+            endLocalDateTime = LocalDateTime.parse(endDateTimeInput, dateTimeFormatter);
+        } catch (Exception e) {
+            // En cas d'une exception, affichez un message d'erreur et quittez la méthode
+            showAlert("Erreur", "Format de date/heure invalide", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Vérifiez si la date de début est antérieure à la date actuelle
+        if (startLocalDateTime.isBefore(LocalDateTime.now())) {
+            showAlert("Erreur", "La date de début ne peut pas être antérieure à la date actuelle", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Vérifiez si la date de fin est postérieure à la date de début
+        if (endLocalDateTime.isBefore(startLocalDateTime)) {
+            showAlert("Erreur", "La date de fin doit être après la date de début", Alert.AlertType.ERROR);
+            return;
+        }
 
         // Convert LocalDateTime to Timestamp
         Timestamp startTimestamp = Timestamp.valueOf(startLocalDateTime);
-
-        // Parse the entered end date and time
-        LocalDateTime endLocalDateTime = LocalDateTime.parse(endDateTimeInput, dateTimeFormatter);
-
-        // Convert LocalDateTime to Timestamp
         Timestamp endTimestamp = Timestamp.valueOf(endLocalDateTime);
-//
-        //datepicker fel fxml kenet en cas ou :
-//        LocalDate startDate = dateDebutId.getValue();
-//        LocalDate endDate = datefinId.getValue();
-//
-//        Timestamp sqlStartDate = Timestamp.valueOf(startDate.atStartOfDay());
-//        Timestamp sqlEndDate = Timestamp.valueOf(endDate.atStartOfDay());
 
-
-        // Now you can use the 'startTimestamp' and 'endTimestamp' variables for database operations
+        // Ajoutez l'exposition uniquement si toutes les validations ont réussi
         exp.ajouter(new Exposition(
                 nomExpoId.getText(),
                 startTimestamp,
                 endTimestamp,
                 descriptionId.getText(),
-                themeID.getText(),
+                themeID.getValue(),
                 pathimageid.getText()));
 
+        // Affichez un message de succès
+        showAlert("Succès", "Exposition ajoutée avec succès!", Alert.AlertType.INFORMATION);
     }
+
+    // Méthode pour afficher une boîte de dialogue d'alerte
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
     @FXML
     void Afficher(ActionEvent event) throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherExposition.fxml"));
@@ -95,6 +128,15 @@ public class AjouterExposition {
 //        stage.show();
         nomExpoId.getScene().setRoot(root);
     }
+
+    public void initialize() {
+        // Ajouter un écouteur de changement de texte
+        endDateTimeTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Si le champ est vidé, rétablir le texte d'exemple
+            if (newValue.isEmpty()) {
+                endDateTimeTextField.setText(FORMAT_ATTENDU);
+            }
+        });}
     @FXML
     void browseImage(ActionEvent event) {
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

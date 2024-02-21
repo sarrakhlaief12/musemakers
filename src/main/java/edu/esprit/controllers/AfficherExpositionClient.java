@@ -72,6 +72,7 @@ public class AfficherExpositionClient {
             Label themeLabel = new Label("Thème: " + expo.getTheme());
             Label descriptionLabel = new Label("Description: " + expo.getDescription());
 
+
             // Bouton pour réserver l'exposition
             Button reserveButton = new Button("Réserver");
             reserveButton.setId("btnreserverexposition");
@@ -106,17 +107,23 @@ public class AfficherExpositionClient {
 
             // Create a new stage (window)
             Stage stage = new Stage();
+            stage.setTitle("Formulaire de Réservation");
+
+            Label titleLabel = new Label("Réserver des Billets");
+            titleLabel.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
+
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Réserver l'exposition");
             stage.setScene(new Scene(root));
             stage.showAndWait();
 
-            // Refresh the exhibition display after reservation
-            displayExhibitions();
+            // You can refresh the exhibition display here if needed
+            // displayExhibitions();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
 
 

@@ -32,7 +32,12 @@ public class ReservationController {
     public void setExposition(Exposition exposition) {
         this.exposition = exposition;
         // Set the exhibition details in the label when the exposition is set
-        expositionDetailsLabel.setText("Exposition: " + exposition.getNom() + " - Date et Heure: " + formatDateTime(exposition.getDateDebut()));
+        expositionDetailsLabel.setText("Nom de l'exposition: " + exposition.getNom() + "\n" +
+                "Date et Heure de début: " + formatDateTime(exposition.getDateDebut()) + "\n" +
+                "Date et Heure de fin: " + formatDateTime(exposition.getDateFin()) + "\n" +
+                "Thème: " + exposition.getTheme()+"\n" +
+                "saisir le nombre de tciket souhaités:");
+
     }
 
     @FXML

@@ -9,10 +9,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -110,12 +116,12 @@ public class AfficherExposition {
         TextField nomField = new TextField(exposition.getNom());
         TextField dateDebutField = new TextField(exposition.getDateDebut().toString());
         TextField dateFinField = new TextField(exposition.getDateFin().toString());
-        TextField descriptionField = new TextField(exposition.getDescription());
+        TextArea descriptionField = new TextArea(exposition.getDescription());
         TextField themeField = new TextField(exposition.getTheme());
         TextField imageField = new TextField(exposition.getImage());
 
         GridPane grid = new GridPane();
-        grid.add(new Label("Nom:"), 0, 0);
+        grid.add(new Label("Nom de l'exposition:"), 0, 0);
         grid.add(nomField, 1, 0);
         grid.add(new Label("Date Début:"), 0, 1);
         grid.add(dateDebutField, 1, 1);
@@ -126,7 +132,10 @@ public class AfficherExposition {
         grid.add(new Label("Thème:"), 0, 4);
         grid.add(themeField, 1, 4);
         grid.add(new Label("Image:"), 0, 5);
-        grid.add(imageField, 1, 5);
+
+        HBox imageBox = new HBox();
+        imageBox.getChildren().addAll(imageField, createBrowseButton(imageField));
+        grid.add(imageBox, 1, 5);
 
         dialog.getDialogPane().setContent(grid);
 
@@ -170,6 +179,41 @@ public class AfficherExposition {
 
         dialog.showAndWait();
     }
+
+    private Button createBrowseButton(TextField imageField) {
+        Button browseButton = new Button("Browse");
+        browseButton.setOnAction(event -> browseImage(imageField));
+        return browseButton;
+    }
+
+    private void browseImage(TextField imageField) {
+        Stage primaryStage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select an image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(primaryStage);
+        if (selectedFile != null) {
+            // Enregistrez le chemin du fichier dans le champ de texte pathimageid
+            imageField.setText(selectedFile.getPath());
+
+            // Chargez l'image depuis le fichier sélectionné
+            try {
+                // Utilisez la classe Paths pour obtenir un chemin de fichier correct
+                String imagePath = Paths.get(selectedFile.getPath()).toUri().toString();
+                Image image = new Image(imagePath);
+
+                // Affichez l'image dans l'ImageView si nécessaire
+                // imageView.setImage(image);
+            } catch (Exception e) {
+                System.out.println("Error loading image: " + e.getMessage());
+                // Gérer l'exception, par exemple, afficher une image par défaut
+            }
+        }
+    }
+
 
     private void handleTableViewDoubleClick() {
         Exposition selectedRec = TableView.getSelectionModel().getSelectedItem();
