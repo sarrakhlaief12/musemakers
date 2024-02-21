@@ -34,7 +34,12 @@
       </font>
    </Text>
    <Label fx:id="details_id" layoutX="30.0" layoutY="63.0" prefHeight="220.0" prefWidth="170.0" text="Label" />
-   <Button fx:id="button_envoyer" layoutX="318.0" layoutY="305.0" mnemonicParsing="false" onAction="#submitAvis" text="Envoyer">
+   <Button fx:id="button_envoyer" layoutX="452.0" layoutY="289.0" mnemonicParsing="false" onAction="#submitAvis" text="Envoyer">
+      <font>
+         <Font name="System Bold" size="20.0" />
+      </font>
+   </Button>
+   <Button fx:id="historique_id" layoutX="225.0" layoutY="289.0" mnemonicParsing="false" onAction="#submitAvis" text="Historique Avis">
       <font>
          <Font name="System Bold" size="20.0" />
       </font>

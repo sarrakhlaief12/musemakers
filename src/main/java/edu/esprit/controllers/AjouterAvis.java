@@ -5,7 +5,10 @@ import edu.esprit.entities.Oeuvre;
 import edu.esprit.entities.User;
 import edu.esprit.services.ServiceAvis;
 import edu.esprit.services.ServicePersonne;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 
 
@@ -14,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -37,6 +41,9 @@ public class AjouterAvis {
     @FXML
     private Button button_envoyer;
 
+
+    @FXML
+    private Button historique_id;
 
     private Oeuvre oeuvre;
 
@@ -101,6 +108,22 @@ public class AjouterAvis {
     private String formatDateTime(java.util.Date date) {
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return dateTimeFormat.format(date);
+    }
+
+    @FXML
+    void Afficherhistoriqueavis(ActionEvent event) throws IOException {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/HistoriqueAvis.fxml"));
+        Parent root=loader.load();
+//        Scene scene = new Scene(root);
+//
+//        // Create a new stage (window)
+//        Stage stage = new Stage();
+//        stage.setTitle("Exhibition List"); // Set a title for the new window
+//        stage.setScene(scene);
+
+        // Show the new stage
+//        stage.show();
+        comment_id.getScene().setRoot(root);
     }
 
 }

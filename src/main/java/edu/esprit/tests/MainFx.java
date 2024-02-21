@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class MainFx extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherOeuvreClient.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/HistoriqueAvis.fxml"));
         // FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterOeuvre.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);

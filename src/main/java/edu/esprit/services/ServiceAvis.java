@@ -4,6 +4,9 @@ import edu.esprit.entities.Oeuvre;
 import edu.esprit.entities.Avis;
 import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import java.util.HashSet;
@@ -122,5 +125,35 @@ public class ServiceAvis implements IService<Avis>{
         }
         return avisSet;
     }
+
+    public List<Avis> getAvisByUserId(int userId) {
+        List<Avis> avisList = new ArrayList<>();
+        String req = "SELECT * FROM avis WHERE id_user=?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, userId);
+            ResultSet res = ps.executeQuery();
+            while (res.next()) {
+                int id = res.getInt("id_avis");
+                String commentaire = res.getString("commentaire");
+                Date dateExperience = res.getDate("date_experience");
+                int note = res.getInt("note");
+                int idOeuvre = res.getInt("id_oeuvre");
+
+                ServiceOeuvre serviceOeuvre = new ServiceOeuvre();
+                Oeuvre oeuvre = serviceOeuvre.getOneById(idOeuvre);
+
+                ServicePersonne servicePersonne = new ServicePersonne();
+                User user = servicePersonne.getOneById(userId);
+
+                Avis avis = new Avis(id, commentaire, dateExperience, note, oeuvre, user);
+                avisList.add(avis);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return avisList;
+    }
+
 
 }
