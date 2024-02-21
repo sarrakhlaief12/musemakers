@@ -154,6 +154,32 @@ public class ServiceAvis implements IService<Avis>{
         }
         return avisList;
     }
+    public List<Avis> getAvisByOeuvre(Oeuvre oeuvre) {
+        List<Avis> avisList = new ArrayList<>();
+        String req = "SELECT * FROM avis WHERE id_oeuvre=?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, oeuvre.getId());
+            ResultSet res = ps.executeQuery();
+            while (res.next()) {
+                int id = res.getInt("id_avis");
+                String commentaire = res.getString("commentaire");
+                Date dateExperience = res.getDate("date_experience");
+                int note = res.getInt("note");
+                int idUser = res.getInt("id_user");
+
+                ServicePersonne servicePersonne = new ServicePersonne();
+                User user = servicePersonne.getOneById(idUser);
+
+                Avis avis = new Avis(id, commentaire, dateExperience, note, oeuvre, user);
+                avisList.add(avis);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return avisList;
+    }
+
 
 
 }

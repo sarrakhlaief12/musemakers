@@ -79,9 +79,13 @@ public class AfficherOeuvreClient {
             Button avisButton = new Button("ajouter avis");
             avisButton.setId("buttonavis");
             avisButton.setOnAction(event ->  showAvisDialog(o));
+            // Bouton pour consulter les avis des clients
+            Button avisButton1 = new Button("voir les details");
+            avisButton1.setId("buttonavis1");
+            //avisButton1.setOnAction(event ->  showAvisDialog1(o));
 
             // Ajouter les composants au VBox des détails
-            detailsVBox.getChildren().addAll(nomLabel, categorieLabel, prixLabel,dateCreationLabel, descriptionLabel, avisButton);
+            detailsVBox.getChildren().addAll(nomLabel, categorieLabel, prixLabel,dateCreationLabel, descriptionLabel, avisButton,avisButton1);
 
             // Ajouter les composants à l'HBox principale
             exhibitionBox.getChildren().addAll(imageView, detailsVBox);
@@ -121,4 +125,28 @@ public class AfficherOeuvreClient {
             e.printStackTrace();
         }
     }
+   /* private void showAvisDialog1(Oeuvre o) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherDetails.fxml"));
+
+            // Load the FXML after setting the controller
+            Parent root = loader.load();
+
+            // Set the artwork to the controller
+           // AjouterAvis controller = loader.getController();
+            //controller.setOeuvre(o);
+
+            // Create a new stage (window) ;
+            //Stage stage = new Stage();
+            //stage.initModality(Modality.APPLICATION_MODAL);
+            //stage.setTitle("les avis de nos clients");
+            //stage.setScene(new Scene(root));
+            //stage.showAndWait();
+
+
+            displayExhibitions();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
 }

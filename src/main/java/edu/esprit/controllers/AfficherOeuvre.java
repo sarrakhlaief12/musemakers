@@ -1,6 +1,8 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Oeuvre;
+import edu.esprit.entities.Avis;
+import edu.esprit.services.ServiceAvis;
 import edu.esprit.services.ServiceOeuvre;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -52,7 +55,8 @@ public class AfficherOeuvre {
     @FXML
     private TableColumn<Oeuvre, Float> prix_id;
 
-
+    @FXML
+    private Button button_avis;
 
     private Oeuvre selectedOeuvre;
 
@@ -61,6 +65,8 @@ public class AfficherOeuvre {
     @FXML
     private final ServiceOeuvre PS=new ServiceOeuvre();
 
+    @FXML
+    private final ServiceAvis serviceAvis=new ServiceAvis();
     private File selectedFile;
 
 
@@ -83,6 +89,13 @@ public class AfficherOeuvre {
         description_id.setCellValueFactory(new PropertyValueFactory<>("description"));
         image_id.setCellValueFactory(new PropertyValueFactory<>("image"));
         prix_id.setCellValueFactory(new PropertyValueFactory<>("prix"));
+
+        button_avis.setOnAction(event -> {
+            Oeuvre selectedOeuvre = TableView.getSelectionModel().getSelectedItem();
+            if (selectedOeuvre != null) {
+                showAvisDialog(selectedOeuvre);
+            }
+        });
 
     }
     @FXML
@@ -218,7 +231,43 @@ public class AfficherOeuvre {
         TableView.getScene().setRoot(root);
     }
 
+    private void showAvisDialog(Oeuvre oeuvre) {
+        // Créez une nouvelle fenêtre (Stage) pour afficher les avis
+        Stage stage = new Stage();
+        stage.setTitle("Avis sur " + oeuvre.getNom());
 
+        stage.setMinWidth(800);
 
+        // Créez une TableView pour afficher les avis
+        TableView<Avis> tableView = new TableView<>();
+
+        // Créez des colonnes pour la TableView
+        TableColumn<Avis, String> userColumn = new TableColumn<>("Utilisateur");
+        userColumn.setCellValueFactory(new PropertyValueFactory<>("client"));
+
+        TableColumn<Avis, String> commentColumn = new TableColumn<>("Commentaire");
+        commentColumn.setCellValueFactory(new PropertyValueFactory<>("commentaire"));
+
+        TableColumn<Avis, Integer> noteColumn = new TableColumn<>("Note");
+        noteColumn.setCellValueFactory(new PropertyValueFactory<>("note"));
+
+        // Ajoutez les colonnes à la TableView
+        tableView.getColumns().add(userColumn);
+        tableView.getColumns().add(commentColumn);
+        tableView.getColumns().add(noteColumn);
+
+        // Récupérez les avis de la base de données
+        List<Avis> avisList = serviceAvis.getAvisByOeuvre(oeuvre);
+
+        // Ajoutez les avis à la TableView
+        tableView.getItems().addAll(avisList);
+
+        // Créez une Scene avec la TableView et ajoutez-la à la Stage
+        Scene scene = new Scene(tableView);
+        stage.setScene(scene);
+
+        // Affichez la Stage
+        stage.show();
+    }
 }
 
