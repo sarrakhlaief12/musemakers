@@ -7,9 +7,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -26,6 +31,7 @@ import java.util.Optional;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 
 public class HistoriqueAvis {
@@ -191,6 +197,20 @@ public class HistoriqueAvis {
         });
     }
 
+    @FXML
+    void Affichergallerie(ActionEvent event) throws IOException {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherOeuvreClient.fxml"));
+        Parent root=loader.load();
+
+        // Obtenez la scène actuelle à partir de n'importe quel nœud inclus dans cette scène
+        Node sourceNode = (Node) event.getSource();
+        Stage currentStage = (Stage) sourceNode.getScene().getWindow();
+
+        // Mettre en place la nouvelle scène
+        Scene scene = new Scene(root);
+        currentStage.setScene(scene);
+        currentStage.show();
+    }
     private void handleTableViewDoubleClick() {
         Avis selectedRec = TableView.getSelectionModel().getSelectedItem();
        if (selectedRec != null) {

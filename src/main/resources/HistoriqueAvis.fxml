@@ -9,18 +9,23 @@
 
 <AnchorPane prefHeight="626.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.HistoriqueAvis">
    <children>
-      <TableView fx:id="TableView" layoutX="83.0" layoutY="106.0" prefHeight="214.0" prefWidth="428.0">
+      <TableView fx:id="TableView" layoutX="169.0" layoutY="226.0" prefHeight="214.0" prefWidth="428.0">
          <columns>
             <TableColumn fx:id="commentaire_id" prefWidth="92.0" text="Commentaire" />
             <TableColumn fx:id="dateexp_id" prefWidth="216.7999725341797" text="Date experience" />
             <TableColumn fx:id="Note_id" prefWidth="118.39996337890625" text="Note " />
          </columns>
       </TableView>
-      <Button fx:id="buttonsupprimer_id" layoutX="105.0" layoutY="339.0" mnemonicParsing="false" onAction="#delete" prefHeight="43.0" prefWidth="128.0" text="supprimer">
+      <Button fx:id="buttonsupprimer_id" layoutX="383.0" layoutY="466.0" mnemonicParsing="false" onAction="#delete" prefHeight="43.0" prefWidth="128.0" text="supprimer">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <ImageView fx:id="image_id" fitHeight="205.0" fitWidth="235.0" layoutX="595.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="image_id" fitHeight="205.0" fitWidth="235.0" layoutX="657.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="gallerie_id" layoutX="590.0" layoutY="38.0" mnemonicParsing="false" onAction="#Affichergallerie" prefHeight="43.0" prefWidth="171.0" text="Gallerie">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
