@@ -46,6 +46,9 @@ public class AjouterAvis {
     @FXML
     private Button historique_id;
 
+    @FXML
+    private Button gallerie_id;
+
     private Oeuvre oeuvre;
 
     ServicePersonne servicePersonne = new ServicePersonne();
@@ -132,5 +135,11 @@ public class AjouterAvis {
 //        stage.show();
         comment_id.getScene().setRoot(root);
     }
+    @FXML
+    void Affichergallerie(ActionEvent event) throws IOException {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherOeuvreClient.fxml"));
+        Parent root=loader.load();
 
+        comment_id.getScene().setRoot(root);
+    }
 }
