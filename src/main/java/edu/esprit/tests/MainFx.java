@@ -14,7 +14,7 @@ public class MainFx extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HistoriqueAvis.fxml"));
-        // FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterOeuvre.fxml"));
+         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherOeuvre.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
