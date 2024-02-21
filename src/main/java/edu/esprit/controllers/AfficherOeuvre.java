@@ -15,13 +15,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
-
-import javax.swing.text.html.ImageView;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.Date;
@@ -47,7 +46,8 @@ public class AfficherOeuvre {
     private TableColumn<Oeuvre,String> description_id;
 
     @FXML
-    private TableColumn<Oeuvre,String> image_id;
+    private ImageView image_id;
+
 
     @FXML
     private TableColumn<Oeuvre, String> nom_id;
@@ -87,7 +87,7 @@ public class AfficherOeuvre {
         categorie_id.setCellValueFactory(new PropertyValueFactory<>("categorie"));
         datecreation_id.setCellValueFactory(new PropertyValueFactory<>("dateCreation"));
         description_id.setCellValueFactory(new PropertyValueFactory<>("description"));
-        image_id.setCellValueFactory(new PropertyValueFactory<>("image"));
+       // image_id.setCellValueFactory(new PropertyValueFactory<>("image"));
         prix_id.setCellValueFactory(new PropertyValueFactory<>("prix"));
 
         button_avis.setOnAction(event -> {
@@ -97,6 +97,42 @@ public class AfficherOeuvre {
             }
         });
 
+        // Créez un Tooltip pour afficher l'image de l'oeuvre
+        Tooltip tooltip = new Tooltip();
+
+        ImageView imageView = new ImageView();
+        imageView.setFitHeight(100); // Ajustez la taille de l'image comme vous le souhaitez
+        imageView.setFitWidth(100);
+
+
+        tooltip.setGraphic(imageView);
+
+        // Configurez la factory de ligne pour afficher l'image de l'oeuvre dans l'Tooltip
+        TableView.setRowFactory(tv -> {
+            TableRow<Oeuvre> row = new TableRow<>();
+
+            row.setOnMouseEntered(event -> {
+                if (!row.isEmpty()) {
+                    Oeuvre oeuvre = row.getItem();
+                    if (oeuvre != null) {
+                        String imageURL = oeuvre.getImage();
+                        if (imageURL != null && !imageURL.isEmpty()) {
+                            Image image = new Image(new File(imageURL).toURI().toString());
+                            imageView.setImage(image);
+                            image_id.setImage(image);
+                        }
+                    }
+                }
+            });
+
+            row.setOnMouseExited(event -> {
+                // Masquez le Tooltip lorsque la souris quitte la ligne
+                imageView.setImage(null);
+                image_id.setImage(null);
+            });
+
+            return row;
+        });
     }
     @FXML
     private void delete(ActionEvent event) throws SQLException {

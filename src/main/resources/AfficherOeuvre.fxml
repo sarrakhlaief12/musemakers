@@ -3,38 +3,39 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="626.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherOeuvre">
     <children>
-        <TableView fx:id="TableView" layoutX="69.0" layoutY="85.0" prefHeight="228.0" prefWidth="798.0">
+        <TableView fx:id="TableView" layoutX="14.0" layoutY="102.0" prefHeight="210.0" prefWidth="731.0">
             <columns>
                 <TableColumn fx:id="nom_id" prefWidth="92.0" text="nom" />
                 <TableColumn fx:id="categorie_id" prefWidth="115.20001220703125" text="categorie" />
-                <TableColumn fx:id="prix_id" prefWidth="119.99998474121094" text="prix" />
-                <TableColumn fx:id="datecreation_id" prefWidth="208.0" text="date creation" />
-                <TableColumn fx:id="description_id" minWidth="0.0" prefWidth="130.4000244140625" text="description" />
-                <TableColumn fx:id="image_id" prefWidth="152.800048828125" text="image " />
+                <TableColumn fx:id="prix_id" prefWidth="96.00001525878906" text="prix" />
+                <TableColumn fx:id="datecreation_id" prefWidth="142.39996337890625" text="date creation" />
+                <TableColumn fx:id="description_id" minWidth="0.0" prefWidth="321.60003662109375" text="description" />
                  
             </columns>
         </TableView>
 
-      <Button fx:id="button_supprimer" layoutX="545.0" layoutY="371.0" mnemonicParsing="false" onAction="#delete" text="supprimer">
+      <Button fx:id="button_supprimer" layoutX="586.0" layoutY="349.0" mnemonicParsing="false" onAction="#delete" text="supprimer">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-        <Button fx:id="button_avis" layoutX="545.0" layoutY="371.0" mnemonicParsing="false"  text="voir les avis">
+        <Button fx:id="button_avis" layoutX="408.0" layoutY="349.0" mnemonicParsing="false" text="voir les avis">
             <font>
                 <Font name="System Bold" size="20.0" />
             </font>
         </Button>
-      <Button fx:id="nouvelajout_id" layoutX="289.0" layoutY="371.0" mnemonicParsing="false" onAction="#AfficherAjoutOeuvre" text="nouvel ajout ">
+      <Button fx:id="nouvelajout_id" layoutX="214.0" layoutY="349.0" mnemonicParsing="false" onAction="#AfficherAjoutOeuvre" text="nouvel ajout ">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
+      <ImageView fx:id="image_id" fitHeight="210.0" fitWidth="200.0" layoutX="761.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
 
     </children>
 </AnchorPane>
