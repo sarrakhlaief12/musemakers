@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Reclamation {
+    private String userNom;
     private int idRec;
     private User user;  // Remplacez 'int idU' par 'User user'
     private String descriRec;
@@ -34,8 +35,17 @@ public class Reclamation {
         StatutRec = statutRec;
     }
 
-   /* public Reclamation(User userAdd, String text, String text1, String text2) {
-    }*/
+    public Reclamation(int idRec, User user, String descriRec, Date dateRec, String categorieRec, String statutRec) {
+        this.idRec = idRec;
+        this.user = user;
+        this.descriRec = descriRec;
+        DateRec = dateRec;
+        CategorieRec = categorieRec;
+        StatutRec = statutRec;
+    }
+
+    /* public Reclamation(User userAdd, String text, String text1, String text2) {
+        }*/
    public String getNom_user() {
        return this.user.getNom_user();
    }
@@ -100,7 +110,7 @@ public class Reclamation {
     public String toString() {
         return "Reclamation{" +
                 "idRec=" + idRec +
-                ", idU=" + (user != null ? user.getId_user() : "null") +
+                ", idU=" + user.getId_user() +
                 ", descriRec=" + descriRec +
                 ", DateRec=" + DateRec +
                 ", CategorieRec=" + CategorieRec +
@@ -114,16 +124,22 @@ public class Reclamation {
         if (!(o instanceof Reclamation that)) return false;
         return getIdRec() == that.getIdRec() && Objects.equals(getStatutRec(), that.getStatutRec());
     }
+
+
     public String getUserNom() {
-        return user != null ? user.getNom_user() : null;
+        return userNom;
     }
-
-
+    public void setUserNom(String userNom) {
+        this.userNom = userNom;
+    }
     public StringProperty userNomProperty() {
         return new SimpleStringProperty(getUserNom());
     }
     @Override
     public int hashCode() {
         return Objects.hash(getIdRec(), getStatutRec());
+    }
+
+    public void setUser(String nomUser) {
     }
 }

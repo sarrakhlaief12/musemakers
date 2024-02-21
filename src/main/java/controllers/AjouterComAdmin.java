@@ -52,7 +52,7 @@ public class AjouterComAdmin {
 
     }
     List<Commentaire> CommentaireList;
-     public void ShowCommentaire() throws IOException {
+    public void ShowCommentaire() throws IOException {
 
         try {
             CommentaireList = cs.getAll();

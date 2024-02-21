@@ -77,9 +77,11 @@ public class ReclamationService implements IService<Reclamation>{
         ps.setInt(1, id);
         ResultSet rst = ps.executeQuery();
         while (rst.next()) {
-            User user = new User();
-            user.setId_user(rst.getInt("IdU"));  // Utilisez 'user.setId_user(rst.getInt("IdU"))' au lieu de 'r.setIdRec(rst.getInt("IdU"))'
-            r.setUser(user);  // Ajoutez cette ligne
+            User u = new User();
+            ServiceUser us = new ServiceUser();
+            u=us.getOneById(rst.getInt("IdU"));
+            r.setUser(u);  // Utilisez 'user.setId_user(rst.getInt("IdU"))' au lieu de 'r.setIdRec(rst.getInt("IdU"))'
+              // Ajoutez cette ligne
             r.setIdRec(rst.getInt("idRec"));
             r.setDescriRec(rst.getString("DescriRec"));
             r.setDateRec(rst.getDate("dateRec"));

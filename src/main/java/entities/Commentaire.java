@@ -6,6 +6,8 @@ import javafx.beans.property.StringProperty;
 import java.util.Date;
 
 public class Commentaire {
+    private String userNom;
+
     private int idCom;
     private Reclamation reclamation;  // Référence à l'objet Reclamation
     private Date DateCom;
@@ -84,8 +86,13 @@ public class Commentaire {
                 ", ContenuCom='" + ContenuCom + '\'' +
                 '}';
     }
+
     public String getUserNom() {
-        return user != null ? user.getNom_user() : null;
+        return userNom;
+    }
+
+    public void setUserNom(String userNom) {
+        this.userNom = userNom;
     }
 
     // Ajoutez un accesseur pour la propriété activiteNom
