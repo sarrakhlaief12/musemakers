@@ -175,6 +175,8 @@ public class AfficherOeuvreClient {
         Stage stage = new Stage();
         stage.setTitle("Avis sur " + o.getNom());
 
+        stage.setMinWidth(800);
+
         // Créez une VBox pour afficher les avis
         VBox vbox = new VBox();
         vbox.setSpacing(10); // Espacer les cartes de 10 pixels

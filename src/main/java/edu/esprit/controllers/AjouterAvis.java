@@ -77,7 +77,7 @@ public class AjouterAvis {
 
 
             // Get the user with ID 4  (You can modify this part based on your requirements)
-            User client = servicePersonne.getOneById(3);
+            User client = servicePersonne.getOneById(4);
 
             // Récupérer la date sélectionnée dans le DatePicker
             LocalDate localDate = dateex_id.getValue();

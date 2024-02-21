@@ -64,18 +64,51 @@ public class HistoriqueAvis {
         });
         // Get the user's reviews
 
-        ObservableList<Avis> avisList = FXCollections.observableArrayList(serviceAvis.getAvisByUserId(3)); // Replace 4 with the actual user ID
+        ObservableList<Avis> avisList = FXCollections.observableArrayList(serviceAvis.getAvisByUserId(4)); // Replace 4 with the actual user ID
 
         // Set up the columns in the table
         Note_id.setCellValueFactory(new PropertyValueFactory<Avis, Integer>("note"));
         commentaire_id.setCellValueFactory(new PropertyValueFactory<Avis, String>("commentaire"));
         dateexp_id.setCellValueFactory(new PropertyValueFactory<Avis, Date>("dateExperience"));
         //nomoeuvre_id.setCellValueFactory(new PropertyValueFactory<Avis, String>("oeuvre"));
+        // Créez un Tooltip pour afficher l'image de l'oeuvre
+        Tooltip tooltip = new Tooltip();
+        ImageView imageView = new ImageView();
+        imageView.setFitHeight(100); // Ajustez la taille de l'image comme vous le souhaitez
+        imageView.setFitWidth(100);
+        tooltip.setGraphic(imageView);
+
+        // Définissez la factory de ligne pour afficher l'image de l'oeuvre dans l'ImageView image_id
+        TableView.setRowFactory(tv -> {
+            TableRow<Avis> row = new TableRow<>();
+
+            row.setOnMouseEntered(event -> {
+                if (!row.isEmpty()) {
+                    Avis avis = row.getItem();
+                    if (avis != null && avis.getOeuvre() != null) {
+                        String imageURL = avis.getOeuvre().getImage();
+                        if (imageURL != null && !imageURL.isEmpty()) {
+                            Image image = new Image(new File(imageURL).toURI().toString());
+                            imageView.setImage(image);
+                            image_id.setImage(image);
+                        }
+                    }
+                }
+            });
+
+            row.setOnMouseExited(event -> {
+                // Effacez l'image lorsque la souris quitte la ligne
+                imageView.setImage(null);
+                image_id.setImage(null);
+            });
+
+            return row;
+        });
 
         // Load the data into the table
         TableView.setItems(avisList);
 
-        
+
     }
     @FXML
     private void delete(ActionEvent event) throws SQLException {
@@ -154,7 +187,7 @@ public class HistoriqueAvis {
 
             // Refresh table view
             TableView.getItems().clear();
-            TableView.getItems().addAll(serviceAvis.getAvisByUserId(3));
+            TableView.getItems().addAll(serviceAvis.getAvisByUserId(4));
         });
     }
 
