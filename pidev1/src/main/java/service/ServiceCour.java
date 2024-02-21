@@ -6,6 +6,7 @@ import utils.DataSource;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,17 +19,18 @@ public class ServiceCour implements IService<Cour> {
 
     @Override
     public void ajouter(Cour p) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String dateDebutStr = sdf.format(p.getDateDebut_cours());
-        String dateFinStr = sdf.format(p.getDateFin_cours());
+       // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+       // String dateDebutStr = sdf.format(p.getDateDebut_cours());
+       // String dateFinStr = sdf.format(p.getDateFin_cours());
+        System.out.printf(p.getDateDebut_cours().toString());
         String requete="insert into cours (titre_cours,descri_cours,dateDebut_cours,dateFin_cours,id_user) values (?,?,?,?,?)";
         try {
             PreparedStatement pst = conn.prepareStatement(requete);
             pst.setString(1, p.getTitre_cours());
             pst.setString(2, p.getDescription_cours());
-            pst.setString(3, dateDebutStr);
-            pst.setString(4, dateFinStr);
-            pst.setInt(5,p.getId_user());
+            pst.setString(3, p.getDateDebut_cours().toString());
+            pst.setString(4, p.getDateFin_cours().toString());
+            pst.setInt(5,1);
             pst.executeUpdate();
             System.out.println("Cours ajouté!");
         } catch (SQLException e) {
@@ -120,8 +122,8 @@ public class ServiceCour implements IService<Cour> {
                     r.setId_cours(rst.getInt("id_cours"));
                     r.setTitre_cours(rst.getString("titre_cours"));
                     r.setDescription_cours(rst.getString("descri_cours"));
-                    r.setDateDebut_cours(rst.getDate("dateDebut_cours"));
-                    r.setDateFin_cours(rst.getDate("DateFin_cours"));
+                    r.setDateDebut_cours(rst.getDate("dateDebut_cours").toLocalDate());
+                    r.setDateFin_cours(rst.getDate("DateFin_cours").toLocalDate());
                     User u = new User();
 
                     u.setId_user(rst.getInt("id_user"));
@@ -173,8 +175,8 @@ public class ServiceCour implements IService<Cour> {
                     int id_cours = res.getInt(1);
                     String titre_cours = res.getString(2);
                     String description_cours = res.getString(3);
-                    java.util.Date dateDebut_cours = res.getDate(4);
-                    java.util.Date dateFin_cours = res.getDate(5);
+                    LocalDate dateDebut_cours = res.getDate(4).toLocalDate();
+                    LocalDate dateFin_cours = res.getDate(5).toLocalDate();
 
                     // Retrieve user ID from the database
                     int userId = res.getInt(6);

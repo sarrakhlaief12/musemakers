@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Button?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterCourController">
-   <children>
-      <Label layoutX="76.0" layoutY="152.0" prefHeight="18.0" prefWidth="60.0" text="nomCour" />
-      <TextField layoutX="149.0" layoutY="149.0" />
-      <Button fx:id="ajout" layoutX="107.0" layoutY="218.0" mnemonicParsing="false" onAction="#ajouter" text="ajouter" />
-      <Button fx:id="modif" layoutX="233.0" layoutY="218.0" mnemonicParsing="false" onAction="#modifier" text="modifier" />
-      <Button fx:id="supp" layoutX="373.0" layoutY="218.0" mnemonicParsing="false" onAction="#supprimer" text="supprimer" />
-      <TableView layoutX="343.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
-        <columns>
-          <TableColumn fx:id="Cvtitre" prefWidth="75.0" text="titre_cours" />
-          <TableColumn prefWidth="75.0" />
-        </columns>
-      </TableView>
-   </children>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.AjouterCour"
+            prefHeight="400.0" prefWidth="600.0">
+    <VBox spacing="10.0" layoutX="50.0" layoutY="50.0">
+        <Text fx:id="title" text="Ajouter un nouveau cours" />
+        <VBox spacing="10.0">
+            <Label text="Titre" />
+            <TextField fx:id="titreField" />
+        </VBox>
+        <VBox spacing="10.0">
+            <Label text="Description" />
+            <TextField fx:id="descriptionField" />
+        </VBox>
+        <VBox spacing="10.0">
+            <Label text="Date de début" />
+            <DatePicker fx:id="datePicker" />
+        </VBox>
+        <VBox spacing="10.0">
+            <Label text="Date de fin" />
+            <DatePicker fx:id="datefin" />
+        </VBox>
+        <!-- Ajoutez d'autres champs si nécessaire -->
+        <Button layoutX="465.0" layoutY="316.0" mnemonicParsing="false" onAction="#Ajouter" text="Ajouter" />
+    </VBox>
 </AnchorPane>
+
+
