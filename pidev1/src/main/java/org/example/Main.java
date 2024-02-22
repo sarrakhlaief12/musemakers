@@ -95,9 +95,9 @@ ServiceAtelier se = new ServiceAtelier();
 */
 
 
+
+
 /*
-
-
         // Créez une instance de votre classe 'ServiceAtelier'
         ServiceAtelier  ServiceAtelier = new ServiceAtelier();
         ServiceCour ServiceCour = new ServiceCour();
@@ -110,8 +110,8 @@ ServiceAtelier se = new ServiceAtelier();
         atelier.setLien("monjiii");
         ServiceAtelier.modifier(atelier);
         // Appelez la méthode 'modifier'
-      }
-      /*
+      }}/*
+
         ServiceAtelier  ServiceAtelier = new ServiceAtelier();
             Atelier atelier = new Atelier();
             atelier.setId_atelier(26);
@@ -136,9 +136,9 @@ ServiceAtelier se = new ServiceAtelier();
 
             // Afficher l'atelier après la modification
             System.out.println("Après la modification : " + atelier);
-        }
+        }/*
 
-    }*/
-
+    }
+*/
 
     }}

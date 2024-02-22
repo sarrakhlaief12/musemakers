@@ -1,5 +1,6 @@
 package entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -7,23 +8,23 @@ public class Atelier {
     private int id_atelier ;
     private  Cour cour;
 
-    private Date dateDebut_atelier;
-    private Date dateFin_atelier ;
+    private LocalDate dateDebut_atelier;
+    private LocalDate dateFin_atelier ;
 
     private String lien_atelier;
 
     public Atelier () {
     }
 
-    public Atelier(int id_atelier, Cour cour, Date dateDebut_atelier, Date dateFin_atelier, String lien) {
+    public Atelier(int id_atelier, Cour cour, LocalDate dateDebut_atelier, LocalDate dateFin_atelier, String lien) {
         this.id_atelier = id_atelier;
-        //this.cour = cour;
+        this.cour = cour;
         this.dateDebut_atelier = dateDebut_atelier;
         this.dateFin_atelier = dateFin_atelier;
         this.lien_atelier = lien;
     }
 
-    public Atelier(Cour cour, Date dateDebut_atelier, Date dateFin_atelier, String lien) {
+    public Atelier(Cour cour, LocalDate dateDebut_atelier, LocalDate dateFin_atelier, String lien) {
         this.cour = cour;
         this.dateDebut_atelier = dateDebut_atelier;
         this.dateFin_atelier = dateFin_atelier;
@@ -65,19 +66,19 @@ public class Atelier {
         this.cour = cour;
     }
 
-    public Date getDateDebut_atelier() {
+    public LocalDate getDateDebut_atelier() {
         return dateDebut_atelier;
     }
 
-    public void setDateDebut_atelier(Date dateDebut_atelier) {
+    public void setDateDebut_atelier(LocalDate dateDebut_atelier) {
         this.dateDebut_atelier = dateDebut_atelier;
     }
 
-    public Date getDateFin_atelier() {
+    public LocalDate getDateFin_atelier() {
         return dateFin_atelier;
     }
 
-    public void setDateFin_atelier(Date dateFin_atelier) {
+    public void setDateFin_atelier(LocalDate dateFin_atelier) {
         this.dateFin_atelier = dateFin_atelier;
     }
 

@@ -7,6 +7,7 @@ import utils.DataSource;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,14 +17,14 @@ public class ServiceAtelier implements IService<Atelier>{
     Connection  conn= DataSource.getInstance().getCnx();
 
     @Override
-    public void ajouter(Atelier p) {
+    public void ajouter(Atelier atelier) {
         String requete ="insert into atelier ( id_cours, dateDebut_atelier, dateFin_atelier, lien_atelier) VALUES ( ?, ?,?,?)";
         try {
             PreparedStatement pst = conn.prepareStatement(requete);
-            pst.setInt(1, p.getCour().getId_cours()); // Supposons que l'id_cours soit la clé étrangère
-            pst.setDate(2, new java.sql.Date(p.getDateDebut_atelier().getTime()));
-            pst.setDate(3, new java.sql.Date(p.getDateFin_atelier().getTime()));
-            pst.setString(4, p.getLien());
+            pst.setInt(1, 6); // Supposons que l'id_cours soit la clé étrangère
+            pst.setString(2,  atelier.getDateDebut_atelier().toString());
+            pst.setString(3,  atelier.getDateFin_atelier().toString());
+            pst.setString(4, atelier.getLien());
             pst.executeUpdate();
             System.out.println("Atelier ajouté avec succès !");
         } catch (SQLException e) {
@@ -63,8 +64,8 @@ public class ServiceAtelier implements IService<Atelier>{
 
             pstmt.setInt(1, p.getId_atelier());
             pstmt.setObject(2, p.getCour()); // Vous devrez peut-être convertir `Cour` en un type approprié
-            pstmt.setDate(3, new java.sql.Date(p.getDateDebut_atelier().getTime()));
-            pstmt.setDate(4, new java.sql.Date(p.getDateFin_atelier().getTime()));
+            pstmt.setString(3, p.getDateDebut_atelier().toString());
+            pstmt.setString(4, p.getDateFin_atelier().toString());
             pstmt.setString(5, p.getLien());
 
             pstmt.executeUpdate();
@@ -102,8 +103,8 @@ public class ServiceAtelier implements IService<Atelier>{
             if (rs.next()) {
                 // Récupérer les données de l'atelier à partir du ResultSet
                 int id_cours = rs.getInt("id_cours");
-                Date dateDebut = rs.getDate("dateDebut_atelier");
-                Date dateFin = rs.getDate("dateFin_atelier");
+                LocalDate dateDebut = rs.getDate("dateDebut_atelier").toLocalDate();
+                LocalDate dateFin = rs.getDate("dateFin_atelier").toLocalDate();
                 String lien = rs.getString("lien_atelier");
                 // Créer une nouvelle instance de Atelier
                 atelier = new Atelier(id, new Cour(id_cours), dateDebut, dateFin, lien);
@@ -129,8 +130,8 @@ public class ServiceAtelier implements IService<Atelier>{
                 int id_cours = res.getInt("id_cours"); // Remplacez par le nom de la colonne dans votre table
                 Cour c = new Cour();
                 c.setId_cours(id_cours);
-                Date dateDebut_atelier = res.getDate("dateDebut_atelier"); // Remplacez par le nom de la colonne
-                Date dateFin_atelier = res.getDate("dateFin_atelier"); // Remplacez par le nom de la colonne
+                LocalDate dateDebut_atelier = res.getDate("dateDebut_atelier").toLocalDate(); // Remplacez par le nom de la colonne
+                LocalDate dateFin_atelier = res.getDate("dateFin_atelier").toLocalDate(); // Remplacez par le nom de la colonne
                 String lien_atelier = res.getString("lien_atelier"); // Remplacez par le nom de la colonne
 
                 Atelier a = new Atelier(id_atelier, c, dateDebut_atelier, dateFin_atelier, lien_atelier);

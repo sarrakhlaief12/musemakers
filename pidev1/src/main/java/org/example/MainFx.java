@@ -16,12 +16,17 @@ import java.io.IOException;
         @Override
         public void start(Stage primaryStage) throws IOException {
 
-            //FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterReclamation.fxml"));
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("//AfficherCourController.fxml"));
-            Parent root=loader.load(getClass().getResource("/AfficherCour.fxml"));
-            //FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterCourController.fxml"));
 
+           // FXMLLoader loader= new FXMLLoader(getClass().getResource("//AfficherCourController.fxml"));
+            //Parent root=loader.load(getClass().getResource("/AfficherCour.fxml"));
+            //FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterCourController.fxml"));
             //Parent root=loader.load(getClass().getResource("/AjouterCourController.fxml"));
+
+
+           // FXMLLoader loader= new FXMLLoader(getClass().getResource("//AjouterAtelier.fxml"));
+            //Parent root=loader.load(getClass().getResource("/AjouterAtelier.fxml"));
+             FXMLLoader loader= new FXMLLoader(getClass().getResource("//AfficherAtelier.fxml"));
+            Parent root=loader.load(getClass().getResource("/AfficherAtelier.fxml"));
             Scene scene=new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("ajout");
