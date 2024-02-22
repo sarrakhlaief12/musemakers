@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
@@ -18,8 +17,6 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -115,7 +112,7 @@ public class AjouterExposition {
 
     @FXML
     void Afficher(ActionEvent event) throws IOException {
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherExposition.fxml"));
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/admin/afficherExpo.fxml"));
         Parent root=loader.load();
 //        Scene scene = new Scene(root);
 //
@@ -128,6 +125,25 @@ public class AjouterExposition {
 //        stage.show();
         nomExpoId.getScene().setRoot(root);
     }
+    @FXML
+    void ajouterNav(ActionEvent event) throws IOException {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/admin/ajouterexpo.fxml"));
+        Parent root=loader.load();
+        nomExpoId.getScene().setRoot(root);
+    }   @FXML
+    void demandeNav(ActionEvent event) throws IOException {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/admin/demandeReser.fxml"));
+        Parent root=loader.load();
+        nomExpoId.getScene().setRoot(root);
+    }
+    @FXML
+    void histoAdminNav(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin/listeReser.fxml"));
+        Parent root=loader.load();
+        nomExpoId.getScene().setRoot(root);
+    }
+
+
 
     public void initialize() {
         // Ajouter un écouteur de changement de texte

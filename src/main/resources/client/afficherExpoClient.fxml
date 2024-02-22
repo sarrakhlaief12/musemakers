@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="626.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherExpositionClient">
+    <children>
+        <BorderPane prefHeight="626.0" prefWidth="971.0">
+            <left>
+                <VBox prefHeight="474.0" prefWidth="154.0" style="-fx-background-color: FAF4ED;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="569.0" prefWidth="189.0" style="-fx-background-color: E8DBCE;">
+                     <children>
+                        <Button layoutX="21.0" layoutY="163.0" mnemonicParsing="false" onAction="#histoClientNav" prefHeight="26.0" prefWidth="214.0" text="Historique de Reservations" />
+                        <Button layoutX="30.0" layoutY="42.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="202.0" text="Consulter les oeuvres" />
+                        <Button layoutX="21.0" layoutY="100.0" mnemonicParsing="false" onAction="#reserverNav" prefHeight="26.0" prefWidth="213.0" text="Réserver des expositions" />
+                     </children>
+                  </AnchorPane>
+               </children></VBox>
+            </left>
+            <top>
+                <HBox prefHeight="57.0" prefWidth="818.0" style="-fx-background-color: FAF4ED;" BorderPane.alignment="CENTER" />
+            </top>
+            <center>
+                <VBox alignment="CENTER" prefHeight="545.0" prefWidth="820.0" spacing="10">
+                    <AnchorPane prefHeight="53.0" prefWidth="610.0">
+                        <children>
+                            <Button fx:id="searchButton" layoutX="548.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSearch" text="chercher" />
+                            <TextField fx:id="nameSearchID" layoutX="154.0" layoutY="14.0" promptText="Nom exposition" />
+                            <TextField fx:id="themeSearchID" layoutX="358.0" layoutY="14.0" promptText="Theme" />
+                            <Text fill="#b1aeae" layoutX="157.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="saisir le nom de l'expositon" />
+                            <Text fill="#b1aeae" layoutX="364.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="saisir le theme" />
+                        </children>
+                    </AnchorPane>
+                    <ScrollPane>
+                        <VBox fx:id="exhibitionVBox" alignment="CENTER" spacing="10">
+                            <!-- This VBox will contain the exhibitions -->
+                        </VBox>
+                    </ScrollPane>
+                </VBox>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

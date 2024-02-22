@@ -11,10 +11,9 @@ import java.io.IOException;
 public class MainFx extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-//        FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterExposition.fxml"));
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherExpositionClient.fxml"));
-//        FXMLLoader loader= new FXMLLoader(getClass().getResource("/demandeReservation.fxml"));
-//        FXMLLoader loader= new FXMLLoader(getClass().getResource("/historiqueReservation.fxml"));
+//        FXMLLoader loader= new FXMLLoader(getClass().getResource("/admin/ajouterexpo.fxml"));
+//       FXMLLoader loader= new FXMLLoader(getClass().getResource("/accueil.fxml"));
+       FXMLLoader loader= new FXMLLoader(getClass().getResource("/client/histoReservationClient.fxml"));
         Parent root=loader.load();
         Scene scene=new Scene(root);
         stage.setScene(scene);

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="edu.esprit.controllers.FullListAdmin"
+            prefHeight="626.0" prefWidth="971.0">
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" />
+        <BorderPane layoutY="-3.0" prefHeight="634.0" prefWidth="1033.0">
+            <left>
+                <VBox prefHeight="200.0" prefWidth="230.0" style="-fx-background-color: E8DBCE;" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane prefHeight="518.0" prefWidth="211.0">
+                            <children>
+                                <Button layoutX="27.0" layoutY="199.0" mnemonicParsing="false" onAction="#Afficher" text="Afficher expositions" />
+                                <Button layoutX="28.0" layoutY="164.0" mnemonicParsing="false" onAction="#ajouterNav" text="Ajouter Expositions" />
+                                <Button layoutX="37.0" layoutY="38.0" mnemonicParsing="false" text="Gestion des artistes" />
+                                <Button layoutX="37.0" layoutY="80.0" mnemonicParsing="false" text="Gestion des clients" />
+                                <Button layoutX="27.0" layoutY="233.0" mnemonicParsing="false" onAction="#demandeNav" text="Demandes de Reservation" />
+                                <Button layoutX="28.0" layoutY="276.0" mnemonicParsing="false" onAction="#histoAdminNav" text="Historique de Reservation" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </VBox>
+            </left>
+            <top>
+                <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: FAF4ED;" BorderPane.alignment="CENTER" />
+            </top>
+            <center>
+                <BorderPane prefHeight="497.0" prefWidth="875.0" BorderPane.alignment="CENTER">
+
+                    <center>
+                        <HBox prefHeight="374.0" prefWidth="504.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <AnchorPane prefHeight="374.0" prefWidth="448.0">
+                                    <children>
+                                        <AnchorPane layoutX="23.0" layoutY="14.0" prefHeight="348.0" prefWidth="607.0">
+                                            <children>
+                                                <TableView fx:id="reservationTableView" layoutX="-1.0" layoutY="26.0" prefHeight="390.0" prefWidth="878.0">
+                                                    <columns>
+                                                        <TableColumn fx:id="emailColumn" prefWidth="114.4000244140625" text="adresse mail client" />
+                                                        <TableColumn fx:id="nomExpositionColumn" prefWidth="107.99996948242188" text="nom exposition" />
+                                                        <TableColumn fx:id="themeExpositionColumn" prefWidth="92.800048828125" text="theme exposition" />
+                                                        <TableColumn fx:id="dateDebutColumn" prefWidth="108.0" text="date debut" />
+                                                        <TableColumn fx:id="dateFinColumn" prefWidth="103.99996948242188" text="date fin" />
+                                                        <TableColumn fx:id="ticketsNumberColumn" prefWidth="88.79998779296875" text="nombre tickets" />
+                                                        <TableColumn fx:id="dateReservationColumn" prefWidth="168.79998779296875" text="date de reservation" />
+                                                        <TableColumn fx:id="etatrdv" minWidth="0.0" prefWidth="89.5999755859375" text="etat" />
+                                                    </columns>
+                                                </TableView>
+                                            </children>
+                                        </AnchorPane>
+                                    </children>
+                                </AnchorPane>
+                            </children></HBox>
+                    </center>
+                </BorderPane>
+            </center>
+        </BorderPane>
+    </children>
+
+</AnchorPane>

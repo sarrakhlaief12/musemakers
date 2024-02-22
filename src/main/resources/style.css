@@ -1,0 +1,50 @@
+.transparent-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white; /* Set text color to white or any other color you prefer */
+}
+
+.underline {
+    -fx-underline: true;
+}
+
+.blank-line {
+    -fx-font-size: 10pt;
+    -fx-text-fill: transparent;
+}
+/* style.css */
+.navbar {
+    -fx-background-color: #333; /* Set background color */
+    -fx-padding: 10px; /* Add padding */
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white; /* Set text color */
+    -fx-padding: 5px 10px; /* Add padding */
+    -fx-border-color: white; /* Add border color */
+    -fx-border-width: 1px; /* Set border width */
+    -fx-cursor: hand; /* Change cursor on hover */
+}
+
+.nav-button:hover {
+    -fx-background-color: #555; /* Change background color on hover */
+}
+/* style.css */
+.navbar {
+    -fx-background-color: #333; /* Set background color */
+    -fx-padding: 10px; /* Add padding */
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white; /* Set text color */
+    -fx-padding: 5px 10px; /* Add padding */
+    -fx-border-color: white; /* Add border color */
+    -fx-border-width: 1px; /* Set border width */
+    -fx-cursor: hand; /* Change cursor on hover */
+}
+
+.nav-button:hover {
+    -fx-background-color: #555; /* Change background color on hover */
+}
+

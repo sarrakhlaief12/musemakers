@@ -8,6 +8,7 @@ import edu.esprit.utils.DataSource;
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class ServiceReservation implements IService<Reservation> {
     Connection cnx= DataSource.getInstance().getCnx();
@@ -159,8 +160,9 @@ public class ServiceReservation implements IService<Reservation> {
 
 
     public Set<Reservation> triparDateAncienne() {
-        Set<Reservation> reservations = new HashSet<>();
-        String req = "SELECT * FROM reservation ORDER BY Date_reser ASC";  // Order by Date_reser in ascending order
+
+        Set<Reservation> reservations = new TreeSet<>((r1, r2) -> r2.getDateReser().compareTo(r1.getDateReser()));
+        String req = "SELECT * FROM reservation WHERE accessByAdmin = 0 ORDER BY Date_reser ASC";  // Order by Date_reser in ascending order
         try {
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
@@ -187,6 +189,7 @@ public class ServiceReservation implements IService<Reservation> {
         }
         return reservations;
     }
+
     // Add this method in your ServiceReservation class
     public Set<Reservation> getEnCoursReservations() {
         Set<Reservation> enCoursReservations = new HashSet<>();

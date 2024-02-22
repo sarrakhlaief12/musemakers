@@ -6,8 +6,6 @@ import edu.esprit.entities.User;
 import edu.esprit.services.ServiceExposition;
 import edu.esprit.services.ServicePersonne;
 import edu.esprit.services.ServiceReservation;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +15,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -25,7 +22,7 @@ import java.sql.Timestamp;
 import java.util.Optional;
 import java.util.Set;
 
-public class DemandeReservation {
+public class FullListAdmin {
     @FXML
     private TableColumn<Exposition, Timestamp> dateDebutColumn;
 
@@ -39,7 +36,8 @@ public class DemandeReservation {
     private TableColumn<User, String> emailColumn;
 
     @FXML
-    private Button tripardate;
+    private TableColumn<Reservation, Integer> etatrdv;
+
     @FXML
     private TableColumn<Exposition, String> nomExpositionColumn;
 
@@ -52,20 +50,31 @@ public class DemandeReservation {
     @FXML
     private TableColumn<Reservation, Integer> ticketsNumberColumn;
 
-    @FXML
-    private TableColumn action;
-
-
     private ServiceReservation serviceReservation = new ServiceReservation();
-    private ServiceExposition serviceExposition = new ServiceExposition();
-    private ServicePersonne servicePersonne = new ServicePersonne();
 
-    Exposition exposition = new Exposition();
-    User user = new User();
+
+    private String getStatusText(Integer accessByAdmin) {
+        if (accessByAdmin == null) {
+            return null;
+        }
+
+        switch (accessByAdmin) {
+            case 0:
+                return "En Cours";
+            case 1:
+                return "Accepté";
+            case 2:
+                return "Refusé";
+            case 3:
+                return "Annulé";
+            default:
+                return "Unknown";
+        }
+    }
     @FXML
-    private void initialize() {
+    private void initialize() throws SQLException {
         // Assuming you have a method to retrieve "En cours" reservations in your service class
-        Set<Reservation> enCoursReservations = serviceReservation.getEnCoursReservations();
+        Set<Reservation> enCoursReservations = serviceReservation.getAll();
 
         // Populate the TableView with "En cours" reservations
         reservationTableView.getItems().addAll(enCoursReservations);
@@ -77,73 +86,48 @@ public class DemandeReservation {
         dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("ExpositionDateD"));
         dateFinColumn.setCellValueFactory(new PropertyValueFactory<>("ExpositionDateF"));
         ticketsNumberColumn.setCellValueFactory(new PropertyValueFactory<>("ticketsNumber"));
-        tripardate.setOnAction(event -> triparDateAncienne());
-
         dateReservationColumn.setCellValueFactory(new PropertyValueFactory<>("dateReser"));
-//        etatrdv.setCellValueFactory(new PropertyValueFactory<>("accessByAdmin"));
-        action.setCellFactory(column -> new TableCell<Reservation, Void>() {
-            private final Button checkButton = new Button("Check");
-            private final Button xButton = new Button("X");
+       etatrdv.setCellValueFactory(new PropertyValueFactory<>("accessByAdmin"));
 
-            {
-                checkButton.setOnAction(event -> {
-                    Reservation reservation = getTableRow().getItem();
-                    if (reservation != null && showConfirmationDialog("accepter cette reservation")) {
-                        serviceReservation.acceptReservation(reservation.getIdReservation());
-                        refreshTable();
-                    }
-                });
-
-                xButton.setOnAction(event -> {
-                    Reservation reservation = getTableRow().getItem();
-                    if (reservation != null && showConfirmationDialog("Annuler cette Reservation")) {
-                        serviceReservation.refuserReservation(reservation.getIdReservation());
-                        refreshTable();
-                    }
-                });
-            }
-
+        etatrdv.setCellFactory(column -> new TableCell<Reservation, Integer>() {
             @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (empty) {
-                    setGraphic(null);
+            protected void updateItem(Integer accessByAdmin, boolean empty) {
+                super.updateItem(accessByAdmin, empty);
+                if (empty || accessByAdmin == null) {
+                    setText("");
+                    setStyle(""); // Clear any previous styles
                 } else {
-                    setGraphic(new HBox(5, checkButton, xButton));
+                    String statusText = getStatusText(accessByAdmin);
+                    setText(statusText != null ? statusText : "Unknown");
+
+                    // Apply styles based on the status
+                    if (accessByAdmin == 1) {
+                        // Accepté (Green)
+                        setStyle("-fx-background-color: #B1DE77;");
+                    } else if (accessByAdmin == 2) {
+                        // Refusé (Red)
+                        setStyle("-fx-background-color: #F4A48F;");
+                    } else if (accessByAdmin == 3) {
+                        // Annulé (Orange)
+                        setStyle("-fx-background-color: #F5DEA2;");
+                    } else {
+                        setStyle(""); // Clear any previous styles
+                    }
                 }
             }
         });
+
     }
 
     // Method to show a confirmation dialog
-    private boolean showConfirmationDialog(String action) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation");
-        alert.setHeaderText("Confirmer: " + action);
-        alert.setContentText("vous voulez" + action.toLowerCase() + "?");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        return result.isPresent() && result.get() == ButtonType.OK;
-    }
 
     // Method to refresh the table
-    private void refreshTable() {
+    private void refreshTable() throws SQLException {
         reservationTableView.getItems().clear();
-        Set<Reservation> enCoursReservations = serviceReservation.getEnCoursReservations();
-        reservationTableView.getItems().addAll(enCoursReservations);
+        Set<Reservation> getallReservations = serviceReservation.getAll();
+        reservationTableView.getItems().addAll(getallReservations);
     }
-    @FXML
-    private void triparDateAncienne() {
-        // Implement your sorting logic here
-        Set<Reservation> sortedReservations = serviceReservation.triparDateAncienne();
-
-        // Clear and repopulate the TableView with the sorted data
-        reservationTableView.getItems().clear();
-        reservationTableView.getItems().addAll(sortedReservations);
-    }
-
-    //////////
     @FXML
     void Afficher(ActionEvent event) {
         try {
@@ -230,10 +214,5 @@ public class DemandeReservation {
         }
     }
 
-
-
-
-
-    }
-
+}
 

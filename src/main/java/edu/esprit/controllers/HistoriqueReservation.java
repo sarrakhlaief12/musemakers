@@ -6,9 +6,14 @@ import edu.esprit.services.ServiceReservation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Optional;
 
@@ -85,7 +90,7 @@ public class HistoriqueReservation {
     @FXML
     private void initialize() {
         // Assuming you have a method to retrieve reservations for a specific user
-        userReservations.addAll(serviceReservation.getReservationsByUser(6));
+        userReservations.addAll(serviceReservation.getReservationsByUser(5));
 
         // Populate the TableView with user reservations
         reservationTableView.setItems(userReservations);
@@ -108,6 +113,7 @@ public class HistoriqueReservation {
                 } else {
                     String statusText = getStatusText(accessByAdmin);
                     setText(statusText != null ? statusText : "Unknown");
+
 
                     // Apply styles based on the status
                     if (accessByAdmin == 1) {
@@ -200,7 +206,49 @@ public class HistoriqueReservation {
         reservation.setAccessByAdmin(3); // Assuming 3 is the status for cancellation
         reservationTableView.refresh();
     }
+    //
+    @FXML
+    void histoClientNav(javafx.event.ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/histoReservationClient.fxml"));
+            Parent root = loader.load();
 
+            // Create a new scene
+            Scene scene = new Scene(root);
+
+            // Get the stage from the event source (button) and set the new scene
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception (e.g., show an error message)
+        }
+    }
+    @FXML
+    void reserverNav(javafx.event.ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/afficherExpoClient.fxml"));
+            Parent root = loader.load();
+
+            // Create a new scene
+            Scene scene = new Scene(root);
+
+            // Get the stage from the event source (button) and set the new scene
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception (e.g., show an error message)
+        }
+    }
 
 
 }

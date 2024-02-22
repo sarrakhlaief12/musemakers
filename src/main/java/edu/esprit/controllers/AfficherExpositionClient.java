@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -17,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -24,9 +26,17 @@ import java.text.SimpleDateFormat;
 import java.util.Set;
 
 public class AfficherExpositionClient {
+    @FXML
+    private TextField nameSearchID;
+
+    @FXML
+    private TextField themeSearchID;
+
+
     private final ServiceReservation serviceReservation = new ServiceReservation();
     private final ServicePersonne servicePersonne = new ServicePersonne();
     private final ServiceExposition exp = new ServiceExposition();
+
     private Set<Exposition> listexpo = exp.getAll();
 
     @FXML
@@ -38,11 +48,20 @@ public class AfficherExpositionClient {
     // Méthode appelée lors de l'initialisation de la vue
     @FXML
     public void initialize() {
+        // Add a ChangeListener to the nameSearchID TextField
+        nameSearchID.textProperty().addListener((observable, oldValue, newValue) -> handleSearch());
+
+        // Add a ChangeListener to the themeSearchID TextField
+        themeSearchID.textProperty().addListener((observable, oldValue, newValue) -> handleSearch());
+
+        // Initial display of all exhibitions
         displayExhibitions();
     }
 
+
     // Méthode pour afficher toutes les expositions
     private void displayExhibitions() {
+
         for (Exposition expo : listexpo) {
             // Créer un HBox pour chaque exposition (to arrange components horizontally)
             HBox exhibitionBox = new HBox(10);
@@ -87,6 +106,16 @@ public class AfficherExpositionClient {
             // Ajouter HBox à la VBox principale
             exhibitionVBox.getChildren().add(exhibitionBox);
         }
+        if (listexpo.isEmpty()) {
+            // Aucune exposition trouvée, afficher un message
+            Label noResultLabel = new Label("Aucune exposition trouvée.");
+            exhibitionVBox.getChildren().add(noResultLabel);
+        } else {
+            // Afficher les expositions normalement
+            for (Exposition expo : listexpo) {
+                // ... (Votre code existant pour afficher chaque exposition)
+            }
+        }
     }
 
     // Méthode pour formater la date
@@ -96,7 +125,7 @@ public class AfficherExpositionClient {
     }
     private void showReservationDialog(Exposition expo) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reservation.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/Reservation.fxml"));
 
             // Load the FXML after setting the controller
             Parent root = loader.load();
@@ -124,6 +153,68 @@ public class AfficherExpositionClient {
         }
     }
 
+
+
+    @FXML
+    void histoClientNav(javafx.event.ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/histoReservationClient.fxml"));
+            Parent root = loader.load();
+
+            // Create a new scene
+            Scene scene = new Scene(root);
+
+            // Get the stage from the event source (button) and set the new scene
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception (e.g., show an error message)
+        }
+    }
+    @FXML
+    void reserverNav(javafx.event.ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/afficherExpoClient.fxml"));
+            Parent root = loader.load();
+
+            // Create a new scene
+            Scene scene = new Scene(root);
+
+            // Get the stage from the event source (button) and set the new scene
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception (e.g., show an error message)
+        }
+    }
+    @FXML
+    private void handleSearch() {
+        String theme = themeSearchID.getText();
+        String name = nameSearchID.getText();
+
+        try {
+            Set<Exposition> searchResult = exp.chercherParThemeOuNom(theme, name);
+            listexpo = searchResult; // Update the listexpo
+
+            // Clear the previous search results from exhibitionVBox
+            exhibitionVBox.getChildren().clear();
+
+            // Display the search results in exhibitionVBox
+            displayExhibitions();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
