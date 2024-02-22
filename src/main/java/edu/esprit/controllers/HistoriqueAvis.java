@@ -70,7 +70,7 @@ public class HistoriqueAvis {
         });
         // Get the user's reviews
 
-        ObservableList<Avis> avisList = FXCollections.observableArrayList(serviceAvis.getAvisByUserId(4)); // Replace 4 with the actual user ID
+        ObservableList<Avis> avisList = FXCollections.observableArrayList(serviceAvis.getAvisByUserId(3)); // Replace 4 with the actual user ID
 
         // Set up the columns in the table
         Note_id.setCellValueFactory(new PropertyValueFactory<Avis, Integer>("note"));
@@ -193,7 +193,7 @@ public class HistoriqueAvis {
 
             // Refresh table view
             TableView.getItems().clear();
-            TableView.getItems().addAll(serviceAvis.getAvisByUserId(4));
+            TableView.getItems().addAll(serviceAvis.getAvisByUserId(3));
         });
     }
 

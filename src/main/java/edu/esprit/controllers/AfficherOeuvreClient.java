@@ -30,12 +30,12 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Set;
 public class AfficherOeuvreClient {
-    private final ServiceAvis serviceReservation = new ServiceAvis();
+    private final ServiceAvis serviceAvis = new ServiceAvis();
     private final ServicePersonne servicePersonne = new ServicePersonne();
     private final ServiceOeuvre oe = new ServiceOeuvre();
     private Set<Oeuvre> listeo = oe.getAll();
 
-    //private final String cheminImages = "/art/";
+
 
     @FXML
     private VBox exhibitionVBox;
@@ -81,20 +81,22 @@ public class AfficherOeuvreClient {
             Label dateCreationLabel = new Label("Date de création: " + o.getDateCreation());
             Label descriptionLabel = new Label("Description: " + o.getDescription());
 
-            // Bouton pour donner l avis a propos l oeuvre
+            // Bouton pour donner un avis a propos l oeuvre
             Button avisButton = new Button("ajouter avis");
             avisButton.setId("buttonavis");
-            avisButton.setOnAction(event -> {
+            avisButton.setOnAction(event ->showAvisDialog(o));
+            //{
                 // Get the source of the event, which is the button
-                Node sourceNode = (Node) event.getSource();
+                //Node sourceNode = (Node) event.getSource();
 
                 // Get the current stage using the button's scene
-                Stage currentStage = (Stage) sourceNode.getScene().getWindow();
+                //Stage currentStage = (Stage) sourceNode.getScene().getWindow();
 
                 // Call the showAvisDialog method with the Oeuvre and currentStage
-                showAvisDialog(o, currentStage);
-            });
-            // Bouton pour consulter les avis des clients
+                //showAvisDialog(o, currentStage);
+            //});
+
+            // Bouton pour consulter les avis des autres clients
             Button avisButton1 = new Button("voir Avis");
             avisButton1.setId("buttonavis1");
             avisButton1.setOnAction(event ->  showAvisDialog1(o));
@@ -116,7 +118,7 @@ public class AfficherOeuvreClient {
         return dateTimeFormat.format(date);
     }
 
-    private void showAvisDialog(Oeuvre o, Stage currentStage) {
+    private void showAvisDialog(Oeuvre o) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterAvis.fxml"));
 
@@ -132,57 +134,24 @@ public class AfficherOeuvreClient {
             controller.setImage(image);
 
             // Create a new stage (window) ;
-            Stage stage = new Stage();
-           stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("donner votre avis");
-            stage.setScene(new Scene(root));
+           // Stage stage = new Stage();
+           //stage.initModality(Modality.APPLICATION_MODAL);
+            //stage.setTitle("donner votre avis");
+            //stage.setScene(new Scene(root));
             // Close the current stage (AfficherClientOeuvre)
-            currentStage.close();
-           stage.showAndWait();
+            //currentStage.close();
+
+           //stage.showAndWait();
+            exhibitionVBox.getScene().setRoot(root);
 
 
-            displayExhibitions();
+           // displayExhibitions();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     private void showAvisDialog1(Oeuvre o) {
 
-       /* Stage stage = new Stage();
-        stage.setTitle("Avis sur " + o.getNom());
-
-        // Créez une TableView pour afficher les avis
-        TableView<Avis> tableView = new TableView<>();
-
-        // Créez des colonnes pour la TableView
-        TableColumn<Avis, String> userColumn = new TableColumn<>("Utilisateur");
-        userColumn.setCellValueFactory(new PropertyValueFactory<>("client")); // Assurez-vous que Avis a une méthode getClient qui retourne un User
-
-        TableColumn<Avis, String> commentColumn = new TableColumn<>("Commentaire");
-        commentColumn.setCellValueFactory(new PropertyValueFactory<>("commentaire"));
-
-        TableColumn<Avis, Integer> noteColumn = new TableColumn<>("Note");
-        noteColumn.setCellValueFactory(new PropertyValueFactory<>("note"));
-
-        // Ajoutez les colonnes à la TableView
-        tableView.getColumns().add(userColumn);
-        tableView.getColumns().add(commentColumn);
-        tableView.getColumns().add(noteColumn);
-
-        // Récupérez les avis de la base de données
-        List<Avis> avisList = serviceReservation.getAvisByOeuvre(o);
-
-        // Ajoutez les avis à la TableView
-        tableView.getItems().addAll(avisList);
-
-        // Créez une Scene avec la TableView et ajoutez-la à la Stage
-        Scene scene = new Scene(tableView);
-        stage.setScene(scene);
-
-        // Affichez la Stage
-        stage.show();
-
-        */
         // Créez une nouvelle fenêtre (Stage) pour afficher les avis
         Stage stage = new Stage();
         stage.setTitle("Avis sur " + o.getNom());
@@ -194,7 +163,7 @@ public class AfficherOeuvreClient {
         vbox.setSpacing(10); // Espacer les cartes de 10 pixels
 
         // Récupérez les avis de la base de données
-        List<Avis> avisList = serviceReservation.getAvisByOeuvre(o);
+        List<Avis> avisList = serviceAvis.getAvisByOeuvre(o);
 
         for (Avis avis : avisList) {
             // Créez une VBox pour chaque avis
