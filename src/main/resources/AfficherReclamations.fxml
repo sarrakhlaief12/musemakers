@@ -6,13 +6,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherReclamations">
    <children>
       <ListView layoutX="296.0" layoutY="73.0" prefHeight="128.0" prefWidth="390.0" />
       <ListView layoutX="296.0" layoutY="371.0" prefHeight="128.0" prefWidth="390.0" />
       <ListView layoutX="296.0" layoutY="220.0" prefHeight="128.0" prefWidth="390.0" />
-      <TextField layoutX="296.0" layoutY="22.0" />
+      <TextField layoutX="296.0" layoutY="22.0" promptText="Search" />
       <ImageView fitHeight="26.0" fitWidth="25.0" layoutX="263.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/chercher.png" />

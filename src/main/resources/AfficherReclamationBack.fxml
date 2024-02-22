@@ -19,7 +19,7 @@
             </columns>
         </TableView>
         <Button fx:id="modifier" layoutX="199.0" layoutY="327.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
-        <TextField fx:id="stat" layoutX="28.0" layoutY="327.0" />
+        <TextField fx:id="stat" layoutX="28.0" layoutY="327.0" promptText="Statut" />
         <Label fx:id="satut" layoutX="28.0" layoutY="302.0" text="Statut du reclamation :" />
         <Button fx:id="supprimer" layoutX="282.0" layoutY="327.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
     </children>

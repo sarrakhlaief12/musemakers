@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="573.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterComAdmin">
+<AnchorPane prefHeight="605.0" prefWidth="614.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterComAdmin">
     <children>
         <VBox layoutX="20" layoutY="20" spacing="10">
             <Label text="Commentaire:" />
-            <TextField fx:id="comTF" />
+            <TextField fx:id="comTF" promptText="Commentaire" />
             <TableView fx:id="TableViewComA">
                 <columns>
                     <TableColumn fx:id="CvNomA" prefWidth="115.20000648498535" text="Nom admin" />
