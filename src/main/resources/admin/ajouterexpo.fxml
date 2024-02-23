@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -14,63 +17,81 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="626.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterExposition">
+   <stylesheets>
+      <URL value="@../style.css" />
+   </stylesheets>
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" />
       <BorderPane layoutY="-3.0" prefHeight="634.0" prefWidth="1033.0">
          <left>
-            <VBox prefHeight="200.0" prefWidth="230.0" style="-fx-background-color: E8DBCE;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="200.0" prefWidth="230.0" styleClass="sidebar_admin" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane prefHeight="518.0" prefWidth="211.0">
+                  <AnchorPane prefHeight="523.0" prefWidth="248.0" style="-fx-background-color: d0d7ac;">
                      <children>
-                        <Button layoutX="27.0" layoutY="199.0" mnemonicParsing="false" onAction="#Afficher" text="Afficher expositions" />
-                        <Button layoutX="28.0" layoutY="164.0" mnemonicParsing="false" onAction="#ajouterNav" text="Ajouter Expositions" />
-                        <Button layoutX="37.0" layoutY="38.0" mnemonicParsing="false" text="Gestion des artistes" />
-                        <Button layoutX="37.0" layoutY="80.0" mnemonicParsing="false" text="Gestion des clients" />
-                        <Button layoutX="27.0" layoutY="233.0" mnemonicParsing="false" onAction="#demandeNav" text="Demandes de Reservation" />
-                        <Button layoutX="28.0" layoutY="276.0" mnemonicParsing="false" onAction="#histoAdminNav" text="Historique de Reservation" />
+
+                        <Button layoutX="27.0" layoutY="108.0" mnemonicParsing="false" onAction="#Afficher" prefHeight="26.0" prefWidth="200.0" styleClass="underline-button" text="Modifier expositions" textFill="#696666" />
+                        <Button layoutX="8.0" layoutY="233.0" mnemonicParsing="false" onAction="#demandeNav" prefHeight="26.0" prefWidth="240.0" styleClass="underline-button" text="Demandes de Reservation" textFill="#696666" />
+                        <Button layoutX="6.0" layoutY="276.0" mnemonicParsing="false" onAction="#histoAdminNav" prefHeight="26.0" prefWidth="241.0" styleClass="underline-button" text="Historique de Reservation" textFill="#696666" />
+                        <Button layoutX="29.0" layoutY="50.0" mnemonicParsing="false" onAction="#ajouterNav" prefHeight="26.0" prefWidth="190.0" styleClass="underline-button" text="Ajouter Expositions" textFill="#696666" />
                      </children>
                   </AnchorPane>
                </children>
             </VBox>
          </left>
          <top>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: FAF4ED;" BorderPane.alignment="CENTER" />
+            <HBox prefHeight="110.0" prefWidth="1034.0" styleClass="navbar_admin" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="119.0" prefWidth="1034.0" style="-fx-background-color: ffff;">
+                     <children>
+                        <ImageView fitHeight="105.0" fitWidth="94.0" layoutX="473.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/logo.png" />
+                           </image>
+                        </ImageView>
+                        <Button layoutX="143.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Les artistes" />
+                        <Button layoutX="300.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Les chefs d'oeuvres" />
+                        <Button layoutX="719.0" layoutY="76.0" mnemonicParsing="false" onAction="#demandeNav" prefHeight="26.0" prefWidth="117.0" styleClass="underline-button" text="Réservations" />
+                        <Button layoutX="564.0" layoutY="76.0" mnemonicParsing="false" onAction="#Afficher" prefHeight="26.0" prefWidth="145.0" styleClass="underline-button" text="Expositions" />
+                        <Button layoutX="873.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Reclamations" />
+                     </children>
+                  </AnchorPane>
+               </children></HBox>
          </top>
          <center>
             <AnchorPane prefHeight="534.0" prefWidth="665.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane layoutX="17.0" layoutY="16.0" prefHeight="486.0" prefWidth="758.0">
+                  <AnchorPane layoutX="9.0" layoutY="12.0" prefHeight="472.0" prefWidth="766.0" style="-fx-background-color: ffff;">
                      <children>
-                        <TextField fx:id="nomExpoId" layoutX="-1.0" layoutY="23.0" promptText="Entrez votre nom" />
+                        <ComboBox fx:id="themeID" layoutX="4.0" layoutY="382.0" promptText="Choisissez un thème">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Peinture à l'huile" />
+                                 <String fx:value="Photographie contemporaine" />
+                                 <String fx:value="Sculptures abstraites" />
+                                 <String fx:value="Art numérique" />
+                                 <String fx:value="Art moderne" />
+                                 <String fx:value="Street Art" />
+                                 <String fx:value="Portraits contemporains" />
+                                 <String fx:value="Art fantastique" />
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+                        <Text fill="#a4a3a3" layoutX="10.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="exemple: 2024-07-02 19:00" wrappingWidth="156.1195068359375" />
+                        <TextArea fx:id="descriptionId" layoutX="14.0" layoutY="247.0" prefHeight="98.0" prefWidth="168.0" promptText="description" />
+                        <Label layoutX="17.0" layoutY="150.0" prefHeight="18.0" prefWidth="124.0" text="Date et heure de fin" />
+                        <TextField fx:id="endDateTimeTextField" layoutX="14.0" layoutY="170.0" promptText="yyyy-MM-dd HH:mm" />
+                        <TextField fx:id="nomExpoId" layoutX="14.0" layoutY="29.0" promptText="Entrez votre nom" />
                         <Label layoutX="4.0" layoutY="63.0" prefHeight="18.0" prefWidth="139.0" text="Date et heure de début" />
                         <TextField fx:id="startDateTimeTextField" layoutX="4.0" layoutY="92.0" promptText="yyyy-MM-dd HH:mm" />
-                        <Label layoutX="4.0" layoutY="-9.0" text="Nom de l'exposition:" />
+                        <Label layoutX="19.0" layoutY="5.0" text="Nom de l'exposition:" />
+                        <Label layoutX="17.0" layoutY="354.0" prefHeight="18.0" prefWidth="124.0" text="Theme" />
+                        <Button fx:id="buttonaddExpoID" layoutX="351.0" layoutY="170.0" mnemonicParsing="false" onAction="#addExpo" prefHeight="34.0" prefWidth="157.0" styleClass="submit_button" text="Ajouter Exposition" />
+                        <Text fill="#a4a3a3" layoutX="7.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="exemple: 2024-07-02 08:00" wrappingWidth="163.31951904296875" />
+                        <TextField fx:id="pathimageid" layoutX="434.0" layoutY="124.0" promptText="lien image" />
+                        <Label layoutX="17.0" layoutY="227.0" prefHeight="18.0" prefWidth="124.0" text="Description" />
+                        <Button fx:id="browseButton" layoutX="318.0" layoutY="124.0" mnemonicParsing="false" onAction="#browseImage" styleClass="browseButton" text="télecharger image" textFill="#4b4747" />
                      </children>
                   </AnchorPane>
-                  <Text fill="#a4a3a3" layoutX="18.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="exemple: 2024-07-02 08:00" wrappingWidth="152.1195068359375" />
-                  <TextField fx:id="endDateTimeTextField" layoutX="20.0" layoutY="180.0" promptText="yyyy-MM-dd HH:mm" />
-                  <Label layoutX="24.0" layoutY="162.0" prefHeight="18.0" prefWidth="124.0" text="Date et heure de fin" />
-                  <Text fill="#a4a3a3" layoutX="18.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="exemple: 2024-07-02 19:00" wrappingWidth="152.1195068359375" />
-                  <TextArea fx:id="descriptionId" layoutX="20.0" layoutY="261.0" prefHeight="98.0" prefWidth="168.0" promptText="description" />
-                  <ComboBox fx:id="themeID" layoutX="20.0" layoutY="386.0" promptText="Choisissez un thème">
-                     <items>
-                        <FXCollections fx:factory="observableArrayList">
-                           <String fx:value="Peinture à l'huile" />
-                           <String fx:value="Photographie contemporaine" />
-                           <String fx:value="Sculptures abstraites" />
-                           <String fx:value="Art numérique" />
-                           <String fx:value="Art moderne" />
-                           <String fx:value="Street Art" />
-                           <String fx:value="Portraits contemporains" />
-                           <String fx:value="Art fantastique" />
-                        </FXCollections>
-                     </items>
-                  </ComboBox>
-                  <Label layoutX="24.0" layoutY="360.0" prefHeight="18.0" prefWidth="124.0" text="Theme" />
-                  <Label layoutX="20.0" layoutY="235.0" prefHeight="18.0" prefWidth="124.0" text="Description" />
-                  <TextField fx:id="pathimageid" layoutX="429.0" layoutY="56.0" promptText="image" />
-                  <Button fx:id="browseButton" layoutX="320.0" layoutY="56.0" mnemonicParsing="false" onAction="#browseImage" text="Browse image" />
-                  <Button fx:id="buttonaddExpoID" layoutX="403.0" layoutY="334.0" mnemonicParsing="false" onAction="#addExpo" text="Ajouter Exposition" />
                </children>
             </AnchorPane>
          </center>

@@ -35,8 +35,7 @@ public class ReservationController {
         expositionDetailsLabel.setText("Nom de l'exposition: " + exposition.getNom() + "\n" +
                 "Date et Heure de début: " + formatDateTime(exposition.getDateDebut()) + "\n" +
                 "Date et Heure de fin: " + formatDateTime(exposition.getDateFin()) + "\n" +
-                "Thème: " + exposition.getTheme()+"\n" +
-                "saisir le nombre de tciket souhaités:");
+                "Thème: " + exposition.getTheme());
 
     }
 

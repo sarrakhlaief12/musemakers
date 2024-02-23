@@ -1,50 +1,74 @@
-.transparent-button {
+.underline-button {
     -fx-background-color: transparent;
-    -fx-text-fill: white; /* Set text color to white or any other color you prefer */
-}
-
-.underline {
     -fx-underline: true;
 }
 
-.blank-line {
-    -fx-font-size: 10pt;
-    -fx-text-fill: transparent;
-}
-/* style.css */
-.navbar {
-    -fx-background-color: #333; /* Set background color */
-    -fx-padding: 10px; /* Add padding */
+.underline-button:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.1); /* Optional: Add a hover effect */
 }
 
-.nav-button {
-    -fx-background-color: transparent;
-    -fx-text-fill: white; /* Set text color */
-    -fx-padding: 5px 10px; /* Add padding */
-    -fx-border-color: white; /* Add border color */
-    -fx-border-width: 1px; /* Set border width */
-    -fx-cursor: hand; /* Change cursor on hover */
+/* ******************** */
+.navbar_admin{
+    -fx-background-color: #ffffff; /*  Change background color on hover */
 }
 
-.nav-button:hover {
-    -fx-background-color: #555; /* Change background color on hover */
-}
-/* style.css */
-.navbar {
-    -fx-background-color: #333; /* Set background color */
-    -fx-padding: 10px; /* Add padding */
+.submit_button {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-border-color: black;
 }
 
-.nav-button {
-    -fx-background-color: transparent;
-    -fx-text-fill: white; /* Set text color */
-    -fx-padding: 5px 10px; /* Add padding */
-    -fx-border-color: white; /* Add border color */
-    -fx-border-width: 1px; /* Set border width */
-    -fx-cursor: hand; /* Change cursor on hover */
+.submit_button:hover {
+    -fx-background-color: lightgray; /* Change to the desired hover color */
 }
 
-.nav-button:hover {
-    -fx-background-color: #555; /* Change background color on hover */
+/* ***********image browse********* */
+
+.browseButton {
+    -fx-background-color: #696666;
+    -fx-text-fill: white;
 }
+
+.browseButton:hover {
+    -fx-background-color: darkgray; /* Change to the desired hover color */
+}
+
+
+.form-container {
+    -fx-background-color: #f4f4f4;
+    -fx-padding: 20px;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
+
+.form-title {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+}
+
+.exposition-details-label {
+    -fx-font-size: 14;
+}
+
+.text-field {
+    -fx-pref-width: 200px;
+}
+
+.submit-button {
+    -fx-background-color: #4CAF50; /* Green */
+    -fx-text-fill: white;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 40px;
+    -fx-font-size: 14;
+    -fx-border-radius: 5px;
+}
+
+.submit-button:hover {
+    -fx-background-color: #45a049; /* Darker green on hover */
+}
+
+
+
+
 

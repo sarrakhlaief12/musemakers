@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="626.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" />
+        <BorderPane layoutY="-3.0" prefHeight="634.0" prefWidth="1033.0">
+            <left>
+                <VBox  prefHeight="200.0" prefWidth="230.0" style="-fx-background-color: E8DBCE;" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane prefHeight="518.0" prefWidth="211.0">
+                            <children>
+                                <Button styleClass="transparent-button" layoutX="1.0" layoutY="199.0" mnemonicParsing="false" onAction="#Afficher" prefHeight="26.0" prefWidth="226.0" text="Afficher expositions" />
+                                <Button  styleClass="transparent-button" layoutX="-1.0" layoutY="164.0" mnemonicParsing="false" onAction="#ajouterNav" prefHeight="26.0" prefWidth="229.0" text="Ajouter Expositions" />
+                                <Button styleClass="transparent-button" layoutY="38.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="226.0" text="Gestion des artistes" />
+                                <Button styleClass="transparent-button" layoutX="-3.0" layoutY="80.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="230.0" text="Gestion des clients" />
+                                <Button styleClass="transparent-button" layoutX="3.0" layoutY="233.0" mnemonicParsing="false" onAction="#demandeNav" prefHeight="26.0" prefWidth="224.0" text="Demandes de Reservation" />
+                                <Button styleClass="transparent-button" layoutX="1.0" layoutY="276.0" mnemonicParsing="false" onAction="#histoAdminNav" prefHeight="26.0" prefWidth="227.0" text="Historique de Reservation" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </VBox>
+            </left>
+            <top>
+                <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: FAF4ED;" BorderPane.alignment="CENTER" />
+            </top>
+            <center>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane layoutX="36.0" layoutY="19.0" prefHeight="488.0" prefWidth="740.0">
+                            <children>
+                                <TableView fx:id="TableView" layoutX="-24.0" layoutY="14.0" prefHeight="406.0" prefWidth="782.0">
+                                    <columns>
+                                        <TableColumn fx:id="nom_expo" prefWidth="92.0" text="Nom de l'exposition" />
+                                        <TableColumn fx:id="date_debut" prefWidth="115.20001220703125" text="Date debut" />
+                                        <TableColumn fx:id="date_fin" prefWidth="119.99998474121094" text="Date fin" />
+                                        <TableColumn fx:id="theme" minWidth="0.0" prefWidth="130.4000244140625" text="Theme" />
+                                        <TableColumn fx:id="img" prefWidth="152.800048828125" text="Image path" />
+                                        <TableColumn fx:id="imgDisplay" prefWidth="168.800048828125" text="Image" />
+                                    </columns>
+                                </TableView>
+                                <Button fx:id="supprimer" layoutX="353.0" layoutY="432.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+                            </children>
+                        </AnchorPane>
+                        <Text layoutX="99.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste exposition" />
+                    </children>
+                </AnchorPane>
+            </center>
+
+        </BorderPane>
+    </children>
+
+</AnchorPane>

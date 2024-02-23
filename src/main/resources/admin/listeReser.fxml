@@ -1,36 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.esprit.controllers.FullListAdmin"
-            prefHeight="626.0" prefWidth="971.0">
+<AnchorPane prefHeight="626.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.FullListAdmin">
+    <stylesheets>
+        <URL value="@../style.css" />
+    </stylesheets>
     <children>
         <BorderPane prefHeight="200.0" prefWidth="200.0" />
         <BorderPane layoutY="-3.0" prefHeight="634.0" prefWidth="1033.0">
             <left>
-                <VBox prefHeight="200.0" prefWidth="230.0" style="-fx-background-color: E8DBCE;" BorderPane.alignment="CENTER">
-                    <children>
-                        <AnchorPane prefHeight="518.0" prefWidth="211.0">
-                            <children>
-                                <Button layoutX="27.0" layoutY="199.0" mnemonicParsing="false" onAction="#Afficher" text="Afficher expositions" />
-                                <Button layoutX="28.0" layoutY="164.0" mnemonicParsing="false" onAction="#ajouterNav" text="Ajouter Expositions" />
-                                <Button layoutX="37.0" layoutY="38.0" mnemonicParsing="false" text="Gestion des artistes" />
-                                <Button layoutX="37.0" layoutY="80.0" mnemonicParsing="false" text="Gestion des clients" />
-                                <Button layoutX="27.0" layoutY="233.0" mnemonicParsing="false" onAction="#demandeNav" text="Demandes de Reservation" />
-                                <Button layoutX="28.0" layoutY="276.0" mnemonicParsing="false" onAction="#histoAdminNav" text="Historique de Reservation" />
-                            </children>
-                        </AnchorPane>
-                    </children>
+                <VBox prefHeight="534.0" prefWidth="211.0" style="-fx-background-color: E8DBCE;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="523.0" prefWidth="248.0" style="-fx-background-color: d0d7ac;">
+                     <children>
+                        <Button layoutX="27.0" layoutY="49.0" mnemonicParsing="false" onAction="#demandeNav" prefHeight="26.0" prefWidth="200.0" styleClass="underline-button" text="Demandes de Reservation" textFill="#696666" />
+                        <Button layoutX="3.0" layoutY="89.0" mnemonicParsing="false" onAction="#histoAdminNav" prefHeight="26.0" prefWidth="241.0" styleClass="underline-button" text="Historique de Reservation" textFill="#696666" />
+                     </children>
+                  </AnchorPane>
+               </children>
                 </VBox>
             </left>
             <top>
-                <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: FAF4ED;" BorderPane.alignment="CENTER" />
+                <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: ffff;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="119.0" prefWidth="1034.0" style="-fx-background-color: ffff;">
+                     <children>
+                        <ImageView fitHeight="105.0" fitWidth="94.0" layoutX="473.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/logo.png" />
+                           </image>
+                        </ImageView>
+                        <Button layoutX="143.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Les artistes" />
+                        <Button layoutX="300.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Les chefs d'oeuvres" />
+                        <Button layoutX="719.0" layoutY="76.0" mnemonicParsing="false" onAction="#demandeNav" prefHeight="26.0" prefWidth="117.0" styleClass="underline-button" text="Réservations" />
+                        <Button layoutX="564.0" layoutY="76.0" mnemonicParsing="false" onAction="#Afficher" prefHeight="26.0" prefWidth="145.0" styleClass="underline-button" text="Expositions" />
+                        <Button layoutX="873.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Reclamations" />
+                     </children>
+                  </AnchorPane>
+               </children></HBox>
             </top>
             <center>
                 <BorderPane prefHeight="497.0" prefWidth="875.0" BorderPane.alignment="CENTER">
@@ -42,7 +59,7 @@
                                     <children>
                                         <AnchorPane layoutX="23.0" layoutY="14.0" prefHeight="348.0" prefWidth="607.0">
                                             <children>
-                                                <TableView fx:id="reservationTableView" layoutX="-1.0" layoutY="26.0" prefHeight="390.0" prefWidth="878.0">
+                                                <TableView fx:id="reservationTableView" layoutX="-15.0" layoutY="26.0" prefHeight="434.0" prefWidth="878.0">
                                                     <columns>
                                                         <TableColumn fx:id="emailColumn" prefWidth="114.4000244140625" text="adresse mail client" />
                                                         <TableColumn fx:id="nomExpositionColumn" prefWidth="107.99996948242188" text="nom exposition" />

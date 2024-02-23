@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -10,47 +13,62 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="626.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherExposition">
+    <stylesheets>
+        <URL value="@../style.css" />
+    </stylesheets>
     <children>
-        <BorderPane prefHeight="200.0" prefWidth="200.0" />
         <BorderPane layoutY="-3.0" prefHeight="634.0" prefWidth="1033.0">
             <left>
                 <VBox prefHeight="200.0" prefWidth="230.0" style="-fx-background-color: E8DBCE;" BorderPane.alignment="CENTER">
-                    <children>
-                        <AnchorPane prefHeight="518.0" prefWidth="211.0">
-                            <children>
-                                <Button layoutX="27.0" layoutY="199.0" mnemonicParsing="false" onAction="#Afficher" text="Afficher expositions" />
-                                <Button layoutX="28.0" layoutY="164.0" mnemonicParsing="false" onAction="#ajouterNav" text="Ajouter Expositions" />
-                                <Button layoutX="37.0" layoutY="38.0" mnemonicParsing="false" text="Gestion des artistes" />
-                                <Button layoutX="37.0" layoutY="80.0" mnemonicParsing="false" text="Gestion des clients" />
-                                <Button layoutX="27.0" layoutY="233.0" mnemonicParsing="false" onAction="#demandeNav" text="Demandes de Reservation" />
-                                <Button layoutX="28.0" layoutY="276.0" mnemonicParsing="false" onAction="#histoAdminNav" text="Historique de Reservation" />
-                            </children>
-                        </AnchorPane>
-                    </children>
+               <children>
+                  <AnchorPane prefHeight="523.0" prefWidth="248.0" style="-fx-background-color: d0d7ac;">
+                     <children>
+                        <Button layoutX="27.0" layoutY="108.0" mnemonicParsing="false" onAction="#Afficher" prefHeight="26.0" prefWidth="200.0" styleClass="underline-button" text="Afficher expositions" textFill="#696666" />
+                        <Button layoutX="8.0" layoutY="233.0" mnemonicParsing="false" onAction="#demandeNav" prefHeight="26.0" prefWidth="240.0" styleClass="underline-button" text="Demandes de Reservation" textFill="#696666" />
+                        <Button layoutX="6.0" layoutY="276.0" mnemonicParsing="false" onAction="#histoAdminNav" prefHeight="26.0" prefWidth="241.0" styleClass="underline-button" text="Historique de Reservation" textFill="#696666" />
+                        <Button layoutX="29.0" layoutY="50.0" mnemonicParsing="false" onAction="#ajouterNav" prefHeight="26.0" prefWidth="190.0" styleClass="underline-button" text="Ajouter Expositions" textFill="#696666" />
+                     </children>
+                  </AnchorPane>
+               </children>
                 </VBox>
             </left>
             <top>
-                <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: FAF4ED;" BorderPane.alignment="CENTER" />
+                <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="119.0" prefWidth="1034.0" style="-fx-background-color: ffff;">
+                     <children>
+                        <ImageView fitHeight="105.0" fitWidth="94.0" layoutX="473.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/logo.png" />
+                           </image>
+                        </ImageView>
+                        <Button layoutX="143.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Les artistes" />
+                        <Button layoutX="300.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Les chefs d'oeuvres" />
+                        <Button layoutX="719.0" layoutY="76.0" mnemonicParsing="false" onAction="#demandeNav" prefHeight="26.0" prefWidth="117.0" styleClass="underline-button" text="Réservations" />
+                        <Button layoutX="564.0" layoutY="76.0" mnemonicParsing="false" onAction="#Afficher" prefHeight="26.0" prefWidth="145.0" styleClass="underline-button" text="Expositions" />
+                        <Button layoutX="873.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Reclamations" />
+                     </children>
+                  </AnchorPane>
+               </children></HBox>
             </top>
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="450.0" prefWidth="734.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane layoutX="36.0" layoutY="19.0" prefHeight="488.0" prefWidth="740.0">
+                  <AnchorPane layoutX="35.0" layoutY="19.0" prefHeight="474.0" prefWidth="759.0">
                      <children>
-                        <TableView fx:id="TableView" layoutX="-24.0" layoutY="14.0" prefHeight="406.0" prefWidth="782.0">
+                        <TableView fx:id="TableView" layoutY="14.0" prefHeight="406.0" prefWidth="590.0">
                            <columns>
                               <TableColumn fx:id="nom_expo" prefWidth="92.0" text="Nom de l'exposition" />
                               <TableColumn fx:id="date_debut" prefWidth="115.20001220703125" text="Date debut" />
-                              <TableColumn fx:id="date_fin" prefWidth="119.99998474121094" text="Date fin" />
-                              <TableColumn fx:id="description" prefWidth="208.0" text="Description" />
-                              <TableColumn fx:id="theme" minWidth="0.0" prefWidth="130.4000244140625" text="Theme" />
+                              <TableColumn fx:id="date_fin" prefWidth="129.5999755859375" text="Date fin" />
+                              <TableColumn fx:id="theme" minWidth="0.0" prefWidth="121.5999755859375" text="Theme" />
                               <TableColumn fx:id="img" prefWidth="152.800048828125" text="Image path" />
                            </columns>
                         </TableView>
-                        <Button fx:id="supprimer" layoutX="353.0" layoutY="432.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+                        <Button fx:id="supprimer" layoutX="272.0" layoutY="426.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
                      </children>
                   </AnchorPane>
-                  <Text layoutX="99.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste exposition" />
+                  <Text layoutX="231.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste exposition" />
                </children>
             </AnchorPane>
          </center>

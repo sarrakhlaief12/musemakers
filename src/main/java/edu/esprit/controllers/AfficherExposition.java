@@ -35,9 +35,10 @@ public class AfficherExposition {
 
     @FXML
     private TableColumn<Exposition, Timestamp> date_fin;
-
     @FXML
-    private TableColumn<Exposition, String> description;
+    private TableColumn<Exposition, String> imgDisplay;
+
+
 
     @FXML
     private TableColumn<Exposition, String> img;
@@ -70,11 +71,11 @@ public class AfficherExposition {
         nom_expo.setCellValueFactory(new PropertyValueFactory<>("nom"));
         date_debut.setCellValueFactory(new PropertyValueFactory<>("dateDebut"));
         date_fin.setCellValueFactory(new PropertyValueFactory<>("dateFin"));
-        description.setCellValueFactory(new PropertyValueFactory<>("description"));
         theme.setCellValueFactory(new PropertyValueFactory<>("theme"));
         img.setCellValueFactory(new PropertyValueFactory<>("image"));
 
     }
+
 
     @FXML
     private void supprimer(ActionEvent event) throws SQLException {

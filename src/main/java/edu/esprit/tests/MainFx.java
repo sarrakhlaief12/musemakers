@@ -16,8 +16,9 @@ public class MainFx extends Application {
        FXMLLoader loader= new FXMLLoader(getClass().getResource("/client/histoReservationClient.fxml"));
         Parent root=loader.load();
         Scene scene=new Scene(root);
+        //scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setScene(scene);
-        stage.setTitle("ajout");
+        stage.setTitle("Art Waves");
         stage.show();
 
 
