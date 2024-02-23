@@ -68,8 +68,6 @@ public class AjouterReclamationController {
 
     }
 
-
-
     @FXML
     void ajouter(ActionEvent event) throws IOException {
         Reclamation r=new Reclamation();
@@ -115,9 +113,7 @@ public class AjouterReclamationController {
             ((TableView<Reclamation>) TableViewRec).setItems(FXCollections.observableArrayList(filteredRecList));
         }
 
-
     }
-
 
     @FXML
     void modifier(ActionEvent event) throws IOException {
@@ -139,8 +135,6 @@ public class AjouterReclamationController {
             }
         }
     }
-
-
 
     @FXML
     void supprimer(ActionEvent event) throws IOException, SQLException {
