@@ -2,6 +2,8 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -22,7 +24,7 @@
                         <AnchorPane prefHeight="523.0" prefWidth="248.0" style="-fx-background-color: d0d7ac;">
                      <children>
                         <Button fx:id="nouvelajout_id" layoutX="49.0" layoutY="127.0" mnemonicParsing="false" onAction="#AfficherAjoutOeuvre" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Nouvel Ajout" />
-                        <Button fx:id="button_avis" layoutX="46.0" layoutY="184.0" mnemonicParsing="false" onAction="#showAvisDialog" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Voir les avis" />
+                        <Button fx:id="button_avis" layoutX="46.0" layoutY="184.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Voir les avis" />
                         <Button fx:id="button_supprimer" layoutX="43.0" layoutY="235.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Supprimer" />
                      </children></AnchorPane>
                     </children>
@@ -52,7 +54,15 @@
                     <children>
                         <AnchorPane layoutY="7.0" prefHeight="472.0" prefWidth="766.0" style="-fx-background-color: ffff;">
                      <children>
-                        <ImageView fx:id="image_id" fitHeight="210.0" fitWidth="200.0" layoutX="534.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="image_id" fitHeight="210.0" fitWidth="200.0" layoutX="526.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" />
+                        <TableView fx:id="TableView" layoutX="30.0" layoutY="66.0" prefHeight="200.0" prefWidth="445.0">
+                           <columns>
+                              <TableColumn fx:id="nom_id" prefWidth="92.0" text="nom" />
+                              <TableColumn fx:id="categorie_id" prefWidth="115.20001220703125" text="categorie" />
+                              <TableColumn fx:id="prix_id" prefWidth="96.00001525878906" text="prix" />
+                              <TableColumn fx:id="datecreation_id" prefWidth="142.39996337890625" text="date creation" />
+                           </columns>
+                        </TableView>
                      </children>
                         </AnchorPane>
                     </children>

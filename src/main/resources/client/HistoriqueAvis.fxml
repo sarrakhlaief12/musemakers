@@ -1,31 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="626.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.HistoriqueAvis">
-   <children>
-      <TableView fx:id="TableView" layoutX="169.0" layoutY="226.0" prefHeight="214.0" prefWidth="428.0">
-         <columns>
-            <TableColumn fx:id="commentaire_id" prefWidth="92.0" text="Commentaire" />
-            <TableColumn fx:id="dateexp_id" prefWidth="216.7999725341797" text="Date experience" />
-            <TableColumn fx:id="Note_id" prefWidth="118.39996337890625" text="Note " />
-         </columns>
-      </TableView>
-      <Button fx:id="buttonsupprimer_id" layoutX="383.0" layoutY="466.0" mnemonicParsing="false" onAction="#delete" prefHeight="43.0" prefWidth="128.0" text="supprimer">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Button>
-      <ImageView fx:id="image_id" fitHeight="205.0" fitWidth="235.0" layoutX="657.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="gallerie_id" layoutX="590.0" layoutY="38.0" mnemonicParsing="false" onAction="#Affichergallerie" prefHeight="43.0" prefWidth="171.0" text="Gallerie">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Button>
-   </children>
+<AnchorPane prefHeight="626.0" prefWidth="981.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.HistoriqueAvis">
+    <stylesheets>
+        <URL value="@../style.css" />
+    </stylesheets>
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" />
+        <BorderPane layoutY="-3.0" prefHeight="634.0" prefWidth="1033.0">
+            <left>
+                <VBox prefHeight="200.0" prefWidth="230.0" styleClass="sidebar_admin" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane prefHeight="523.0" prefWidth="248.0" style="-fx-background-color: d0d7ac;">
+                            <children>
+                                <Button fx:id="buttonsupprimer_id" layoutX="39.0" layoutY="137.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Supprimer" />
+                            </children></AnchorPane>
+                    </children>
+                </VBox>
+            </left>
+            <top>
+                <HBox prefHeight="110.0" prefWidth="1034.0" styleClass="navbar_admin" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane prefHeight="119.0" prefWidth="1034.0" style="-fx-background-color: ffff;">
+                            <children>
+                                <ImageView fitHeight="105.0" fitWidth="94.0" layoutX="473.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../art/logo.png" />
+                                    </image>
+                                </ImageView>
+                                <Button layoutX="143.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Les artistes" />
+                                <Button fx:id="button_afficher" layoutX="300.0" layoutY="76.0" mnemonicParsing="false" onAction="#Affichergallerie" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Les chefs d'oeuvres" />
+                                <Button layoutX="719.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" styleClass="underline-button" text="Réservations" />
+                                <Button layoutX="564.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="145.0" styleClass="underline-button" text="Expositions" />
+                                <Button layoutX="873.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Reclamations" />
+                            </children>
+                        </AnchorPane>
+                    </children></HBox>
+            </top>
+            <center>
+                <AnchorPane prefHeight="534.0" prefWidth="665.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane layoutY="7.0" prefHeight="472.0" prefWidth="766.0" style="-fx-background-color: ffff;">
+                            <children>
+                                <ImageView fx:id="image_id" fitHeight="210.0" fitWidth="200.0" layoutX="534.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true" />
+                        <TableView fx:id="TableView" layoutX="30.0" layoutY="101.0" prefHeight="214.0" prefWidth="428.0">
+                           <columns>
+                              <TableColumn fx:id="commentaire_id" prefWidth="92.0" text="Commentaire" />
+                              <TableColumn fx:id="dateexp_id" prefWidth="216.7999725341797" text="Date experience" />
+                              <TableColumn fx:id="Note_id" prefWidth="118.39996337890625" text="Note " />
+                           </columns>
+                        </TableView>
+                        <ImageView fx:id="image_id1" fitHeight="175.0" fitWidth="179.0" layoutX="525.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+            </center>
+        </BorderPane>
+    </children>
 </AnchorPane>
