@@ -13,10 +13,7 @@ import service.ReclamationService;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class AjouterCommentaireUser {
     private final CommentaireService cs = new CommentaireService();
@@ -42,7 +39,7 @@ public class AjouterCommentaireUser {
 
     @FXML
     private Button supprimer;
-
+    private static final List<String> BAD_WORDS = Arrays.asList("Sick", "Bad", "Dump");
     public void initialize() throws IOException {
         TableViewCommentaire.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) { // Vérifie si c'est un simple clic
@@ -55,6 +52,7 @@ public class AjouterCommentaireUser {
         });
         ShowCommentaire();
     }
+
 
     @FXML
     void ajouter(ActionEvent event) throws IOException {
@@ -79,7 +77,6 @@ public class AjouterCommentaireUser {
     List<Commentaire> CommentaireList;
     @FXML
     public void ShowCommentaire() throws IOException {
-
         try {
             CommentaireList = cs.getAll();
         } catch (SQLException e) {
@@ -92,49 +89,18 @@ public class AjouterCommentaireUser {
         }
         List<Reclamation> filteredCommentaireList = new ArrayList<>();
 
+        // Censor bad words before displaying them
+        CommentaireList.forEach(commentaire -> {
+            String censoredContenuCom = censorBadWords(commentaire.getContenuCom());
+            commentaire.setContenuCom(censoredContenuCom);
+        });
 
         CvContenu.setCellValueFactory(new PropertyValueFactory<>("ContenuCom"));
         CvDate.setCellValueFactory(new PropertyValueFactory<>("DateCom"));
 
         TableViewCommentaire.setItems(FXCollections.observableArrayList(CommentaireList));
     }
-    /*
-     @FXML
-     void modifier(ActionEvent event) throws IOException, SQLException {
-         // Récupérer le commentaire sélectionné dans la table
-         Commentaire selectedCommentaire = TableViewCommentaire.getSelectionModel().getSelectedItem();
 
-         if (selectedCommentaire != null) {
-             // Mettre à jour le contenu du commentaire avec le texte du TextField
-             selectedCommentaire.setContenuCom(contenuCommentaireTF.getText());
-
-             // Mettre à jour la date du commentaire avec la date actuelle
-             selectedCommentaire.setDateCom(new Date(System.currentTimeMillis()));
-
-             // Demander une confirmation à l'utilisateur
-             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-             alert.setTitle("Confirmation de modification");
-             alert.setHeaderText("Modifier le commentaire");
-             alert.setContentText("Êtes-vous sûr de vouloir modifier le commentaire sélectionné ?");
-
-             Optional<ButtonType> result = alert.showAndWait();
-             // Si l'utilisateur confirme la modification, procéder
-             if (result.isPresent() && result.get() == ButtonType.OK) {
-                 // Mettre à jour le commentaire dans la base de données
-                 cs.modifier(selectedCommentaire);
-
-                 // Rafraîchir l'affichage des commentaires dans la TableView
-                 ShowCommentaire();
-             }
-         } else {
-             // Afficher un message si aucun commentaire n'est sélectionné
-             Alert alert = new Alert(Alert.AlertType.WARNING);
-             alert.setTitle("Aucun commentaire sélectionné");
-             alert.setHeaderText("Aucun commentaire sélectionné");
-             alert.setContentText("Veuillez sélectionner un commentaire à modifier.");
-             alert.showAndWait();
-         }
-     }*/
     @FXML
     void modifier(ActionEvent event) throws IOException {
         // Obtenez le commentaire sélectionné dans la table
@@ -152,6 +118,13 @@ public class AjouterCommentaireUser {
             // Mettez à jour le contenu du commentaire avec le texte du TextField
             c.setContenuCom(contenuCommentaireTF.getText());
             c.setDateCom(new Date(System.currentTimeMillis()));
+            // Check if the message has been modified
+            String censoredMessage = censorBadWords(contenuCommentaireTF.getSelectedText());
+            if (!contenuCommentaireTF.getSelectedText().equals(censoredMessage)) {
+                ShowCommentaire();//notification mtaa el bad words
+            } else {
+                ShowCommentaire();//notification kn jawha bhy
+            }
             try {
                 // Appelez la méthode modifier pour mettre à jour le commentaire dans la base de données
                 cs.modifier(c);
@@ -162,7 +135,6 @@ public class AjouterCommentaireUser {
             }
         }
     }
-
 
 
     private void displayCommentaireInfo(Commentaire c) {
@@ -182,5 +154,12 @@ public class AjouterCommentaireUser {
                 throw new RuntimeException(e);
             }
         }
+    }
+    private String censorBadWords(String text) {
+        for (String badWord : BAD_WORDS) {
+            // Replace bad words with **
+            text = text.replaceAll("(?i)" + badWord, "*****");
+        }
+        return text;
     }
 }
