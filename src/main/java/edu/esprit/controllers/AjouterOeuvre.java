@@ -6,12 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -19,11 +17,9 @@ import javafx.scene.image.Image;
 import java.io.File;
 import java.nio.file.Paths;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.time.LocalDate;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class AjouterOeuvre {
 
@@ -84,7 +80,7 @@ public class AjouterOeuvre {
     }
     @FXML
     void Afficher(ActionEvent event) throws IOException {
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherOeuvre.fxml"));
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/admin/AfficherOeuvre.fxml"));
         Parent root=loader.load();
 //        Scene scene = new Scene(root);
 //

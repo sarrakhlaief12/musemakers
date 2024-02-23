@@ -1,8 +1,6 @@
 package edu.esprit.controllers;
 import edu.esprit.entities.Avis;
-import edu.esprit.entities.Oeuvre;
 import edu.esprit.services.ServiceAvis;
-import edu.esprit.services.ServiceOeuvre;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,16 +18,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
-import javafx.stage.FileChooser;
 
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -199,7 +192,7 @@ public class HistoriqueAvis {
 
     @FXML
     void Affichergallerie(ActionEvent event) throws IOException {
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherOeuvreClient.fxml"));
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/client/AfficherOeuvreClient.fxml"));
         Parent root=loader.load();
 
         // Obtenez la scène actuelle à partir de n'importe quel nœud inclus dans cette scène

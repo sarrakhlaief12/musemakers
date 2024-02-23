@@ -9,11 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 
-
-import javafx.stage.Stage;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,10 +18,8 @@ import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 public class AjouterAvis {
 
     @FXML
@@ -123,7 +118,7 @@ public class AjouterAvis {
 
     @FXML
     void Afficherhistoriqueavis(ActionEvent event) throws IOException {
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("/HistoriqueAvis.fxml"));
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/client/HistoriqueAvis.fxml"));
         Parent root=loader.load();
 //        Scene scene = new Scene(root);
 //
@@ -138,7 +133,7 @@ public class AjouterAvis {
     }
     @FXML
     void Affichergallerie(javafx.event.ActionEvent event) throws IOException {
-       FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherOeuvreClient.fxml"));
+       FXMLLoader loader= new FXMLLoader(getClass().getResource("/client/AfficherOeuvreClient.fxml"));
        Parent root=loader.load();
 
         comment_id.getScene().setRoot(root);

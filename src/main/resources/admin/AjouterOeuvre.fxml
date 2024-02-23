@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="626.0" prefWidth="981.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterOeuvre">
+    <stylesheets>
+        <URL value="@../style.css" />
+    </stylesheets>
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" />
+        <BorderPane layoutY="-3.0" prefHeight="634.0" prefWidth="1033.0">
+            <left>
+                <VBox prefHeight="200.0" prefWidth="230.0" styleClass="sidebar_admin" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane prefHeight="523.0" prefWidth="248.0" style="-fx-background-color: d0d7ac;" />
+                    </children>
+                </VBox>
+            </left>
+            <top>
+                <HBox prefHeight="110.0" prefWidth="1034.0" styleClass="navbar_admin" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane prefHeight="119.0" prefWidth="1034.0" style="-fx-background-color: ffff;">
+                            <children>
+                                <ImageView fitHeight="105.0" fitWidth="94.0" layoutX="473.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../art/logo.png" />
+                                    </image>
+                                </ImageView>
+                                <Button layoutX="143.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Les artistes" />
+                                <Button fx:id="button_afficher" layoutX="300.0" layoutY="76.0" mnemonicParsing="false" onAction="#Afficher" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Les chefs d'oeuvres" />
+                                <Button layoutX="719.0" layoutY="76.0" mnemonicParsing="false"  prefHeight="26.0" prefWidth="117.0" styleClass="underline-button" text="Réservations" />
+                                <Button layoutX="564.0" layoutY="76.0" mnemonicParsing="false"  prefHeight="26.0" prefWidth="145.0" styleClass="underline-button" text="Expositions" />
+                                <Button layoutX="873.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Reclamations" />
+                            </children>
+                        </AnchorPane>
+                    </children></HBox>
+            </top>
+            <center>
+                <AnchorPane prefHeight="534.0" prefWidth="665.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane layoutY="7.0" prefHeight="472.0" prefWidth="766.0" style="-fx-background-color: ffff;">
+                            <children>
+                                <Label layoutX="19.0" layoutY="150.0" prefHeight="18.0" prefWidth="124.0" text="Prix:" />
+                                <Label layoutX="19.0" layoutY="217.0" prefHeight="18.0" prefWidth="139.0" text="Date de creation:" />
+                                <Label layoutX="19.0" layoutY="5.0" text="Nom de l'oeuvre:" />
+                                <Label layoutX="19.0" layoutY="71.0" prefHeight="18.0" prefWidth="124.0" text="Categorie:" />
+                                <Button fx:id="button_ajouter" layoutX="351.0" layoutY="170.0" mnemonicParsing="false" onAction="#add" prefHeight="34.0" prefWidth="157.0" styleClass="submit_button" text="Ajouter Oeuvre" />
+                                <Label layoutX="27.0" layoutY="310.0" prefHeight="18.0" prefWidth="124.0" text="Description:" />
+                                <Button fx:id="browseButton" layoutX="318.0" layoutY="98.0" mnemonicParsing="false" onAction="#browseImage" styleClass="browseButton" text="télecharger image" textFill="#4b4747" />
+                        <TextField fx:id="Nom_id" layoutX="23.0" layoutY="29.0" />
+                        <ChoiceBox fx:id="categorie_id" layoutX="22.0" layoutY="98.0" prefWidth="150.0" />
+                        <TextField fx:id="description_id" layoutX="27.0" layoutY="343.0" prefHeight="99.0" prefWidth="165.0" />
+                        <TextField fx:id="prix_id" layoutX="23.0" layoutY="174.0" />
+                        <DatePicker fx:id="date_id" layoutX="22.0" layoutY="250.0" prefHeight="26.0" prefWidth="150.0" />
+                        <TextField fx:id="image_id" layoutX="468.0" layoutY="98.0" promptText="image" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>
