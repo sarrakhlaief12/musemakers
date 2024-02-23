@@ -42,8 +42,8 @@
                         </ImageView>
                         <Button layoutX="143.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Cours Artistique" />
                         <Button layoutX="300.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Les chefs d'oeuvres" />
-                        <Button onAction="#histoClientNav" layoutX="719.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" styleClass="underline-button" text="Réservations" />
-                        <Button onAction="#reserverNav" layoutX="564.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="145.0" styleClass="underline-button" text="Expositions" />
+                        <Button layoutX="719.0" layoutY="76.0" mnemonicParsing="false" onAction="#histoClientNav" prefHeight="26.0" prefWidth="117.0" styleClass="underline-button" text="Réservations" />
+                        <Button layoutX="564.0" layoutY="76.0" mnemonicParsing="false" onAction="#reserverNav" prefHeight="26.0" prefWidth="145.0" styleClass="underline-button" text="Expositions" />
                         <Button layoutX="873.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Reclamations" />
                      </children>
                   </AnchorPane>
@@ -53,7 +53,7 @@
                 <VBox alignment="CENTER" prefHeight="545.0" prefWidth="820.0" spacing="10">
                     <AnchorPane prefHeight="53.0" prefWidth="610.0">
                         <children>
-                            <Button fx:id="searchButton" layoutX="548.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSearch" text="chercher" />
+                            <Button fx:id="searchButton" layoutX="568.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSearch" text="chercher" />
                             <TextField fx:id="nameSearchID" layoutX="154.0" layoutY="14.0" promptText="Nom exposition" />
                             <TextField fx:id="themeSearchID" layoutX="358.0" layoutY="14.0" promptText="Theme" />
                             <Text fill="#b1aeae" layoutX="157.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="saisir le nom de l'expositon" />
@@ -61,7 +61,7 @@
                         </children>
                     </AnchorPane>
                     <ScrollPane>
-                        <VBox fx:id="exhibitionVBox" alignment="CENTER" spacing="10">
+                        <VBox fx:id="exhibitionVBox" alignment="CENTER" spacing="10" styleClass="exhibition-container">
                             <!-- This VBox will contain the exhibitions -->
                         </VBox>
                     </ScrollPane>

@@ -68,6 +68,17 @@
     -fx-background-color: #45a049; /* Darker green on hover */
 }
 
+.exhibition-container {
+    -fx-padding: 10px;
+}
+
+.exhibition-box {
+    -fx-border-radius: 10px;
+    -fx-border-color: #a8a0a0; /* Border color */
+    -fx-border-width: 2px;
+    -fx-background-color: #ecf0f1; /* Background color */
+    -fx-padding: 10px;
+}
 
 
 

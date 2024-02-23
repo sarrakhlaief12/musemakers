@@ -102,6 +102,7 @@ public class AfficherExpositionClient {
 
             // Ajouter les composants à l'HBox principale
             exhibitionBox.getChildren().addAll(imageView, detailsVBox);
+            exhibitionBox.getStyleClass().add("exhibition-box");
 
             // Ajouter HBox à la VBox principale
             exhibitionVBox.getChildren().add(exhibitionBox);
