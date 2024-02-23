@@ -62,9 +62,9 @@ public class AjouterReclamationController {
     private Button supprimer;
     @FXML
     private Button rec;
+
     public void initialize() throws IOException {
         ShowReclamation();
-
 
     }
 
@@ -105,7 +105,7 @@ public class AjouterReclamationController {
             throw new RuntimeException(e);
         }
 
-        User userAdd = su.getOneById(2);
+       User userAdd = su.getOneById(2);
         List<Reclamation> filteredRecList = new ArrayList<>();
 
         for (Reclamation r : RecList) {

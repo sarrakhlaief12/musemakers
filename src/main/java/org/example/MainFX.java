@@ -14,7 +14,7 @@ public class MainFX extends Application {  public static void main(String[] args
     @Override
     public void start(Stage primaryStage) throws IOException {
      //FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterReclamation.fxml"));
-    // FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherReclamationBack.fxml"));
+   // FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherReclamationBack.fxml"));
        FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterCommentaireUser.fxml"));
         //FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterComAdmin.fxml"));
 

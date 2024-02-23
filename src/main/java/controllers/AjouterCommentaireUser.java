@@ -59,7 +59,7 @@ public class AjouterCommentaireUser {
         Commentaire c = new Commentaire();
         Reclamation r = null ; // Remplacez 1 par l'ID de la réclamation appropriée
         try {
-            r = rs.getOneById(35);
+            r = rs.getOneById(178);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -94,7 +94,7 @@ public class AjouterCommentaireUser {
             throw new RuntimeException(e);
         }
         try {
-            Reclamation reclamationAdd = rs.getOneById(35);
+            Reclamation reclamationAdd = rs.getOneById(178);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -120,7 +120,7 @@ public class AjouterCommentaireUser {
             // Obtenez une instance de la réclamation que vous souhaitez associer
             Reclamation r = null;
             try {
-                r = rs.getOneById(35); // Remplacez 35 par l'ID de la réclamation appropriée
+                r = rs.getOneById(178); // Remplacez 35 par l'ID de la réclamation appropriée
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
