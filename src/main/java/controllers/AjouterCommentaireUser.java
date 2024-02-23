@@ -63,8 +63,19 @@ public class AjouterCommentaireUser {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        String contenuCom = contenuCommentaireTF.getText();
+
+        // Ajouter le contrôle de saisie ici
+        if (contenuCom.length() > 50) {
+            System.out.println("Vous avez dépassé 50 caractères.");
+            return;
+        } else if (contenuCom.isEmpty()) {
+            System.out.println("Le contenu du commentaire est vide.");
+            return;
+        }
+
         c.setReclamation(r);
-        c.setContenuCom(contenuCommentaireTF.getText());
+        c.setContenuCom(contenuCom);
         c.setDateCom(new Date(System.currentTimeMillis()));
 
         try {
@@ -113,18 +124,32 @@ public class AjouterCommentaireUser {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+            String contenuCom = contenuCommentaireTF.getText();
+
+            // Ajouter le contrôle de saisie ici
+            if (contenuCom.length() > 50) {
+                System.out.println("Vous avez dépassé 50 caractères.");
+                return;
+            } else if (contenuCom.isEmpty()) {
+                System.out.println("Le contenu du commentaire est vide.");
+                return;
+            }
+
             // Associez la réclamation au commentaire
             c.setReclamation(r);
             // Mettez à jour le contenu du commentaire avec le texte du TextField
-            c.setContenuCom(contenuCommentaireTF.getText());
+            c.setContenuCom(contenuCom);
             c.setDateCom(new Date(System.currentTimeMillis()));
+
             // Check if the message has been modified
-            String censoredMessage = censorBadWords(contenuCommentaireTF.getSelectedText());
-            if (!contenuCommentaireTF.getSelectedText().equals(censoredMessage)) {
-                ShowCommentaire();//notification mtaa el bad words
+            String censoredMessage = censorBadWords(contenuCom);
+            if (!contenuCom.equals(censoredMessage)) {
+                System.out.println("Votre commentaire contient des mots interdits.");
+                return;
             } else {
-                ShowCommentaire();//notification kn jawha bhy
+                System.out.println("Votre commentaire a été modifié avec succès.");
             }
+
             try {
                 // Appelez la méthode modifier pour mettre à jour le commentaire dans la base de données
                 cs.modifier(c);

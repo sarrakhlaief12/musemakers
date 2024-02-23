@@ -72,9 +72,20 @@ public class AjouterReclamationController {
     void ajouter(ActionEvent event) throws IOException {
         Reclamation r=new Reclamation();
         User userAdd= su.getOneById(2);
+        String descriRec = descriRecTF.getText();
+
+        // Ajouter le contrôle de saisie ici
+        if (descriRec.length() > 50) {
+            System.out.println("Vous avez dépassé 50 caractères.");
+            return;
+        } else if (descriRec.isEmpty()) {
+            System.out.println("La description est vide.");
+            return;
+        }
+
         r.setCategorieRec(CategorieRecTF.getText());
         r.setStatutRec("En cours");
-        r.setDescriRec(descriRecTF.getText());
+        r.setDescriRec(descriRec);
         r.setUser(userAdd);
         r.setDateRec(new Date(System.currentTimeMillis()));
 
@@ -120,9 +131,20 @@ public class AjouterReclamationController {
         // Obtenez la réclamation sélectionnée dans la table
         Reclamation r = (Reclamation) TableViewRec.getSelectionModel().getSelectedItem();
         if (r != null) {
+            String descriRec = descriRecTF.getText();
+
+            // Ajouter le contrôle de saisie ici
+            if (descriRec.length() > 50) {
+                System.out.println("Vous avez dépassé 50 caractères.");
+                return;
+            } else if (descriRec.isEmpty()) {
+                System.out.println("La description est vide.");
+                return;
+            }
+
             // Mettez à jour les champs de la réclamation
             r.setCategorieRec(CategorieRecTF.getText());
-            r.setDescriRec(descriRecTF.getText());
+            r.setDescriRec(descriRec);
 
             try {
                 // Mettez à jour la réclamation dans la base de données
@@ -135,7 +157,6 @@ public class AjouterReclamationController {
             }
         }
     }
-
     @FXML
     void supprimer(ActionEvent event) throws IOException, SQLException {
         // Obtenez l'objet Reclamation sélectionné
