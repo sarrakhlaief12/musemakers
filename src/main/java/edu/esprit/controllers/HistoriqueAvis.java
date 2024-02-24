@@ -21,9 +21,11 @@ import javafx.scene.layout.GridPane;
 
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -126,6 +128,8 @@ public class HistoriqueAvis {
         System.out.println("Row double-clicked");
         Dialog<Avis> dialog = new Dialog<>();
         dialog.setTitle("Modifier votre avis");
+        dialog.getDialogPane().setMinWidth(700);
+        dialog.getDialogPane().setMinHeight(300);
 
         // Set the button types.
         ButtonType saveButtonType = new ButtonType("Enregistrer", ButtonBar.ButtonData.OK_DONE);
@@ -146,30 +150,71 @@ public class HistoriqueAvis {
         //TextField noteField = new TextField(String.valueOf(avis.getNote()));
         //TextField dateexperienceField = new TextField(avis.getDateExperience().toString());
 
+        // Create error labels
+        Label commentaireErrorLabel = new Label();
+        commentaireErrorLabel.setTextFill(Color.RED);
+        Label noteErrorLabel = new Label();
+        noteErrorLabel.setTextFill(Color.RED);
+        Label dateErrorLabel = new Label();
+        dateErrorLabel.setTextFill(Color.RED);
+
+        // Add listeners to fields
+        commentaireField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String erreurCommentaire = (newValue.isEmpty() || newValue.length() > 30 || !newValue.matches("[a-zA-Z0-9,\\-]+")) ? "Le commentaire ne peut pas être vide, ne doit pas dépasser 30 caractères et doit contenir uniquement des lettres, des chiffres, des virgules et des tirets." : "";
+            commentaireErrorLabel.setText(erreurCommentaire);
+        });
+
+        noteField.valueProperty().addListener((observable, oldValue, newValue) -> {
+            String erreurnote = (newValue == null) ? "Veuillez sélectionner une note." : "";
+            noteErrorLabel.setText(erreurnote);
+        });
+
+        dateexperienceField.valueProperty().addListener((observable, oldValue, newValue) -> {
+            String erreurDate = (newValue == null) ? "Veuillez sélectionner une date." : "";
+            dateErrorLabel.setText(erreurDate);
+        });
+
         // Layout for dialog
         GridPane grid = new GridPane();
+        grid.setVgap(50);
         grid.add(new Label("Commentaire:"), 0, 0);
         grid.add(commentaireField, 1, 0);
+        grid.add(commentaireErrorLabel, 1, 1);
         grid.add(new Label("Note:"), 0, 1);
         grid.add(noteField, 1, 1);
+        grid.add(noteErrorLabel, 1, 3);
        // grid.add(new Label("Note:"), 0, 1);
         //grid.add(noteField, 1, 1);
         //grid.add(new Label("Date de votre experience:"), 0, 3);
         //grid.add(dateexperienceField, 1, 3);
         grid.add(new Label("Date de votre experience:"), 0, 3);
         grid.add(dateexperienceField, 1, 3);
+        grid.add(dateErrorLabel, 1, 5);
 
 
 
         dialog.getDialogPane().setContent(grid);
 
-        // Convert the result to an Oeuvre when the save button is clicked.
+        // Convert the result to an Avis when the save button is clicked.
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
-                avis.setCommentaire(commentaireField.getText());
-                avis.setNote(noteField.getValue());
-                //avis.setDateExperience(Date.valueOf(dateexperienceField.getText()));
-                avis.setDateExperience(Date.valueOf(dateexperienceField.getValue()));
+                String commentaire = commentaireField.getText();
+                Integer note = noteField.getValue();
+                LocalDate localDate = dateexperienceField.getValue();
+                Date date = Date.valueOf(localDate); // Conversion LocalDate en Date
+
+                if (commentaireErrorLabel.getText().isEmpty() && noteErrorLabel.getText().isEmpty() && dateErrorLabel.getText().isEmpty()) {
+                    avis.setCommentaire(commentaire);
+                    avis.setNote(note);
+                    avis.setDateExperience(date);
+
+                    // Update the database
+                    serviceAvis.modifier(avis);
+
+                    // Refresh table view
+                    TableView.getItems().clear();
+                    TableView.getItems().addAll(serviceAvis.getAvisByUserId(3));
+                }
 
                 return avis;
             }

@@ -141,7 +141,7 @@ public class AjouterAvis {
         }
     }
     private String formatDateTime(java.util.Date date) {
-        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateTimeFormat.format(date);
     }
 
