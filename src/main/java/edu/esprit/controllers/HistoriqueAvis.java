@@ -135,7 +135,7 @@ public class HistoriqueAvis {
         System.out.println("Row double-clicked");
         Dialog<Avis> dialog = new Dialog<>();
         dialog.setTitle("Modifier votre avis");
-        dialog.getDialogPane().setMinWidth(700);
+        dialog.getDialogPane().setMinWidth(800);
         dialog.getDialogPane().setMinHeight(300);
 
         // Set the button types.
@@ -187,6 +187,7 @@ public class HistoriqueAvis {
         grid.add(new Label("Commentaire:"), 0, 0);
         grid.add(commentaireField, 1, 0);
         grid.add(commentaireErrorLabel, 1, 1);
+
         grid.add(new Label("Note:"), 0, 2);
         grid.add(noteField, 1, 2);
         grid.add(noteErrorLabel, 1, 3);

@@ -6,11 +6,13 @@ import edu.esprit.entities.Avis;
 import edu.esprit.services.ServiceOeuvre;
 import edu.esprit.services.ServicePersonne;
 import edu.esprit.services.ServiceAvis;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -23,6 +25,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 public class AfficherOeuvreClient {
@@ -36,6 +40,9 @@ public class AfficherOeuvreClient {
 
     @FXML
     private TextField nameSearchID;
+
+    @FXML
+    private ComboBox<String> comboBox;
 
 
     @FXML
@@ -55,6 +62,7 @@ public class AfficherOeuvreClient {
         nameSearchID.textProperty().addListener((observable, oldValue, newValue) -> {
             handleSearch();
         });
+
     }
 
     // Méthode pour afficher toutes les expositions
@@ -219,6 +227,9 @@ public class AfficherOeuvreClient {
             e.printStackTrace();
         }
     }
+
+
+
 
 }
 
