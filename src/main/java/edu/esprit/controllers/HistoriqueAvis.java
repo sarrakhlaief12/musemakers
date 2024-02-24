@@ -160,7 +160,7 @@ public class HistoriqueAvis {
 
         // Add listeners to fields
         commentaireField.textProperty().addListener((observable, oldValue, newValue) -> {
-            String erreurCommentaire = (newValue.isEmpty() || newValue.length() > 30 || !newValue.matches("[a-zA-Z0-9,\\-]+")) ? "Le commentaire ne peut pas être vide, ne doit pas dépasser 30 caractères et doit contenir uniquement des lettres, des chiffres, des virgules et des tirets." : "";
+            String erreurCommentaire = (newValue.isEmpty() || newValue.length() > 30 || !newValue.matches("[a-zA-Z0-9,\\-]+")) ? "Le commentaire ne peut pas être vide, ne doit pas dépasser 30 caractères et doit contenir uniquement des lettres,des chiffres, des virgules et des tirets." : "";
             commentaireErrorLabel.setText(erreurCommentaire);
         });
 
@@ -176,19 +176,19 @@ public class HistoriqueAvis {
 
         // Layout for dialog
         GridPane grid = new GridPane();
-        grid.setVgap(50);
+        grid.setVgap(30);
         grid.add(new Label("Commentaire:"), 0, 0);
         grid.add(commentaireField, 1, 0);
         grid.add(commentaireErrorLabel, 1, 1);
-        grid.add(new Label("Note:"), 0, 1);
-        grid.add(noteField, 1, 1);
+        grid.add(new Label("Note:"), 0, 2);
+        grid.add(noteField, 1, 2);
         grid.add(noteErrorLabel, 1, 3);
        // grid.add(new Label("Note:"), 0, 1);
         //grid.add(noteField, 1, 1);
         //grid.add(new Label("Date de votre experience:"), 0, 3);
         //grid.add(dateexperienceField, 1, 3);
-        grid.add(new Label("Date de votre experience:"), 0, 3);
-        grid.add(dateexperienceField, 1, 3);
+        grid.add(new Label("Date de votre experience:"), 0, 4);
+        grid.add(dateexperienceField, 1, 4);
         grid.add(dateErrorLabel, 1, 5);
 
 

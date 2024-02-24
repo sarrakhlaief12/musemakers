@@ -83,7 +83,7 @@ public class AjouterAvis {
             // Get the note entered by the user
             Integer note = note_id.getValue();
 
-            String erreurnote = (note == null) ? "Veuillez sélectionner une date." : "";
+            String erreurnote = (note == null) ? "Veuillez sélectionner une note." : "";
 
             // Get the comment entered by the user
             String commentaire = comment_id.getText();
@@ -95,7 +95,7 @@ public class AjouterAvis {
 
             // Récupérer la date sélectionnée dans le DatePicker
             LocalDate localDate = dateex_id.getValue();
-            String erreurDate = (localDate == null) ? "Veuillez sélectionner une note." : "";
+            String erreurDate = (localDate == null) ? "Veuillez sélectionner une date." : "";
             Date date = Date.valueOf(localDate); // Conversion LocalDate en Date
 
             commentaireerreur.setText(erreurCommentaire);
@@ -136,7 +136,7 @@ public class AjouterAvis {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText(null);
-            alert.setContentText("Veuillez entrer une note valide.");
+            alert.setContentText("Veuillez entrer un avis valide.");
             alert.showAndWait();
         }
     }
