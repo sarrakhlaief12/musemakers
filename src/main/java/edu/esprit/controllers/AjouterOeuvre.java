@@ -11,6 +11,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
+
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
@@ -18,9 +20,11 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.sql.Date;
 import java.time.LocalDate;
-
+import javafx.scene.paint.Color;
 import java.io.IOException;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 public class AjouterOeuvre {
 
     private final ServiceOeuvre PS = new ServiceOeuvre();
@@ -55,6 +59,21 @@ public class AjouterOeuvre {
     private Button browseButton;
 
     @FXML
+    private Text erreurCategorieLabel;
+    @FXML
+    private Text erreurDateLabel;
+
+    @FXML
+    private Text erreurprix;
+
+    @FXML
+    private Text erreurNomLabel;
+    @FXML
+    private Text erreurDescriptionLabel;
+    @FXML
+    private Text erreurImageLabel;
+
+    @FXML
     public void initialize() {
         // Ajoutez des éléments à la ChoiceBox dans la méthode initialize
         categorie_id.getItems().addAll("Peinture", "Sculpture", "scene");
@@ -62,22 +81,65 @@ public class AjouterOeuvre {
     }
 
     @FXML
-    public void add(ActionEvent event){
+    public void add(ActionEvent event) {
+        // Validation du champ nom
+        String nom = Nom_id.getText();
+        String erreurNom = nom.isEmpty() || !nom.matches("[a-zA-Z]+") ? "Le nom doit contenir uniquement des lettres et ne peut pas être vide." : "";
 
-// Récupérer la valeur sélectionnée dans la ChoiceBox
-            String categorie = categorie_id.getValue();
+        // Validation du champ catégorie
+        String categorie = categorie_id.getValue();
+        String erreurCategorie = (categorie == null || categorie.isEmpty()) ? "Veuillez sélectionner une catégorie." : "";
 
-            // Récupérer la date sélectionnée dans le DatePicker
-            LocalDate localDate = date_id.getValue();
-            Date date = Date.valueOf(localDate); // Conversion LocalDate en Date
+        // Validation du champ date
+        LocalDate localDate = date_id.getValue();
+        String erreurDate = (localDate == null) ? "Veuillez sélectionner une date." : "";
 
-            // Convertir le prix en float
-            float prix = Float.parseFloat(prix_id.getText());
+        // Validation du champ prix
+        String prixText = prix_id.getText();
+        String erreurPrix = "";
+        if (prixText.isEmpty()) {
+            erreurPrix = "Veuillez saisir un prix.";
+        } else {
+            try {
+                float prix = Float.parseFloat(prixText);
+            } catch (NumberFormatException e) {
+                erreurPrix = "Veuillez saisir un prix valide.";
+            }
+        }
 
-        System.out.println("Ajout de l'oeuvre : ");
-            PS.ajouter(new Oeuvre(Nom_id.getText(), categorie, prix, date, description_id.getText(), image_id.getText()));
+        // Validation du champ description
+        String description = description_id.getText();
+        String erreurDescription = (description.isEmpty() || description.length() > 30 || !description.matches("[a-zA-Z0-9,\\-]+")) ? "La description ne peut pas être vide, ne doit pas dépasser 30 caractères et doit contenir uniquement des lettres, des chiffres, des virgules et des tirets." : "";
 
+        // Validation du champ image
+        String image = image_id.getText();
+        String erreurImage = image.isEmpty() ? "Veuillez fournir une URL d'image." : "";
+
+        // Mise à jour des champs de texte d'erreur
+        erreurNomLabel.setText(erreurNom);
+        erreurNomLabel.setFill(Color.RED);
+
+        erreurCategorieLabel.setText(erreurCategorie);
+        erreurCategorieLabel.setFill(Color.RED);
+
+        erreurDateLabel.setText(erreurDate);
+        erreurDateLabel.setFill(Color.RED);
+
+        erreurprix.setText(erreurPrix);
+        erreurprix.setFill(Color.RED);
+
+        erreurDescriptionLabel.setText(erreurDescription);
+        erreurDescriptionLabel.setFill(Color.RED);
+
+        erreurImageLabel.setText(erreurImage);
+        erreurImageLabel.setFill(Color.RED);
+
+        // Si aucune erreur n'est détectée, ajoutez l'oeuvre
+        if (erreurNom.isEmpty() && erreurCategorie.isEmpty() && erreurDate.isEmpty() && erreurPrix.isEmpty() && erreurDescription.isEmpty() && erreurImage.isEmpty()) {
+            PS.ajouter(new Oeuvre(nom, categorie, Float.parseFloat(prixText), Date.valueOf(localDate), description, image));
+        }
     }
+
     @FXML
     void Afficher(ActionEvent event) throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("/admin/AfficherOeuvre.fxml"));

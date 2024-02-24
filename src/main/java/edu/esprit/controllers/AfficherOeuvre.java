@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -168,8 +169,8 @@ public class AfficherOeuvre {
         TextField nomField = new TextField(oeuvre.getNom());
         //TextField categorieField = new TextField(oeuvre.getCategorie());
         TextField prixField = new TextField(String.valueOf(oeuvre.getPrix()));
-       // TextField dateCreationField = new TextField(oeuvre.getDateCreation().toString());
-       TextField descriptionField = new TextField(oeuvre.getDescription());
+        // TextField dateCreationField = new TextField(oeuvre.getDateCreation().toString());
+        TextField descriptionField = new TextField(oeuvre.getDescription());
         TextField imageField = new TextField(oeuvre.getImage());
         Button browseButton = new Button("Parcourir");
 
@@ -199,7 +200,7 @@ public class AfficherOeuvre {
                 //oeuvre.setCategorie(categorieField.getText());
                 oeuvre.setCategorie(categorieField.getValue());
                 oeuvre.setPrix(Float.parseFloat(prixField.getText()));
-               // oeuvre.setDateCreation(Date.valueOf(dateCreationField.getText()));
+                // oeuvre.setDateCreation(Date.valueOf(dateCreationField.getText()));
                 oeuvre.setDateCreation(Date.valueOf(dateCreationField.getValue())); // on a utuliser getValue pour recuperer la date
                 oeuvre.setDescription(descriptionField.getText());
                 oeuvre.setImage(imageField.getText());
