@@ -2,7 +2,6 @@ package controllers;
 
 import entities.Reclamation;
 import entities.User;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AfficherReclamationBack {
+public class AfficherRecBack {
     private final ReclamationService rs= new ReclamationService( );
     private final service.ServiceUser su= new ServiceUser();
 

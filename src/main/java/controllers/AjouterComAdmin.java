@@ -17,11 +17,8 @@ import service.ServiceUser;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static javafx.collections.FXCollections.*;
 
 public class AjouterComAdmin {
     private final CommentaireService cs = new CommentaireService();

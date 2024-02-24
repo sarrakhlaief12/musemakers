@@ -2,7 +2,6 @@ package controllers;
 
 import entities.Commentaire;
 import entities.Reclamation;
-import entities.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +15,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class AjouterCommentaireUser {
+public class AjouterComUser {
     private final CommentaireService cs = new CommentaireService();
     private final ReclamationService rs = new ReclamationService();
 
