@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <AnchorPane prefHeight="626.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherOeuvreClient">
     <stylesheets>
         <URL value="@../style.css" />
@@ -49,12 +51,23 @@
                 </AnchorPane>
              </children></HBox>
           </top>
-          <center>
+           <center>
+          <VBox alignment="CENTER" prefHeight="545.0" prefWidth="820.0" spacing="10">
+              <AnchorPane prefHeight="53.0" prefWidth="610.0">
+                  <children>
+                      <Button fx:id="searchButton" layoutX="568.0" layoutY="14.0" mnemonicParsing="false" text="chercher" />
+                      <TextField fx:id="nameSearchID" layoutX="154.0" layoutY="14.0" promptText="Nom Oeuvre" />
+                      <TextField fx:id="themeSearchID" layoutX="358.0" layoutY="14.0" promptText="Categorie" />
+                      <Text fill="#b1aeae" layoutX="157.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="saisir le nom de l'oeuvre" />
+                      <Text fill="#b1aeae" layoutX="364.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="saisir la categorie" />
+                  </children>
+              </AnchorPane>
               <ScrollPane prefHeight="535.0" prefWidth="857.0">
                   <VBox fx:id="exhibitionVBox" alignment="CENTER" spacing="10">
                       <!-- This VBox will contain the exhibitions -->
                     </VBox>
                 </ScrollPane>
+          </VBox>
             </center>
         </BorderPane>
     </children>
