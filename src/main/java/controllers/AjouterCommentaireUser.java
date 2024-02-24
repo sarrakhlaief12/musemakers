@@ -14,6 +14,7 @@ import service.ReclamationService;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class AjouterCommentaireUser {
     private final CommentaireService cs = new CommentaireService();
@@ -39,7 +40,24 @@ public class AjouterCommentaireUser {
 
     @FXML
     private Button supprimer;
-    private static final List<String> BAD_WORDS = Arrays.asList("Sick", "Bad", "Dump");
+    private static final List<String> BAD_WORDS = Arrays.asList("Sick", "Bad", "Dump","hamouda");
+    private static final Map<String, String> EMOJI_MAP = new HashMap<>();
+
+    static {
+        EMOJI_MAP.put(":)", "😊");
+        EMOJI_MAP.put(":(", "😢");
+        EMOJI_MAP.put(":D", "😃");
+        EMOJI_MAP.put(":-)", "😊");
+        EMOJI_MAP.put(":-(", "😢");
+        EMOJI_MAP.put(":p", "😛");
+        EMOJI_MAP.put(";)", "😉");
+        EMOJI_MAP.put("<3", "❤️");
+        EMOJI_MAP.put(":/", "☹");
+        EMOJI_MAP.put("-_-", "😑");
+
+
+        // Add more mappings as needed
+    }
     public void initialize() throws IOException {
         TableViewCommentaire.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) { // Vérifie si c'est un simple clic
@@ -104,6 +122,9 @@ public class AjouterCommentaireUser {
         CommentaireList.forEach(commentaire -> {
             String censoredContenuCom = censorBadWords(commentaire.getContenuCom());
             commentaire.setContenuCom(censoredContenuCom);
+            // Convert symbols to emojis in the censored message
+            String emojiMessage = convertSymbolsToEmojis(censoredContenuCom);
+            commentaire.setContenuCom(emojiMessage);
         });
 
         CvContenu.setCellValueFactory(new PropertyValueFactory<>("ContenuCom"));
@@ -111,6 +132,9 @@ public class AjouterCommentaireUser {
 
         TableViewCommentaire.setItems(FXCollections.observableArrayList(CommentaireList));
     }
+
+
+
 
     @FXML
     void modifier(ActionEvent event) throws IOException {
@@ -147,6 +171,9 @@ public class AjouterCommentaireUser {
                 System.out.println("Votre commentaire contient des mots interdits.");
                 return;
             } else {
+                // Convert symbols to emojis in the censored message
+                String emojiMessage = convertSymbolsToEmojis(censoredMessage);
+                contenuCom.equals(emojiMessage);
                 System.out.println("Votre commentaire a été modifié avec succès.");
             }
 
@@ -160,6 +187,7 @@ public class AjouterCommentaireUser {
             }
         }
     }
+
 
 
     private void displayCommentaireInfo(Commentaire c) {
@@ -184,6 +212,13 @@ public class AjouterCommentaireUser {
         for (String badWord : BAD_WORDS) {
             // Replace bad words with **
             text = text.replaceAll("(?i)" + badWord, "*****");
+        }
+        return text;
+    }
+    private String convertSymbolsToEmojis(String text) {
+        for (Map.Entry<String, String> entry : EMOJI_MAP.entrySet()) {
+            // Escape special characters in symbols and replace symbols with emojis
+            text = text.replaceAll(Pattern.quote(entry.getKey()), entry.getValue());
         }
         return text;
     }

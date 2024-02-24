@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AjouterReclamationController {
+public class AjouterReclamationUser {
     private final ReclamationService rs= new ReclamationService( );
     private final service.ServiceUser su= new ServiceUser();
 
@@ -105,7 +105,7 @@ public class AjouterReclamationController {
             throw new RuntimeException(e);
         }
 
-       User userAdd = su.getOneById(2);
+        User userAdd = su.getOneById(2);
         List<Reclamation> filteredRecList = new ArrayList<>();
 
         for (Reclamation r : RecList) {
@@ -113,7 +113,7 @@ public class AjouterReclamationController {
                 filteredRecList.add(r);
             }
         }
-       // CvClient.setCellValueFactory(new PropertyValueFactory<>("user"));
+        // CvClient.setCellValueFactory(new PropertyValueFactory<>("user"));
 
         CvDescri.setCellValueFactory(new PropertyValueFactory<>("descriRec"));
         CvDate.setCellValueFactory(new PropertyValueFactory<>("DateRec"));
