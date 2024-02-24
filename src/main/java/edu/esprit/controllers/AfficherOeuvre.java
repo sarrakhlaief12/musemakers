@@ -29,6 +29,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class AfficherOeuvre {
 
@@ -57,6 +58,12 @@ public class AfficherOeuvre {
     @FXML
     private Button button_avis;
 
+    @FXML
+    private TextField categorieSearchID;
+
+    @FXML
+    private TextField nameSearchID;
+
     private Oeuvre selectedOeuvre;
 
     @FXML
@@ -67,6 +74,8 @@ public class AfficherOeuvre {
     @FXML
     private final ServiceAvis serviceAvis=new ServiceAvis();
     private File selectedFile;
+
+
 
 
     @FXML
@@ -132,6 +141,16 @@ public class AfficherOeuvre {
 
             return row;
         });
+
+        categorieSearchID.textProperty().addListener((observable, oldValue, newValue) -> {
+            handleSearch();
+        });
+
+        nameSearchID.textProperty().addListener((observable, oldValue, newValue) -> {
+            handleSearch();
+        });
+
+
     }
     @FXML
     private void delete(ActionEvent event) throws SQLException {
@@ -375,6 +394,29 @@ public class AfficherOeuvre {
 
         // Affichez la Stage
         stage.show();
+    }
+    @FXML
+    private void handleSearch() {
+        String categorie = categorieSearchID.getText();
+        String name = nameSearchID.getText();
+
+        try {
+            Set<Oeuvre> searchResult;
+            if (categorie.isEmpty() && name.isEmpty()) {
+                searchResult = PS.getAll(); // Utilisez cette méthode pour obtenir toutes les œuvres
+            } else {
+                searchResult = PS.chercherParCategorieOuNom(categorie, name);
+            }
+
+            // Convertir le Set en ObservableList pour la TableView
+            ObservableList<Oeuvre> observableList = FXCollections.observableArrayList();
+            observableList.addAll(searchResult);
+
+            // Mettre à jour la TableView
+            TableView.setItems(observableList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

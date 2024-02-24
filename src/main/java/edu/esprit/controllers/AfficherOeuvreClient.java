@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -30,6 +31,11 @@ public class AfficherOeuvreClient {
     private final ServiceOeuvre oe = new ServiceOeuvre();
     private Set<Oeuvre> listeo = oe.getAll();
 
+    @FXML
+    private TextField categorieSearchID;
+
+    @FXML
+    private TextField nameSearchID;
 
 
     @FXML
@@ -42,6 +48,13 @@ public class AfficherOeuvreClient {
     @FXML
     public void initialize() {
         displayExhibitions();
+        categorieSearchID.textProperty().addListener((observable, oldValue, newValue) -> {
+            handleSearch();
+        });
+
+        nameSearchID.textProperty().addListener((observable, oldValue, newValue) -> {
+            handleSearch();
+        });
     }
 
     // Méthode pour afficher toutes les expositions
@@ -183,7 +196,29 @@ public class AfficherOeuvreClient {
         // Affichez la Stage
         stage.show();
     }
+    @FXML
+    private void handleSearch()  {
+        String categorie = categorieSearchID.getText();
+        String name = nameSearchID.getText();
 
+        try {
+            Set<Oeuvre> searchResult;
+            if (categorie.isEmpty() && name.isEmpty()) {
+                searchResult = oe.getAll(); // Utilisez cette méthode pour obtenir toutes les œuvres
+            } else {
+                searchResult = oe.chercherParCategorieOuNom(categorie, name);
+            }
+            listeo = searchResult; // Update the listexpo
+
+            // Clear the previous search results from exhibitionVBox
+            exhibitionVBox.getChildren().clear();
+
+            // Display the search results in exhibitionVBox
+            displayExhibitions();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
 

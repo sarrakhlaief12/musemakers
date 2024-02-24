@@ -4,12 +4,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="626.0" prefWidth="981.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherOeuvre">
     <stylesheets>
@@ -54,8 +56,16 @@
                     <children>
                         <AnchorPane layoutY="7.0" prefHeight="472.0" prefWidth="766.0" style="-fx-background-color: ffff;">
                      <children>
-                        <ImageView fx:id="image_id" fitHeight="210.0" fitWidth="200.0" layoutX="526.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" />
-                        <TableView fx:id="TableView" layoutX="30.0" layoutY="66.0" prefHeight="200.0" prefWidth="445.0">
+                         <AnchorPane prefHeight="74.0" prefWidth="767.0">
+                             <children>
+                                 <TextField fx:id="nameSearchID" layoutX="154.0" layoutY="14.0" promptText="Nom Oeuvre" />
+                                 <TextField fx:id="categorieSearchID" layoutX="358.0" layoutY="14.0" promptText="Categorie" />
+                                 <Text fill="#b1aeae" layoutX="157.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="saisir le nom de l'oeuvre" />
+                                 <Text fill="#b1aeae" layoutX="364.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="saisir la categorie" />
+                             </children>
+                         </AnchorPane>
+                        <ImageView fx:id="image_id" fitHeight="210.0" fitWidth="200.0" layoutX="510.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" />
+                        <TableView fx:id="TableView" layoutX="30.0" layoutY="136.0" prefHeight="200.0" prefWidth="445.0">
                            <columns>
                               <TableColumn fx:id="nom_id" prefWidth="92.0" text="nom" />
                               <TableColumn fx:id="categorie_id" prefWidth="115.20001220703125" text="categorie" />
