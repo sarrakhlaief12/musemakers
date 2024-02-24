@@ -14,6 +14,8 @@ import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -45,6 +47,15 @@ public class AjouterAvis {
     @FXML
     private Button gallerie_id;
 
+    @FXML
+    private Text commentaireerreur;
+
+    @FXML
+    private Text dateerreur;
+
+    @FXML
+    private Text noteerreur;
+
     private Oeuvre oeuvre;
 
     ServicePersonne servicePersonne = new ServicePersonne();
@@ -70,9 +81,13 @@ public class AjouterAvis {
     private void submitAvis(ActionEvent event) {
         try {
             // Get the note entered by the user
-            int note = note_id.getValue();
+            Integer note = note_id.getValue();
+
+            String erreurnote = (note == null) ? "Veuillez sélectionner une date." : "";
+
             // Get the comment entered by the user
             String commentaire = comment_id.getText();
+            String  erreurCommentaire = (commentaire.isEmpty() || commentaire.length() > 30 || !commentaire.matches("[a-zA-Z0-9,\\-]+")) ? "Le commentaire ne peut pas être vide, ne doit pas dépasser 30 caractères et doit contenir uniquement des lettres, des chiffres, des virgules et des tirets." : "";
 
 
             // Get the user with ID 4  (You can modify this part based on your requirements)
@@ -80,24 +95,38 @@ public class AjouterAvis {
 
             // Récupérer la date sélectionnée dans le DatePicker
             LocalDate localDate = dateex_id.getValue();
+            String erreurDate = (localDate == null) ? "Veuillez sélectionner une note." : "";
             Date date = Date.valueOf(localDate); // Conversion LocalDate en Date
-            // Create an avis
-            Avis avis = new Avis(commentaire, date, note, oeuvre, client);
 
-            // Add the avis to the database
-            serviceAvis.ajouter(avis);
+            commentaireerreur.setText(erreurCommentaire);
+            commentaireerreur.setFill(Color.RED);
 
-            comment_id.clear();
-            dateex_id.setValue(null);
-            note_id.setValue(null);
+            dateerreur.setText(erreurDate);
+            dateerreur.setFill(Color.RED);
 
-            // Show a confirmation message
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Avis soumis");
-            alert.setHeaderText(null);
-            alert.setContentText("Votre avis a été enregistré. Merci pour votre feedback!");
-            alert.showAndWait();
+            noteerreur.setText(erreurnote);
+            noteerreur.setFill(Color.RED);
 
+            if (erreurCommentaire.isEmpty() && erreurDate.isEmpty() && erreurnote.isEmpty()) {
+
+                // Create an avis
+                Avis avis = new Avis(commentaire, date, note, oeuvre, client);
+
+                // Add the avis to the database
+                serviceAvis.ajouter(avis);
+
+
+                comment_id.clear();
+                dateex_id.setValue(null);
+                note_id.setValue(null);
+
+                // Show a confirmation message
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Avis soumis");
+                alert.setHeaderText(null);
+                alert.setContentText("Votre avis a été enregistré. Merci pour votre feedback!");
+                alert.showAndWait();
+            }
             // Close the dialog
 
             //Stage stage = (Stage) comment_id.getScene().getWindow();
