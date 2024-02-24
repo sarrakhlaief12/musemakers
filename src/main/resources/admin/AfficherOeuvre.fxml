@@ -29,7 +29,8 @@
                         <Button fx:id="nouvelajout_id" layoutX="49.0" layoutY="127.0" mnemonicParsing="false" onAction="#AfficherAjoutOeuvre" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Nouvel Ajout" />
                         <Button fx:id="button_avis" layoutX="46.0" layoutY="184.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Voir les avis" />
                         <Button fx:id="button_supprimer" layoutX="43.0" layoutY="235.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Supprimer" />
-                        <Button fx:id="button_stat" layoutX="49.0" layoutY="291.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Voir les statistiques" />
+                        <Button fx:id="button_stat" layoutX="49.0" layoutY="291.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="statistiques oeuvres" />
+                        <Button fx:id="button_stat1" layoutX="49.0" layoutY="338.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="statistiques avis" />
                      </children></AnchorPane>
                     </children>
                 </VBox>

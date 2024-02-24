@@ -93,7 +93,7 @@ public class Avis {
                 ", dateExperience=" + dateExperience +
                 ", note=" + note +
                 ", oeuvre=" + oeuvre +
-                ", User=" + client +
+                ", User=" + client.getNom_user() +
                 '}';
     }
 

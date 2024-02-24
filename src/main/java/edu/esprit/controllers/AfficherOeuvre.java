@@ -12,14 +12,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.geometry.Insets;
+
+
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
@@ -48,7 +57,6 @@ public class AfficherOeuvre {
     @FXML
     private ImageView image_id;
 
-
     @FXML
     private TableColumn<Oeuvre, String> nom_id;
 
@@ -64,7 +72,8 @@ public class AfficherOeuvre {
     @FXML
     private TextField nameSearchID;
 
-
+    @FXML
+    private Button button_stat1;
     @FXML
     private Button button_stat;
 
@@ -172,6 +181,7 @@ public class AfficherOeuvre {
         });
 
         button_stat.setOnAction(e -> afficherStatistiquesOeuvre());
+        button_stat1.setOnAction(e1 -> afficherStatistiquesParAvis());
     }
     @FXML
     private void delete(ActionEvent event) throws SQLException {
@@ -378,7 +388,7 @@ public class AfficherOeuvre {
         TableView.getScene().setRoot(root);
     }
 
-    private void showAvisDialog(Oeuvre oeuvre) {
+    /*private void showAvisDialog(Oeuvre oeuvre) {
         // Créez une nouvelle fenêtre (Stage) pour afficher les avis
         Stage stage = new Stage();
         stage.setTitle("Avis sur " + oeuvre.getNom());
@@ -411,6 +421,44 @@ public class AfficherOeuvre {
 
         // Créez une Scene avec la TableView et ajoutez-la à la Stage
         Scene scene = new Scene(tableView);
+        stage.setScene(scene);
+
+        // Affichez la Stage
+        stage.show();
+    }*/
+    public void showAvisDialog(Oeuvre oeuvre) {
+        // Créez une nouvelle fenêtre (Stage) pour afficher les avis
+        // Créez une nouvelle fenêtre (Stage) pour afficher les avis
+        Stage stage = new Stage();
+        stage.setTitle("Avis sur " + oeuvre.getNom());
+
+        stage.setMinWidth(800);
+
+        // Créez une VBox pour contenir les avis
+        VBox vbox = new VBox();
+        vbox.setSpacing(10);  // Ajoutez de l'espace entre les avis
+
+        // Récupérez les avis de la base de données
+        List<Avis> avisList = serviceAvis.getAvisByOeuvre(oeuvre);
+
+        // Ajoutez les avis à la VBox
+        for (Avis avis : avisList) {
+            Label userLabel = new Label("Utilisateur: " + avis.getClient().getNom_user()+ " "+ avis.getClient().getPrenom_user());
+            userLabel.setStyle("-fx-font-weight: bold;");
+
+            Label commentLabel = new Label("Commentaire: " + avis.getCommentaire());
+            commentLabel.setStyle("-fx-text-fill: bold;");
+
+            Label noteLabel = new Label("Note: " + avis.getNote());
+            noteLabel.setStyle("-fx-text-fill: bold;");
+
+            VBox avisBox = new VBox(userLabel, commentLabel, noteLabel);
+            avisBox.setPadding(new Insets(10, 0, 10, 0));  // Ajoutez du padding autour de chaque avis
+            vbox.getChildren().add(avisBox);
+        }
+
+        // Créez une Scene avec la VBox et ajoutez-la à la Stage
+        Scene scene = new Scene(vbox);
         stage.setScene(scene);
 
         // Affichez la Stage
@@ -479,6 +527,10 @@ public class AfficherOeuvre {
     public void afficherStatistiquesOeuvre() {
 
         PS.afficherStatistiques();
+    }
+    public void afficherStatistiquesParAvis()
+    {
+        serviceAvis.afficherStatistiquesAvis();
     }
 }
 
