@@ -1,6 +1,7 @@
 package org.example;
 
 import controllers.InscriptionClient;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,8 +23,11 @@ public class MainFx extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-         //   FXMLLoader loader = new FXMLLoader(getClass().getResource("/InscriptionClient.fxml"));
-               FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherClient.fxml"));
+          // FXMLLoader loader = new FXMLLoader(getClass().getResource("/InscriptionClient.fxml"));
+         //   FXMLLoader loader = new FXMLLoader(getClass().getResource("/InscriptionArtiste.fxml"));
+          // FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherArtiste.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/LoginAdmin.fxml"));
+        //        FXMLLoader loader = new FXMLLoader(getClass().getResource("/LoginClient.fxml"));
 
             Parent root = loader.load(); // Chargez le fichier FXML et le contrôleur
 
@@ -34,7 +38,6 @@ public class MainFx extends Application {
             e.printStackTrace();
         }
     }
-
 
 
 

@@ -1,0 +1,7 @@
+.text-field:focused {
+    -fx-prompt-text-fill: black;
+}
+
+.password-field:focused {
+    -fx-prompt-text-fill: black;
+}
