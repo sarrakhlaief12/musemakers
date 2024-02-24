@@ -3,6 +3,16 @@ package edu.esprit.services;
 import edu.esprit.entities.Oeuvre;
 
 import edu.esprit.utils.DataSource;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.sql.*;
 
@@ -145,7 +155,7 @@ public class ServiceOeuvre implements IService<Oeuvre>  {
     }
 
     // Méthode pour trier par nom
-    public static void triParNom(List<Oeuvre> oeuvres, boolean ascendant) {
+    public  void triParNom(List<Oeuvre> oeuvres, boolean ascendant) {
         oeuvres.sort(Comparator.comparing(Oeuvre::getNom));
         if (!ascendant) {
             Collections.reverse(oeuvres);
@@ -153,7 +163,7 @@ public class ServiceOeuvre implements IService<Oeuvre>  {
     }
 
     // Méthode pour trier par date de création
-    public static void triParDateCreation(List<Oeuvre> oeuvres, boolean ascendant) {
+    public  void triParDateCreation(List<Oeuvre> oeuvres, boolean ascendant) {
         oeuvres.sort(Comparator.comparing(Oeuvre::getDateCreation));
         if (!ascendant) {
             Collections.reverse(oeuvres);
@@ -161,11 +171,100 @@ public class ServiceOeuvre implements IService<Oeuvre>  {
     }
 
     // Méthode pour trier par prix
-    public static void triParPrix(List<Oeuvre> oeuvres, boolean ascendant) {
+    public  void triParPrix(List<Oeuvre> oeuvres, boolean ascendant) {
         oeuvres.sort(Comparator.comparing(Oeuvre::getPrix));
         if (!ascendant) {
             Collections.reverse(oeuvres);
         }
     }
 
+    // SET
+
+    public List<Oeuvre> triParNomS(Set<Oeuvre> oeuvres, boolean ascendant) {
+        List<Oeuvre> oeuvresList = new ArrayList<>(oeuvres);
+        oeuvresList.sort(Comparator.comparing(Oeuvre::getNom));
+        if (!ascendant) {
+            Collections.reverse(oeuvresList);
+        }
+        return oeuvresList;
+    }
+
+    public  List<Oeuvre> triParDateCreationS(Set<Oeuvre> oeuvres, boolean ascendant) {
+        List<Oeuvre> oeuvresList = new ArrayList<>(oeuvres);
+        oeuvresList.sort(Comparator.comparing(Oeuvre::getDateCreation));
+        if (!ascendant) {
+            Collections.reverse(oeuvresList);
+        }
+        return oeuvresList;
+
+    }
+
+    public  List<Oeuvre> triParPrixS(Set<Oeuvre> oeuvres, boolean ascendant) {
+        List<Oeuvre> oeuvresList = new ArrayList<>(oeuvres);
+        oeuvresList.sort(Comparator.comparing(Oeuvre::getPrix));
+        if (!ascendant) {
+            Collections.reverse(oeuvresList);
+        }
+        return oeuvresList;
+
+    }
+
+    public void afficherStatistiques() {
+        // Créer les données pour les diagrammes
+        ObservableList<PieChart.Data> categorieData = FXCollections.observableArrayList();
+        ObservableList<PieChart.Data> prixData = FXCollections.observableArrayList();
+
+        try {
+            Statement st = cnx.createStatement();
+            ResultSet res = st.executeQuery("SELECT * FROM oeuvre");
+
+            Map<String, Integer> categorieCount = new HashMap<>();
+            Map<String, Integer> prixCount = new HashMap<>();
+            while (res.next()) {
+                String categorie = res.getString("categorie_oeuvre");
+                float prix = res.getFloat("prix_oeuvre");
+
+                categorieCount.put(categorie, categorieCount.getOrDefault(categorie, 0) + 1);
+
+                String prixCategorie;
+                if (prix > 5000) {
+                    prixCategorie = "+5000";
+                } else if (prix > 1000) {
+                    prixCategorie = "+1000";
+                } else {
+                    prixCategorie = "-1000";
+                }
+                prixCount.put(prixCategorie, prixCount.getOrDefault(prixCategorie, 0) + 1);
+            }
+
+            for (Map.Entry<String, Integer> entry : categorieCount.entrySet()) {
+                categorieData.add(new PieChart.Data(entry.getKey(), entry.getValue()));
+            }
+            for (Map.Entry<String, Integer> entry : prixCount.entrySet()) {
+                prixData.add(new PieChart.Data(entry.getKey(), entry.getValue()));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Créer les diagrammes
+        final PieChart categorieChart = new PieChart(categorieData);
+        categorieChart.setTitle("les Statistiques par Categorie");
+
+        final PieChart prixChart = new PieChart(prixData);
+        prixChart.setTitle("les Statistiques par prix");
+
+        // Créer la boîte de dialogue
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.initStyle(StageStyle.UTILITY);
+        HBox hbox = new HBox(categorieChart, prixChart);
+        dialog.getDialogPane().setContent(hbox);
+        // Ajouter un bouton de fermeture
+        ButtonType closeButton = new ButtonType("Fermer");
+        dialog.getDialogPane().getButtonTypes().add(closeButton);
+        dialog.showAndWait();
+    }
 }
+
+

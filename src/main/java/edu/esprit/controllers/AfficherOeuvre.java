@@ -64,6 +64,10 @@ public class AfficherOeuvre {
     @FXML
     private TextField nameSearchID;
 
+
+    @FXML
+    private Button button_stat;
+
     @FXML
     private ComboBox<String> comboBox;
 
@@ -167,7 +171,7 @@ public class AfficherOeuvre {
             trierOeuvres(newValue);
         });
 
-
+        button_stat.setOnAction(e -> afficherStatistiquesOeuvre());
     }
     @FXML
     private void delete(ActionEvent event) throws SQLException {
@@ -471,6 +475,10 @@ public class AfficherOeuvre {
         }
 
         TableView.setItems(oeuvres);
+    }
+    public void afficherStatistiquesOeuvre() {
+
+        PS.afficherStatistiques();
     }
 }
 

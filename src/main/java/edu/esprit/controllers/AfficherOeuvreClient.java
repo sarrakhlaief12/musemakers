@@ -54,6 +54,8 @@ public class AfficherOeuvreClient {
     // Méthode appelée lors de l'initialisation de la vue
     @FXML
     public void initialize() {
+
+
         displayExhibitions();
         categorieSearchID.textProperty().addListener((observable, oldValue, newValue) -> {
             handleSearch();
@@ -62,11 +64,24 @@ public class AfficherOeuvreClient {
         nameSearchID.textProperty().addListener((observable, oldValue, newValue) -> {
             handleSearch();
         });
+        /*comboBox.getItems().add("");
+
+        // Ajoutez les options de tri au ComboBox
+        comboBox.getItems().addAll("Nom ascendant", "Nom descendant", "Date de création ascendante", "Date de création descendante", "Prix ascendant", "Prix descendant");
+
+        // Ajoutez un écouteur pour détecter quand l'utilisateur change l'option de tri
+        comboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            handleTri();
+
+        });*/
+
 
     }
 
     // Méthode pour afficher toutes les expositions
     private void displayExhibitions() {
+        System.out.println("Affichage des œuvres :"); // Ajoutez cette ligne
+
         exhibitionVBox.getChildren().clear();
 
         for (Oeuvre o: listeo) {
@@ -229,6 +244,43 @@ public class AfficherOeuvreClient {
     }
 
 
+    /*private void handleTri()  {
+        System.out.println("La méthode handleTri() a été appelée.");
+        String optionTri = comboBox.getValue(); // Obtenez l'option de tri sélectionnée dans le ComboBox
+
+        Set<Oeuvre> oeuvres = oe.getAll(); // Utilisez cette méthode pour obtenir toutes les œuvres
+
+        switch (optionTri) {
+            case "Nom ascendant":
+                listeo = new HashSet<>(oe.triParNomS(oeuvres, true));
+                break;
+            case "Nom descendant":
+                listeo = new HashSet<>(oe.triParNomS(oeuvres, false));
+                break;
+            case "Date de création ascendante":
+                listeo = new HashSet<>(oe.triParDateCreationS(oeuvres, true));
+                break;
+            case "Date de création descendante":
+                listeo = new HashSet<>(oe.triParDateCreationS(oeuvres, false));
+                break;
+            case "Prix ascendant":
+                listeo = new HashSet<>(oe.triParPrixS(oeuvres, true));
+                break;
+            case "Prix descendant":
+                listeo = new HashSet<>(oe.triParPrixS(oeuvres, false));
+                break;
+            default:
+                // Option non reconnue, vous pouvez gérer cette situation comme vous le souhaitez
+                break;
+        }
+
+        // Clear the previous results from exhibitionVBox
+        exhibitionVBox.getChildren().clear();
+
+        // Display the sorted results in exhibitionVBox
+        displayExhibitions();
+    }
+*/
 
 
 }
