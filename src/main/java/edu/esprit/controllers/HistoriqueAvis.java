@@ -22,7 +22,11 @@ import javafx.scene.layout.GridPane;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZoneId;
+
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -52,6 +56,8 @@ public class HistoriqueAvis {
 
     @FXML
     private ImageView image_id;
+
+
 
 
     ServiceAvis serviceAvis = new ServiceAvis();
@@ -108,6 +114,7 @@ public class HistoriqueAvis {
 
         // Load the data into the table
         TableView.setItems(avisList);
+
 
 
     }
@@ -255,4 +262,8 @@ public class HistoriqueAvis {
             openEditDialog(selectedRec);
        }
     }
+
+
+
 }
+

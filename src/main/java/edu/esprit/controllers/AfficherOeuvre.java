@@ -64,6 +64,9 @@ public class AfficherOeuvre {
     @FXML
     private TextField nameSearchID;
 
+    @FXML
+    private ComboBox<String> comboBox;
+
     private Oeuvre selectedOeuvre;
 
     @FXML
@@ -75,7 +78,7 @@ public class AfficherOeuvre {
     private final ServiceAvis serviceAvis=new ServiceAvis();
     private File selectedFile;
 
-
+    private ObservableList<Oeuvre> oeuvresInitiales;
 
 
     @FXML
@@ -148,6 +151,20 @@ public class AfficherOeuvre {
 
         nameSearchID.textProperty().addListener((observable, oldValue, newValue) -> {
             handleSearch();
+        });
+
+        // Ajoutez une option vide au début du ComboBox
+        comboBox.getItems().add("");
+
+        // Ajoutez les options de tri au ComboBox
+        comboBox.getItems().addAll("Nom ascendant", "Nom descendant", "Date de création ascendante", "Date de création descendante", "Prix ascendant", "Prix descendant");
+
+        // Faites une copie de la liste initiale des œuvres
+        oeuvresInitiales = FXCollections.observableArrayList(TableView.getItems());
+
+        // Ajoutez un écouteur pour détecter quand l'utilisateur change l'option de tri
+        comboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            trierOeuvres(newValue);
         });
 
 
@@ -417,6 +434,43 @@ public class AfficherOeuvre {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void trierOeuvres(String option) {
+        ObservableList<Oeuvre> oeuvres;
+
+        if (option.equals("")) {
+            // Si l'option est vide, réinitialisez la TableView à son état initial
+            oeuvres = FXCollections.observableArrayList(oeuvresInitiales);
+        } else {
+            // Sinon, faites une copie de la liste initiale et triez-la
+            oeuvres = FXCollections.observableArrayList(oeuvresInitiales);
+            switch (option) {
+                case "Nom ascendant":
+                    PS.triParNom(oeuvres, true);
+                    break;
+                case "Nom descendant":
+                    PS.triParNom(oeuvres, false);
+                    break;
+                case "Date de création ascendante":
+                    PS.triParDateCreation(oeuvres, true);
+                    break;
+                case "Date de création descendante":
+                    PS.triParDateCreation(oeuvres, false);
+                    break;
+                case "Prix ascendant":
+                    PS.triParPrix(oeuvres, true);
+                    break;
+                case "Prix descendant":
+                    PS.triParPrix(oeuvres, false);
+                    break;
+                default:
+                    // Option non reconnue, vous pouvez gérer cette situation comme vous le souhaitez
+                    break;
+            }
+        }
+
+        TableView.setItems(oeuvres);
     }
 }
 

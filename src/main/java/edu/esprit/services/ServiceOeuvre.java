@@ -6,9 +6,8 @@ import edu.esprit.utils.DataSource;
 
 import java.sql.*;
 
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Date;
+import java.util.*;
 
 public class ServiceOeuvre implements IService<Oeuvre>  {
     Connection cnx = DataSource.getInstance().getCnx();
@@ -143,5 +142,29 @@ public class ServiceOeuvre implements IService<Oeuvre>  {
         }
 
         return result;
+    }
+
+    // Méthode pour trier par nom
+    public static void triParNom(List<Oeuvre> oeuvres, boolean ascendant) {
+        oeuvres.sort(Comparator.comparing(Oeuvre::getNom));
+        if (!ascendant) {
+            Collections.reverse(oeuvres);
+        }
+    }
+
+    // Méthode pour trier par date de création
+    public static void triParDateCreation(List<Oeuvre> oeuvres, boolean ascendant) {
+        oeuvres.sort(Comparator.comparing(Oeuvre::getDateCreation));
+        if (!ascendant) {
+            Collections.reverse(oeuvres);
+        }
+    }
+
+    // Méthode pour trier par prix
+    public static void triParPrix(List<Oeuvre> oeuvres, boolean ascendant) {
+        oeuvres.sort(Comparator.comparing(Oeuvre::getPrix));
+        if (!ascendant) {
+            Collections.reverse(oeuvres);
+        }
     }
 }
