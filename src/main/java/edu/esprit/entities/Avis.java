@@ -7,6 +7,9 @@ public class Avis {
     private String commentaire;
     private Date dateExperience;
     private int note;
+
+    private Integer likes;
+    private Integer dislikes;
     // Foreign key
     private Oeuvre oeuvre;
     private User client;
@@ -14,21 +17,25 @@ public class Avis {
     public Avis(){
     }
 
-    public Avis(int idAvis,String commentaire, Date dateExperience, int note, Oeuvre oeuvre, User client) {
+    public Avis(int idAvis,String commentaire, Date dateExperience, int note, Oeuvre oeuvre, User client, Integer likes, Integer dislikes) {
         this.idAvis = idAvis;
         this.commentaire = commentaire;
         this.dateExperience = dateExperience;
         this.note = note;
         this.oeuvre = oeuvre;
         this.client = client;
+        this.likes = likes;
+        this.dislikes = dislikes;
     }
 
-    public Avis(String commentaire, Date dateExperience, int note, Oeuvre oeuvre, User client) {
+    public Avis(String commentaire, Date dateExperience, int note, Oeuvre oeuvre, User client, Integer likes, Integer dislikes) {
         this.commentaire = commentaire;
         this.dateExperience = dateExperience;
         this.note = note;
         this.oeuvre = oeuvre;
         this.client = client;
+        this.likes = likes;
+        this.dislikes = dislikes;
     }
 
     public int getIdAvis() {
@@ -77,6 +84,23 @@ public class Avis {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public Integer getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Integer likes) {
+        this.likes = likes;
+    }
+
+    // Getters et setters pour dislikes
+    public Integer getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(Integer dislikes) {
+        this.dislikes = dislikes;
     }
 
     @Override

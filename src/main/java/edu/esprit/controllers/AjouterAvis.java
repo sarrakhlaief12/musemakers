@@ -44,6 +44,11 @@ public class AjouterAvis {
     @FXML
     private ImageView image_id;
     @FXML
+    private Button like_id;
+    @FXML
+    private Button deslike_id;
+
+    @FXML
     private Button historique_id;
 
     @FXML
@@ -63,10 +68,30 @@ public class AjouterAvis {
     @FXML
     private VBox vbox1;
 
-
+    private boolean likeClique = false;
+    private boolean dislikeClique = false;
     ServicePersonne servicePersonne = new ServicePersonne();
     ServiceAvis serviceAvis = new ServiceAvis();
     Avis a=new Avis();
+
+    @FXML
+    private void likeAction(ActionEvent event) {
+        likeClique = true;
+        dislikeClique = false;
+        // Autres actions à effectuer lors du clic sur le bouton Like
+        like_id.setStyle("-fx-background-color: green;"); // Exemple de changement de couleur
+        deslike_id.setStyle("-fx-background-color: transparent;"); // Réinitialiser le style du bouton Dislike
+    }
+
+    // Méthode pour gérer l'action du bouton Dislike
+    @FXML
+    private void dislikeAction(ActionEvent event) {
+        dislikeClique = true;
+        likeClique = false;
+        // Autres actions à effectuer lors du clic sur le bouton Dislike
+        deslike_id.setStyle("-fx-background-color: red;"); // Exemple de changement de couleur
+        like_id.setStyle("-fx-background-color: transparent;"); // Réinitialiser le style du bouton Like
+    }
     public void setOeuvre(Oeuvre oeuvre) {
         vbox1.getChildren().clear();
         this.oeuvre = oeuvre;
@@ -129,9 +154,22 @@ public class AjouterAvis {
             noteerreur.setFill(Color.RED);
 
             if (erreurCommentaire.isEmpty() && erreurDate.isEmpty() && erreurnote.isEmpty()) {
+                int likes = 0;
+                int dislikes = 0;
+
+                // Si l'utilisateur clique sur Like, likes sera 1 et dislikes sera 0
+                // Si l'utilisateur clique sur Dislike, likes sera 0 et dislikes sera 1
+
+                // Vous n'avez pas besoin de likeClique et dislikeClique ici car vous gérez cela directement dans les méthodes associées aux boutons.
+
+                if (like_id.getStyle().contains("-fx-background-color: green;")) {
+                    likes = 1;
+                } else if (deslike_id.getStyle().contains("-fx-background-color: red;")) {
+                    dislikes = 1;
+                }
 
                 // Create an avis
-                Avis avis = new Avis(commentaire, date, note, oeuvre, client);
+                Avis avis = new Avis(commentaire, date, note, oeuvre, client, likes, dislikes);
 
                 // Add the avis to the database
                 serviceAvis.ajouter(avis);
