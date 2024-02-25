@@ -58,7 +58,7 @@ public class Main {
         Reclamation rec = new Reclamation(user, "description", new Date(), "categorie", "statut");
 
         // Ajouter la réclamation à la base de données
-       // recService.ajouter(rec);
+        // recService.ajouter(rec);
         //System.out.println("Reclamation ajoutée: " + rec);
 
         // Récupérer la réclamation avec idRec
@@ -69,8 +69,8 @@ public class Main {
 
             // Tester la méthode 'ajouter'
 
-          //  comService.ajouter(com);
-           // System.out.println("Commentaire ajouté: " + com);
+            //  comService.ajouter(com);
+            // System.out.println("Commentaire ajouté: " + com);
 
             // Tester la méthode 'modifier'
             Commentaire com22 = new Commentaire(2, rec35, new Date(), "contenu");

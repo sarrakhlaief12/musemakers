@@ -23,14 +23,14 @@
                 <VBox prefHeight="200.0" prefWidth="230.0" styleClass="sidebar_admin" BorderPane.alignment="CENTER">
                     <children>
                         <AnchorPane prefHeight="523.0" prefWidth="248.0" style="-fx-background-color: d0d7ac;">
-                     <children>
-                        <Button fx:id="exit" layoutX="-7.0" layoutY="471.0" mnemonicParsing="false" onAction="#exit" prefHeight="52.0" prefWidth="94.0" style="-fx-background-color: transparante;" />
-                        <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="15.0" layoutY="482.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/exit.png" />
-                           </image>
-                        </ImageView>
-                     </children></AnchorPane>
+                            <children>
+                                <Button fx:id="exit" layoutX="-7.0" layoutY="471.0" mnemonicParsing="false" onAction="#exit" prefHeight="52.0" prefWidth="94.0" style="-fx-background-color: transparante;" />
+                                <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="15.0" layoutY="482.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@img/exit.png" />
+                                    </image>
+                                </ImageView>
+                            </children></AnchorPane>
                     </children>
                 </VBox>
             </left>
@@ -64,32 +64,32 @@
                                 <Text fx:id="erreurNomLabel" layoutX="27.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.13671875" />
                                 <Text fx:id="erreurCategorieLabel" layoutX="23.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.13671875" />
                                 <Text fx:id="erreurImageLabel" layoutX="369.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.13671875" />
-                        <ImageView fitHeight="26.0" fitWidth="25.0" layoutX="274.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/chercher.png" />
-                           </image>
-                        </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="25.0" layoutX="274.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@img/chercher.png" />
+                                    </image>
+                                </ImageView>
                             </children>
                         </AnchorPane>
-                  <TextField layoutX="306.0" layoutY="32.0" promptText="Search" />
-                  <ImageView fitHeight="87.0" fitWidth="50.0" layoutX="238.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/profile.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="66.0" fitWidth="50.0" layoutX="238.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/profile.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="50.0" layoutX="238.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/profile.png" />
-                     </image>
-                  </ImageView>
-                  <ListView fx:id="rec1" layoutX="306.0" layoutY="83.0" prefHeight="128.0" prefWidth="390.0" />
-                  <ListView fx:id="rec3" layoutX="306.0" layoutY="230.0" prefHeight="128.0" prefWidth="390.0" />
-                  <ListView fx:id="rec2" layoutX="306.0" layoutY="381.0" prefHeight="128.0" prefWidth="390.0" />
+                        <TextField layoutX="306.0" layoutY="32.0" promptText="Search" />
+                        <ImageView fitHeight="87.0" fitWidth="50.0" layoutX="238.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/profile.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="66.0" fitWidth="50.0" layoutX="238.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/profile.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="60.0" fitWidth="50.0" layoutX="238.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/profile.png" />
+                            </image>
+                        </ImageView>
+                        <ListView fx:id="rec1" layoutX="306.0" layoutY="83.0" prefHeight="128.0" prefWidth="390.0" />
+                        <ListView fx:id="rec3" layoutX="306.0" layoutY="230.0" prefHeight="128.0" prefWidth="390.0" />
+                        <ListView fx:id="rec2" layoutX="306.0" layoutY="381.0" prefHeight="128.0" prefWidth="390.0" />
                     </children>
                 </AnchorPane>
             </center>
