@@ -123,6 +123,8 @@ public class AfficherOeuvreClient {
             Button avisButton = new Button("Details");
             avisButton.setId("buttonavis");
             avisButton.setOnAction(event ->showAvisDialog(o));
+            avisButton.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-border-color: black;");
+
             //{
                 // Get the source of the event, which is the button
                 //Node sourceNode = (Node) event.getSource();
@@ -298,15 +300,7 @@ public class AfficherOeuvreClient {
     void Afficherhistoriqueavis(ActionEvent event) throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("/client/HistoriqueAvis.fxml"));
         Parent root=loader.load();
-//        Scene scene = new Scene(root);
-//
-//        // Create a new stage (window)
-//        Stage stage = new Stage();
-//        stage.setTitle("Exhibition List"); // Set a title for the new window
-//        stage.setScene(scene);
 
-        // Show the new stage
-//        stage.show();
         nameSearchID.getScene().setRoot(root);
     }
 

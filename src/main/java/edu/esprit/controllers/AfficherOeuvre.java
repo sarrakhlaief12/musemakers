@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -56,6 +57,8 @@ public class AfficherOeuvre {
 
     @FXML
     private ImageView image_id;
+
+
 
     @FXML
     private TableColumn<Oeuvre, String> nom_id;
@@ -378,90 +381,63 @@ public class AfficherOeuvre {
     void AfficherAjoutOeuvre(ActionEvent event) throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("/admin/AjouterOeuvre.fxml"));
         Parent root=loader.load();
-//        Scene scene = new Scene(root);
-//        Stage stage = new Stage();
-//        stage.setTitle("Exhibition List"); // Set a title for the new window
-//        stage.setScene(scene);
-//        stage.show();
+//
         TableView.getScene().setRoot(root);
     }
 
-    /*private void showAvisDialog(Oeuvre oeuvre) {
-        // Créez une nouvelle fenêtre (Stage) pour afficher les avis
+    public void showAvisDialog(Oeuvre oeuvre) {
+
+            // Créez un ScrollPane
+            ScrollPane scrollPane = new ScrollPane();
+
+            // Créez un VBox pour contenir les avis
+            VBox vbox = new VBox();
+             vbox.setSpacing(10); // Ajoutez de l'espace entre les avis
+
+            // Récupérez les avis de la base de données (vous avez déjà cette partie)
+            List<Avis> avisList = serviceAvis.getAvisByOeuvre(oeuvre);
+
+            // Ajoutez les avis au VBox
+            for (Avis avis : avisList) {
+                /*Label userLabel = new Label("Utilisateur: " + avis.getClient().getNom_user() + " " + avis.getClient().getPrenom_user());
+                userLabel.setStyle("-fx-font-weight: bold;");
+
+                Label commentLabel = new Label("Commentaire: " + avis.getCommentaire());
+                commentLabel.setStyle("-fx-font-weight: bold;");
+
+                Label noteLabel = new Label("Note: " + avis.getNote());
+                noteLabel.setStyle("-fx-font-weight: bold;");
+
+                avisbox_id.getChildren().addAll(userLabel, commentLabel, noteLabel);*/
+                // Créez un Label personnalisé pour chaque avis
+                Label avisLabel = new Label();
+                avisLabel.setStyle("-fx-font-weight: bold; -fx-background-color: #d0d7ac; -fx-padding: 10px; -fx-border-radius: 20px;");
+
+                // Remplissez le contenu du Label avec les détails de l'avis
+                avisLabel.setText("Utilisateur: " + avis.getClient().getNom_user() + " " + avis.getClient().getPrenom_user()
+                        + "\nCommentaire: " + avis.getCommentaire()
+                        + "\nNote: " + avis.getNote());
+
+                vbox.getChildren().add(avisLabel);
+            }
+
+            // Liez le VBox au ScrollPane
+            scrollPane.setContent(vbox);
+
+            // Créez la scène
+            Scene scene = new Scene(scrollPane, 800, 600);
         Stage stage = new Stage();
         stage.setTitle("Avis sur " + oeuvre.getNom());
 
         stage.setMinWidth(800);
-
-        // Créez une TableView pour afficher les avis
-        TableView<Avis> tableView = new TableView<>();
-
-        // Créez des colonnes pour la TableView
-        TableColumn<Avis, String> userColumn = new TableColumn<>("Utilisateur");
-        userColumn.setCellValueFactory(new PropertyValueFactory<>("client"));
-
-        TableColumn<Avis, String> commentColumn = new TableColumn<>("Commentaire");
-        commentColumn.setCellValueFactory(new PropertyValueFactory<>("commentaire"));
-
-        TableColumn<Avis, Integer> noteColumn = new TableColumn<>("Note");
-        noteColumn.setCellValueFactory(new PropertyValueFactory<>("note"));
-
-        // Ajoutez les colonnes à la TableView
-        tableView.getColumns().add(userColumn);
-        tableView.getColumns().add(commentColumn);
-        tableView.getColumns().add(noteColumn);
-
-        // Récupérez les avis de la base de données
-        List<Avis> avisList = serviceAvis.getAvisByOeuvre(oeuvre);
-
-        // Ajoutez les avis à la TableView
-        tableView.getItems().addAll(avisList);
-
-        // Créez une Scene avec la TableView et ajoutez-la à la Stage
-        Scene scene = new Scene(tableView);
         stage.setScene(scene);
 
         // Affichez la Stage
         stage.show();
-    }*/
-    public void showAvisDialog(Oeuvre oeuvre) {
-        // Créez une nouvelle fenêtre (Stage) pour afficher les avis
 
-        Stage stage = new Stage();
-        stage.setTitle("Avis sur " + oeuvre.getNom());
-
-        stage.setMinWidth(800);
-
-        // Créez une VBox pour contenir les avis
-        VBox vbox = new VBox();
-        vbox.setSpacing(10);  // Ajoutez de l'espace entre les avis
-
-        // Récupérez les avis de la base de données
-        List<Avis> avisList = serviceAvis.getAvisByOeuvre(oeuvre);
-
-        // Ajoutez les avis à la VBox
-        for (Avis avis : avisList) {
-            Label userLabel = new Label("Utilisateur: " + avis.getClient().getNom_user()+ " "+ avis.getClient().getPrenom_user());
-            userLabel.setStyle("-fx-font-weight: bold;");
-
-            Label commentLabel = new Label("Commentaire: " + avis.getCommentaire());
-            userLabel.setStyle("-fx-font-weight: bold;");
-
-            Label noteLabel = new Label("Note: " + avis.getNote());
-            userLabel.setStyle("-fx-font-weight: bold;");
-
-            VBox avisBox = new VBox(userLabel, commentLabel, noteLabel);
-            avisBox.setPadding(new Insets(10, 0, 10, 0));  // Ajoutez du padding autour de chaque avis
-            vbox.getChildren().add(avisBox);
         }
 
-        // Créez une Scene avec la VBox et ajoutez-la à la Stage
-        Scene scene = new Scene(vbox);
-        stage.setScene(scene);
 
-        // Affichez la Stage
-        stage.show();
-    }
     @FXML
     private void handleSearch() {
         String categorie = categorieSearchID.getText();
