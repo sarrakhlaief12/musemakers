@@ -14,13 +14,15 @@ import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-
+import javafx.geometry.Insets;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 public class AjouterAvis {
 
@@ -58,6 +60,10 @@ public class AjouterAvis {
 
     private Oeuvre oeuvre;
 
+    @FXML
+    private VBox vbox1;
+
+
     ServicePersonne servicePersonne = new ServicePersonne();
     ServiceAvis serviceAvis = new ServiceAvis();
     Avis a=new Avis();
@@ -65,7 +71,21 @@ public class AjouterAvis {
         this.oeuvre = oeuvre;
         // Set the image in the ImageView
         //details_id.setText("Exposition: " + oeuvre.getNom() );
+        // Récupérez les avis de la base de données
+        List<Avis> avisList = serviceAvis.getAvisByOeuvre(oeuvre);
+
+        // Ajoutez les avis au VBox
+        for (Avis avis : avisList) {
+            Label userLabel = new Label("Utilisateur: " + avis.getClient().getNom_user() + " " + avis.getClient().getPrenom_user());
+            Label commentLabel = new Label("Commentaire: " + avis.getCommentaire());
+            Label noteLabel = new Label("Note: " + avis.getNote());
+
+            VBox avisBox = new VBox(userLabel, commentLabel, noteLabel);
+            avisBox.setPadding(new Insets(10, 0, 10, 0));  // Ajoutez du padding autour de chaque avis
+            vbox1.getChildren().add(avisBox);
+        }
     }
+
     @FXML
     public void initialize() {
         // Ajoutez des éléments à la ChoiceBox dans la méthode initialize

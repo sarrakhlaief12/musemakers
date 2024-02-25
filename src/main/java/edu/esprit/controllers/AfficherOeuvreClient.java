@@ -7,8 +7,10 @@ import edu.esprit.services.ServiceOeuvre;
 import edu.esprit.services.ServicePersonne;
 import edu.esprit.services.ServiceAvis;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -40,6 +42,11 @@ public class AfficherOeuvreClient {
 
     @FXML
     private TextField nameSearchID;
+
+    @FXML
+    private Button Historique_id;
+
+
 
     @FXML
     private ComboBox<String> comboBox;
@@ -113,7 +120,7 @@ public class AfficherOeuvreClient {
             Label descriptionLabel = new Label("Description: " + o.getDescription());
 
             // Bouton pour donner un avis a propos l oeuvre
-            Button avisButton = new Button("ajouter avis");
+            Button avisButton = new Button("Details");
             avisButton.setId("buttonavis");
             avisButton.setOnAction(event ->showAvisDialog(o));
             //{
@@ -128,12 +135,12 @@ public class AfficherOeuvreClient {
             //});
 
             // Bouton pour consulter les avis des autres clients
-            Button avisButton1 = new Button("voir Avis");
-            avisButton1.setId("buttonavis1");
-            avisButton1.setOnAction(event ->  showAvisDialog1(o));
+            //Button avisButton1 = new Button("voir Avis");
+            //avisButton1.setId("buttonavis1");
+            //avisButton1.setOnAction(event ->  showAvisDialog1(o));
 
             // Ajouter les composants au VBox des détails
-            detailsVBox.getChildren().addAll(nomLabel, categorieLabel, prixLabel,dateCreationLabel, descriptionLabel, avisButton,avisButton1);
+            detailsVBox.getChildren().addAll(nomLabel, categorieLabel, prixLabel,dateCreationLabel, descriptionLabel, avisButton);
 
             // Ajouter les composants à l'HBox principale
             exhibitionBox.getChildren().addAll(imageView, detailsVBox);
@@ -160,6 +167,7 @@ public class AfficherOeuvreClient {
             AjouterAvis controller = loader.getController();
             controller.setOeuvre(o);
 
+
             // Load the image and set it to the controller
             Image image = new Image(new File(o.getImage()).toURI().toString());
             controller.setImage(image);
@@ -172,8 +180,9 @@ public class AfficherOeuvreClient {
             // Close the current stage (AfficherClientOeuvre)
             //currentStage.close();
 
-           //stage.showAndWait();
+
             exhibitionVBox.getScene().setRoot(root);
+
 
 
            // displayExhibitions();
@@ -181,7 +190,7 @@ public class AfficherOeuvreClient {
             e.printStackTrace();
         }
     }
-    private void showAvisDialog1(Oeuvre o) {
+   /* private void showAvisDialog1(Oeuvre o) {
 
         // Créez une nouvelle fenêtre (Stage) pour afficher les avis
         Stage stage = new Stage();
@@ -198,18 +207,22 @@ public class AfficherOeuvreClient {
 
         for (Avis avis : avisList) {
             // Créez une VBox pour chaque avis
-            VBox avisBox = new VBox();
+
 
             // Créez des Labels pour l'utilisateur, le commentaire et la note
-            Label userLabel = new Label("Utilisateur: " + avis.getClient());
+            Label userLabel = new Label("Utilisateur: " + avis.getClient().getNom_user()+ " "+ avis.getClient().getPrenom_user());
+
             Label commentLabel = new Label("Commentaire: " + avis.getCommentaire());
+
+
             Label noteLabel = new Label("Note: " + avis.getNote());
 
-            // Ajoutez les Labels à la VBox
-            avisBox.getChildren().addAll(userLabel, commentLabel, noteLabel);
 
-            // Ajoutez la VBox à la VBox principale
+            VBox avisBox = new VBox(userLabel, commentLabel, noteLabel);
+            avisBox.setPadding(new Insets(10, 0, 10, 0));  // Ajoutez du padding autour de chaque avis
             vbox.getChildren().add(avisBox);
+
+
         }
 
         // Créez une Scene avec la VBox et ajoutez-la à la Stage
@@ -218,7 +231,7 @@ public class AfficherOeuvreClient {
 
         // Affichez la Stage
         stage.show();
-    }
+    }*/
     @FXML
     private void handleSearch()  {
         String categorie = categorieSearchID.getText();
@@ -281,7 +294,21 @@ public class AfficherOeuvreClient {
         displayExhibitions();
     }
 */
+    @FXML
+    void Afficherhistoriqueavis(ActionEvent event) throws IOException {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/client/HistoriqueAvis.fxml"));
+        Parent root=loader.load();
+//        Scene scene = new Scene(root);
+//
+//        // Create a new stage (window)
+//        Stage stage = new Stage();
+//        stage.setTitle("Exhibition List"); // Set a title for the new window
+//        stage.setScene(scene);
 
+        // Show the new stage
+//        stage.show();
+        nameSearchID.getScene().setRoot(root);
+    }
 
 }
 

@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.ComboBox?>
 <AnchorPane prefHeight="626.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherOeuvreClient">
     <stylesheets>
         <URL value="@../style.css" />
@@ -23,14 +22,9 @@
                 <VBox prefHeight="569.0" prefWidth="176.0" style="-fx-background-color: #e9d9d0;" BorderPane.alignment="CENTER">
                <children>
                   <AnchorPane prefHeight="523.0" prefWidth="248.0" style="-fx-background-color: d0d7ac;">
-                    <!--
-                   <children>
-                      <Button fx:id="nouvelajout_id" layoutX="25.0" layoutY="120.0" mnemonicParsing="false" onAction="#AfficherAjoutOeuvre" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Nouvel Ajout" />
-                      <Button fx:id="button_avis" layoutX="23.0" layoutY="174.0" mnemonicParsing="false" onAction="#showAvisDialog" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Voir les avis" />
-                      <Button fx:id="button_supprimer" layoutX="22.0" layoutY="231.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Supprimer" />
-                   </children>
-                   -->
-                </AnchorPane>
+                     <children>
+                        <Button fx:id="Historique_id" layoutX="26.0" layoutY="174.0" mnemonicParsing="false" onAction="#Afficherhistoriqueavis" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Historique Avis" />
+                     </children></AnchorPane>
              </children></VBox>
           </left>
           <top>

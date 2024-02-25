@@ -110,8 +110,6 @@ public class AfficherOeuvre {
         nom_id.setCellValueFactory(new PropertyValueFactory<>("nom"));
         categorie_id.setCellValueFactory(new PropertyValueFactory<>("categorie"));
         datecreation_id.setCellValueFactory(new PropertyValueFactory<>("dateCreation"));
-        //description_id.setCellValueFactory(new PropertyValueFactory<>("description"));
-       // image_id.setCellValueFactory(new PropertyValueFactory<>("image"));
         prix_id.setCellValueFactory(new PropertyValueFactory<>("prix"));
 
         button_avis.setOnAction(event -> {
@@ -428,7 +426,7 @@ public class AfficherOeuvre {
     }*/
     public void showAvisDialog(Oeuvre oeuvre) {
         // Créez une nouvelle fenêtre (Stage) pour afficher les avis
-        // Créez une nouvelle fenêtre (Stage) pour afficher les avis
+
         Stage stage = new Stage();
         stage.setTitle("Avis sur " + oeuvre.getNom());
 
@@ -447,10 +445,10 @@ public class AfficherOeuvre {
             userLabel.setStyle("-fx-font-weight: bold;");
 
             Label commentLabel = new Label("Commentaire: " + avis.getCommentaire());
-            commentLabel.setStyle("-fx-text-fill: bold;");
+            userLabel.setStyle("-fx-font-weight: bold;");
 
             Label noteLabel = new Label("Note: " + avis.getNote());
-            noteLabel.setStyle("-fx-text-fill: bold;");
+            userLabel.setStyle("-fx-font-weight: bold;");
 
             VBox avisBox = new VBox(userLabel, commentLabel, noteLabel);
             avisBox.setPadding(new Insets(10, 0, 10, 0));  // Ajoutez du padding autour de chaque avis
