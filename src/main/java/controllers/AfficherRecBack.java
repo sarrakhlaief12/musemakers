@@ -52,37 +52,7 @@ public class AfficherRecBack {
 
 
     List<Reclamation> RecList;
-    /*
-        public void ShowReclamation() throws IOException {
 
-            try {
-                RecList = rs.getAll();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
-            User userAdd = su.getOneById(2);
-
-            List<Reclamation> filteredRecList = new ArrayList<>();
-
-            for (Reclamation r : RecList) {
-                if (r.getUser().equals(userAdd)) {
-                    filteredRecList.add(r);
-                }
-            }
-            CvNom.setCellValueFactory(new PropertyValueFactory<>("userNom"));
-
-            CvDescri.setCellValueFactory(new PropertyValueFactory<>("descriRec"));
-            CvDate.setCellValueFactory(new PropertyValueFactory<>("DateRec"));
-            CvCat.setCellValueFactory(new PropertyValueFactory<>("CategorieRec"));
-            CvStatut.setCellValueFactory(new PropertyValueFactory<>("StatutRec"));
-
-            if (TableViewRecB != null && TableViewRecB instanceof TableView) {
-                ((TableView<Reclamation>) TableViewRecB).setItems(FXCollections.observableArrayList(filteredRecList));
-            }
-
-
-        */
     public void ShowReclamation() throws IOException {
         try {
             RecList = rs.getAll();
@@ -90,7 +60,7 @@ public class AfficherRecBack {
             throw new RuntimeException(e);
         }
 
-        User userAdd = su.getOneById(1); // Assurez-vous que cette méthode retourne l'utilisateur correct
+        User userAdd = su.getOneById(3); // Assurez-vous que cette méthode retourne l'utilisateur correct
 
         List<Reclamation> filteredRecList = new ArrayList<>();
 

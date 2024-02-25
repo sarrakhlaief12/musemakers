@@ -52,7 +52,6 @@
                     <children>
                         <AnchorPane layoutY="7.0" prefHeight="514.0" prefWidth="802.0" style="-fx-background-color: ffff;">
                             <children>
-                                <Button fx:id="button_ajouter" layoutX="483.0" layoutY="393.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="157.0" styleClass="submit_button" text="Ajouter Oeuvre" />
                                 <Text fx:id="erreurDescriptionLabel" layoutX="369.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.13671875" />
                                 <Text fx:id="erreurDateLabel" layoutX="23.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.13671875" />
                                 <Text fx:id="erreurprix" layoutX="22.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.13671875" />
@@ -64,12 +63,18 @@
                         <Button fx:id="supp" layoutX="68.0" layoutY="157.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
                         <Button fx:id="mod" layoutX="145.0" layoutY="157.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
                         <Button fx:id="ajout" layoutX="278.0" layoutY="83.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
-                        <TableView fx:id="TableViewCommentaire" layoutX="381.0" layoutY="57.0" prefHeight="250.0" prefWidth="291.0">
+                        <TableView fx:id="TableViewCommentaire" layoutX="381.0" layoutY="79.0" prefHeight="250.0" prefWidth="291.0">
                            <columns>
                               <TableColumn fx:id="CvDate" prefWidth="133.60003662109375" text="Date" />
                               <TableColumn fx:id="CvContenu" prefWidth="156.7999267578125" text="Contenu" />
                            </columns>
                         </TableView>
+                        <TextField fx:id="searchTF" layoutX="393.0" layoutY="29.0" promptText="Search" />
+                        <ImageView fitHeight="24.0" fitWidth="18.0" layoutX="372.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/chercher.png" />
+                           </image>
+                        </ImageView>
                             </children>
                         </AnchorPane>
                     </children>

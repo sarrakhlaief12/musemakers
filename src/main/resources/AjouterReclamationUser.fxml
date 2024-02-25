@@ -26,16 +26,16 @@
                 <VBox prefHeight="200.0" prefWidth="230.0" styleClass="sidebar_admin" BorderPane.alignment="CENTER">
                     <children>
                         <AnchorPane prefHeight="529.0" prefWidth="230.0" style="-fx-background-color: d0d7ac;">
-                     <children>
-                        <Button fx:id="rec" layoutX="40.0" layoutY="121.0" mnemonicParsing="false" onAction="#rec" text="Voir Reclamation" />
-                     </children></AnchorPane>
+                            <children>
+                                <Button fx:id="rec" layoutX="40.0" layoutY="121.0" mnemonicParsing="false" onAction="#rec" text="Voir Reclamation" />
+                            </children></AnchorPane>
                     </children>
                 </VBox>
             </left>
             <top>
                 <HBox prefHeight="110.0" prefWidth="1034.0" styleClass="navbar_admin" BorderPane.alignment="CENTER">
                     <children>
-                        <AnchorPane prefHeight="119.0" prefWidth="1034.0" style="-fx-background-color: ffff;">
+                        <AnchorPane prefHeight="120.0" prefWidth="1198.0" style="-fx-background-color: ffff;">
                             <children>
                                 <ImageView fitHeight="105.0" fitWidth="94.0" layoutX="23.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -43,10 +43,10 @@
                                     </image>
                                 </ImageView>
                                 <Button layoutX="207.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: transparant;" text="Les artistes">
-                           <styleClass>
-                              <String fx:value="underline-button" />
-                              <String fx:value="underline-button" />
-                           </styleClass></Button>
+                                    <styleClass>
+                                        <String fx:value="underline-button" />
+                                        <String fx:value="underline-button" />
+                                    </styleClass></Button>
                                 <Button layoutX="207.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Les artistes" />
                                 <Button fx:id="button_afficher" layoutX="392.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Les chefs d'oeuvres" />
                                 <Button layoutX="719.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" styleClass="underline-button" text="Réservations" />
@@ -62,38 +62,44 @@
                     <children>
                         <AnchorPane layoutY="7.0" prefHeight="514.0" prefWidth="802.0" style="-fx-background-color: ffff;">
                             <children>
-                        <ImageView fitHeight="527.0" fitWidth="1032.0" layoutX="-1.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/2.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="415.0" fitWidth="759.0" layoutX="229.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/table.png" />
-                           </image>
-                        </ImageView>
-                                <Button fx:id="ajouter" layoutX="165.0" layoutY="120.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="34.0" prefWidth="157.0" styleClass="submit_button" text="Ajouter Reclamation" />
+                                <ImageView fitHeight="527.0" fitWidth="1032.0" layoutX="-1.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@img/2.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="415.0" fitWidth="759.0" layoutX="197.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@img/table.png" />
+                                    </image>
+                                </ImageView>
+                                <Button fx:id="ajouter" layoutX="140.0" layoutY="120.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="34.0" prefWidth="157.0" styleClass="submit_button" text="Ajouter Reclamation" />
                                 <Text fx:id="erreurDescriptionLabel" layoutX="369.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.13671875" />
                                 <Text fx:id="erreurDateLabel" layoutX="23.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.13671875" />
                                 <Text fx:id="erreurprix" layoutX="22.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.13671875" />
                                 <Text fx:id="erreurImageLabel" layoutX="369.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.13671875" />
-                        <TextField fx:id="CategorieRecTF" layoutX="22.0" layoutY="125.0" prefHeight="19.0" prefWidth="94.0" promptText="Categorie" />
-                        <TextField fx:id="descriRecTF" alignment="TOP_LEFT" layoutX="13.0" layoutY="210.0" prefHeight="109.0" prefWidth="231.0" promptText="Description" />
-                        <Button fx:id="supprimer" layoutX="14.0" layoutY="334.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
-                        <Button fx:id="modifier" layoutX="109.0" layoutY="334.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
-                        <TableView fx:id="TableViewRec" layoutX="371.0" layoutY="70.0" prefHeight="317.0" prefWidth="452.0">
-                           <columns>
-                              <TableColumn fx:id="CvDescri" prefWidth="151.20004272460938" text="Description" />
-                              <TableColumn fx:id="CvDate" prefWidth="83.19998168945312" text="Date" />
-                              <TableColumn fx:id="CvCat" prefWidth="112.00006103515625" text="Categorie" />
-                              <TableColumn fx:id="CvStatut" minWidth="5.60009765625" prefWidth="102.39996337890625" text="Statut" />
-                           </columns>
-                        </TableView>
-                        <Label fx:id="desc" layoutX="27.0" layoutY="178.0" text="Description :" />
-                        <Label fx:id="cate" layoutX="31.0" layoutY="99.0" prefHeight="18.0" prefWidth="98.0" text="Categorie :" />
-                        <ImageView fitHeight="220.0" fitWidth="389.0" layoutX="387.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                                <TextField fx:id="CategorieRecTF" layoutX="22.0" layoutY="125.0" prefHeight="19.0" prefWidth="94.0" promptText="Categorie" />
+                                <TextField fx:id="descriRecTF" alignment="TOP_LEFT" layoutX="13.0" layoutY="210.0" prefHeight="109.0" prefWidth="231.0" promptText="Description" />
+                                <Button fx:id="supprimer" layoutX="14.0" layoutY="334.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+                                <Button fx:id="modifier" layoutX="109.0" layoutY="334.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
+                                <ImageView fitHeight="220.0" fitWidth="389.0" layoutX="403.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@img/anbeyeb.png" />
+                                    </image>
+                                </ImageView>
+                                <TableView fx:id="TableViewRec" layoutX="340.0" layoutY="70.0" prefHeight="317.0" prefWidth="452.0">
+                                    <columns>
+                                        <TableColumn fx:id="CvDescri" prefWidth="151.20004272460938" text="Description" />
+                                        <TableColumn fx:id="CvDate" prefWidth="83.19998168945312" text="Date" />
+                                        <TableColumn fx:id="CvCat" prefWidth="112.00006103515625" text="Categorie" />
+                                        <TableColumn fx:id="CvStatut" minWidth="5.60009765625" prefWidth="103.20001220703125" text="Statut" />
+                                    </columns>
+                                </TableView>
+                                <Label fx:id="desc" layoutX="27.0" layoutY="178.0" text="Description :" />
+                                <Label fx:id="cate" layoutX="31.0" layoutY="99.0" prefHeight="18.0" prefWidth="98.0" text="Categorie :" />
+                        <TextField fx:id="searchTF" layoutX="351.0" layoutY="21.0" promptText="Search" />
+                        <ImageView fitHeight="56.0" fitWidth="24.0" layoutX="316.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@img/anbeyeb.png" />
+                              <Image url="@img/chercher.png" />
                            </image>
                         </ImageView>
                             </children>

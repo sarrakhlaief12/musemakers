@@ -2,7 +2,10 @@ package controllers;
 
 import entities.Reclamation;
 import entities.User;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,12 +21,13 @@ import service.ServiceUser;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 public class AjouterReclamationUser {
     private final ReclamationService rs= new ReclamationService( );
-    private final service.ServiceUser su= new ServiceUser();
+    private final ServiceUser su= new ServiceUser();
 
     @FXML
     private TextField CategorieRecTF;
@@ -41,7 +45,7 @@ public class AjouterReclamationUser {
     private TableColumn<?, ?> CvStatut;
 
     @FXML
-    private TableView<?> TableViewRec;
+    private TableView<Reclamation> TableViewRec;
 
     @FXML
     private Button ajouter;
@@ -54,6 +58,8 @@ public class AjouterReclamationUser {
 
     @FXML
     private TextField descriRecTF;
+    @FXML
+    private TextField searchTF;
 
     @FXML
     private Button modifier;
@@ -63,9 +69,10 @@ public class AjouterReclamationUser {
     @FXML
     private Button rec;
 
+    List<Reclamation> RecList;
+
     public void initialize() throws IOException {
         ShowReclamation();
-
     }
 
     @FXML
@@ -97,39 +104,10 @@ public class AjouterReclamationUser {
         }
     }
 
-    List<Reclamation> RecList;
-    public void ShowReclamation() throws IOException {
-        try {
-            RecList = rs.getAll();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        User userAdd = su.getOneById(2);
-        List<Reclamation> filteredRecList = new ArrayList<>();
-
-        for (Reclamation r : RecList) {
-            if (r.getUser().equals(userAdd)) {
-                filteredRecList.add(r);
-            }
-        }
-        // CvClient.setCellValueFactory(new PropertyValueFactory<>("user"));
-
-        CvDescri.setCellValueFactory(new PropertyValueFactory<>("descriRec"));
-        CvDate.setCellValueFactory(new PropertyValueFactory<>("DateRec"));
-        CvCat.setCellValueFactory(new PropertyValueFactory<>("CategorieRec"));
-        CvStatut.setCellValueFactory(new PropertyValueFactory<>("StatutRec"));
-
-        if (TableViewRec != null && TableViewRec instanceof TableView) {
-            ((TableView<Reclamation>) TableViewRec).setItems(FXCollections.observableArrayList(filteredRecList));
-        }
-
-    }
-
     @FXML
     void modifier(ActionEvent event) throws IOException {
         // Obtenez la réclamation sélectionnée dans la table
-        Reclamation r = (Reclamation) TableViewRec.getSelectionModel().getSelectedItem();
+        Reclamation r = TableViewRec.getSelectionModel().getSelectedItem();
         if (r != null) {
             String descriRec = descriRecTF.getText();
 
@@ -157,22 +135,34 @@ public class AjouterReclamationUser {
             }
         }
     }
+
     @FXML
     void supprimer(ActionEvent event) throws IOException, SQLException {
         // Obtenez l'objet Reclamation sélectionné
-        Reclamation selectedReclamation = (Reclamation) TableViewRec.getSelectionModel().getSelectedItem();
+        Reclamation selectedReclamation = TableViewRec.getSelectionModel().getSelectedItem();
 
-        // Supprimez cet objet de votre base de données
-        rs.supprimer(selectedReclamation.getIdRec());
+        // Vérifiez si une réclamation est sélectionnée
+        if (selectedReclamation != null) {
+            // Supprimez cet objet de votre base de données
+            try {
+                rs.supprimer(selectedReclamation.getIdRec());
+            } catch (SQLException e) {
+                System.out.println("Erreur lors de la suppression de la réclamation: " + e.getMessage());
+                return;
+            }
 
-        // Supprimez cet objet de la vue de la table
-        TableViewRec.getItems().remove(selectedReclamation);
+
+
+            // Rafraîchir les données de la table
+            ShowReclamation();
+        } else {
+            System.out.println("Aucune réclamation sélectionnée.");
+        }
     }
 
     @FXML
     void rec(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherReclamations.fxml"));
-        Parent root = loader.load();
+        Parent root = FXMLLoader.load(getClass().getResource("/AfficherReclamations.fxml"));
 
         // Créer une nouvelle scène
         Scene scene = new Scene(root);
@@ -185,4 +175,58 @@ public class AjouterReclamationUser {
         // Afficher la nouvelle fenêtre
         stage.show();
     }
+
+    public void ShowReclamation() throws IOException {
+        try {
+            RecList = rs.getAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        User userAdd = su.getOneById(2);
+        List<Reclamation> filteredRecList = new ArrayList<>();
+
+        for (Reclamation r : RecList) {
+            if (r.getUser().equals(userAdd)) {
+                filteredRecList.add(r);
+            }
+        }
+
+        // Créer une FilteredList
+        FilteredList<Reclamation> filteredData = new FilteredList<>(FXCollections.observableArrayList(filteredRecList), p -> true);
+
+        // Envelopper la FilteredList dans une SortedList
+        SortedList<Reclamation> sortedData = new SortedList<>(filteredData);
+
+        // Lier le comparateur de la SortedList au comparateur de TableView
+        sortedData.comparatorProperty().bind(TableViewRec.comparatorProperty());
+
+        // Ajouter les données triées (et filtrées) à la TableView
+        TableViewRec.setItems(sortedData);
+
+        CvDescri.setCellValueFactory(new PropertyValueFactory<>("descriRec"));
+        CvDate.setCellValueFactory(new PropertyValueFactory<>("DateRec"));
+        CvCat.setCellValueFactory(new PropertyValueFactory<>("CategorieRec"));
+        CvStatut.setCellValueFactory(new PropertyValueFactory<>("StatutRec"));
+
+        // Ajouter un listener à searchTF pour qu'il réagisse aux changements de texte
+        searchTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(reclamation -> {
+                // Si le texte de recherche est vide, afficher toutes les réclamations
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Comparer le texte de recherche avec la catégorie et la description de chaque réclamation
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (reclamation.getCategorieRec().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Le filtre correspond à la catégorie
+                } else if (reclamation.getDescriRec().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Le filtre correspond à la description
+                }
+                return false; // Aucune correspondance
+            });
+        });
+    }
+
 }
