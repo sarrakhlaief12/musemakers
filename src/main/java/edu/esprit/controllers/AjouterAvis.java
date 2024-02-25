@@ -68,6 +68,7 @@ public class AjouterAvis {
     ServiceAvis serviceAvis = new ServiceAvis();
     Avis a=new Avis();
     public void setOeuvre(Oeuvre oeuvre) {
+        vbox1.getChildren().clear();
         this.oeuvre = oeuvre;
         // Set the image in the ImageView
         //details_id.setText("Exposition: " + oeuvre.getNom() );
@@ -146,6 +147,7 @@ public class AjouterAvis {
                 alert.setHeaderText(null);
                 alert.setContentText("Votre avis a été enregistré. Merci pour votre feedback!");
                 alert.showAndWait();
+                setOeuvre(oeuvre);
             }
             // Close the dialog
 
