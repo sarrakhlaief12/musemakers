@@ -57,17 +57,17 @@
                         <AnchorPane layoutY="7.0" prefHeight="518.0" prefWidth="803.0" style="-fx-background-color: ffff;">
                             <children>
                                 <Button fx:id="button_ajouter" layoutX="533.0" layoutY="440.0" mnemonicParsing="false" onAction="#submitAvis" prefHeight="34.0" prefWidth="157.0" styleClass="submit_button" text="Ajouter Avis" />
-                                <Label layoutX="475.0" layoutY="40.0" prefHeight="18.0" prefWidth="124.0" text="Votre Note:" />
-                        <TextArea fx:id="comment_id" layoutX="612.0" layoutY="211.0" prefHeight="95.0" prefWidth="163.0" />
-                        <DatePicker fx:id="dateex_id" layoutX="612.0" layoutY="119.0" prefHeight="26.0" prefWidth="163.0" />
-                        <Label layoutX="471.0" layoutY="123.0" prefHeight="18.0" prefWidth="124.0" text="Date Experience :" />
-                        <ChoiceBox fx:id="note_id" layoutX="612.0" layoutY="45.0" prefHeight="26.0" prefWidth="163.0" />
-                        <Label layoutX="471.0" layoutY="218.0" prefHeight="18.0" prefWidth="124.0" text="Votre Avis :" />
+                                <Label layoutX="415.0" layoutY="35.0" prefHeight="18.0" prefWidth="124.0" text="Votre Note:" />
+                        <TextArea fx:id="comment_id" layoutX="506.0" layoutY="211.0" prefHeight="95.0" prefWidth="163.0" />
+                        <DatePicker fx:id="dateex_id" layoutX="506.0" layoutY="111.0" prefHeight="26.0" prefWidth="163.0" />
+                        <Label layoutX="402.0" layoutY="115.0" prefHeight="18.0" prefWidth="124.0" text="Date Experience :" />
+                        <ChoiceBox fx:id="note_id" layoutX="506.0" layoutY="31.0" prefHeight="26.0" prefWidth="163.0" />
+                        <Label layoutX="402.0" layoutY="211.0" prefHeight="18.0" prefWidth="124.0" text="Votre Avis :" />
                         <ImageView fx:id="image_id" fitHeight="161.0" fitWidth="176.0" layoutX="74.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
                                 <HBox spacing="10" />
-                        <Text fx:id="commentaireerreur" layoutX="606.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="175.73654174804688" />
-                        <Text fx:id="noteerreur" layoutX="612.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="175.73654174804688" />
-                        <Text fx:id="dateerreur" layoutX="606.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="175.73654174804688" />
+                        <Text fx:id="commentaireerreur" layoutX="500.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="175.73654174804688" />
+                        <Text fx:id="noteerreur" layoutX="500.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="175.73654174804688" />
+                        <Text fx:id="dateerreur" layoutX="500.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="175.73654174804688" />
                                 <ScrollPane layoutX="41.0" layoutY="211.0" prefHeight="272.0" prefWidth="286.0">
                                     <VBox fx:id="vbox1" alignment="CENTER" spacing="10">
                                         <!-- This VBox will contain the exhibitions -->

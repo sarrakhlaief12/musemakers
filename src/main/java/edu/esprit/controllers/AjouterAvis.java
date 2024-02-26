@@ -11,7 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 
-
+import java.util.prefs.Preferences;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -68,33 +68,31 @@ public class AjouterAvis {
     @FXML
     private VBox vbox1;
 
+    private Preferences preferences;
+    private int currentOeuvreId;
+
+
     private boolean likeClique = false;
     private boolean dislikeClique = false;
     ServicePersonne servicePersonne = new ServicePersonne();
     ServiceAvis serviceAvis = new ServiceAvis();
     Avis a=new Avis();
 
-    @FXML
-    private void likeAction(ActionEvent event) {
-        likeClique = true;
-        dislikeClique = false;
-        // Autres actions à effectuer lors du clic sur le bouton Like
-        like_id.setStyle("-fx-background-color: green;"); // Exemple de changement de couleur
-        deslike_id.setStyle("-fx-background-color: transparent;"); // Réinitialiser le style du bouton Dislike
-    }
 
-    // Méthode pour gérer l'action du bouton Dislike
+
     @FXML
-    private void dislikeAction(ActionEvent event) {
-        dislikeClique = true;
-        likeClique = false;
-        // Autres actions à effectuer lors du clic sur le bouton Dislike
-        deslike_id.setStyle("-fx-background-color: red;"); // Exemple de changement de couleur
-        like_id.setStyle("-fx-background-color: transparent;"); // Réinitialiser le style du bouton Like
+    public void initialize() {
+        System.out.println("cc");
+        // Ajoutez des éléments à la ChoiceBox dans la méthode initialize
+        note_id.getItems().addAll(1,2,3,4,5);
+
+
     }
     public void setOeuvre(Oeuvre oeuvre) {
         vbox1.getChildren().clear();
         this.oeuvre = oeuvre;
+        currentOeuvreId = oeuvre.getId(); // Supposons que getId() retourne l'ID de l'œuvre
+
         // Set the image in the ImageView
         //details_id.setText("Exposition: " + oeuvre.getNom() );
         // Récupérez les avis de la base de données
@@ -110,15 +108,57 @@ public class AjouterAvis {
             avisBox.setPadding(new Insets(10, 0, 10, 0));  // Ajoutez du padding autour de chaque avis
             vbox1.getChildren().add(avisBox);
         }
+        preferences = Preferences.userNodeForPackage(getClass());
+
+        likeClique = preferences.getBoolean("likeClique_" + currentOeuvreId, false);
+        dislikeClique = preferences.getBoolean("dislikeClique_" + currentOeuvreId, false);
+        if (currentOeuvreId != -1) {
+            if (likeClique) {
+                like_id.setStyle("-fx-background-color: green;");
+            }
+
+            if (dislikeClique) {
+                deslike_id.setStyle("-fx-background-color: red;");
+            }
+        }
     }
 
     @FXML
-    public void initialize() {
-        // Ajoutez des éléments à la ChoiceBox dans la méthode initialize
-        note_id.getItems().addAll(1,2,3,4,5);
+    private void likeAction(ActionEvent event) {
+        preferences.putBoolean("likeClique_" + currentOeuvreId, !likeClique);
+        preferences.putBoolean("dislikeClique_" + currentOeuvreId, false);
+
+        if (!likeClique) {
+            likeClique = true;
+            dislikeClique = false;
+            // Autres actions à effectuer lors du clic sur le bouton Like
+            like_id.setStyle("-fx-background-color: green;"); // Exemple de changement de couleur
+            deslike_id.setStyle("-fx-background-color: transparent;"); // Réinitialiser le style du bouton Dislike
+        } else {
+            likeClique = false;
+            // Réinitialiser l'état du bouton Like
+            like_id.setStyle("-fx-background-color: transparent;");
+        }
 
     }
 
+    // Méthode pour gérer l'action du bouton Dislike
+    @FXML
+    private void dislikeAction(ActionEvent event) {
+        preferences.putBoolean("dislikeClique_" + currentOeuvreId, !dislikeClique);
+        preferences.putBoolean("likeClique_" + currentOeuvreId, false);
+        if (!dislikeClique) {
+            dislikeClique = true;
+            likeClique = false;
+            // Autres actions à effectuer lors du clic sur le bouton Dislike
+            deslike_id.setStyle("-fx-background-color: red;"); // Exemple de changement de couleur
+            like_id.setStyle("-fx-background-color: transparent;"); // Réinitialiser le style du bouton Like
+        } else {
+            dislikeClique = false;
+            // Réinitialiser l'état du bouton Dislike
+            deslike_id.setStyle("-fx-background-color: transparent;");
+        }
+    }
 
     public void setImage(Image image) {
         image_id.setImage(image);
