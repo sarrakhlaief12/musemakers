@@ -133,16 +133,19 @@ public class AjouterAvis {
 
             // Get the comment entered by the user
             String commentaire = comment_id.getText();
-            String  erreurCommentaire = (commentaire.isEmpty() || commentaire.length() > 30 || !commentaire.matches("[a-zA-Z0-9,\\-]+")) ? "Le commentaire ne peut pas être vide, ne doit pas dépasser 30 caractères et doit contenir uniquement des lettres, des chiffres, des virgules et des tirets." : "";
+            String  erreurCommentaire = (commentaire.isEmpty() || commentaire.length() > 30 || !commentaire.matches("[a-zA-Z0-9,\\-]+")) ? "Le commentaire est vide, ou il a  dépasse 30 caractères et doit contenir uniquement des lettres, des chiffres, des virgules et des tirets." : "";
 
 
             // Get the user with ID 4  (You can modify this part based on your requirements)
             User client = servicePersonne.getOneById(3);
 
             // Récupérer la date sélectionnée dans le DatePicker
-            LocalDate localDate = dateex_id.getValue();
-            String erreurDate = (localDate == null) ? "Veuillez sélectionner une date." : "";
-            Date date = Date.valueOf(localDate); // Conversion LocalDate en Date
+            LocalDate localdate = dateex_id.getValue();
+            String erreurDate = (localdate == null) ? "Veuillez sélectionner une date." : "";
+            java.sql.Date date = null;
+            if (localdate != null) {
+              date = java.sql.Date.valueOf(localdate); // Conversion de LocalDate en java.sql.Date
+            }
 
             commentaireerreur.setText(erreurCommentaire);
             commentaireerreur.setFill(Color.RED);
