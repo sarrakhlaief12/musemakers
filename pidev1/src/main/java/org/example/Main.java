@@ -33,8 +33,8 @@ public class Main {
 
 
 
-/*
-                            //MODIFIERCours
+*/
+       /*                     //MODIFIERCours
         ServiceCour sc = new ServiceCour();
         Cour coursAModifier = sc.getOneById(1); // Supposons que l'ID du cours à modifier est 1
         coursAModifier.setTitre_cours(" donnees ");

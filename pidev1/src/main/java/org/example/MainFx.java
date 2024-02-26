@@ -18,15 +18,15 @@ import java.io.IOException;
 
 
            // FXMLLoader loader= new FXMLLoader(getClass().getResource("//AfficherCourController.fxml"));
-            //Parent root=loader.load(getClass().getResource("/AfficherCour.fxml"));
-            //FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterCourController.fxml"));
-            //Parent root=loader.load(getClass().getResource("/AjouterCourController.fxml"));
+            //Parent root= loader.load(getClass().getResource("/AfficherCourNV.fxml"));
+         //  FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterCourController.fxml"));
+           //Parent root=loader.load(getClass().getResource("/AjouterCourController.fxml"));
 
 
            // FXMLLoader loader= new FXMLLoader(getClass().getResource("//AjouterAtelier.fxml"));
             //Parent root=loader.load(getClass().getResource("/AjouterAtelier.fxml"));
-             FXMLLoader loader= new FXMLLoader(getClass().getResource("//AfficherAtelier.fxml"));
-            Parent root=loader.load(getClass().getResource("/AfficherAtelier.fxml"));
+             FXMLLoader loader= new FXMLLoader(getClass().getResource("//AfficherAtelierNV.fxml"));
+            Parent root=loader.load(getClass().getResource("/AfficherAtelierNV.fxml"));
             Scene scene=new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("ajout");

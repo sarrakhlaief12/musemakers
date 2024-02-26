@@ -10,7 +10,7 @@ import service.ServiceCour;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Set;
-public class AfficherCour {
+public class AfficherCourNV {
 
 
 

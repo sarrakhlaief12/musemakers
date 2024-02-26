@@ -19,30 +19,28 @@
 
 
 
-        <VBox spacing="10.0" layoutX="50.0" layoutY="50.0">
-            <TableView fx:id="tableAtelier">
-                <columns>
+    <VBox spacing="10.0" layoutX="50.0" layoutY="50.0">
+        <TableView fx:id="tableAtelier">
+            <columns>
 
-                    <TableColumn text="Lien" fx:id="colDescription"/>
-                    <TableColumn text="Date Début" fx:id="colDateDebut"/>
-                    <TableColumn text="Date Fin" fx:id="colDateFin"/>
-                    <TableColumn fx:id="colDelete" text="Supprimer"/>
-                </columns>
-            </TableView>
-            <HBox spacing="10.0">
+                <TableColumn text="Lien" fx:id="colDescription"/>
+                <TableColumn text="Date Début" fx:id="colDateDebut"/>
+                <TableColumn text="Date Fin" fx:id="colDateFin"/>
+                <TableColumn fx:id="colDelete" text="Supprimer"/>
+            </columns>
+        </TableView>
+        <HBox spacing="10.0">
 
-                <TextField fx:id="tflien" promptText="Lien"/>
-                <DatePicker fx:id="datePickerDebut" promptText="Date Début"/>
-                <DatePicker fx:id="datePickerFin" promptText="Date Fin"/>
-                <Button fx:id="btnSave" text="Enregistrer" onAction="#saveChanges"/>
+            <TextField fx:id="tflien" promptText="Lien"/>
+            <DatePicker fx:id="datePickerDebut" promptText="Date Début"/>
+            <DatePicker fx:id="datePickerFin" promptText="Date Fin"/>
+            <Button fx:id="btnSave" text="Enregistrer" onAction="#saveChanges"/>
 
-            </HBox>
-            <Label fx:id="lblTitreError" />
-            <Label fx:id="lblDescriptionError" />
-            <Label fx:id="lblDateDebutError" />
-            <Label fx:id="lblDateFinError" />
+        </HBox>
+        <Label fx:id="lblTitreError" />
+        <Label fx:id="lblDescriptionError" />
+        <Label fx:id="lblDateDebutError" />
+        <Label fx:id="lblDateFinError" />
 
-        </VBox>
-    </AnchorPane>
-
-
+    </VBox>
+</AnchorPane>

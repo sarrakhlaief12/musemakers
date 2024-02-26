@@ -4,22 +4,28 @@ import entities.Atelier;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import service.IService;
 import service.ServiceAtelier;
 
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
-public class AfficherAtelier {
+public class AfficherAtelierNV {
 
     @FXML
     private TableView<Atelier> tableAtelier;
 
-    @FXML
-    private TableColumn<Atelier, String> colTitre;
 
     @FXML
     private TableColumn<Atelier, String> colDescription;
@@ -45,11 +51,12 @@ public class AfficherAtelier {
     @FXML
     private Button btnSave;
 
-    @FXML
-    private Button btnAdd;
+
 
     @FXML
     private Label lblTitreError, lblDescriptionError, lblDateDebutError, lblDateFinError;
+    @FXML
+    private Button ajoutid ;
 
     private Atelier atelier;
 
@@ -75,7 +82,7 @@ public class AfficherAtelier {
             if (!tableAtelier.getSelectionModel().isEmpty()) {
                 Atelier atelierSelectionne = tableAtelier.getSelectionModel().getSelectedItem();
                 // Remplir les champs avec les informations de l'atelier sélectionné
-               txtLien.setText(atelierSelectionne.getLien());
+               // txtLien.setText(atelierSelectionne.getLien());
                 datePickerDebut.setValue(atelierSelectionne.getDateDebut_atelier());
                 datePickerFin.setValue(atelierSelectionne.getDateFin_atelier());
                 atelier = atelierSelectionne;
@@ -105,6 +112,7 @@ public class AfficherAtelier {
         });
     }
 
+
     @FXML
     void saveChanges() {
         // Vérifier si un atelier est sélectionné
@@ -133,4 +141,19 @@ public class AfficherAtelier {
         alert.setContentText(message);
         alert.showAndWait();
     }
+    @FXML
+    void ajoutid(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AjouterAtelier.fxml")));
+        // Créer une nouvelle scène
+        Scene scene = new Scene(root);
+
+        // Configurer la nouvelle scène dans une nouvelle fenêtre
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Ajouter Atelier");
+
+        // Afficher la nouvelle fenêtre
+        stage.show();
+    }
+
 }
