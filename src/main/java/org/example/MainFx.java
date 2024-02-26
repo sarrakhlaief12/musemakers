@@ -24,10 +24,13 @@ public class MainFx extends Application {
     public void start(Stage primaryStage) {
         try {
           // FXMLLoader loader = new FXMLLoader(getClass().getResource("/InscriptionClient.fxml"));
-         //   FXMLLoader loader = new FXMLLoader(getClass().getResource("/InscriptionArtiste.fxml"));
-          // FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherArtiste.fxml"));
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/LoginAdmin.fxml"));
-        //        FXMLLoader loader = new FXMLLoader(getClass().getResource("/LoginClient.fxml"));
+     //     FXMLLoader loader = new FXMLLoader(getClass().getResource("/InscriptionArtiste.fxml"));
+     //   FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherClientNV.fxml"));
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("/LoginAdmin.fxml"));
+          //   FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherArtisteNV.fxml"));
+                // FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherArtiste.fxml"));
+
+            //        FXMLLoader loader = new FXMLLoader(getClass().getResource("/LoginClient.fxml"));
 
             Parent root = loader.load(); // Chargez le fichier FXML et le contrôleur
 

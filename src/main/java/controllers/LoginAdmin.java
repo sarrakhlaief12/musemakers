@@ -9,13 +9,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
+import mailling.SendEmail;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
+import java.util.Optional;
+import java.util.Random;
 
 public class LoginAdmin {
 
@@ -32,6 +37,20 @@ public class LoginAdmin {
 
     @FXML
     private Label errorLabel;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private Label usernameWarningLabel;
+    @FXML
+    private  Label  passwordWarningLabel;
+    @FXML
+    private TextField newPasswordField;
+    @FXML
+    private TextField  confirmPasswordField;
+    @FXML
+    private Label passwordChangeStatusLabel;
+    @FXML
+    private VBox changePasswordVBox;
     private static final String DB_URL = "jdbc:mysql://localhost:3306/musemakers";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = ""; // Mettez votre mot de passe de base de données ici
@@ -39,6 +58,7 @@ public class LoginAdmin {
 
 
 
+    private Connection conn;
 
     public void initialize() {
 
@@ -158,6 +178,131 @@ public class LoginAdmin {
     }
 
 
+
+    public  String generateCode() {
+        // Define characters to be used in the code
+        String characters = "0123456789";
+
+        // Initialize random object
+        Random random = new Random();
+
+        // Initialize StringBuilder to store the generated code
+        StringBuilder code = new StringBuilder();
+
+        // Generate code of length 4
+        for (int i = 0; i < 4; i++) {
+            // Generate random index within the characters string length
+            int randomIndex = random.nextInt(characters.length());
+
+            // Append character at the random index to the code
+            code.append(characters.charAt(randomIndex));
+        }
+
+        // Convert StringBuilder to String and return
+        return code.toString();
+    }
+    public void modifierPassword(String email, String newPassword) {
+        String req = "UPDATE user SET mdp = ? WHERE email = ?";
+        Connection conn = null;
+        try {
+            // Assurez-vous de remplacer DB_URL, USER et PASS par vos propres valeurs
+            conn = DriverManager.getConnection("DB_URL", "USER", "PASS");
+
+            PreparedStatement pst = conn.prepareStatement(req);
+            pst.setString(1, newPassword);
+            pst.setString(2, email);
+            int rowsAffected = pst.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Password updated successfully for user with email: " + email);
+            } else {
+                System.out.println("No user found with the email: " + email);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating password for user with email: " + email);
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @FXML
+    void forgotPasswordButtonAction(ActionEvent event) {
+        // Generate a random code
+        if (mailid.getText().isEmpty()) {
+            // Show a warning message
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter your email address.");
+            alert.showAndWait();
+            return; // Exit the method
+        }
+
+        String generatedCode = generateCode();
+
+        // Send the code via email
+        SendEmail.send(mailid.getText(), Integer.parseInt(generatedCode));
+
+        // Prompt the user to enter the code
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Verification");
+        dialog.setHeaderText("Enter the verification code sent to your email:");
+        dialog.setContentText("Code:");
+
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            String enteredCode = result.get();
+            if (enteredCode.equals(generatedCode)) {
+                // Code is correct, show success message
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("Verification successful. You can proceed to reset your password.");
+                alert.showAndWait();
+                changePasswordVBox.setVisible(true);
+
+                // Proceed to reset password page
+                // Add your code to navigate to the reset password page here
+            } else {
+                // Code is incorrect, show alert
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Invalid verification code. Please try again.");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    @FXML
+    void changePasswordAction(ActionEvent event) {
+        String newPassword = newPasswordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+
+        // Check if new password and confirm password match
+        if (!newPassword.equals(confirmPassword)) {
+            passwordChangeStatusLabel.setText("Passwords do not match.");
+            return;
+        }
+
+
+
+        // Update the password in the database
+
+        String email = mailid.getText(); // Assuming you have an emailField for the user's email
+        modifierPassword(email, newPassword);
+
+        // Show success message
+        passwordChangeStatusLabel.setText("Password changed successfully.");
+
+        changePasswordVBox.setVisible(false);
+    }
 
     /*@FXML
   private void handleButtonAction(ActionEvent event) throws IOException {

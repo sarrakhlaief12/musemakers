@@ -1,6 +1,7 @@
 package controllers;
 
 import entities.Artiste;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
@@ -20,60 +21,86 @@ import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AfficherArtiste {
-        @FXML
-        private ListView<Artiste> listView;
-        @FXML
-        private TextField nomField;
-        @FXML
-        private TextField prenomField;
-        @FXML
-        private TextField mailField;
-        @FXML
-        private TextField passeField;
-        @FXML
-        private TextField telField;
-        @FXML
-        private DatePicker dateField;
-        @FXML
-        private TextField carteproField;
-        @FXML
-        private Button browseid;
-        @FXML
-        private Button modifierid;
-        @FXML
-        private Button supprimerid;
+public class AfficherArtisteNV {
+    @FXML
+    private ListView<Artiste> listView;
+    @FXML
+    private TextField nomField;
+    @FXML
+    private TextField prenomField;
+    @FXML
+    private TextField mailField;
+    @FXML
+    private TextField passeField;
+    @FXML
+    private TextField telField;
+    @FXML
+    private DatePicker dateField;
+    @FXML
+    private TextField carteproField;
+    @FXML
+    private Button browseid;
+    @FXML
+    private Button modifierid;
+    @FXML
+    private Button supprimerid;
+    @FXML
+    private TextField searchField;
+    private ObservableList<Artiste> observableList;
 
-        public void initialize() {
-            // Obtenez la liste des artistes à partir de votre service
-            Set<Artiste> artistes = getAllArtists();
+    public void initialize() {
+        // Obtenez la liste des artistes à partir de votre service
+        Set<Artiste> artistes = getAllArtists();
 
-            // Convertir le Set en ObservableList
-            ObservableList<Artiste> observableList = FXCollections.observableArrayList(artistes);
+        // Convertir le Set en ObservableList
+        ObservableList<Artiste> observableList = FXCollections.observableArrayList(artistes);
 
-            // Ajoutez les artistes à la ListView
-            listView.setItems(observableList);
+        // Créez un FilteredList
+        FilteredList<Artiste> filteredList = new FilteredList<>(observableList, b -> true);
 
-            // Ajoutez un ChangeListener à la sélection du ListView
-            listView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-                if (newSelection != null) {
-                    Artiste selectedArtiste = listView.getSelectionModel().getSelectedItem();
-                    nomField.setText(selectedArtiste.getNom_user());
-                    prenomField.setText(selectedArtiste.getPrenom_user());
-                    mailField.setText(selectedArtiste.getEmail());
-                    passeField.setText(selectedArtiste.getMdp());
-                    telField.setText(String.valueOf(selectedArtiste.getNum_tel()));
-                    java.sql.Date sqlDate = (Date) selectedArtiste.getDate_de_naissance();
-                    java.time.LocalDate localDate = sqlDate.toLocalDate();
-                    dateField.setValue(localDate);
-                    carteproField.setText(selectedArtiste.getCartepro());
+        // Configurez un écouteur sur le TextField
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredList.setPredicate(artiste -> {
+                // Si le TextField est vide, affichez tous les artistes
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Comparez le nom et le prénom de chaque artiste avec le texte de recherche
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (artiste.getNom_user().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Le filtre correspond au nom.
+                } else if (artiste.getPrenom_user().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Le filtre correspond au prénom.
+                } else {
+                    return false; // Aucune correspondance.
                 }
             });
+        });
 
-            //delete
-            supprimerid.setOnAction(e -> handleDelete());
-            modifierid.setOnAction(e -> handleUpdate());
-        }
+        // Ajoutez les artistes à la ListView
+        listView.setItems(filteredList);
+
+        // Ajoutez un ChangeListener à la sélection du ListView
+        listView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                Artiste selectedArtiste = listView.getSelectionModel().getSelectedItem();
+                nomField.setText(selectedArtiste.getNom_user());
+                prenomField.setText(selectedArtiste.getPrenom_user());
+                mailField.setText(selectedArtiste.getEmail());
+                passeField.setText(selectedArtiste.getMdp());
+                telField.setText(String.valueOf(selectedArtiste.getNum_tel()));
+                java.sql.Date sqlDate = (Date) selectedArtiste.getDate_de_naissance();
+                java.time.LocalDate localDate = sqlDate.toLocalDate();
+                dateField.setValue(localDate);
+                carteproField.setText(selectedArtiste.getCartepro());
+            }
+        });
+
+        //delete
+        supprimerid.setOnAction(e -> handleDelete());
+        modifierid.setOnAction(e -> handleUpdate());
+    }
 
 
 
@@ -110,7 +137,7 @@ public class AfficherArtiste {
     }
 
     private void handleDelete() {
-        // Obtenez l'artiste sélectionné dans le TableView
+        // Obtenez l'artiste sélectionné dans le ListView
         Artiste selectedArtiste = listView.getSelectionModel().getSelectedItem();
 
         if (selectedArtiste != null) {
@@ -118,13 +145,22 @@ public class AfficherArtiste {
             ServiceUser serviceArtiste = new ServiceUser();
             serviceArtiste.supprimer(selectedArtiste.getId_user());
 
-            // Supprimez l'artiste de la TableView
-            listView.getItems().remove(selectedArtiste);
+            // Récupérez à nouveau la liste des artistes à partir de votre service
+            Set<Artiste> artistes = getAllArtists();
+
+            // Convertir le Set en ObservableList
+            observableList = FXCollections.observableArrayList(artistes);
+
+            // Créez une nouvelle FilteredList et mettez à jour la ListView
+            FilteredList<Artiste> filteredList = new FilteredList<>(observableList, b -> true);
+            listView.setItems(filteredList);
         } else {
             System.out.println("Aucun artiste n'est sélectionné.");
         }
-
     }
+
+
+
 
     // Votre méthode pour obtenir tous les artistes
     public Set<Artiste> getAllArtists() {

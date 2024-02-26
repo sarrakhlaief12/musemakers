@@ -7,8 +7,8 @@ import javafx.stage.FileChooser;
 import service.ServiceUser;
 
 import java.io.File;
+import java.sql.*;
 import java.time.LocalDate;
-import java.sql.Date;
 
 public class InscriptionArtiste {
 
@@ -71,10 +71,39 @@ public class InscriptionArtiste {
             alert.showAndWait();
             return;
         }
+        if (passwordExists(password)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur d'inscription");
+            alert.setHeaderText(null);
+            alert.setContentText("Le mot de passe existe déjà !");
+            alert.showAndWait();
+            return;
+        }
+
 
         Artiste artiste = new Artiste(nom, prenom, email, password, tel, Date.valueOf(date), cartepro);
         ServiceUser serviceUser = new ServiceUser();
         serviceUser.ajouter(artiste);
+    }
+    private boolean passwordExists(String password) {
+        // Remplacez cette requête SQL par la requête appropriée pour votre base de données
+        String sql = "SELECT COUNT(*) FROM user WHERE mdp = ?";
+
+        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/musemakers", "root", "");
+             PreparedStatement pstmt = cnx.prepareStatement(sql)) {
+
+            pstmt.setString(1, password);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
     }
 
     @FXML
