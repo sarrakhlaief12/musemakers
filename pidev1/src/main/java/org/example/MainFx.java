@@ -25,7 +25,7 @@ import java.io.IOException;
 
            // FXMLLoader loader= new FXMLLoader(getClass().getResource("//AjouterAtelier.fxml"));
             //Parent root=loader.load(getClass().getResource("/AjouterAtelier.fxml"));
-             FXMLLoader loader= new FXMLLoader(getClass().getResource("//AfficherAtelierNV.fxml"));
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherAtelierNV.fxml"));
             Parent root=loader.load(getClass().getResource("/AfficherAtelierNV.fxml"));
             Scene scene=new Scene(root);
             primaryStage.setScene(scene);

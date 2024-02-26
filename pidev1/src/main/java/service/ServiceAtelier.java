@@ -18,7 +18,7 @@ public class ServiceAtelier implements IService<Atelier>{
 
     @Override
     public void ajouter(Atelier atelier) {
-        String requete ="insert into atelier ( id_cours, dateDebut_atelier, dateFin_atelier, lien_atelier) VALUES ( ?, ?,?,?)";
+        String requete ="insert into atelier ( id_cours, dateDebut_atelier, dateFin_atelier, lien_atelier) VALUES (?, ?,?,?)";
         try {
             PreparedStatement pst = conn.prepareStatement(requete);
             pst.setInt(1, 6); // Supposons que l'id_cours soit la clé étrangère
@@ -57,16 +57,17 @@ public class ServiceAtelier implements IService<Atelier>{
 
     @Override
     public void modifier(Atelier p) {
-        String requete = "UPDATE atelier SET cour = ?, dateDebut_atelier = ?, dateFin_atelier = ?, lien_atelier = ? WHERE id_atelier = ?";
+        String requete = "UPDATE atelier SET id_cours = ?, dateDebut_atelier = ?, dateFin_atelier = ?, lien_atelier = ? WHERE id_atelier = ?";
 
         try (
              PreparedStatement pstmt = conn.prepareStatement(requete)) {
 
-            pstmt.setInt(1, p.getId_atelier());
-            pstmt.setObject(2, p.getCour()); // Vous devrez peut-être convertir `Cour` en un type approprié
-            pstmt.setString(3, p.getDateDebut_atelier().toString());
-            pstmt.setString(4, p.getDateFin_atelier().toString());
-            pstmt.setString(5, p.getLien());
+
+            pstmt.setObject(1, p.getCour().getId_cours()); // Vous devrez peut-être convertir `Cour` en un type approprié
+            pstmt.setString(2, p.getDateDebut_atelier().toString());
+            pstmt.setString(3, p.getDateFin_atelier().toString());
+            pstmt.setString(4, p.getLien());
+            pstmt.setInt(5, p.getId_atelier());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {

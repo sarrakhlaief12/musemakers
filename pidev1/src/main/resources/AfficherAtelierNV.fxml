@@ -62,7 +62,8 @@
                         <DatePicker fx:id="datePickerDebut" layoutX="215.0" layoutY="263.0" promptText="Date Début" />
                         <DatePicker fx:id="datePickerFin" layoutX="412.0" layoutY="264.0" promptText="Date Fin" />
                         <Button fx:id="btnSave" layoutX="599.0" layoutY="261.0" onAction="#saveChanges" text="Enregistrer" />
-                        <Button fx:id="ajoutid" layoutX="386.0" layoutY="24.0" mnemonicParsing="false" text="Ajouter Atelier" />
+                        <Button fx:id="ajouterid" layoutX="412.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleAjouterAtelier" text="AjouterAtelier" />
+                       
                             </children>
                         </AnchorPane>
                   <TableView fx:id="tableAtelier" layoutX="10.0" layoutY="10.0" prefHeight="229.0" prefWidth="342.0">

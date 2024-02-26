@@ -40,7 +40,7 @@ public class AfficherAtelierNV {
     private TableColumn<Atelier, Void> colDelete;
 
     @FXML
-    private TextField txtLien;
+    private TextField tflien;
 
     @FXML
     private DatePicker datePickerDebut;
@@ -55,8 +55,9 @@ public class AfficherAtelierNV {
 
     @FXML
     private Label lblTitreError, lblDescriptionError, lblDateDebutError, lblDateFinError;
+
     @FXML
-    private Button ajoutid ;
+    private Button ajoutid;
 
     private Atelier atelier;
 
@@ -82,7 +83,8 @@ public class AfficherAtelierNV {
             if (!tableAtelier.getSelectionModel().isEmpty()) {
                 Atelier atelierSelectionne = tableAtelier.getSelectionModel().getSelectedItem();
                 // Remplir les champs avec les informations de l'atelier sélectionné
-               // txtLien.setText(atelierSelectionne.getLien());
+                tflien.setText(atelierSelectionne.getLien());
+                System.out.println(atelierSelectionne.getLien());
                 datePickerDebut.setValue(atelierSelectionne.getDateDebut_atelier());
                 datePickerFin.setValue(atelierSelectionne.getDateFin_atelier());
                 atelier = atelierSelectionne;
@@ -118,7 +120,7 @@ public class AfficherAtelierNV {
         // Vérifier si un atelier est sélectionné
         if (atelier != null) {
             // Mettre à jour l'objet atelier avec les nouvelles valeurs
-            atelier.setLien(txtLien.getText());
+            atelier.setLien(tflien.getText());
             atelier.setDateDebut_atelier(datePickerDebut.getValue());
             atelier.setDateFin_atelier(datePickerFin.getValue());
 
@@ -141,19 +143,20 @@ public class AfficherAtelierNV {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    @FXML
-    void ajoutid(ActionEvent event) throws IOException {
+
+
+
+    public void handleAjouterAtelier(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AjouterAtelier.fxml")));
         // Créer une nouvelle scène
         Scene scene = new Scene(root);
 
         // Configurer la nouvelle scène dans une nouvelle fenêtre
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("Ajouter Atelier");
 
         // Afficher la nouvelle fenêtre
         stage.show();
     }
-
 }
