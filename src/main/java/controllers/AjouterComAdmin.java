@@ -56,7 +56,7 @@ public class AjouterComAdmin {
         try {
             CommentaireList = cs.getAll();
             for (Commentaire commentaire : CommentaireList) {
-                User user = su.getOneById(2);  // Remplacez '1' par l'ID de l'utilisateur approprié
+                User user = su.getOneById(20);  // Remplacez '1' par l'ID de l'utilisateur approprié
                 commentaire.setUser(user);
                 commentaire.setUserNom(user.getNom_user());  // Assurez-vous que la classe User a une méthode getNom()
             }
@@ -68,13 +68,13 @@ public class AjouterComAdmin {
         CvNomA.setCellValueFactory(new PropertyValueFactory<>("userNom"));
         TableViewComA.setItems(FXCollections.observableArrayList(CommentaireList).sorted());
     }
-
+/*
     @FXML
     void ajouter(ActionEvent event) throws IOException {
         Commentaire c = new Commentaire();
         Reclamation r = null ; // Remplacez 1 par l'ID de la réclamation appropriée
         try {
-            r = rs.getOneById(113);
+            r = rs.getOneById(20);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -88,7 +88,7 @@ public class AjouterComAdmin {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     @FXML
     void modifier(ActionEvent event) throws IOException {
@@ -136,7 +136,22 @@ public class AjouterComAdmin {
     }
 
 
+    public void ajouterr(ActionEvent actionEvent) { Commentaire c = new Commentaire();
+        Reclamation r = null ; // Remplacez 1 par l'ID de la réclamation appropriée
+        try {
+            r = rs.getOneById(20);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        c.setReclamation(r);
+        c.setContenuCom(comTF.getText());
+        c.setDateCom(new Date(System.currentTimeMillis()));
 
-
-
+        try {
+            cs.ajouter(c);
+            ShowCommentaire(); // Rafraîchir les données de la table
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

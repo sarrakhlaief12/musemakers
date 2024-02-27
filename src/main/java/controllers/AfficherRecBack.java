@@ -36,8 +36,7 @@ public class AfficherRecBack {
     @FXML
     private TableView<Reclamation> TableViewRecB;
     @FXML
-    private Button modifier;
-
+private  Button modifier;
     @FXML
     private Label satut;
 
@@ -85,15 +84,15 @@ public class AfficherRecBack {
 
 
 
+
+
+
     @FXML
-    private void modifier(ActionEvent event) throws SQLException {
+    private void supprimer(ActionEvent event) throws SQLException {
         Reclamation selectedRec = (Reclamation) TableViewRecB.getSelectionModel().getSelectedItem();
         if (selectedRec != null) {
-            // Change status here, for example:
-            selectedRec.setStatutRec(stat.getText()); // get new status from TextField
-
-            // Update in database
-            rs.modifier(selectedRec);
+            // Delete from database
+            rs.supprimer(selectedRec.getIdRec());
 
             // Refresh table view
             try {
@@ -104,13 +103,14 @@ public class AfficherRecBack {
         }
     }
 
-
-    @FXML
-    private void supprimer(ActionEvent event) throws SQLException {
+    public void modifierr(ActionEvent actionEvent) throws SQLException {
         Reclamation selectedRec = (Reclamation) TableViewRecB.getSelectionModel().getSelectedItem();
         if (selectedRec != null) {
-            // Delete from database
-            rs.supprimer(selectedRec.getIdRec());
+            // Change status here, for example:
+            selectedRec.setStatutRec(stat.getText()); // get new status from TextField
+
+            // Update in database
+            rs.modifier(selectedRec);
 
             // Refresh table view
             try {

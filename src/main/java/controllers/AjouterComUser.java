@@ -87,7 +87,7 @@ public class AjouterComUser {
         Commentaire c = new Commentaire();
         Reclamation r = null ; // Remplacez 1 par l'ID de la réclamation appropriée
         try {
-            r = rs.getOneById(178);
+            r = rs.getOneById(20);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

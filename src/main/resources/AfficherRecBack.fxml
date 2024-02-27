@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -14,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="626.0" prefWidth="981.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherRecBack">
+<AnchorPane prefHeight="626.0" prefWidth="981.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherRecBack">
     <stylesheets>
         <URL value="@../style.css" />
     </stylesheets>
@@ -34,9 +40,7 @@
                         <AnchorPane prefHeight="119.0" prefWidth="1034.0" style="-fx-background-color: ffff;">
                             <children>
                                 <ImageView fitHeight="105.0" fitWidth="94.0" layoutX="473.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@img/logo.png" />
-                                    </image>
+
                                 </ImageView>
                                 <Button layoutX="143.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Les artistes" />
                                 <Button fx:id="button_afficher" layoutX="300.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Les chefs d'oeuvres" />
@@ -67,12 +71,12 @@
                               <TableColumn fx:id="CvStatut" prefWidth="98.39999999999998" text="Statut" />
                            </columns>
                         </TableView>
+                        <Button fx:id="modifier" layoutX="230.0" layoutY="332.0" mnemonicParsing="false" onAction="#modifierr" text="modifier" />
+                        <Button fx:id="supprimer" layoutX="320.0" layoutY="332.0" mnemonicParsing="false" text="supprimer" />
                             </children>
                         </AnchorPane>
                   <Label fx:id="satut" layoutX="38.0" layoutY="312.0" text="Statut du reclamation :" />
                   <TextField fx:id="stat" layoutX="38.0" layoutY="337.0" promptText="Statut" />
-                  <Button fx:id="modifier" layoutX="209.0" layoutY="337.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
-                  <Button fx:id="supprimer" layoutX="292.0" layoutY="337.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
                     </children>
                 </AnchorPane>
             </center>

@@ -34,14 +34,9 @@
                         <AnchorPane prefHeight="119.0" prefWidth="1034.0" style="-fx-background-color: ffff;">
                             <children>
                                 <ImageView fitHeight="105.0" fitWidth="94.0" layoutX="473.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@img/logo.png" />
-                                    </image>
+
                                 </ImageView>
-                                <Button layoutX="143.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Les artistes" />
-                                <Button fx:id="button_afficher" layoutX="300.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Les chefs d'oeuvres" />
-                                <Button layoutX="719.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" styleClass="underline-button" text="Réservations" />
-                                <Button layoutX="564.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="145.0" styleClass="underline-button" text="Expositions" />
+
                                 <Button layoutX="873.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Reclamations" />
                             </children>
                         </AnchorPane>
@@ -66,7 +61,7 @@
                         </TableView>
                         <Label layoutX="10.0" layoutY="10.0" text="Commentaire:" />
                         <TextField fx:id="comTF" layoutX="14.0" layoutY="35.0" promptText="Commentaire" />
-                        <Button fx:id="ajouter" layoutX="16.0" layoutY="83.0" onAction="#ajouter" text="Ajouter" />
+                        <Button fx:id="ajouter" layoutX="16.0" layoutY="83.0" onAction="#ajouterr" text="Ajouter" />
                         <Button fx:id="modifier" layoutX="83.0" layoutY="83.0" onAction="#modifier" text="Modifier" />
                         <Button fx:id="supprimer" layoutX="160.0" layoutY="83.0" onAction="#supprimer" text="Supprimer" />
                             </children>

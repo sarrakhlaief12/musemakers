@@ -32,11 +32,9 @@ public class AfficherReclamations {
     private ListView<Reclamation> ListViewRec;
 
     @FXML
-    private Button ajouter;
-
-    @FXML
     private Label cate;
-
+    @FXML
+    private Button ajouter;
     @FXML
     private Label desc;
 
@@ -55,7 +53,7 @@ public class AfficherReclamations {
     @FXML
     void ajouter(ActionEvent event) throws IOException {
         Reclamation r = new Reclamation();
-        User userAdd = su.getOneById(2);
+        User userAdd = su.getOneById(20);
         String descriRec = descriRecTF.getText();
 
         // Ajouter le contrôle de saisie ici

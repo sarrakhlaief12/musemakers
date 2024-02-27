@@ -38,19 +38,14 @@
                         <AnchorPane prefHeight="120.0" prefWidth="1198.0" style="-fx-background-color: ffff;">
                             <children>
                                 <ImageView fitHeight="105.0" fitWidth="94.0" layoutX="23.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@img/logo.png" />
-                                    </image>
+
                                 </ImageView>
                                 <Button layoutX="207.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: transparant;" text="Les artistes">
                                     <styleClass>
                                         <String fx:value="underline-button" />
                                         <String fx:value="underline-button" />
                                     </styleClass></Button>
-                                <Button layoutX="207.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Les artistes" />
-                                <Button fx:id="button_afficher" layoutX="392.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" styleClass="underline-button" text="Les chefs d'oeuvres" />
-                                <Button layoutX="719.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" styleClass="underline-button" text="Réservations" />
-                                <Button layoutX="564.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="145.0" styleClass="underline-button" text="Expositions" />
+
                                 <Button layoutX="873.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="underline-button" text="Reclamations" />
 
                             </children>
