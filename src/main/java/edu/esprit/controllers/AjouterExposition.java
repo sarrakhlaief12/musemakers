@@ -17,8 +17,10 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -30,9 +32,9 @@ public class AjouterExposition {
     @FXML
     public Button buttonaddExpoID;
     @FXML
-    private TextField startDateTimeTextField;
+    private DatePicker startDateTimeTextField;
     @FXML
-    private TextField endDateTimeTextField;
+    private DatePicker endDateTimeTextField;
     @FXML
     public TextField pathimageid;
 
@@ -43,58 +45,43 @@ public class AjouterExposition {
     @FXML
     public TextField nomExpoId;
 
-    private final String FORMAT_ATTENDU = "yyyy-MM-dd HH:mm";
+    private final String FORMAT_ATTENDU = "yyyy-MM-dd";
 
     @FXML
     public Button browseButton;
     public void addExpo(ActionEvent event) throws IOException, SQLException {
         // Vérifiez si tous les champs sont remplis
-        if (nomExpoId.getText().isEmpty() || startDateTimeTextField.getText().isEmpty() ||
-                endDateTimeTextField.getText().isEmpty() || descriptionId.getText().isEmpty() ||
+        if (nomExpoId.getText().isEmpty() || startDateTimeTextField.getValue() == null ||
+                endDateTimeTextField.getValue() == null || descriptionId.getText().isEmpty() ||
                 themeID.getValue() == null || pathimageid.getText().isEmpty()) {
             // Affichez un message d'erreur et quittez la méthode
             showAlert("Erreur", "Veuillez remplir tous les champs", Alert.AlertType.ERROR);
             return;
         }
+        LocalDate startDate=startDateTimeTextField.getValue();
+        LocalDate endDay=endDateTimeTextField.getValue();
 
-        String startDateTimeInput = startDateTimeTextField.getText();
-        String endDateTimeInput = endDateTimeTextField.getText();
 
-        // Parse the entered start date and time
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime startLocalDateTime;
-        LocalDateTime endLocalDateTime;
-
-        try {
-            startLocalDateTime = LocalDateTime.parse(startDateTimeInput, dateTimeFormatter);
-            endLocalDateTime = LocalDateTime.parse(endDateTimeInput, dateTimeFormatter);
-        } catch (Exception e) {
-            // En cas d'une exception, affichez un message d'erreur et quittez la méthode
-            showAlert("Erreur", "Format de date/heure invalide", Alert.AlertType.ERROR);
-            return;
-        }
 
         // Vérifiez si la date de début est antérieure à la date actuelle
-        if (startLocalDateTime.isBefore(LocalDateTime.now())) {
+        if (startDate.isBefore(LocalDate.now())) {
             showAlert("Erreur", "La date de début ne peut pas être antérieure à la date actuelle", Alert.AlertType.ERROR);
             return;
         }
 
         // Vérifiez si la date de fin est postérieure à la date de début
-        if (endLocalDateTime.isBefore(startLocalDateTime)) {
+        if (endDay.isBefore(startDate)) {
             showAlert("Erreur", "La date de fin doit être après la date de début", Alert.AlertType.ERROR);
             return;
         }
 
-        // Convert LocalDateTime to Timestamp
-        Timestamp startTimestamp = Timestamp.valueOf(startLocalDateTime);
-        Timestamp endTimestamp = Timestamp.valueOf(endLocalDateTime);
+
 
         // Ajoutez l'exposition uniquement si toutes les validations ont réussi
         exp.ajouter(new Exposition(
                 nomExpoId.getText(),
-                startTimestamp,
-                endTimestamp,
+                Date.valueOf(startDate),
+                Date.valueOf(endDay),
                 descriptionId.getText(),
                 themeID.getValue(),
                 pathimageid.getText()));
@@ -149,12 +136,14 @@ public class AjouterExposition {
 
     public void initialize() {
         // Ajouter un écouteur de changement de texte
-        endDateTimeTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+        endDateTimeTextField.valueProperty().addListener((observable, oldValue, newValue) -> {
             // Si le champ est vidé, rétablir le texte d'exemple
-            if (newValue.isEmpty()) {
-                endDateTimeTextField.setText(FORMAT_ATTENDU);
+            if (newValue == null) {
+                endDateTimeTextField.setPromptText(FORMAT_ATTENDU);
             }
-        });}
+        });
+    }
+
     @FXML
     void browseImage(ActionEvent event) {
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

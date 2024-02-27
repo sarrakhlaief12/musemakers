@@ -4,6 +4,7 @@ import edu.esprit.entities.Exposition;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,8 +17,8 @@ public class ServiceExposition implements IService<Exposition> {
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, exp.getNom());
-            ps.setTimestamp(2, exp.getDateDebut());
-            ps.setTimestamp(3, exp.getDateFin());
+            ps.setDate(2, exp.getDateDebut());
+            ps.setDate(3, exp.getDateFin());
             ps.setString(4, exp.getDescription());
             ps.setString(5, exp.getTheme());
             ps.setString(6, exp.getImage());
@@ -35,8 +36,8 @@ public class ServiceExposition implements IService<Exposition> {
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, exp.getNom());
-            ps.setTimestamp(2, exp.getDateDebut());
-            ps.setTimestamp(3, exp.getDateFin());
+            ps.setDate(2, exp.getDateDebut());
+            ps.setDate(3, exp.getDateFin());
             ps.setString(4, exp.getDescription());
             ps.setString(5, exp.getTheme());
             ps.setString(6, exp.getImage());
@@ -81,8 +82,8 @@ public class ServiceExposition implements IService<Exposition> {
 
             if (res.next()) {
                 String nom = res.getString("nom");
-                Timestamp dateDebut = res.getTimestamp("Date_debut");
-                Timestamp dateFin = res.getTimestamp("Date_fin");
+                Date dateDebut = res.getDate("Date_debut");
+                Date dateFin = res.getDate("Date_fin");
                 String description = res.getString("Description");
                 String theme = res.getString("Theme");
                 String image = res.getString("image");
@@ -106,8 +107,8 @@ public class ServiceExposition implements IService<Exposition> {
             while (res.next()) {
                 int id = res.getInt(1);
                 String nom = res.getString(2);
-                Timestamp date_debut = res.getTimestamp(3);
-                Timestamp date_fin = res.getTimestamp(4);
+                Date date_debut = res.getDate(3);
+                Date date_fin = res.getDate(4);
                 String description = res.getString(5);
                 String theme = res.getString(6);
                 String image = res.getString(7);
@@ -132,8 +133,8 @@ public class ServiceExposition implements IService<Exposition> {
             while (res.next()) {
                 int id = res.getInt(1);
                 String expositionNom = res.getString(2);
-                Timestamp dateDebut = res.getTimestamp(3);
-                Timestamp dateFin = res.getTimestamp(4);
+                Date dateDebut = res.getDate(3);
+                Date dateFin = res.getDate(4);
 
                 String description = res.getString(5);
                 String expositionTheme = res.getString(6);

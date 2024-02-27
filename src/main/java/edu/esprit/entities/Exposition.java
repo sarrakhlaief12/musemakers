@@ -1,21 +1,22 @@
 package edu.esprit.entities;
 
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.sql.Date;
 import java.util.Objects;
 
 public class Exposition {
     private int id;
     private String nom;
-    private Timestamp dateDebut;
-    private Timestamp dateFin;
+    private Date dateDebut;
+    private Date dateFin;
     private String description;
     private String theme;
     private String image;
     public Exposition(){}
 
-    public Exposition(int id, String nom, Timestamp dateDebut, Timestamp dateFin, String description, String theme, String image) {
+    public Exposition(int id, String nom, Date dateDebut, Date dateFin, String description, String theme, String image) {
         this.id = id;
         this.nom = nom;
         this.dateDebut = dateDebut;
@@ -26,7 +27,7 @@ public class Exposition {
         this.theme = theme;
         this.image = image;
     }
-    public Exposition( String nom, Timestamp dateDebut, Timestamp dateFin, String description, String theme, String image) {
+    public Exposition( String nom, Date dateDebut, Date dateFin, String description, String theme, String image) {
 
         this.nom = nom;
         this.dateDebut = dateDebut;
@@ -56,19 +57,19 @@ public class Exposition {
 
     }
 
-    public Timestamp getDateDebut() {
+    public Date getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(Timestamp dateDebut) {
+    public void setDateDebut(Date dateDebut) {
         this.dateDebut = dateDebut;
 
     }
-    public Timestamp getDateFin() {
+    public Date getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(Timestamp dateFin) {
+    public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
 
     }

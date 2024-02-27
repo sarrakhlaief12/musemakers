@@ -87,7 +87,7 @@ public class AfficherExpositionClient {
             // Labels pour les détails de l'exposition
             Label nameLabel = new Label("Nom: " + expo.getNom());
 //            Label dateLabel = new Label("Date: " + formatDate(expo.getDateDebut()) + " - " + formatDate(expo.getDateFin()));
-            Label dateTimeLabel = new Label("Date et Heure: " + formatDateTime(expo.getDateDebut()) + " - " + formatDateTime(expo.getDateFin()));
+            Label dateTimeLabel = new Label("Date d: " + formatDateTime(expo.getDateDebut()) + " - " + formatDateTime(expo.getDateFin()));
 
             Label themeLabel = new Label("Thème: " + expo.getTheme());
             Label descriptionLabel = new Label("Description: " + expo.getDescription());
@@ -96,6 +96,7 @@ public class AfficherExpositionClient {
             // Bouton pour réserver l'exposition
             Button reserveButton = new Button("Réserver");
             reserveButton.setId("btnreserverexposition");
+            reserveButton.setOnAction(event -> showReservationDialog(expo));
 
             // Ajouter les composants au VBox des détails
             detailsVBox.getChildren().addAll(nameLabel, dateTimeLabel, themeLabel, descriptionLabel, reserveButton);
@@ -121,7 +122,7 @@ public class AfficherExpositionClient {
 
     // Méthode pour formater la date
     private String formatDateTime(java.util.Date date) {
-        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateTimeFormat.format(date);
     }
     private void showReservationDialog(Exposition expo) {

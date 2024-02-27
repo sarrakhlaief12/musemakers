@@ -2,6 +2,8 @@ package edu.esprit.entities;
 
 import java.net.ProtocolFamily;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 public class Reservation {
@@ -124,9 +126,9 @@ public String getExpositionNom() {
     public String getUserEmail() {
         return client.getEmail();
     }
-    public Timestamp getExpositionDateD() {
+    public Date getExpositionDateD() {
         return exposition.getDateDebut();
-    }public Timestamp getExpositionDateF() {
+    }public Date getExpositionDateF() {
         return exposition.getDateFin();
     }
 

@@ -24,10 +24,12 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 public class AfficherExposition {
@@ -35,10 +37,10 @@ public class AfficherExposition {
     private TableView<Exposition>  TableView;
 
     @FXML
-    private TableColumn<Exposition, Timestamp> date_debut;
+    private TableColumn<Exposition, Date> date_debut;
 
     @FXML
-    private TableColumn<Exposition, Timestamp> date_fin;
+    private TableColumn<Exposition, Date> date_fin;
     @FXML
     private TableColumn<Exposition, String> imgDisplay;
 
@@ -141,8 +143,8 @@ public class AfficherExposition {
 
         // Customize the controls in the dialog for editing
         TextField nomField = new TextField(exposition.getNom());
-        TextField dateDebutField = new TextField(exposition.getDateDebut().toString());
-        TextField dateFinField = new TextField(exposition.getDateFin().toString());
+        DatePicker dateDebutField = new DatePicker(exposition.getDateDebut().toLocalDate());
+        DatePicker dateFinField = new DatePicker(exposition.getDateFin().toLocalDate());
         TextArea descriptionField = new TextArea(exposition.getDescription());
 
         // Ajout du ComboBox pour le thème
@@ -188,23 +190,22 @@ public class AfficherExposition {
         dialog.setResultConverter(buttonType -> {
             if (buttonType == buttonTypeOk) {
                 String newNom = nomField.getText();
-                Timestamp newDateDebut = Timestamp.valueOf(dateDebutField.getText());
-                Timestamp newDateFin = Timestamp.valueOf(dateFinField.getText());
+
                 String newDescription = descriptionField.getText();
                 String newTheme = themeComboBox.getValue(); // Utilisez le ComboBox pour obtenir la valeur du thème
                 String newImage = imageField.getText();
 
-                LocalDateTime newLocalDateDebut = newDateDebut.toLocalDateTime();
-                LocalDateTime newLocalDateFin = newDateFin.toLocalDateTime();
-
-                if (newNom.isEmpty() || dateFinField.getText().isEmpty() ||
-                        dateDebutField.getText().isEmpty() || newDescription.isEmpty() ||
+                if (newNom.isEmpty() || dateDebutField.getValue() == null ||
+                        dateFinField.getValue() == null || newDescription.isEmpty() ||
                         newTheme == null || newImage.isEmpty()) {
                     showAlert("Erreur", "Veuillez remplir tous les champs", Alert.AlertType.ERROR);
                     return null;
                 }
 
-                if (newLocalDateDebut.isBefore(LocalDateTime.now())) {
+                LocalDate newLocalDateDebut = dateDebutField.getValue();
+                LocalDate newLocalDateFin = dateFinField.getValue();
+
+                if (newLocalDateDebut.isBefore(LocalDate.now())) {
                     showAlert("Erreur", "La date de début ne peut pas être antérieure à la date actuelle", Alert.AlertType.ERROR);
                     return null;
                 }
@@ -216,8 +217,8 @@ public class AfficherExposition {
 
                 try {
                     exposition.setNom(newNom);
-                    exposition.setDateDebut(newDateDebut);
-                    exposition.setDateFin(newDateFin);
+                    exposition.setDateDebut(Date.valueOf(newLocalDateDebut));
+                    exposition.setDateFin(Date.valueOf(newLocalDateFin));
                     exposition.setDescription(newDescription);
                     exposition.setTheme(newTheme);
                     exposition.setImage(newImage);
@@ -228,7 +229,6 @@ public class AfficherExposition {
                     int index = TableView.getItems().indexOf(exposition);
                     TableView.getItems().set(index, exposition);
 
-
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -238,6 +238,7 @@ public class AfficherExposition {
 
         dialog.showAndWait();
     }
+
 
     private void showAlert(String title, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
@@ -287,9 +288,6 @@ public class AfficherExposition {
             openEditDialog(selectedRec);
         }
     }
-
-
-
 
 
 
