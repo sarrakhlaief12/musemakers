@@ -19,10 +19,14 @@ import java.io.IOException;
 
            // FXMLLoader loader= new FXMLLoader(getClass().getResource("//AfficherCourNV.fxml"));
            // Parent root= loader.load(getClass().getResource("/AfficherCourNV.fxml"));
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("//AfficherCourFront.fxml"));
-            Parent root= loader.load(getClass().getResource("/AfficherCourFront.fxml"));
+           // FXMLLoader loader= new FXMLLoader(getClass().getResource("//AfficherCourFront.fxml"));
+           // Parent root= loader.load(getClass().getResource("/AfficherCourFront.fxml"));
+            // FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherCourFrontNV.fxml"));
+             //Parent root= loader.load(getClass().getResource("/AfficherCourFrontNV.fxml"));
            //FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterCourController.fxml"));
           // Parent root=loader.load(getClass().getResource("/AjouterCourController.fxml"));
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterCourNV.fxml"));
+             Parent root=loader.load(getClass().getResource("/AjouterCourNV.fxml"));
 
 
            // FXMLLoader loader= new FXMLLoader(getClass().getResource("//AjouterAtelier.fxml"));
