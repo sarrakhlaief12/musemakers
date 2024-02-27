@@ -110,15 +110,46 @@ public class AfficherCourNV {
 
     @FXML
     void saveChanges() {
-        // Mettre à jour l'objet cour avec les nouvelles valeurs
-        cour.setTitre_cours(txtTitre.getText());
-        cour.setDescription_cours(txtDescription.getText());
-        cour.setDateDebut_cours(datePickerDebut.getValue());
-        cour.setDateFin_cours(datePickerFin.getValue());
+            try {
+                // Vérifier que le titre et la description ne sont pas vides
+                String titre = txtTitre.getText().trim();
+                String description = txtDescription.getText().trim();
+                if (titre.isEmpty() || description.isEmpty()) {
+                    throw new IllegalArgumentException("Le titre et la description ne peuvent pas être vides.");
+                }
 
-        // Mettre à jour l'objet cour dans la base de données
-        serviceCour.modifier(cour);
+                // Vérifier que le titre ne contient que des lettres et des espaces
+                if (!titre.matches("^[a-zA-Z\\s]+$")) {
+                    throw new IllegalArgumentException("Le titre ne peut contenir que des lettres et des espaces.");
+                }
 
-        // Rafraîchir le tableau
-        tableCour.refresh();
-    }}
+                // Vérifier que la date de fin est postérieure à la date de début
+                LocalDate dateDebut = datePickerDebut.getValue();
+                LocalDate dateFin = datePickerFin.getValue();
+                if (dateFin.isBefore(dateDebut)) {
+                    throw new IllegalArgumentException("La date de fin doit être postérieure à la date de début.");
+                }
+
+                // Mettre à jour l'objet cour avec les nouvelles valeurs
+                cour.setTitre_cours(titre);
+                cour.setDescription_cours(description);
+                cour.setDateDebut_cours(dateDebut);
+                cour.setDateFin_cours(dateFin);
+
+                // Mettre à jour l'objet cour dans la base de données
+                serviceCour.modifier(cour);
+
+                // Rafraîchir le tableau
+                tableCour.refresh();
+            } catch (Exception e) {
+                // Gérer les exceptions et afficher une alerte d'erreur
+                afficherAlerteErreur("Erreur", e.getMessage());
+            }
+        }
+
+    private void afficherAlerteErreur(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
+}}

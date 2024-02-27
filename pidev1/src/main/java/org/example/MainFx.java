@@ -23,16 +23,19 @@ import java.io.IOException;
            // Parent root= loader.load(getClass().getResource("/AfficherCourFront.fxml"));
             // FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherCourFrontNV.fxml"));
              //Parent root= loader.load(getClass().getResource("/AfficherCourFrontNV.fxml"));
-           //FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterCourController.fxml"));
-          // Parent root=loader.load(getClass().getResource("/AjouterCourController.fxml"));
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterCourNV.fxml"));
-             Parent root=loader.load(getClass().getResource("/AjouterCourNV.fxml"));
+
+
+
+            Parent root=FXMLLoader.load(getClass().getResource("/AjouterCourNV.fxml"));
+
+           // Parent root=FXMLLoader.load(getClass().getResource("/AjouterAtelierNV.fxml"));
+
 
 
            // FXMLLoader loader= new FXMLLoader(getClass().getResource("//AjouterAtelier.fxml"));
             //Parent root=loader.load(getClass().getResource("/AjouterAtelier.fxml"));
-           // FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherAtelierNV.fxml"));
-            //Parent root=loader.load(getClass().getResource("/AfficherAtelierNV.fxml"));
+          //  FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherAtelierNV.fxml"));
+           // Parent root=loader.load(getClass().getResource("/AfficherAtelierNV.fxml"));
             Scene scene=new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("ajout");

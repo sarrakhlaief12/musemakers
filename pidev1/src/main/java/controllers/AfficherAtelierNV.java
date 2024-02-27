@@ -117,23 +117,42 @@ public class AfficherAtelierNV {
 
     @FXML
     void saveChanges() {
-        // Vérifier si un atelier est sélectionné
-        if (atelier != null) {
-            // Mettre à jour l'objet atelier avec les nouvelles valeurs
-            atelier.setLien(tflien.getText());
-            atelier.setDateDebut_atelier(datePickerDebut.getValue());
-            atelier.setDateFin_atelier(datePickerFin.getValue());
+        try {
+            // Vérifier si un atelier est sélectionné
+            if (atelier != null) {
+                // Vérifier que le lien respecte un format spécifique (par exemple, un lien HTTP ou HTTPS)
+                String lien = tflien.getText();
+                if (!lien.matches("^https?://.*$")) {
+                    throw new IllegalArgumentException("Le lien doit commencer par 'http://' ou 'https://'.");
+                }
 
-            // Mettre à jour l'objet atelier dans la base de données
-            serviceAtelier.modifier(atelier);
+                // Vérifier que la date de fin est postérieure à la date de début
+                LocalDate dateDebut = datePickerDebut.getValue();
+                LocalDate dateFin = datePickerFin.getValue();
+                if (dateFin.isBefore(dateDebut)) {
+                    throw new IllegalArgumentException("La date de fin doit être postérieure à la date de début.");
+                }
 
-            // Rafraîchir le tableau
-            tableAtelier.refresh();
-        } else {
-            // Afficher un message d'erreur si aucun atelier n'est sélectionné
-            afficherAlerteErreur("Erreur", "Aucun atelier sélectionné.");
+                // Mettre à jour l'objet atelier avec les nouvelles valeurs
+                atelier.setLien(lien);
+                atelier.setDateDebut_atelier(dateDebut);
+                atelier.setDateFin_atelier(dateFin);
+
+                // Mettre à jour l'objet atelier dans la base de données
+                serviceAtelier.modifier(atelier);
+
+                // Rafraîchir le tableau
+                tableAtelier.refresh();
+            } else {
+                // Afficher un message d'erreur si aucun atelier n'est sélectionné
+                afficherAlerteErreur("Erreur", "Aucun atelier sélectionné.");
+            }
+        } catch (Exception e) {
+            // Gérer les exceptions et afficher une alerte d'erreur
+            afficherAlerteErreur("Erreur", e.getMessage());
         }
     }
+
 
     // Méthode pour afficher une alerte d'erreur
     private void afficherAlerteErreur(String titre, String message) {
