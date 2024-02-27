@@ -331,6 +331,34 @@ public class ServiceReservation implements IService<Reservation> {
             System.out.println("Error modifying the number of tickets: " + e.getMessage());
         }
     }
+    public Set<Reservation> getReservationsByExposition(Exposition exposition) {
+        Set<Reservation> expositionReservations = new HashSet<>();
+        String req = "SELECT * FROM reservation WHERE id_exposition = ?";
+
+        try (PreparedStatement statement = cnx.prepareStatement(req)) {
+            statement.setInt(1, exposition.getId());
+            ResultSet res = statement.executeQuery();
+
+            while (res.next()) {
+                int id = res.getInt(1);
+                Timestamp dateReser = res.getTimestamp("date_reser");
+                int ticketsNumber = res.getInt("tickets_number");
+                int accessByAdmin = res.getInt("accessByAdmin");
+                int id_user = res.getInt("id_user");
+
+                ServicePersonne servicePersonne = new ServicePersonne();
+                User user = servicePersonne.getOneById(id_user);
+
+                Reservation reservation = new Reservation(id, dateReser, ticketsNumber, accessByAdmin, exposition, user);
+                expositionReservations.add(reservation);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return expositionReservations;
+    }
+
 
 
 

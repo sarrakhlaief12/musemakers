@@ -15,9 +15,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import mailing.SendEmailExpo;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -86,14 +89,28 @@ public class DemandeReservation {
             private final Button xButton = new Button("X");
 
             {
+
                 checkButton.setOnAction(event -> {
                     Reservation reservation = getTableRow().getItem();
                     if (reservation != null && showConfirmationDialog("accepter cette reservation")) {
                         serviceReservation.acceptReservation(reservation.getIdReservation());
                         refreshTable();
+
+                        // Obtenez l'adresse e-mail, la date de début et la date de fin de l'objet reservation
+                        String toEmail = reservation.getUserEmail();
+                        String nomExpo=reservation.getExpositionNom();
+                        String dateDebut = reservation.getExpositionDateD().toString();
+                        String dateFin = reservation.getExpositionDateF().toString();
+
+                        // Envoyez l'e-mail
+                        SendEmailExpo.send(toEmail, dateDebut, dateFin,nomExpo);
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("email envoyé avec succes");
+                        alert.setHeaderText(null);
+                        alert.setContentText("L'e-mail a été envoyé avec succès à \" + toEmail");
+                        alert.showAndWait();
                     }
                 });
-
                 xButton.setOnAction(event -> {
                     Reservation reservation = getTableRow().getItem();
                     if (reservation != null && showConfirmationDialog("Annuler cette Reservation")) {

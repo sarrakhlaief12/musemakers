@@ -54,9 +54,9 @@
          <center>
             <AnchorPane prefHeight="450.0" prefWidth="734.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane layoutX="35.0" layoutY="19.0" prefHeight="474.0" prefWidth="759.0">
+                  <AnchorPane layoutX="5.0" layoutY="19.0" prefHeight="475.0" prefWidth="789.0">
                      <children>
-                        <TableView fx:id="TableView" layoutY="14.0" prefHeight="406.0" prefWidth="590.0">
+                        <TableView fx:id="TableView" layoutX="6.0" layoutY="31.0" prefHeight="327.0" prefWidth="491.0">
                            <columns>
                               <TableColumn fx:id="nom_expo" prefWidth="92.0" text="Nom de l'exposition" />
                               <TableColumn fx:id="date_debut" prefWidth="115.20001220703125" text="Date debut" />
@@ -65,10 +65,11 @@
                               <TableColumn fx:id="img" prefWidth="152.800048828125" text="Image path" />
                            </columns>
                         </TableView>
-                        <Button fx:id="supprimer" layoutX="272.0" layoutY="426.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+                        <Button fx:id="supprimer" layoutX="210.0" layoutY="371.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+                        <ImageView fx:id="imageView" fitHeight="327.0" fitWidth="264.0" layoutX="517.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" />
+                        <Text layoutX="266.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste exposition" />
                      </children>
                   </AnchorPane>
-                  <Text layoutX="231.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste exposition" />
                </children>
             </AnchorPane>
          </center>

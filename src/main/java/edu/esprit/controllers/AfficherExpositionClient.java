@@ -1,6 +1,7 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Exposition;
+import edu.esprit.entities.Reservation;
 import edu.esprit.services.ServiceExposition;
 import edu.esprit.services.ServicePersonne;
 import edu.esprit.services.ServiceReservation;
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -30,10 +32,10 @@ public class AfficherExpositionClient {
     private TextField nameSearchID;
 
     @FXML
-    private TextField themeSearchID;
+    private ComboBox<String> themeSearchID;
 
 
-    private final ServiceReservation serviceReservation = new ServiceReservation();
+    private final Reservation reser = new Reservation();
     private final ServicePersonne servicePersonne = new ServicePersonne();
     private final ServiceExposition exp = new ServiceExposition();
 
@@ -41,7 +43,6 @@ public class AfficherExpositionClient {
 
     @FXML
     private VBox exhibitionVBox;
-
     public AfficherExpositionClient() throws SQLException {
     }
 
@@ -52,7 +53,7 @@ public class AfficherExpositionClient {
         nameSearchID.textProperty().addListener((observable, oldValue, newValue) -> handleSearch());
 
         // Add a ChangeListener to the themeSearchID TextField
-        themeSearchID.textProperty().addListener((observable, oldValue, newValue) -> handleSearch());
+        themeSearchID.valueProperty().addListener((observable, oldValue, newValue) -> handleSearch());
 
         // Initial display of all exhibitions
         displayExhibitions();
@@ -95,7 +96,6 @@ public class AfficherExpositionClient {
             // Bouton pour réserver l'exposition
             Button reserveButton = new Button("Réserver");
             reserveButton.setId("btnreserverexposition");
-            reserveButton.setOnAction(event -> showReservationDialog(expo));
 
             // Ajouter les composants au VBox des détails
             detailsVBox.getChildren().addAll(nameLabel, dateTimeLabel, themeLabel, descriptionLabel, reserveButton);
@@ -200,7 +200,7 @@ public class AfficherExpositionClient {
     }
     @FXML
     private void handleSearch() {
-        String theme = themeSearchID.getText();
+        String theme = themeSearchID.getValue();
         String name = nameSearchID.getText();
 
         try {

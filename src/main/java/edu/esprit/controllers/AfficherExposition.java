@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -23,6 +24,9 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +42,8 @@ public class AfficherExposition {
     @FXML
     private TableColumn<Exposition, String> imgDisplay;
 
-
+    @FXML
+    private ImageView imageView;
 
     @FXML
     private TableColumn<Exposition, String> img;
@@ -57,58 +62,77 @@ public class AfficherExposition {
     @FXML
     void initialize() {
         TableView.setOnMouseClicked(event -> {
-            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
-                handleTableViewDoubleClick();
+            if (event.getButton() == MouseButton.PRIMARY) {
+                if (event.getClickCount() == 1) {
+                    handleTableViewClick();
+                } else if (event.getClickCount() == 2) {
+                    handleTableViewDoubleClick();
+                }
             }
         });
+
         try {
-            List<Exposition> ex= new ArrayList<>(expo.getAll());
+            List<Exposition> ex = new ArrayList<>(expo.getAll());
             ObservableList<Exposition> observableList = FXCollections.observableList(ex);
             TableView.setItems(observableList);
+            TableView.getSelectionModel().selectFirst();
+            if (!ex.isEmpty()) {
+                displayImage(ex.get(0).getImage());
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        catch (SQLException e){}
 
         nom_expo.setCellValueFactory(new PropertyValueFactory<>("nom"));
         date_debut.setCellValueFactory(new PropertyValueFactory<>("dateDebut"));
         date_fin.setCellValueFactory(new PropertyValueFactory<>("dateFin"));
         theme.setCellValueFactory(new PropertyValueFactory<>("theme"));
         img.setCellValueFactory(new PropertyValueFactory<>("image"));
-
     }
 
-
-    @FXML
-    private void supprimer(ActionEvent event) throws SQLException {
-        Exposition selectedRec = (Exposition) TableView.getSelectionModel().getSelectedItem();
+    private void handleTableViewClick() {
+        Exposition selectedRec = TableView.getSelectionModel().getSelectedItem();
         if (selectedRec != null) {
-            // Delete from database
-            expo.supprimer(selectedRec.getId());
+            displayImage(selectedRec.getImage());
+        }}
 
-            // Refresh table view
-            initialize();
+
+    private void displayImage(String imagePath) {
+        try {
+            String imageURL = Paths.get(imagePath).toUri().toString();
+            Image image = new Image(imageURL);
+            imageView.setImage(image);
+        } catch (Exception e) {
+            System.out.println("Error loading image: " + e.getMessage());
+            // Handle the exception, for example, display a placeholder image
+            imageView.setImage(null);
         }
     }
-//    @FXML
-//    private void modifier(ActionEvent event) throws SQLException {
-//        Exposition selectedExpo = (Exposition) TableView.getSelectionModel().getSelectedItem();
-//        if (selectedExpo != null) {
-//            // Get the new values from the user. You can use a form or a dialog for this.
-//            String newNom = selectedExpo.getNom(); // replace with code to get new nom
-//            Timestamp newDateDebut = selectedExpo.getDateDebut(); // replace with code to get new date debut
-//            Timestamp newDateFin = selectedExpo.getDateFin(); // replace with code to get new date fin
-//            String newDescription = selectedExpo.getDescription(); // replace with code to get new description
-//            String newTheme = selectedExpo.getTheme(); // replace with code to get new theme
-//            String newImage = selectedExpo.getImage(); // replace with code to get new image path
-//
-//            // Create a new Exposition object with the new values
-//            Exposition newExpo = new Exposition(newNom, newDateDebut, newDateFin, newDescription, newTheme, newImage);
-//
-//            // Update the database
-//            expo.modifier(newExpo);
-//
-//            // Refresh table view
-//            initialize();
-//        }
+    @FXML
+    private void supprimer(ActionEvent event) throws SQLException {
+        Exposition selectedRec = TableView.getSelectionModel().getSelectedItem();
+        if (selectedRec != null) {
+            // Display a confirmation dialog
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Supprimer l'exposition");
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer cette exposition?");
+
+            // Capture the user's choice
+            ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
+
+            // If the user clicks OK, proceed with deletion
+            if (result == ButtonType.OK) {
+                // Delete from database
+                expo.supprimer(selectedRec.getId());
+
+                // Refresh table view
+                initialize();
+            }
+        }
+    }
+
 
     private void openEditDialog(Exposition exposition) {
         Dialog<Exposition> dialog = new Dialog<>();
@@ -120,7 +144,22 @@ public class AfficherExposition {
         TextField dateDebutField = new TextField(exposition.getDateDebut().toString());
         TextField dateFinField = new TextField(exposition.getDateFin().toString());
         TextArea descriptionField = new TextArea(exposition.getDescription());
-        TextField themeField = new TextField(exposition.getTheme());
+
+        // Ajout du ComboBox pour le thème
+        Label themeLabel = new Label("Thème:");
+        ComboBox<String> themeComboBox = new ComboBox<>();
+        themeComboBox.getItems().addAll(
+                "Peinture à l'huile",
+                "Photographie contemporaine",
+                "Sculptures abstraites",
+                "Art numérique",
+                "Art moderne",
+                "Street Art",
+                "Portraits contemporains",
+                "Art fantastique"
+        );
+        themeComboBox.setValue(exposition.getTheme());
+
         TextField imageField = new TextField(exposition.getImage());
 
         GridPane grid = new GridPane();
@@ -132,8 +171,8 @@ public class AfficherExposition {
         grid.add(dateFinField, 1, 2);
         grid.add(new Label("Description:"), 0, 3);
         grid.add(descriptionField, 1, 3);
-        grid.add(new Label("Thème:"), 0, 4);
-        grid.add(themeField, 1, 4);
+        grid.add(themeLabel, 0, 4);
+        grid.add(themeComboBox, 1, 4);
         grid.add(new Label("Image:"), 0, 5);
 
         HBox imageBox = new HBox();
@@ -148,18 +187,34 @@ public class AfficherExposition {
 
         dialog.setResultConverter(buttonType -> {
             if (buttonType == buttonTypeOk) {
-                // Retrieve updated data from the controls
                 String newNom = nomField.getText();
                 Timestamp newDateDebut = Timestamp.valueOf(dateDebutField.getText());
                 Timestamp newDateFin = Timestamp.valueOf(dateFinField.getText());
                 String newDescription = descriptionField.getText();
-                String newTheme = themeField.getText();
+                String newTheme = themeComboBox.getValue(); // Utilisez le ComboBox pour obtenir la valeur du thème
                 String newImage = imageField.getText();
 
-                Exposition updatedExpo = new Exposition(newNom, newDateDebut, newDateFin, newDescription, newTheme, newImage);
+                LocalDateTime newLocalDateDebut = newDateDebut.toLocalDateTime();
+                LocalDateTime newLocalDateFin = newDateFin.toLocalDateTime();
+
+                if (newNom.isEmpty() || dateFinField.getText().isEmpty() ||
+                        dateDebutField.getText().isEmpty() || newDescription.isEmpty() ||
+                        newTheme == null || newImage.isEmpty()) {
+                    showAlert("Erreur", "Veuillez remplir tous les champs", Alert.AlertType.ERROR);
+                    return null;
+                }
+
+                if (newLocalDateDebut.isBefore(LocalDateTime.now())) {
+                    showAlert("Erreur", "La date de début ne peut pas être antérieure à la date actuelle", Alert.AlertType.ERROR);
+                    return null;
+                }
+
+                if (newLocalDateFin.isBefore(newLocalDateDebut)) {
+                    showAlert("Erreur", "La date de fin doit être après la date de début", Alert.AlertType.ERROR);
+                    return null;
+                }
 
                 try {
-                    // Update the existing Exposition object with the new values
                     exposition.setNom(newNom);
                     exposition.setDateDebut(newDateDebut);
                     exposition.setDateFin(newDateFin);
@@ -167,14 +222,15 @@ public class AfficherExposition {
                     exposition.setTheme(newTheme);
                     exposition.setImage(newImage);
 
-                    // Update the database
                     expo.modifier(exposition);
+                    displayImage(newImage);
 
-                    // Refresh the table view
                     int index = TableView.getItems().indexOf(exposition);
                     TableView.getItems().set(index, exposition);
+
+
                 } catch (SQLException e) {
-                    e.printStackTrace(); // Handle the exception appropriately
+                    e.printStackTrace();
                 }
             }
             return null;
@@ -183,6 +239,13 @@ public class AfficherExposition {
         dialog.showAndWait();
     }
 
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
     private Button createBrowseButton(TextField imageField) {
         Button browseButton = new Button("Browse");
         browseButton.setOnAction(event -> browseImage(imageField));
@@ -224,6 +287,13 @@ public class AfficherExposition {
             openEditDialog(selectedRec);
         }
     }
+
+
+
+
+
+
+    ////////////********** navigation
 
     @FXML
     void Afficher(ActionEvent event) {
